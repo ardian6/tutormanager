@@ -5,5 +5,5 @@ Created the team with Michael, Mathew, Ryan and Hayka, where Mathew became the S
 We didn't fully understand how to create the System Architecture diagram and Storyboards for the proposal, because of this we decided to wait for the Week 2 lecture/lab to learn more and ask questions.
 
 Week 2:
-The team started work on the project proposal, where I was assigned to creating the Storyboard. I began working on the Storyboard using Balsamiq and collaborated with Ryan to finish a rough draft. We weren't completely confident on how to complete the Storyboard, but after reviewing the lecture material
-and using Balsamiq's features, we felt as if we had a good idea as to how to complete the Storyboard by the due date in Week 3. In our Friday lab we also chose a 8:30 pm meeting time every Wednesday which everyone confirmed their availability for.
+The team started work on the project proposal, where I was assigned to creating the Storyboard. I began working on the Storyboard using Balsamiq and collaborated with Ryan to finish a rough draft. We weren't completely confident on creating the Storyboard, but after reviewing the lecture material and learning Balsamiq's features, we felt as if we had a good idea as to how to complete the Storyboard by the due date in Week 3. In our Friday lab we also chose a 8:30 pm meeting time every Wednesday 
+which everyone confirmed their availability for.
