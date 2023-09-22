@@ -1,0 +1,5 @@
+Week 1
+Created a group with myself, Hayka, Michael, Ryan and Ardian. The group name chosen was 3900F12APenguin. I am the scrum master for the group. We are looking to do project 16. Also, set up our Jira this week and did some discussion on what languages to use for the project.
+
+Week 2
+For this week all of us individually worked on separate parts of the proposal. The main part I completed was part b of the proposal. Specifically, I added some user stories to the one already written up by Ryan. Afterwards, since the user stories were written inside the document I added the user stories to Jira and changed the user stories in the document to screenshots instead. Then I moved on to writing the sprints and I decided to follow the format of the lecture with 3 sprints. Also, created the sprints on Jira and attached the associated user stories with it and then I screenshotted it to put it in the document. Also, write some informal dot points for novel functionality.
