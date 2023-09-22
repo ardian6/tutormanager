@@ -1,0 +1,9 @@
+Ardian Magjarraj (z5312076) Diary
+
+Week 1:
+Created the team with Michael, Mathew, Ryan and Hayka, where Mathew became the Scrum Master. We reviewed the skills/knowledge of each group member and decided that Project 16 was ideal for our combined skillset. We discussed and defined basic roles for completing the project proposal.
+We didn't fully understand how to create the System Architecture diagram and Storyboards for the proposal, because of this we decided to wait for the Week 2 lecture/lab to learn more and ask questions.
+
+Week 2:
+The team started work on the project proposal, where I was assigned to creating the Storyboard. I began working on the Storyboard using Balsamiq and collaborated with Ryan to finish a rough draft. We weren't completely confident on how to complete the Storyboard, but after reviewing the lecture material
+and using Balsamiq's features, we felt as if we had a good idea as to how to complete the Storyboard by the due date in Week 3. In our Friday lab we also chose a 8:30 pm meeting time every Wednesday which everyone confirmed their availability for.
