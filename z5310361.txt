@@ -1,0 +1,7 @@
+Week 1
+Formed a group with Hayka, Ryan, Ardian, Mathew and I. The decided name for the group was 3900F12APenguin. We proceeded to setup Jira and decided on P16 as our capstone project. We also discussed our preferences based on each other's technical experience. With me as a full stack, I will have particular contribution to the projects database establishment and also frontend development.
+
+Week 2
+Met up earlier in the week to delegate parts for the project proposal. I decided to do the system architecture diagram as it was a fair portion of the proposal. 
+Upon attending menter session/tutor, managed to clarify the requirements of the proposal and whether the diagram I produced was as required.
+The meeting finalised with the team deciding on the next meeting time/date.
