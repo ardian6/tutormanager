@@ -22,7 +22,7 @@ HTML, CSS, React.js for the frontend.
 Database (PostgreSQL) for data storage.
 Authentication using JWT (JSON Web Tokens).
 Messaging system (Twilio) for real-time communication.
-Calendar integration (Google Calendar API).
+Calendar integration (Outlook Calendar API).
 
 
 
