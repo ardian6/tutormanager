@@ -3,3 +3,6 @@ Created a group with myself, Hayka, Michael, Ryan and Ardian. The group name cho
 
 Week 2
 For this week all of us individually worked on separate parts of the proposal. The main part I completed was part b of the proposal. Specifically, I added some user stories to the one already written up by Ryan. Afterwards, since the user stories were written inside the document I added the user stories to Jira and changed the user stories in the document to screenshots instead. Then I moved on to writing the sprints and I decided to follow the format of the lecture with 3 sprints. Also, created the sprints on Jira and attached the associated user stories with it and then I screenshotted it to put it in the document. Also, write some informal dot points for novel functionality.
+
+Week 3
+For this week we did our final touchups for our project proposal. For me specifically, I have finished of part b of the proposal by adding more user stories, putting all the user stories on the Jira board, rewording all the main goals in the sprints to contain more details and also put down a few novel functionalities we are going to implement in our project. Also helped with rewording some of part A to make it more clear. Since I am the scrum master for the group I will be the one submitting the proposal and I intend to do that right after the tutorial.
