@@ -7,3 +7,7 @@ We didn't fully understand how to create the System Architecture diagram and Sto
 Week 2:
 The team started work on the project proposal, where I was assigned to creating the Storyboard. I began working on the Storyboard using Balsamiq and collaborated with Ryan to finish a rough draft. We weren't completely confident on creating the Storyboard, but after reviewing the lecture material and learning Balsamiq's features, we felt as if we had a good idea as to how to complete the Storyboard by the due date in Week 3. In our Friday lab we also chose a 8:30 pm meeting time every Wednesday 
 which everyone confirmed their availability for.
+
+Week 3:
+Struggled with finishing the storyboard, as I wasn't sure of the correct format, so I referred to lecture slides and asked my Mentor for assistance. By Friday week 3, Ryan and I finished the storyboard and met up with the rest of the team to finalise the proposal. We agreed to meet on
+the following Monday to talk about coding the project.
