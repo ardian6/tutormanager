@@ -6,13 +6,16 @@ db = None
 #Create all db related functions
 def dblogin(token, username, password):
     #Store Token into database
+    return
 
 def dbregister(token, email, username, password, firstName, lastName, userType):
     #Store Token into database
     #Store a new account into database
+    return
 
 def dblogout(token):
     #Remove Token from database
+    return
 
 
 if __name__ == '__main__':
