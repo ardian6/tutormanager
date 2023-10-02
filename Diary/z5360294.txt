@@ -1,5 +1,9 @@
+Ryan Gian Diary (z5360294)
 Week 1 
 Group formed with members Mathew, Hayka, Michael, Ardian, and I. Group named 3900F12APenguin. Selected Mathew as the Scrum Master. Set up Jira and discussed with the group and tutor of how the proposal works. Selected project 16. Had a basic brainstorm of what programming languages/technologies to use and discussed each person’s tasks for the project proposal.
 
 Week 2 
 Each team member took on different parts of the proposal. I went through and wrote most of the user stories required for admin, student, and tutor users. I discussed with Mathew some novel functionality that we can add to the project. I collaborated with Ardian and started the storyboard using balsamiq cloud. 
+
+Week 3
+Each team member finished and finalised the proposal document to submit. Ardian and I went through all user stories to see if they were included in the storyboard. Team went through one last time to check if everything is correct.  Group planned ahead and made dates for when we will start coding everything.
