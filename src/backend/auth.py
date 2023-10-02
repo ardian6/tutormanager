@@ -1,3 +1,4 @@
+
 def login(username, password):
   """User logs in.
     Paramaters:
@@ -6,6 +7,8 @@ def login(username, password):
     Returns:
       session_token: String
   """
+  # Below functions stores info on database
+  dblogin(token, username, password)
   return
 
 def register(email, username, password, firstName, lastName, userType):
@@ -20,4 +23,11 @@ def register(email, username, password, firstName, lastName, userType):
     Returns:
       session_token: String
   """
+  # Below functions stores info on database
+  dbregister(token, email, username, password, firstName, lastName, userType)
+  return
+
+def logout(token):
+  # Below functions stores info on database
+  dblogout(token)
   return
