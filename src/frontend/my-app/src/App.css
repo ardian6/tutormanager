@@ -41,3 +41,23 @@
   margin-top: -800px;
   margin-right: 500px;
 }
+
+.NavBarContainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.NavBar {
+  position: fixed;
+  top: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  background-color: whitesmoke;
+  width: 80vw;
+  border-radius: 25px;
+  border: 2px;
+  padding: 0 10px 0 10px;
+}
