@@ -1,3 +1,4 @@
+import DBFunctions
 
 def login(username, password):
   """User logs in.
@@ -8,7 +9,8 @@ def login(username, password):
       session_token: String
   """
   # Below functions stores info on database
-  dblogin(token, username, password)
+  token = "abc"
+  print(DBFunctions.dblogin(token, username, password))
   return
 
 def register(email, username, password, firstName, lastName, userType):
@@ -31,3 +33,7 @@ def logout(token):
   # Below functions stores info on database
   dblogout(token)
   return
+
+
+# if __name__ == '__main__':
+#   login("test1","test2")
