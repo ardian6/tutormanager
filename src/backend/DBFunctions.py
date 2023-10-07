@@ -16,6 +16,9 @@ def dbregister(token, email, username, password, firstName, lastName, userType):
     #Store a new account into database
     return
 
+def checkRegisterDuplicate(username):
+    return True
+
 def dblogout(token):
     #Remove Token from database
     return
@@ -29,7 +32,7 @@ def test():
 def connectDB():
     return psycopg2.connect(
         host="project3900db.cjma1ndgw4m4.ap-southeast-2.rds.amazonaws.com",
-        database="postgres",
+        database="penguinproject",
         user="penguin3900",
         password="3900PenguinDBtest",
         port='5432')
