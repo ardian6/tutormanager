@@ -16,16 +16,17 @@ import {
 
 function Site(props) {
   return (
-    <div>
-      <NavBar></NavBar>
-      <OpenIconSpeedDial></OpenIconSpeedDial>
+    <div className="SiteContainer">
+      {/* <NavBar></NavBar>
+      <OpenIconSpeedDial></OpenIconSpeedDial> */}
       <Routes>
         <Route path="/Register" element={<Register />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/"/>
-      </Routes> 
-      <div>
+        <Route path="/Home" element={<Home />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
+      {/* <div>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pellentesque sodales justo, vitae venenatis tellus varius aliquet. Nulla quis magna at nibh interdum volutpat. Praesent ligula velit, bibendum eget nisi et, dapibus mattis turpis. Nunc eu tellus non velit ultricies placerat sit amet non quam. Donec mollis id nunc id lacinia. Vestibulum ac leo a nisi finibus interdum vel sed odio. Quisque congue fermentum porttitor. Duis dignissim sagittis blandit. Morbi at tortor turpis. Vivamus finibus lorem maximus purus imperdiet, in egestas diam laoreet. Duis eu tortor ligula.
 
         Maecenas sollicitudin orci vel dignissim aliquam. Phasellus sit amet arcu a quam varius rutrum vel eu turpis. Nullam vitae justo et enim dapibus sagittis. Fusce congue justo vulputate, fermentum metus id, luctus libero. Pellentesque et tellus in lorem porttitor pellentesque eget non nibh. Sed accumsan varius quam, et efficitur elit condimentum id. Proin rhoncus quam id odio pellentesque consectetur. Aenean diam turpis, auctor vitae quam eget, lobortis egestas justo. Suspendisse at condimentum sem. Nunc tincidunt, sem a viverra eleifend, nisl velit ultricies dolor, et commodo felis felis ac quam. Vivamus aliquam, est dapibus scelerisque rutrum, dui purus dictum orci, eget interdum ante diam vitae mauris. In nec est lectus. Nunc sit amet felis mollis, fringilla ipsum at, rhoncus tellus. Praesent sit amet tincidunt ipsum, consectetur blandit sem.
@@ -41,7 +42,7 @@ function Site(props) {
         Suspendisse eu erat velit. Aenean tristique iaculis ipsum, eget vehicula eros sollicitudin sed. Praesent facilisis nisl ac placerat condimentum. Phasellus consequat euismod sapien sed mattis. Nunc egestas placerat justo non blandit. Nulla placerat elementum lacus, in vulputate quam feugiat ut. Cras gravida nulla vitae aliquet tempus. Aenean sit amet porta neque, non efficitur enim. Mauris placerat vestibulum ante, ultrices blandit est suscipit nec. Donec eu malesuada enim. Curabitur cursus luctus tortor, vitae aliquet magna fringilla in. Integer pellentesque eleifend massa accumsan sodales. Sed bibendum, eros rutrum aliquet fermentum, dui massa viverra lorem, sed suscipit nisl massa a sapien.
 
         Sed eros quam, lacinia ac mattis ornare, pretium posuere lacus. Ut dignissim erat elementum pulvinar sodales. Suspendisse potenti. Sed ac augue vel leo commodo mattis a a libero. Ut turpis odio, commodo sit amet lacinia at, aliquam mollis urna. Praesent commodo, urna et laoreet pretium, quam leo molestie orci, at venenatis augue est at purus. Pellentesque ac varius dolor, ut malesuada tellus. Vivamus consectetur arcu mauris, id convallis quam maximus et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed non lorem sit amet dui tristique consequat ut vel erat. Aliquam placerat congue arcu iaculis rhoncus. Aliquam tincidunt nulla vitae risus vestibulum interdum. Sed mollis pretium est, laoreet posuere libero pulvinar quis. Curabitur non cursus leo, at commodo magna. Proin hendrerit, felis a vulputate ornare, mi urna vehicula odio, at ullamcorper justo magna sit amet justo.
-      </div>
+      </div> */}
     </div>
   );
 }

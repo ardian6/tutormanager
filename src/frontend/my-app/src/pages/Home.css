@@ -1,0 +1,50 @@
+.home-container {
+  background-color: #4960a6;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Sora";
+  position: absolute;
+}
+
+.home-card {
+  /* border-color: black; */
+  height: 50vh;
+  width: 450px;
+  /* border: 1px solid; */
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-image {
+  height: 96vh;
+  right: 2vh;
+  bottom: 2vh;
+  position: fixed;
+  border-radius: 30px;
+}
+
+.logo-container {
+  border-radius: 10px;
+}
+
+.signup-word {
+  color: #4960a6;
+}
+
+.signup-word:hover {
+  cursor: pointer;
+}
+
+.signup-container {
+  margin-top: 80px;
+}
