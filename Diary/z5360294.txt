@@ -19,3 +19,4 @@ After he set up the backend and pushed it up, I took over to set up the frontend
 I worked with Michael for a while to set up the routes for the react app to redirect to other pages. This was all the work we did on the Monday. 
 We set out to complete sprint 1 as early as possible so that we could connect the frontend to the backend. 
 Mathew told us later in the week that he had moved the database to AWS so it makes connecting to the database easier.
+I discussed with all revelant frontend engineers who was doing what tasks. I set out to complete the Login, register and home page before the next week. 
