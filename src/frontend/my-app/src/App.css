@@ -112,4 +112,13 @@
 
 .item {
   flex: 1 1 0px;
+  padding: 0px 10px 0px 10px;
+}
+
+.item1 {
+  border-right: 1px solid #0000003b;
+}
+
+.item3 {
+  border-left: 1px solid #0000003b;
 }

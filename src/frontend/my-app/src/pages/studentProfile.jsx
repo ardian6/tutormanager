@@ -60,24 +60,24 @@ const TutorProfile = () => {
                     </div>
                 </div>
                 <div className="profileInfo">
-                    <div className="item">
+                    <div className="item item1" >
                         <h3>Courses</h3>
                     </div>
                     <div className="item">
-                        <h3>Profile Information</h3>
                         <div>
+                            <h3>Profile Information</h3>
                             <div>
                                 {bio}
                             </div>
                         </div>
                         <div>
-                            Full Name : {firstName + ' ' + lastName} 
+                            <b>Full Name :</b> {firstName + ' ' + lastName} 
                         </div>
                         <div>
-                            Email : {email}
+                            <b>Email :</b> {email}
                         </div>
                     </div>
-                    <div className="item"> 
+                    <div className="item item3"> 
                         <h3>Conversations</h3>
                     </div>
                 </div>
