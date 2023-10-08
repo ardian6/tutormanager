@@ -27,6 +27,10 @@ const Login = () => {
   //   setAlignment(newAlignment);
   // };
 
+  const [email, setEmail] = React.useState('');
+  const [pwd, setPwd] = React.useState('');
+
+
   const theme = createTheme({
     typography: {
       allVariants: {
@@ -48,6 +52,29 @@ const Login = () => {
     let path = `../Home`;
     navigate(path);
   };
+
+  // Login Button - calls backend API
+  const loginBtn = async () => {
+    console.log(email);
+    console.log(pwd);
+    const response = await fetch('http://localhost:5005/user/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: pwd,
+      })
+    });
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      // setToken(data.token);
+      // setEmailGlobal(email);
+    }
+  }
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -84,12 +111,12 @@ const Login = () => {
         {/* Welcome! */}
         <Box sx={{ display: "flex", flexWrap: "wrap" }}>
           <div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+            <FormControl sx={{ m: 1, width: "25ch" }} variant="standard" >
               <ThemeProvider theme={theme}>
-                <InputLabel htmlFor="standard-adornment-email">
+                <InputLabel htmlFor="standard-adornment-email" >
                   Email
                 </InputLabel>
-                <Input id="standard-adornment-email" />
+                <Input id="standard-adornment-email" onChange={(event) => { setEmail(event.target.value); }}/>
               </ThemeProvider>
             </FormControl>
           </div>
@@ -97,7 +124,7 @@ const Login = () => {
         <Box sx={{ display: "flex", flexWrap: "wrap" }}>
           <div>
             <ThemeProvider theme={theme}>
-              <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+              <FormControl sx={{ m: 1, width: "25ch" }} variant="standard" >
                 <InputLabel htmlFor="standard-adornment-password">
                   Password
                 </InputLabel>
@@ -105,6 +132,7 @@ const Login = () => {
                 <Input
                   id="standard-adornment-password"
                   type={showPassword ? "text" : "password"}
+                  onChange={(event) => { setPwd(event.target.value); }}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -131,6 +159,7 @@ const Login = () => {
                 minHeight: "30px",
               }}
               sx={{ borderRadius: "30px" }}
+              onClick={loginBtn}
             >
               Login
             </Button>

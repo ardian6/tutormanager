@@ -27,6 +27,36 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [alignment, setAlignment] = React.useState("Student");
 
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [userName, setUserName] = React.useState("");
+  const [pwd, setPwd] = React.useState("");
+  // const [checkPwd, setCheckPwd] = React.useState("");
+
+  const registerBtn = async () => {
+    const response = await fetch('http://localhost:5005/user/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        userName: userName,
+        email: email,
+        password: pwd,
+      })
+    });
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      // setToken(data.token);
+      // setEmailGlobal(email);
+    }
+  }
+
   const handleChange = (event, newAlignment) => {
     if (newAlignment !== null) {
       setAlignment(newAlignment);
@@ -121,12 +151,14 @@ const Register = () => {
                 </InputLabel>
                 <Input
                   id="standard-adornment-First-Name"
+                  onChange={(event) => {setFirstName(event.target.value)}}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
                         onClick={handleClickShowConfirmPassword}
                         onMouseDown={handleMouseDownConfirmPassword}
+                        
                       >
                         {showConfirmPassword ? (
                           <></>
@@ -150,6 +182,7 @@ const Register = () => {
                 </InputLabel>
                 <Input
                   id="standard-adornment-Last-Name"
+                  onChange={(event) => {setLastName(event.target.value)}}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -179,6 +212,7 @@ const Register = () => {
                 </InputLabel>
                 <Input
                   id="standard-adornment-email"
+                  onChange={(event) => {setEmail(event.target.value)}}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -208,6 +242,7 @@ const Register = () => {
                 </InputLabel>
                 <Input
                   id="standard-adornment-Username"
+                  onChange={(event) => {setUserName(event.target.value)}}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -238,6 +273,7 @@ const Register = () => {
 
                 <Input
                   id="standard-adornment-password"
+                  onChange={(event) => {setPwd(event.target.value)}}
                   type={showPassword ? "text" : "password"}
                   endAdornment={
                     <>
@@ -330,6 +366,7 @@ const Register = () => {
                 minHeight: "30px",
               }}
               sx={{ borderRadius: "30px" }}
+              onClick={registerBtn}
             >
               Register
             </Button>
