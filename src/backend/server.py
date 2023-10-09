@@ -9,7 +9,7 @@ from flask import send_from_directory
 from flask_cors import CORS
 #from src.echo import echo
 
-from auth import login, register
+from auth import login, register, logout
 
 
 def quit_gracefully(*args):
@@ -80,13 +80,11 @@ def auth_register():
     # save()
     # return dumps(result)
 
-# @APP.route("/auth/logout/v1", methods = ["POST"])
-# def logout_v1():
-#     load()
-#     data = request.get_json()
-#     auth_logout(data['token'])
-#     save()
-#     return dumps({})
+@APP.route("/auth/logout/", methods = ["POST"])
+def logout_v1():
+    data = request.get_json()
+    logout(data['token'])
+    return dumps({})
 
 ## Auth Register Implementation to Server ##
 
