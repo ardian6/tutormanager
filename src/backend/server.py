@@ -11,7 +11,7 @@ from flask_cors import CORS
 from PIL import Image
 #from src.echo import echo
 
-from auth import login
+from auth import login, register
 
 
 def quit_gracefully(*args):
@@ -40,7 +40,7 @@ APP.register_error_handler(Exception, defaultHandler)
 # Auth Login Implementation to Server ##
 
 @APP.route("/auth/login/", methods = ['POST'])
-def auth_login_v2():
+def auth_login():
     data = request.get_json()
     loginData = login(data['email'], data['password'])
 
@@ -50,17 +50,14 @@ def auth_login_v2():
 
 ## Auth Register Implementation to Server ##
 
-# @APP.route("/auth/register/", methods = ['POST'])
-# def auth_login_v2():
-    # load()
-    # data = request.get_json()
-    # user_id = auth_login_v1(data['email'],
-    # data['password'])
+@APP.route("/auth/register/", methods = ['POST'])
+def auth_register():
+    data = request.get_json()
+    user_id = register(data['email'], data['userName'], data['password'], data['firstName'], data['lastName'], data['userType'])
 
     # encoded_token = generate_token(user_id)
-    # result = {'token' : encoded_token, 'auth_user_id' : user_id['auth_user_id']}
-    # save()
-    # return dumps(result)
+    result = {'token' : encoded_token, 'auth_user_id' : user_id['auth_user_id']}
+    return dumps(result)
 
 ## Auth Register Implementation to Server ##
 

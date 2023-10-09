@@ -33,9 +33,10 @@ const Register = () => {
   const [userName, setUserName] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [checkPwd, setCheckPwd] = React.useState("");
+  const [userType, setUserType] = React.useState("");
 
   const registerBtn = async () => {
-    const response = await fetch('http://localhost:5005/user/auth/register', {
+    const response = await fetch('http://localhost:5005/auth/register/', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -46,12 +47,14 @@ const Register = () => {
         userName: userName,
         email: email,
         password: pwd,
+        userType: userType
       })
     });
     const data = await response.json();
     if (data.error) {
       alert(data.error);
     } else {
+      console.log(data);
       // setToken(data.token);
       // setEmailGlobal(email);
     }
@@ -75,6 +78,7 @@ const Register = () => {
   }
 
   const handleChange = (event, newAlignment) => {
+    setUserType(event.target.value);
     if (newAlignment !== null) {
       setAlignment(newAlignment);
     }
