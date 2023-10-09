@@ -1,7 +1,8 @@
 from random import randint
 from DBFunctions import dblogin, dbregister, checkRegisterDuplicateEmail, checkRegisterDuplicateUsername
+import hashlib
 
-def login(username, password):
+def login(username: str, password: str) -> str:
   """User logs in.
     Paramaters:
       username: String
@@ -9,6 +10,8 @@ def login(username, password):
     Returns:
       session_token: String
   """
+  # TODO: Create token with jwt module
+
   # Below functions stores info on database
   token = randint(1, 10000)
   if dblogin(token, username, password) == True:
@@ -16,7 +19,7 @@ def login(username, password):
       'username' : username,
       'token': token
     }
-  return None
+  return {"error": "Invalid username or password" }
 
 def register(email, username, password, firstName, lastName, userType):
   """User provides credentials to register.
@@ -30,13 +33,20 @@ def register(email, username, password, firstName, lastName, userType):
     Returns:
       session_token: String
   """
+  # TODO: Create token with jwt module
+  
+  # TODO: Encode password
+  encrypted_pass = hashlib.sha256(password.encode()).hexdigest()
+
   # Below functions stores info on database
   if checkRegisterDuplicateUsername(username) is True:
-    return "Invalid Username"
+    return {"error": "Invalid Username"}
+    # raise Exception("Invalid Username")
   if checkRegisterDuplicateEmail(email) is True:
-    return "Invalid Email"
+    return {"error": "Invalid Email"}
+    # raise Exception("Invalid Email")
   token = randint(1, 1000)
-  dbregister(token, email, username, password, firstName, lastName, userType.lower())
+  dbregister(token, email, username, encrypted_pass, firstName, lastName, userType.lower())
   return {
     'username' : username,
     'token': token
