@@ -22,7 +22,7 @@ import Button from "@mui/material/Button";
 
 // import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [firstName, setFirstName] = React.useState("");
@@ -105,18 +105,6 @@ const Register = () => {
     event.preventDefault();
   };
 
-  let navigate = useNavigate();
-  const redirectLoginRouteChange = () => {
-    let path = `../login`;
-    navigate(path);
-  };
-
-  // Redirect to Login page
-  // let navigate = useNavigate();
-  // const routeChange = () => {
-  //   let path = `../login`;
-  //   navigate(path);
-  // };
   return (
     <div className="RegisterContainer">
       {/* <ArrowBackIcon
@@ -350,12 +338,9 @@ const Register = () => {
         </ThemeProvider>
         <div className="redirect-to-login-container">
           Have an account?{" "}
-          <span
-            className="redirect-to-login-word"
-            onClick={redirectLoginRouteChange}
-          >
-            Login
-          </span>
+          <Link to="../login">
+            <span className="redirect-to-login-word">Login</span>
+          </Link>
         </div>
       </div>
     </div>

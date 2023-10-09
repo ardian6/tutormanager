@@ -6,8 +6,8 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import OpenIconSpeedDial from "./OpenIconSpeedDial";
 import NavBar from "./NavBar";
-import StudentProfile from "../pages/studentProfile"
-import TutorProfile from "../pages/tutorProfile"
+import StudentProfile from "../pages/studentProfile";
+import TutorProfile from "../pages/tutorProfile";
 import {
   Routes,
   Route,
@@ -17,7 +17,6 @@ import {
   //   useLocation,
 } from "react-router-dom";
 
-
 function Site(props) {
   const [userType, setUserType] = React.useState(true);
 
@@ -26,8 +25,12 @@ function Site(props) {
       {/* <NavBar></NavBar>
       <OpenIconSpeedDial></OpenIconSpeedDial> */}
       <Routes>
+        <Route path="/dashboard" />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={userType ? <StudentProfile /> : <TutorProfile/> } />
+        <Route
+          path="/profile"
+          element={userType ? <StudentProfile /> : <TutorProfile />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/home" element={<Home />} />

@@ -1,18 +1,18 @@
 import psycopg2
 import sys
 
-db = None 
+db = None
 
 def setupTables():
   # Creating all the tables and types
   cur = db.cursor()
-  
+
   cur.execute("""create type uType as ENUM (
 	'student',
   'tutor',
   'admin'
   )""")
-  
+
   cur.execute("""create table Users (
 	username    varchar(30) not null,
   password    varchar(30) not null,
@@ -22,7 +22,7 @@ def setupTables():
   userType    uType,
 	primary key (username)
   )""")
- 
+
   cur.execute("""create table Sessions (
 	sessID      varchar(30),
   username    varchar(30),
@@ -36,11 +36,11 @@ def setupTables():
 def deleteTables():
   # Deleting all tables and types
   cur = db.cursor()
-  
+
   cur.execute("""drop table Sessions""")
 
   cur.execute("""drop table Users""")
- 
+
   cur.execute("""drop type uType""")
   cur.close()
   db.commit()
@@ -76,7 +76,7 @@ def inputData2():
   cur.execute("""insert into Sessions values ('3', 'username2')""")
   cur.close()
   db.commit()
-  return 
+  return
 
 def printData():
   # Print out all the data in the database currently
@@ -104,7 +104,7 @@ if __name__ == '__main__':
         #clearData()
         #inputData1()
         #inputData2()
-        #printData()
+        printData()
 
     except psycopg2.Error as err:
         print("DB error: ", err)

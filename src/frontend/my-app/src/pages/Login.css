@@ -49,14 +49,12 @@
   margin-top: 10px;
 }
 
-
-.forgot-password-word{
+.forgot-password-word {
   color: #4960a6;
   margin-left: 165px;
   font-size: 14px;
 }
 
-.forgot-password-word:hover{
+.forgot-password-word:hover {
   cursor: pointer;
 }
-

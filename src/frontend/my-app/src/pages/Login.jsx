@@ -18,7 +18,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 
 const Login = () => {
   // const [alignment, setAlignment] = React.useState("Student");
@@ -27,49 +28,20 @@ const Login = () => {
   //   setAlignment(newAlignment);
   // };
 
-  const [email, setEmail] = React.useState('');
-  const [pwd, setPwd] = React.useState('');
-
-
-  const theme = createTheme({
-    typography: {
-      allVariants: {
-        fontFamily: "Sora",
-        textTransform: "none",
-      },
-    },
-  });
-
-  // Redirect to Register page
-  let navigate = useNavigate();
-  const registerRouteChange = () => {
-    let path = `../register`;
-    navigate(path);
-  };
-
-  // Redirect to Home page
-  const homeRouteChange = () => {
-    let path = `../home`;
-    navigate(path);
-  };
-
-  // Redirect to ForgotPassword page
-  const forgotPasswordRouteChange = () => {
-    let path = `./forgotpassword`;
-    navigate(path);
-  };
+  const [email, setEmail] = React.useState("");
+  const [pwd, setPwd] = React.useState("");
 
   // Login Button - calls backend API
   const loginBtn = async () => {
-    const response = await fetch('http://localhost:5005/auth/login/', {
-      method: 'POST',
+    const response = await fetch("http://localhost:5005/auth/login/", {
+      method: "POST",
       headers: {
-        'Content-type': 'application/json',
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
         email: email,
         password: pwd,
-      })
+      }),
     });
     const data = await response.json();
     if (data.error) {
@@ -77,7 +49,7 @@ const Login = () => {
     } else {
       console.log(data);
     }
-  }
+  };
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -90,91 +62,79 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-card">
-        <img
-          src={Logo}
-          alt="TutorManagerLogo"
-          width="140px"
-          className="logo-container"
-          onClick={homeRouteChange}
-        />
-        {/* <ThemeProvider theme={theme}>
-          <ToggleButtonGroup
-            color="primary"
-            value={alignment}
-            exclusive
-            onChange={handleChange}
-            aria-label="Platform"
-          >
-            <ToggleButton value="Student">Student</ToggleButton>
-            <ToggleButton value="Tutor">Tutor</ToggleButton>
-            <ToggleButton value="Admin">Admin</ToggleButton>
-          </ToggleButtonGroup>
-        </ThemeProvider> */}
-        {/* Welcome! */}
+        <Link to="../home">
+          <img
+            src={Logo}
+            alt="TutorManagerLogo"
+            width="140px"
+            className="logo-container"
+          />
+        </Link>
+
         <Box sx={{ display: "flex", flexWrap: "wrap" }}>
           <div>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="standard" >
-              <ThemeProvider theme={theme}>
-                <InputLabel htmlFor="standard-adornment-email" >
-                  Email
-                </InputLabel>
-                <Input id="standard-adornment-email" onChange={(event) => { setEmail(event.target.value); }}/>
-              </ThemeProvider>
+            <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+              <InputLabel htmlFor="standard-adornment-email">Email</InputLabel>
+              <Input
+                id="standard-adornment-email"
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+              />
             </FormControl>
           </div>
         </Box>
         <Box sx={{ display: "flex", flexWrap: "wrap" }}>
           <div>
-            <ThemeProvider theme={theme}>
-              <FormControl sx={{ m: 1, width: "25ch" }} variant="standard" >
-                <InputLabel htmlFor="standard-adornment-password">
-                  Password
-                </InputLabel>
+            <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+              <InputLabel htmlFor="standard-adornment-password">
+                Password
+              </InputLabel>
 
-                <Input
-                  id="standard-adornment-password"
-                  type={showPassword ? "text" : "password"}
-                  onChange={(event) => { setPwd(event.target.value); }}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-            </ThemeProvider>
+              <Input
+                id="standard-adornment-password"
+                type={showPassword ? "text" : "password"}
+                onChange={(event) => {
+                  setPwd(event.target.value);
+                }}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
           </div>
         </Box>
 
-        <div className="forgot-password-word" onClick={forgotPasswordRouteChange}>Forgot Password?</div>
+        <Link to="forgotpassword">
+          <div className="forgot-password-word">Forgot Password?</div>
+        </Link>
 
-        <ThemeProvider theme={theme}>
-          <Stack spacing={2} direction="row" className="login-button">
-            <Button
-              variant="contained"
-              style={{
-                maxWidth: "300px",
-                minWidth: "300px",
-                minHeight: "30px",
-              }}
-              sx={{ borderRadius: "30px" }}
-              onClick={loginBtn}
-            >
-              Login
-            </Button>
-          </Stack>
-        </ThemeProvider>
+        <Stack spacing={2} direction="row" className="login-button">
+          <Button
+            variant="contained"
+            style={{
+              maxWidth: "300px",
+              minWidth: "300px",
+              minHeight: "30px",
+            }}
+            sx={{ borderRadius: "30px" }}
+          >
+            Login
+          </Button>
+        </Stack>
         <div className="redirect-to-signup-container">
           Don't have an account? &#160;
-          <span className="signup-word" onClick={registerRouteChange}>
-            Sign Up
-          </span>
+          <Link to="/register">
+            <span className="signup-word">Sign Up</span>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,0 +1,39 @@
+.NavBarContainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.NavBar {
+  position: fixed;
+  top: 20px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: whitesmoke;
+  width: 90vw;
+  border-radius: 30px;
+  border: 2px;
+  padding: 0px 10px 0px 10px;
+  gap: 100px;
+}
+
+.NavBarInfo {
+  display: flex;
+}
+
+.profileContainer {
+  position: relative;
+  top: 100px;
+  background-color: whitesmoke;
+  width: 95vw;
+  border-radius: 25px;
+  border: 2px;
+  padding: 0px 10px 0px 10px;
+}
+
+.tutormanager-title {
+  padding-right: 100px;
+}
