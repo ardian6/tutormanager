@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import ForgotPassword from "../pages/ForgotPassword";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import OpenIconSpeedDial from "./OpenIconSpeedDial";
@@ -16,6 +17,7 @@ import {
   //   useLocation,
 } from "react-router-dom";
 
+
 function Site(props) {
   const [userType, setUserType] = React.useState(true);
 
@@ -24,9 +26,11 @@ function Site(props) {
       {/* <NavBar></NavBar>
       <OpenIconSpeedDial></OpenIconSpeedDial> */}
       <Routes>
-        <Route path="/Register" element={<Register />} />
-        <Route path="/Profile" element={userType ? <StudentProfile /> : <TutorProfile/> } />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={userType ? <StudentProfile /> : <TutorProfile/> } />
+        <Route path="/login" element={<Login />} />
+        <Route path="/login/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
       </Routes>
       {/* <div>
