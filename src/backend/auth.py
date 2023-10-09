@@ -36,12 +36,11 @@ def register(email, username, password, firstName, lastName, userType):
   if checkRegisterDuplicateEmail(email) is True:
     return "Invalid Email"
   token = randint(1, 1000)
-  if dbregister(token, email, username, password, firstName, lastName, userType):
-    return {
-      'username' : username,
-      'token': token
-    }
-  return None
+  dbregister(token, email, username, password, firstName, lastName, userType.lower())
+  return {
+    'username' : username,
+    'token': token
+  }
 
 def logout(token):
   # Below functions stores info on database
