@@ -55,8 +55,6 @@ const Login = () => {
 
   // Login Button - calls backend API
   const loginBtn = async () => {
-    console.log(email);
-    console.log(pwd);
     const response = await fetch('http://localhost:5005/user/auth/login', {
       method: 'POST',
       headers: {

@@ -58,7 +58,8 @@ const Register = () => {
   }
 
   const validEmail = () => {
-
+    const emailRegex = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
+    return emailRegex.test(email);
   }
 
   const validUserName = () => {
@@ -68,7 +69,7 @@ const Register = () => {
   const validPwd = () => {
     // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
     //const pwdRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
-    const pwdRegex = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
+    const pwdRegex = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i);
     return pwd === checkPwd && pwd.length !== 0 && pwdRegex.test(pwd);
     //return pwd === checkPwd && pwd.length !== 0
   }
