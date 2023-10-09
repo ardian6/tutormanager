@@ -70,7 +70,7 @@ def checkTokenExists(token):
     return True # -> if true it means proceed if false stop here
 
 # Check if token exists and is an admin
-def checkTokenAdmin(session_token)
+def checkTokenAdmin(session_token):
     return True # -> if true it means proceed if false stop here
 
 # This function actually goes into the database and changes the data stored
