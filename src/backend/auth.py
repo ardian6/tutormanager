@@ -16,7 +16,7 @@ def login(username, password):
       'username' : username,
       'token': token
     }
-  return None
+  return {"error": "Invalid username or password" }
 
 def register(email, username, password, firstName, lastName, userType):
   """User provides credentials to register.
@@ -32,9 +32,11 @@ def register(email, username, password, firstName, lastName, userType):
   """
   # Below functions stores info on database
   if checkRegisterDuplicateUsername(username) is True:
-    return "Invalid Username"
+    return {"error": "Invalid Username"}
+    # raise Exception("Invalid Username")
   if checkRegisterDuplicateEmail(email) is True:
-    return "Invalid Email"
+    return {"error": "Invalid Email"}
+    # raise Exception("Invalid Email")
   token = randint(1, 1000)
   dbregister(token, email, username, password, firstName, lastName, userType.lower())
   return {

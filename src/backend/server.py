@@ -43,8 +43,7 @@ def auth_login():
     loginData = login(data['email'], data['password'])
 
     # encoded_token = generate_token(user_id)
-    result = {'token' : loginData['token'], 'username' : loginData['username']}
-    return dumps(result)
+    return dumps(loginData)
 
 ## Auth Register Implementation to Server ##
 
@@ -52,13 +51,8 @@ def auth_login():
 def auth_register():
     data = request.get_json()
     loginData = register(data['email'], data['userName'], data['password'], data['firstName'], data['lastName'], data['userType'])
-
     # encoded_token = generate_token(user_id)
-    result = None
-    if loginData:
-        result = {'token' : loginData['token'], 'username' : loginData['username']}
-    
-    return dumps(result)
+    return dumps(loginData)
 
 ## Auth Register Implementation to Server ##
 
