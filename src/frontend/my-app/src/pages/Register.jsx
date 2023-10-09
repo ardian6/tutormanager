@@ -78,6 +78,7 @@ const Register = () => {
   }
 
   const handleChange = (event, newAlignment) => {
+    console.log(event.target.value);
     setUserType(event.target.value);
     if (newAlignment !== null) {
       setAlignment(newAlignment);
@@ -105,7 +106,6 @@ const Register = () => {
 
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword((show) => !show);
-
   const handleMouseDownConfirmPassword = (event) => {
     event.preventDefault();
   };
@@ -141,7 +141,7 @@ const Register = () => {
             aria-label="Platform"
           >
             <ToggleButton
-              value="Student"
+              value="student"
               style={{
                 maxWidth: "150px",
                 minWidth: "150px",
@@ -151,7 +151,7 @@ const Register = () => {
               Student
             </ToggleButton>
             <ToggleButton
-              value="Tutor"
+              value="tutor"
               style={{
                 maxWidth: "150px",
                 minWidth: "150px",
