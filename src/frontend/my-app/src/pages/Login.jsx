@@ -67,7 +67,6 @@ const Login = () => {
           className="logo-container"
           onClick={homeRouteChange}
         />
-
         {/* <ThemeProvider theme={theme}>
           <ToggleButtonGroup
             color="primary"
@@ -121,6 +120,7 @@ const Login = () => {
             </ThemeProvider>
           </div>
         </Box>
+        <div className="forgot-password-word">Forgot Password?</div>
         <ThemeProvider theme={theme}>
           <Stack spacing={2} direction="row" className="login-button">
             <Button

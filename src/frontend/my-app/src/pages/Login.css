@@ -48,3 +48,12 @@
 .login-button {
   margin-top: 10px;
 }
+
+.forgot-password-word {
+  color: #4960a6;
+  margin-left: 150px;
+}
+
+.forgot-password-word:hover {
+  cursor: pointer;
+}
