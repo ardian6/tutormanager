@@ -10,7 +10,7 @@ def login(username, password):
       session_token: String
   """
   # Below functions stores info on database
-  token = randint()
+  token = randint(1, 10000)
   if dblogin(token, username, password) == True:
     return {
       'username' : username,
