@@ -1,9 +1,22 @@
 Ryan Gian Diary (z5360294)
 Week 1 
-Group formed with members Mathew, Hayka, Michael, Ardian, and I. Group named 3900F12APenguin. Selected Mathew as the Scrum Master. Set up Jira and discussed with the group and tutor of how the proposal works. Selected project 16. Had a basic brainstorm of what programming languages/technologies to use and discussed each person’s tasks for the project proposal.
+Group formed with members Mathew, Hayka, Michael, Ardian, and I. Group named 3900F12APenguin. Selected Mathew as the Scrum Master. 
+Set up Jira and discussed with the group and tutor of how the proposal works. Selected project 16. 
+Had a basic brainstorm of what programming languages/technologies to use and discussed each person’s tasks for the project proposal.
 
 Week 2 
-Each team member took on different parts of the proposal. I went through and wrote most of the user stories required for admin, student, and tutor users. I discussed with Mathew some novel functionality that we can add to the project. I collaborated with Ardian and started the storyboard using balsamiq cloud. 
+Each team member took on different parts of the proposal. I went through and wrote most of the user stories required for admin, student, and tutor users. 
+I discussed with Mathew some novel functionality that we can add to the project. I collaborated with Ardian and started the storyboard using balsamiq cloud. 
 
 Week 3
-Each team member finished and finalised the proposal document to submit. Ardian and I went through all user stories to see if they were included in the storyboard. Team went through one last time to check if everything is correct.  Group planned ahead and made dates for when we will start coding everything.
+Each team member finished and finalised the proposal document to submit. Ardian and I went through all user stories to see if they were included in the storyboard. 
+Team went through one last time to check if everything is correct.  Group planned ahead and made dates for when we will start coding everything.
+
+Week 4
+This week, we had a meeting on the monday to come together and set everything up. This meant that the backend and frontend had to be set up. 
+Mathew was in charge with setting up the database and connecting it to the backend. Mathew wrote all the starter functions for the backend. 
+After he set up the backend and pushed it up, I took over to set up the frontend. I installed all relevant dependencies and created the react app. 
+I worked with Michael for a while to set up the routes for the react app to redirect to other pages. This was all the work we did on the Monday. 
+We set out to complete sprint 1 as early as possible so that we could connect the frontend to the backend. 
+Mathew told us later in the week that he had moved the database to AWS so it makes connecting to the database easier.
+I discussed with all relevant frontend engineers who was doing what tasks. I set out to complete the Login, register and home page before the next week. 

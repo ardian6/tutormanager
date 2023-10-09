@@ -1,6 +1,7 @@
-from DBFunctions import dblogin
+from random import randint
+from DBFunctions import dblogin, dbregister, checkRegisterDuplicateEmail, checkRegisterDuplicateUsername
 
-def login(username, password):
+def login(username: str, password: str) -> str:
   """User logs in.
     Paramaters:
       username: String
@@ -9,9 +10,13 @@ def login(username, password):
       session_token: String
   """
   # Below functions stores info on database
-  token = "abc"
-  print(dblogin(token, username, password))
-  return
+  token = randint(1, 10000)
+  if dblogin(token, username, password) == True:
+    return {
+      'username' : username,
+      'token': token
+    }
+  return {"error": "Invalid username or password" }
 
 def register(email, username, password, firstName, lastName, userType):
   """User provides credentials to register.
@@ -26,10 +31,18 @@ def register(email, username, password, firstName, lastName, userType):
       session_token: String
   """
   # Below functions stores info on database
-  if checkRegisterDuplicate(username) is True:
-    # Do something here else we continue
-  dbregister(token, email, username, password, firstName, lastName, userType)
-  return
+  if checkRegisterDuplicateUsername(username) is True:
+    return {"error": "Invalid Username"}
+    # raise Exception("Invalid Username")
+  if checkRegisterDuplicateEmail(email) is True:
+    return {"error": "Invalid Email"}
+    # raise Exception("Invalid Email")
+  token = randint(1, 1000)
+  dbregister(token, email, username, password, firstName, lastName, userType.lower())
+  return {
+    'username' : username,
+    'token': token
+  }
 
 def logout(token):
   # Below functions stores info on database
@@ -37,5 +50,5 @@ def logout(token):
   return
 
 
-if __name__ == '__main__':
-  login("test1","test2")
+# if __name__ == '__main__':
+#   login("test1","test2")

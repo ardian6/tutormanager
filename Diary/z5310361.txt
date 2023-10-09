@@ -5,3 +5,14 @@ Week 2
 Met up earlier in the week to delegate parts for the project proposal. I decided to do the system architecture diagram as it was a fair portion of the proposal. 
 Upon attending menter session/tutor, managed to clarify the requirements of the proposal and whether the diagram I produced was as required.
 The meeting finalised with the team deciding on the next meeting time/date.
+
+Week 3
+Met up earlier in the week on wednesday to see where everyone was up to on the project proposal. I have finalised the system architecture diagram.
+We decided to stick to a python backend api, postgreSQL database server and use reactJs for  frontend. We could potentially
+take on aws for our database depending on client needs and if we need to deploy the project.
+
+Week 4
+Again, met up with team earlier on the week to organise and delegate which funtionalities each memeber should be developing.
+Finalised and edited the project proposal. I decided to be a full stack developer helping on all 3 sides of the project.
+Since then, I have mainly helped developing frontend especially functionality with react jsx. The goal is to finish authentication
+by Sprint 1 with acceptable UI.
