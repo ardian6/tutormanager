@@ -100,9 +100,9 @@ def auth_login_v2():
 
 
 ### NO NEED TO MODIFY BELOW THIS POINT
-# if __name__ == "__main__":
-#     signal.signal(signal.SIGINT, quit_gracefully) # For coverage
-#     APP.run(port=config.port) # Do not edit this port
+if __name__ == "__main__":
+    signal.signal(signal.SIGINT, quit_gracefully) # For coverage
+    APP.run(port=5005) # Do not edit this port
 
 # 400 bad request,
 # 200 good request,
