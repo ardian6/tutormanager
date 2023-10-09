@@ -3,14 +3,13 @@ import signal
 import token
 import jwt
 from json import dumps
-from src.other import clear_v1
 from flask import Flask, request, redirect
 from flask import send_from_directory
 #from flask_mail import Mail, Message
 from flask_cors import CORS
-
-from PIL import Image
 #from src.echo import echo
+
+from auth import login, register
 
 
 def quit_gracefully(*args):
@@ -36,44 +35,24 @@ APP.register_error_handler(Exception, defaultHandler)
 
 #### NO NEED TO MODIFY ABOVE THIS POINT, EXCEPT IMPORTS
 
-# Example
-# @APP.route("/echo", methods = ['GET'])
-# def echo():
-#     data = request.args.get('data')
-#     if data == 'echo':
-#    	    raise InputError(description = 'Cannot echo "echo"')
-
-#     return dumps({'data': data})
-
-
-
 # Auth Login Implementation to Server ##
 
-# @APP.route("/auth/login/", methods = ['POST'])
-# def auth_login_v2():
-    # load()
-    # data = request.get_json()
-    # user_id = auth_login_v1(data['email'],
-    # data['password'])
+@APP.route("/auth/login/", methods = ['POST'])
+def auth_login():
+    data = request.get_json()
+    loginData = login(data['email'], data['password'])
 
     # encoded_token = generate_token(user_id)
-    # result = {'token' : encoded_token, 'auth_user_id' : user_id['auth_user_id']}
-    # save()
-    # return dumps(result)
+    return dumps(loginData)
 
 ## Auth Register Implementation to Server ##
 
-# @APP.route("/auth/register/", methods = ['POST'])
-# def auth_login_v2():
-    # load()
-    # data = request.get_json()
-    # user_id = auth_login_v1(data['email'],
-    # data['password'])
-
+@APP.route("/auth/register/", methods = ['POST'])
+def auth_register():
+    data = request.get_json()
+    loginData = register(data['email'], data['userName'], data['password'], data['firstName'], data['lastName'], data['userType'])
     # encoded_token = generate_token(user_id)
-    # result = {'token' : encoded_token, 'auth_user_id' : user_id['auth_user_id']}
-    # save()
-    # return dumps(result)
+    return dumps(loginData)
 
 ## Auth Register Implementation to Server ##
 
@@ -113,9 +92,9 @@ APP.register_error_handler(Exception, defaultHandler)
 
 
 ### NO NEED TO MODIFY BELOW THIS POINT
-# if __name__ == "__main__":
-#     signal.signal(signal.SIGINT, quit_gracefully) # For coverage
-#     APP.run(port=config.port) # Do not edit this port
+if __name__ == "__main__":
+    signal.signal(signal.SIGINT, quit_gracefully) # For coverage
+    APP.run(port=5005) # Do not edit this port
 
 # 400 bad request,
 # 200 good request,

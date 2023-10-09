@@ -43,21 +43,25 @@ const Login = () => {
   // Redirect to Register page
   let navigate = useNavigate();
   const registerRouteChange = () => {
-    let path = `../Register`;
+    let path = `../register`;
     navigate(path);
   };
 
   // Redirect to Home page
   const homeRouteChange = () => {
-    let path = `../Home`;
+    let path = `../home`;
+    navigate(path);
+  };
+
+  // Redirect to ForgotPassword page
+  const forgotPasswordRouteChange = () => {
+    let path = `./forgotpassword`;
     navigate(path);
   };
 
   // Login Button - calls backend API
   const loginBtn = async () => {
-    console.log(email);
-    console.log(pwd);
-    const response = await fetch('http://localhost:5005/user/auth/login', {
+    const response = await fetch('http://localhost:5005/auth/login/', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -71,8 +75,7 @@ const Login = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      // setToken(data.token);
-      // setEmailGlobal(email);
+      console.log(data);
     }
   }
 
@@ -148,14 +151,16 @@ const Login = () => {
             </ThemeProvider>
           </div>
         </Box>
-        <div className="forgot-password-word">Forgot Password?</div>
+
+        <div className="forgot-password-word" onClick={forgotPasswordRouteChange}>Forgot Password?</div>
+
         <ThemeProvider theme={theme}>
           <Stack spacing={2} direction="row" className="login-button">
             <Button
               variant="contained"
               style={{
-                maxWidth: "200px",
-                minWidth: "200px",
+                maxWidth: "300px",
+                minWidth: "300px",
                 minHeight: "30px",
               }}
               sx={{ borderRadius: "30px" }}
