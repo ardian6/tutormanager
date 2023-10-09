@@ -25,6 +25,42 @@ Messaging system (Twilio) for real-time communication.
 Calendar integration (Outlook Calendar API).
 
 
+---Installation---
+Do in order
+---Register ssh key---
+ssh-keygen
+cat ~/.ssh/id_rsa.pub
+Copy ssh key into GitHub account
+
+---Install Python---
+sudo apt update && upgrade
+sudo apt install python3 python3-pip
+python3 --version
+
+---Install Node---
+npm install
+sudo apt-get install -y nodejs
+
+---Install yarn---
+npm install --global yarn
+
+---Install React---
+yarn add react-scripts
+
+---Install dependencies---
+yarn install 
+yarn
+
+---Install Flask---
+pip3 install flask
+
+---Install psycopg2---
+pip3 install flask_cors
+
+---Install psycopg2 ---
+sudo apt-get install build-dep python-psycopg2
+pip install psycopg2-binary 
+
 
 
 
