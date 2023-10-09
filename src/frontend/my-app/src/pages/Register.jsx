@@ -33,7 +33,7 @@ const Register = () => {
   const [userName, setUserName] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [checkPwd, setCheckPwd] = React.useState("");
-  const [userType, setUserType] = React.useState("");
+  const [userType, setUserType] = React.useState("Student");
 
   const registerBtn = async () => {
     const response = await fetch('http://localhost:5005/auth/register/', {
