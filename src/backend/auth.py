@@ -1,5 +1,6 @@
 from random import randint
 from DBFunctions import dblogin, dbregister, checkRegisterDuplicateEmail, checkRegisterDuplicateUsername
+import hashlib
 
 def login(username: str, password: str) -> str:
   """User logs in.
@@ -9,6 +10,8 @@ def login(username: str, password: str) -> str:
     Returns:
       session_token: String
   """
+  # TODO: Create token with jwt module
+
   # Below functions stores info on database
   token = randint(1, 10000)
   if dblogin(token, username, password) == True:
@@ -30,6 +33,11 @@ def register(email, username, password, firstName, lastName, userType):
     Returns:
       session_token: String
   """
+  # TODO: Create token with jwt module
+  
+  # TODO: Encode password
+  encrypted_pass = hashlib.sha256(password.encode()).hexdigest()
+
   # Below functions stores info on database
   if checkRegisterDuplicateUsername(username) is True:
     return {"error": "Invalid Username"}
@@ -38,7 +46,7 @@ def register(email, username, password, firstName, lastName, userType):
     return {"error": "Invalid Email"}
     # raise Exception("Invalid Email")
   token = randint(1, 1000)
-  dbregister(token, email, username, password, firstName, lastName, userType.lower())
+  dbregister(token, email, username, encrypted_pass, firstName, lastName, userType.lower())
   return {
     'username' : username,
     'token': token
