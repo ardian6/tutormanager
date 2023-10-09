@@ -33,9 +33,10 @@ const Register = () => {
   const [userName, setUserName] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [checkPwd, setCheckPwd] = React.useState("");
+  const [userType, setUserType] = React.useState("Student");
 
   const registerBtn = async () => {
-    const response = await fetch('http://localhost:5005/user/auth/register', {
+    const response = await fetch('http://localhost:5005/auth/register/', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -46,6 +47,7 @@ const Register = () => {
         userName: userName,
         email: email,
         password: pwd,
+        userType: userType
       })
     });
     const data = await response.json();
@@ -75,6 +77,8 @@ const Register = () => {
   }
 
   const handleChange = (event, newAlignment) => {
+    console.log(event.target.value);
+    setUserType(event.target.value);
     if (newAlignment !== null) {
       setAlignment(newAlignment);
     }
@@ -101,7 +105,6 @@ const Register = () => {
 
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword((show) => !show);
-
   const handleMouseDownConfirmPassword = (event) => {
     event.preventDefault();
   };
@@ -137,7 +140,7 @@ const Register = () => {
             aria-label="Platform"
           >
             <ToggleButton
-              value="Student"
+              value="student"
               style={{
                 maxWidth: "150px",
                 minWidth: "150px",
@@ -147,7 +150,7 @@ const Register = () => {
               Student
             </ToggleButton>
             <ToggleButton
-              value="Tutor"
+              value="tutor"
               style={{
                 maxWidth: "150px",
                 minWidth: "150px",
