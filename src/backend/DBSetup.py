@@ -58,7 +58,7 @@ def clearData():
 def inputData1():
   # Input dummy data for user table
   cur = db.cursor()
-  cur.execute("""insert into Users values ('username1', 'password1', 'email1gmail.com', 'givenname1', 'famailyName1', 'admin')""")
+  cur.execute("""insert into Users values ('username1', 'password1', 'email1@gmail.com', 'givenname1', 'famailyName1', 'admin')""")
   cur.execute("""insert into Users values ('username2', 'password2', 'email2@gmail.com', 'givenname2', 'famailyName2', 'student')""")
   cur.execute("""insert into Users values ('username3', 'password3', 'email3@gmail.com', 'givenname3', 'famailyName3', 'student')""")
   cur.execute("""insert into Users values ('username4', 'password4', 'email4@gmail.com', 'givenname4', 'famailyName4', 'tutor')""")
