@@ -3,31 +3,59 @@ import sys
 
 #Create all db related functions
 def dblogin(token, username, password):
-    #Store Token into database
+    # Check if login info is correct and Store Token into database
+    correctPassword = False
     db = connectDB()
     cur = db.cursor()
-    cur.execute('SELECT version()')
-    state = cur.fetchone()
+    cur.execute("""select u.username, u.password from Users u where u.username = %s and u.password = %s""", [username, password])
+    state = cur.fetchall()
+    if len(state) == 1:
+        cur.execute("""insert into Sessions values (%s, %s)""", [token, username])
+        correctPassword = True
+    cur.close()
+    db.commit()
     db.close()
-    return state
+    return correctPassword
 
 def dbregister(token, email, username, password, firstName, lastName, userType):
-    #Store Token into database
-    #Store a new account into database
+    # Store a new user into the database
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType])
+    cur.close()
+    db.commit()
+    db.close()
     return
 
 def checkRegisterDuplicate(username):
-    return True
+    # Check if the username hasn't already been registered
+    alreadyExist = False
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select u.username from Users u where u.username = %s""", [username])
+    state = cur.fetchall()
+    if len(state) == 1:
+        alreadyExist = True
+    cur.close()
+    db.commit()
+    db.close()
+    return alreadyExist
 
 def dblogout(token):
-    #Remove Token from database
+    # Remove Token from database
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""delete from Sessions s where s.sessID = %s""", [token])
+    cur.close()
+    db.commit()
+    db.close()
     return
 
-def test():
-    cur = db.cursor()
-    cur.execute('SELECT version()')
-    state = cur.fetchone()
-    print(state)
+# def test():
+#     cur = db.cursor()
+#     cur.execute('SELECT version()')
+#     state = cur.fetchone()
+#     print(state)
 
 def connectDB():
     return psycopg2.connect(

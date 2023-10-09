@@ -4,6 +4,7 @@ import sys
 db = None 
 
 def setupTables():
+  # Creating all the tables and types
   cur = db.cursor()
   
   cur.execute("""create type uType as ENUM (
@@ -33,6 +34,7 @@ def setupTables():
   return
 
 def deleteTables():
+  # Deleting all tables and types
   cur = db.cursor()
   
   cur.execute("""drop table Sessions""")
@@ -45,6 +47,7 @@ def deleteTables():
   return
 
 def clearData():
+  # Clear all the data from the tables
   cur = db.cursor()
   cur.execute("""delete from Sessions""")
   cur.execute("""delete from Users""")
@@ -53,6 +56,7 @@ def clearData():
   return
 
 def inputData1():
+  # Input dummy data for user table
   cur = db.cursor()
   cur.execute("""insert into Users values ('username1', 'password1', 'email1gmail.com', 'givenname1', 'famailyName1', 'admin')""")
   cur.execute("""insert into Users values ('username2', 'password2', 'email2@gmail.com', 'givenname2', 'famailyName2', 'student')""")
@@ -65,6 +69,7 @@ def inputData1():
   return
 
 def inputData2():
+  # Input dummy data for session table
   cur = db.cursor()
   cur.execute("""insert into Sessions values ('1', 'username1')""")
   cur.execute("""insert into Sessions values ('2', 'username5')""")
@@ -74,6 +79,7 @@ def inputData2():
   return 
 
 def printData():
+  # Print out all the data in the database currently
   cur = db.cursor()
   print('Users table')
   cur.execute("""select u.username, u.password, u.email, u.givenName, u.familyName, u.userType from Users u""")
