@@ -25,21 +25,19 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [alignment, setAlignment] = React.useState("Student");
-
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [userName, setUserName] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [checkPwd, setCheckPwd] = React.useState("");
-  const [userType, setUserType] = React.useState("Student");
+  const [userType, setUserType] = React.useState("student");
 
   const registerBtn = async () => {
-    const response = await fetch('http://localhost:5005/auth/register/', {
-      method: 'POST',
+    const response = await fetch("http://localhost:5005/auth/register/", {
+      method: "POST",
       headers: {
-        'Content-type': 'application/json',
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
         firstName: firstName,
@@ -47,8 +45,8 @@ const Register = () => {
         userName: userName,
         email: email,
         password: pwd,
-        userType: userType
-      })
+        userType: userType,
+      }),
     });
     const data = await response.json();
     if (data.error) {
@@ -57,16 +55,14 @@ const Register = () => {
       // setToken(data.token);
       // setEmailGlobal(email);
     }
-  }
+  };
 
   const validEmail = () => {
     const emailRegex = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
     return emailRegex.test(email);
-  }
+  };
 
-  const validUserName = () => {
-    
-  }
+  const validUserName = () => {};
 
   const validPwd = () => {
     // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
@@ -74,13 +70,13 @@ const Register = () => {
     const pwdRegex = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i);
     return pwd === checkPwd && pwd.length !== 0 && pwdRegex.test(pwd);
     //return pwd === checkPwd && pwd.length !== 0
-  }
+  };
 
-  const handleChange = (event, newAlignment) => {
+  const handleChange = (event, userType) => {
     console.log(event.target.value);
     setUserType(event.target.value);
-    if (newAlignment !== null) {
-      setAlignment(newAlignment);
+    if (userType !== null) {
+      setUserType(userType);
     }
   };
 
@@ -111,14 +107,14 @@ const Register = () => {
 
   let navigate = useNavigate();
   const redirectLoginRouteChange = () => {
-    let path = `../Login`;
+    let path = `../login`;
     navigate(path);
   };
 
   // Redirect to Login page
   // let navigate = useNavigate();
   // const routeChange = () => {
-  //   let path = `../Login`;
+  //   let path = `../login`;
   //   navigate(path);
   // };
   return (
@@ -134,7 +130,7 @@ const Register = () => {
         <ThemeProvider theme={theme}>
           <ToggleButtonGroup
             color="primary"
-            value={alignment}
+            value={userType}
             exclusive
             onChange={handleChange}
             aria-label="Platform"
@@ -167,11 +163,13 @@ const Register = () => {
             <FormControl sx={{ m: 1, width: "360px" }} variant="standard">
               <ThemeProvider theme={theme}>
                 <InputLabel htmlFor="standard-adornment-First-Name">
-                  First Name
+                  First Name*
                 </InputLabel>
                 <Input
                   id="standard-adornment-First-Name"
-                  onChange={(event) => {setFirstName(event.target.value)}}
+                  onChange={(event) => {
+                    setFirstName(event.target.value);
+                  }}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton></IconButton>
@@ -187,11 +185,13 @@ const Register = () => {
             <FormControl sx={{ m: 1, width: "360px" }} variant="standard">
               <ThemeProvider theme={theme}>
                 <InputLabel htmlFor="standard-adornment-Last-Name">
-                  Last Name
+                  Last Name*
                 </InputLabel>
                 <Input
                   id="standard-adornment-Last-Name"
-                  onChange={(event) => {setLastName(event.target.value)}}
+                  onChange={(event) => {
+                    setLastName(event.target.value);
+                  }}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton></IconButton>
@@ -207,19 +207,17 @@ const Register = () => {
             <FormControl sx={{ m: 1, width: "360px" }} variant="standard">
               <ThemeProvider theme={theme}>
                 <InputLabel htmlFor="standard-adornment-email">
-                  Email
+                  Email*
                 </InputLabel>
                 <Input
                   id="standard-adornment-email"
-                  onChange={(event) => {setEmail(event.target.value)}}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                  }}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton>
-                        {validEmail() ? (
-                          <></>
-                        ) : (
-                          <ErrorIcon color="error" />
-                        )}
+                        {validEmail() ? <></> : <ErrorIcon color="error" />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -233,19 +231,17 @@ const Register = () => {
             <FormControl sx={{ m: 1, width: "360px" }} variant="standard">
               <ThemeProvider theme={theme}>
                 <InputLabel htmlFor="standard-adornment-Username">
-                  Username
+                  Username*
                 </InputLabel>
                 <Input
                   id="standard-adornment-Username"
-                  onChange={(event) => {setUserName(event.target.value)}}
+                  onChange={(event) => {
+                    setUserName(event.target.value);
+                  }}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton>
-                        {validEmail() ? (
-                          <></>
-                        ) : (
-                          <ErrorIcon color="error" />
-                        )}
+                        {validEmail() ? <></> : <ErrorIcon color="error" />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -259,22 +255,20 @@ const Register = () => {
             <ThemeProvider theme={theme}>
               <FormControl sx={{ m: 1, width: "360px" }} variant="standard">
                 <InputLabel htmlFor="standard-adornment-password">
-                  Password
+                  Password*
                 </InputLabel>
 
                 <Input
                   id="standard-adornment-password"
-                  onChange={(event) => {setPwd(event.target.value)}}
+                  onChange={(event) => {
+                    setPwd(event.target.value);
+                  }}
                   type={showPassword ? "text" : "password"}
                   endAdornment={
                     <>
                       <InputAdornment position="start">
                         <IconButton>
-                          {validPwd() ? (
-                            <></>
-                          ) : (
-                            <ErrorIcon color="error" />
-                          )}
+                          {validPwd() ? <></> : <ErrorIcon color="error" />}
                         </IconButton>
                       </InputAdornment>
                       <InputAdornment position="end">
@@ -298,23 +292,21 @@ const Register = () => {
             <ThemeProvider theme={theme}>
               <FormControl sx={{ m: 1, width: "360px" }} variant="standard">
                 <InputLabel htmlFor="standard-adornment-confirm-password">
-                  Confirm Password
+                  Confirm Password*
                 </InputLabel>
 
                 <Input
                   // error
                   id="standard-adornment-confirm-password"
-                  onChange={(event) => {setCheckPwd(event.target.value)}}
+                  onChange={(event) => {
+                    setCheckPwd(event.target.value);
+                  }}
                   type={showConfirmPassword ? "text" : "password"}
                   endAdornment={
                     <>
                       <InputAdornment position="start">
                         <IconButton>
-                          {validPwd() ? (
-                            <></>
-                          ) : (
-                            <ErrorIcon color="error" />
-                          )}
+                          {validPwd() ? <></> : <ErrorIcon color="error" />}
                         </IconButton>
                       </InputAdornment>
                       <InputAdornment position="end">
@@ -345,8 +337,8 @@ const Register = () => {
             <Button
               variant="contained"
               style={{
-                maxWidth: "200px",
-                minWidth: "200px",
+                maxWidth: "350px",
+                minWidth: "350px",
                 minHeight: "30px",
               }}
               sx={{ borderRadius: "30px" }}
