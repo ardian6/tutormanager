@@ -51,10 +51,10 @@ def auth_login():
 @APP.route("/auth/register/", methods = ['POST'])
 def auth_register():
     data = request.get_json()
-    user_id = register(data['email'], data['userName'], data['password'], data['firstName'], data['lastName'], data['userType'])
+    loginData = register(data['email'], data['userName'], data['password'], data['firstName'], data['lastName'], data['userType'])
 
     # encoded_token = generate_token(user_id)
-    result = {'token' : encoded_token, 'auth_user_id' : user_id['auth_user_id']}
+    result = {'token' : loginData['token'], 'username' : loginData['username']}
     return dumps(result)
 
 ## Auth Register Implementation to Server ##
