@@ -65,6 +65,58 @@ def dblogout(token):
     db.close()
     return
 
+ # Check if the token exists
+def checkTokenExists(token):
+    return True # -> if true it means proceed if false stop here
+
+# Check if token exists and is an admin
+def checkTokenAdmin(session_token):
+    return True # -> if true it means proceed if false stop here
+
+# This function actually goes into the database and changes the data stored
+def dbChangeUsername(token, newUsername):
+    return #Just changes the username
+
+# This function actually goes into the database and changes the data stored
+def dbChangeEmail(token, newEmail):
+    return
+
+# This function actually goes into the database and changes the data stored
+def dbChangePassword(token, newPass):
+    return
+
+# This function actually goes into the database and changes the data stored
+def dbChangeBio(token, newBio):
+    # I am going to need to either edit current table or insert a new table for this functionality
+    return
+
+# This function actually goes into the database and changes the data stored
+def dbAddCourse(session_token, newCourse):
+    # Need to create new table or modify existing table for this
+    return True  # This function returns True if successful or false if failed (Failed if course is already added)
+
+# This function actually goes into the database and changes the data stored
+def dbDeleteCourse(session_token, courseToBeDeleted):
+    return True # This function returns True if successful or false if failed (Failed if course cannot be deleted because they didnt have it in the first place)
+
+# This function actually goes into the database and changes the data stored
+def dbDeleteAccount(session_token, password):
+    # Check if the user assoicated with the sess token and the password match to the ones in the database
+    # If the above passes we return true and delete the user sess token and profile from the database
+    # Else return false
+    return True
+
+# This function actually goes into the database and retrieves the information wanted
+def dbViewProfile(targetProfile):
+    # Return it in a dictionary format
+    return
+
+# This function actually goes into the database and changes the data stored
+def dbAdminDelete(targetProfile):
+    # Delete the targeted profile
+    return
+
+
 # def test():
 #     cur = db.cursor()
 #     cur.execute('SELECT version()')

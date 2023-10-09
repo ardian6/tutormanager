@@ -23,13 +23,13 @@ const Home = () => {
   // Redirect to Login page
   let navigate = useNavigate();
   const loginRouteChange = () => {
-    let path = `../Login`;
+    let path = `../login`;
     navigate(path);
   };
 
   // Redirect to Register page
   const registerRouteChange = () => {
-    let path = `../Register`;
+    let path = `../register`;
     navigate(path);
   };
 

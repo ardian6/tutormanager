@@ -4,12 +4,9 @@ import "./Login.css";
 // import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Logo from "./TutorManagerLogo.png";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
-
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
-
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
@@ -20,6 +17,8 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
+import { Context, useContext } from '../Context';
+
 const Login = () => {
   // const [alignment, setAlignment] = React.useState("Student");
 
@@ -29,6 +28,11 @@ const Login = () => {
 
   const [email, setEmail] = React.useState('');
   const [pwd, setPwd] = React.useState('');
+
+  const { setters } = useContext(Context);
+  const setToken = setters.setToken;
+  const setEmailGlobal = setters.setEmailGlobal;
+  const setUserTypeGlobal = setters.setUserType;
 
 
   const theme = createTheme({
@@ -43,13 +47,19 @@ const Login = () => {
   // Redirect to Register page
   let navigate = useNavigate();
   const registerRouteChange = () => {
-    let path = `../Register`;
+    let path = `../register`;
     navigate(path);
   };
 
   // Redirect to Home page
   const homeRouteChange = () => {
-    let path = `../Home`;
+    let path = `../home`;
+    navigate(path);
+  };
+
+  // Redirect to ForgotPassword page
+  const forgotPasswordRouteChange = () => {
+    let path = `./forgotpassword`;
     navigate(path);
   };
 
@@ -69,7 +79,10 @@ const Login = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      console.log(data);
+      setToken(data.token);
+      setEmailGlobal(email);
+      // Get full user info and set userType
+      //setUserTypeGlobal(userType);
     }
   }
 
@@ -146,13 +159,14 @@ const Login = () => {
             </ThemeProvider>
           </div>
         </Box>
+        <div className="forgot-password-word" onClick={forgotPasswordRouteChange}>Forgot Password?</div>
         <ThemeProvider theme={theme}>
           <Stack spacing={2} direction="row" className="login-button">
             <Button
               variant="contained"
               style={{
-                maxWidth: "200px",
-                minWidth: "200px",
+                maxWidth: "300px",
+                minWidth: "300px",
                 minHeight: "30px",
               }}
               sx={{ borderRadius: "30px" }}
