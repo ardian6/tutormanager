@@ -9,9 +9,13 @@ def login(username, password):
       session_token: String
   """
   # Below functions stores info on database
-  token = "abc"
-  print(dblogin(token, username, password))
-  return
+  token = randint()
+  if dblogin(token, username, password) == True:
+    return {
+      'username' : username,
+      'token': token
+    }
+  return None
 
 def register(email, username, password, firstName, lastName, userType):
   """User provides credentials to register.
@@ -26,10 +30,16 @@ def register(email, username, password, firstName, lastName, userType):
       session_token: String
   """
   # Below functions stores info on database
-  if checkRegisterDuplicate(username) is True:
-    # Do something here else we continue
+  if checkRegisterDuplicateUsername(username) is True:
+    return "Invalid Username"
+  if checkRegisterDuplicateEmail(email) is True:
+    return "Invalid Email"
+  token = randint()
   dbregister(token, email, username, password, firstName, lastName, userType)
-  return
+  return {
+    'username' : username,
+    'token': token
+  }
 
 def logout(token):
   # Below functions stores info on database
@@ -37,5 +47,5 @@ def logout(token):
   return
 
 
-if __name__ == '__main__':
-  login("test1","test2")
+# if __name__ == '__main__':
+#   login("test1","test2")

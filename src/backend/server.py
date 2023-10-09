@@ -3,7 +3,6 @@ import signal
 import token
 import jwt
 from json import dumps
-from src.other import clear_v1
 from flask import Flask, request, redirect
 from flask import send_from_directory
 #from flask_mail import Mail, Message
@@ -11,6 +10,8 @@ from flask_cors import CORS
 
 from PIL import Image
 #from src.echo import echo
+
+from auth import login
 
 
 def quit_gracefully(*args):
@@ -36,30 +37,16 @@ APP.register_error_handler(Exception, defaultHandler)
 
 #### NO NEED TO MODIFY ABOVE THIS POINT, EXCEPT IMPORTS
 
-# Example
-# @APP.route("/echo", methods = ['GET'])
-# def echo():
-#     data = request.args.get('data')
-#     if data == 'echo':
-#    	    raise InputError(description = 'Cannot echo "echo"')
-
-#     return dumps({'data': data})
-
-
-
 # Auth Login Implementation to Server ##
 
-# @APP.route("/auth/login/", methods = ['POST'])
-# def auth_login_v2():
-    # load()
-    # data = request.get_json()
-    # user_id = auth_login_v1(data['email'],
-    # data['password'])
+@APP.route("/auth/login/", methods = ['POST'])
+def auth_login_v2():
+    data = request.get_json()
+    loginData = login(data['email'], data['password'])
 
     # encoded_token = generate_token(user_id)
-    # result = {'token' : encoded_token, 'auth_user_id' : user_id['auth_user_id']}
-    # save()
-    # return dumps(result)
+    result = {'token' : loginData['token'], 'username' : loginData['username']}
+    return dumps(result)
 
 ## Auth Register Implementation to Server ##
 

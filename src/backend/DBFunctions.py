@@ -27,12 +27,26 @@ def dbregister(token, email, username, password, firstName, lastName, userType):
     db.close()
     return
 
-def checkRegisterDuplicate(username):
+def checkRegisterDuplicateUsername(username):
     # Check if the username hasn't already been registered
     alreadyExist = False
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select u.username from Users u where u.username = %s""", [username])
+    state = cur.fetchall()
+    if len(state) == 1:
+        alreadyExist = True
+    cur.close()
+    db.commit()
+    db.close()
+    return alreadyExist
+
+def checkRegisterDuplicateEmail(email):
+    # Check if the username hasn't already been registered
+    alreadyExist = False
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select u.email from Users u where u.email = %s""", [email])
     state = cur.fetchall()
     if len(state) == 1:
         alreadyExist = True
