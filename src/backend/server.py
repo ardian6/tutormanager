@@ -7,8 +7,6 @@ from flask import Flask, request, redirect
 from flask import send_from_directory
 #from flask_mail import Mail, Message
 from flask_cors import CORS
-
-from PIL import Image
 #from src.echo import echo
 
 from auth import login, register
