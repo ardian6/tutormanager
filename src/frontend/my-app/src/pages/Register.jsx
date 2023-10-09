@@ -54,7 +54,6 @@ const Register = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      console.log(data);
       // setToken(data.token);
       // setEmailGlobal(email);
     }
