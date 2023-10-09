@@ -21,6 +21,7 @@ def changeUsername(session_token: str, newUsername: str) -> dict:
 
   if not checkRegisterDuplicateUsername(newUsername): return "This username is already in use!"
 
+  #### EXAMPLE CODE ####
   # user.username = newUsername
   # updateDB(user)
 
@@ -175,6 +176,9 @@ def viewProfile(session_token: str, targetProfile: str) -> dict:
 
   # Find user in database from token
 
+  # If the user is eligible to view the target user (should be in all cases)
+    # Return True from this current function?
+    # Else return False?
 
   return {
     "token": session_token
@@ -193,7 +197,7 @@ def adminDelete(session_token: str, targetProfile: str) -> dict:
   # Find user in database from targetProfile
 
   # Delete user associated with targetProfile from DB
-  # (Admin has extra priviliges so should delete targetProfile without any checks)
+  # (Admin has extra privileges so should delete targetProfile without any checks)
   # Can do additional check to see if user is correctly deleted
 
   return {
