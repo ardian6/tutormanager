@@ -32,7 +32,7 @@ const Register = () => {
   const { setters } = useContext(Context);
   const setToken = setters.setToken;
   const setEmailGlobal = setters.setEmailGlobal;
-  const setUserTypeGlobal = setters.setUserType;
+  const setUserTypeGlobal = setters.setUserTypeGlobal;
 
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -60,10 +60,11 @@ const Register = () => {
     const data = await response.json();
     if (data.error) {
       alert(data.error);
-    } else {
+    } else if (validEmail() && validPwd()){
       setToken(data.token);
       setEmailGlobal(email);
       setUserTypeGlobal(userType);
+      navigate('/Profile');
     }
   };
 
@@ -71,8 +72,6 @@ const Register = () => {
     const emailRegex = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
     return emailRegex.test(email);
   };
-
-  const validUserName = () => {};
 
   const validPwd = () => {
     // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
