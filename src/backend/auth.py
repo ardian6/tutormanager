@@ -1,5 +1,5 @@
 from random import randint
-from DBFunctions import dblogin
+from DBFunctions import dblogin, dbregister, checkRegisterDuplicateEmail, checkRegisterDuplicateUsername
 
 def login(username, password):
   """User logs in.
