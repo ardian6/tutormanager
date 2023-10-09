@@ -1,3 +1,4 @@
+from random import randint
 from DBFunctions import dblogin
 
 def login(username, password):
