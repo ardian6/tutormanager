@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import PositionedMenu from "./PositionedMenu";
 import SideBar from "./SideBar";
+import { Button } from "@mui/material";
 
 function NavBar() {
     return (
@@ -8,8 +9,7 @@ function NavBar() {
             <div className="NavBar">
                 <div className="NavBarInfo">
                     <SideBar></SideBar>
-                    <div><Link to="/">About</Link></div>
-                    <div><Link to="/">Dashboard</Link></div>
+                    <div><Link to="/Dashboard"><Button>Dashboard</Button></Link></div>
                 </div>
                 <h4>
                     Tutor Manager

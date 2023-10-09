@@ -5,6 +5,8 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import OpenIconSpeedDial from "./OpenIconSpeedDial";
 import NavBar from "./NavBar";
+import StudentProfile from "../pages/studentProfile"
+import TutorProfile from "../pages/tutorProfile"
 import {
   Routes,
   Route,
@@ -15,15 +17,16 @@ import {
 } from "react-router-dom";
 
 function Site(props) {
+  const [userType, setUserType] = React.useState(true);
+
   return (
     <div className="SiteContainer">
       {/* <NavBar></NavBar>
       <OpenIconSpeedDial></OpenIconSpeedDial> */}
       <Routes>
         <Route path="/Register" element={<Register />} />
-        <Route path="/Profile" element={<Profile />} />
+        <Route path="/Profile" element={userType ? <StudentProfile /> : <TutorProfile/> } />
         <Route path="/Login" element={<Login />} />
-        <Route path="/Home" element={<Home />} />
         <Route path="/" element={<Home />} />
       </Routes>
       {/* <div>

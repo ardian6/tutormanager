@@ -27,6 +27,52 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [alignment, setAlignment] = React.useState("Student");
 
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [userName, setUserName] = React.useState("");
+  const [pwd, setPwd] = React.useState("");
+  const [checkPwd, setCheckPwd] = React.useState("");
+
+  const registerBtn = async () => {
+    const response = await fetch('http://localhost:5005/user/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        userName: userName,
+        email: email,
+        password: pwd,
+      })
+    });
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      // setToken(data.token);
+      // setEmailGlobal(email);
+    }
+  }
+
+  const validEmail = () => {
+
+  }
+
+  const validUserName = () => {
+    
+  }
+
+  const validPwd = () => {
+    // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
+    //const pwdRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+    const pwdRegex = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
+    return pwd === checkPwd && pwd.length !== 0 && pwdRegex.test(pwd);
+    //return pwd === checkPwd && pwd.length !== 0
+  }
+
   const handleChange = (event, newAlignment) => {
     if (newAlignment !== null) {
       setAlignment(newAlignment);
@@ -121,19 +167,10 @@ const Register = () => {
                 </InputLabel>
                 <Input
                   id="standard-adornment-First-Name"
+                  onChange={(event) => {setFirstName(event.target.value)}}
                   endAdornment={
                     <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowConfirmPassword}
-                        onMouseDown={handleMouseDownConfirmPassword}
-                      >
-                        {showConfirmPassword ? (
-                          <></>
-                        ) : (
-                          <ErrorIcon color="error" />
-                        )}
-                      </IconButton>
+                      <IconButton></IconButton>
                     </InputAdornment>
                   }
                 />
@@ -150,19 +187,10 @@ const Register = () => {
                 </InputLabel>
                 <Input
                   id="standard-adornment-Last-Name"
+                  onChange={(event) => {setLastName(event.target.value)}}
                   endAdornment={
                     <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowConfirmPassword}
-                        onMouseDown={handleMouseDownConfirmPassword}
-                      >
-                        {showConfirmPassword ? (
-                          <></>
-                        ) : (
-                          <ErrorIcon color="error" />
-                        )}
-                      </IconButton>
+                      <IconButton></IconButton>
                     </InputAdornment>
                   }
                 />
@@ -179,14 +207,11 @@ const Register = () => {
                 </InputLabel>
                 <Input
                   id="standard-adornment-email"
+                  onChange={(event) => {setEmail(event.target.value)}}
                   endAdornment={
                     <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowConfirmPassword}
-                        onMouseDown={handleMouseDownConfirmPassword}
-                      >
-                        {showConfirmPassword ? (
+                      <IconButton>
+                        {validEmail() ? (
                           <></>
                         ) : (
                           <ErrorIcon color="error" />
@@ -208,14 +233,11 @@ const Register = () => {
                 </InputLabel>
                 <Input
                   id="standard-adornment-Username"
+                  onChange={(event) => {setUserName(event.target.value)}}
                   endAdornment={
                     <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowConfirmPassword}
-                        onMouseDown={handleMouseDownConfirmPassword}
-                      >
-                        {showConfirmPassword ? (
+                      <IconButton>
+                        {validEmail() ? (
                           <></>
                         ) : (
                           <ErrorIcon color="error" />
@@ -238,16 +260,13 @@ const Register = () => {
 
                 <Input
                   id="standard-adornment-password"
+                  onChange={(event) => {setPwd(event.target.value)}}
                   type={showPassword ? "text" : "password"}
                   endAdornment={
                     <>
                       <InputAdornment position="start">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowConfirmPassword}
-                          onMouseDown={handleMouseDownConfirmPassword}
-                        >
-                          {showConfirmPassword ? (
+                        <IconButton>
+                          {validPwd() ? (
                             <></>
                           ) : (
                             <ErrorIcon color="error" />
@@ -281,16 +300,13 @@ const Register = () => {
                 <Input
                   // error
                   id="standard-adornment-confirm-password"
+                  onChange={(event) => {setCheckPwd(event.target.value)}}
                   type={showConfirmPassword ? "text" : "password"}
                   endAdornment={
                     <>
                       <InputAdornment position="start">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowConfirmPassword}
-                          onMouseDown={handleMouseDownConfirmPassword}
-                        >
-                          {showConfirmPassword ? (
+                        <IconButton>
+                          {validPwd() ? (
                             <></>
                           ) : (
                             <ErrorIcon color="error" />
@@ -330,6 +346,7 @@ const Register = () => {
                 minHeight: "30px",
               }}
               sx={{ borderRadius: "30px" }}
+              onClick={registerBtn}
             >
               Register
             </Button>
