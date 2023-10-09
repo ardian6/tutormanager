@@ -1,7 +1,7 @@
 from random import randint
 from DBFunctions import dblogin
 
-def login(username, password):
+def login(username: str, password: str) -> str:
   """User logs in.
     Paramaters:
       username: String
