@@ -4,12 +4,13 @@ import "./Profile.css";
 // import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Logo from "./TutorManagerLogo.png";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import NavBar from "../components/NavBar";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
-const Profile = () => {
+const TutorProfile = () => {
   const theme = createTheme({
     typography: {
       allVariants: {
@@ -19,31 +20,12 @@ const Profile = () => {
     },
   });
 
-  // Redirect to Login page
-  let navigate = useNavigate();
-  const loginRouteChange = () => {
-    let path = `../Login`;
-    navigate(path);
-  };
-
-  // Redirect to Register page
-  const registerRouteChange = () => {
-    let path = `../Register`;
-    navigate(path);
-  };
-
   return (
-    <div className="profile-container">
-      <div className="profile-card">
-        <img
-          src={Logo}
-          alt="TutorManagerLogo"
-          width="140px"
-          className="logo-container"
-        />
-      </div>
+    <div>
+        <NavBar></NavBar>
+      Tutor
     </div>
   );
 };
 
-export default Profile;
+export default TutorProfile;
