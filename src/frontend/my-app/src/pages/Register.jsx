@@ -20,12 +20,19 @@ import ErrorIcon from "@mui/icons-material/Error";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
+import { Context, useContext } from '../Context';
+
 // import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [alignment, setAlignment] = React.useState("Student");
+
+  const { setters } = useContext(Context);
+  const setToken = setters.setToken;
+  const setEmailGlobal = setters.setEmailGlobal;
+  const setUserTypeGlobal = setters.setUserType;
 
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -54,8 +61,9 @@ const Register = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      // setToken(data.token);
-      // setEmailGlobal(email);
+      setToken(data.token);
+      setEmailGlobal(email);
+      setUserTypeGlobal(userType);
     }
   }
 

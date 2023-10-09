@@ -20,6 +20,8 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
+import { Context, useContext } from '../Context';
+
 const Login = () => {
   // const [alignment, setAlignment] = React.useState("Student");
 
@@ -29,6 +31,11 @@ const Login = () => {
 
   const [email, setEmail] = React.useState('');
   const [pwd, setPwd] = React.useState('');
+
+  const { setters } = useContext(Context);
+  const setToken = setters.setToken;
+  const setEmailGlobal = setters.setEmailGlobal;
+  const setUserTypeGlobal = setters.setUserType;
 
 
   const theme = createTheme({
@@ -69,7 +76,10 @@ const Login = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      console.log(data);
+      setToken(data.token);
+      setEmailGlobal(email);
+      // Get full user info and set userType
+      //setUserTypeGlobal(userType);
     }
   }
 
