@@ -54,7 +54,10 @@ def auth_register():
     loginData = register(data['email'], data['userName'], data['password'], data['firstName'], data['lastName'], data['userType'])
 
     # encoded_token = generate_token(user_id)
-    result = {'token' : loginData['token'], 'username' : loginData['username']}
+    result = None
+    if loginData:
+        result = {'token' : loginData['token'], 'username' : loginData['username']}
+    
     return dumps(result)
 
 ## Auth Register Implementation to Server ##
