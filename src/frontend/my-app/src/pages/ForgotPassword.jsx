@@ -14,8 +14,35 @@ import Button from "@mui/material/Button";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { useRef, useEffect, useState } from "react";
+import emailjs from "@emailjs/browser";
+
 const ForgotPassword = () => {
   const [email, setEmail] = React.useState("");
+
+  // const emailRef = useRef<HTMLInputElement>();
+  // const nameRef = useRef<HTMLInputElement>();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => emailjs.init("bwMCQLQ7fCEEWBECh"), []);
+
+  const handleSubmit = async (e) => {
+    // e.preventDefault();
+    const serviceId = "service_ih839oy";
+    const templateId = "template_ywhd0st";
+    try {
+      setLoading(true);
+      await emailjs.send(serviceId, templateId, {
+        // name: nameRef.current.value,
+        recipient: email,
+      });
+      alert("email successfully sent check inbox");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="ForgotPassword-container">
@@ -51,7 +78,9 @@ const ForgotPassword = () => {
               minHeight: "30px",
             }}
             sx={{ borderRadius: "30px" }}
-            //   onClick={continueBtn}
+            onClick={(event) => {
+              handleSubmit(email);
+            }}
           >
             Continue
           </Button>
