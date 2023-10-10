@@ -18,8 +18,9 @@ function App() {
 
   const [token, setToken] = React.useState("");
   const [emailGlobal, setEmailGlobal] = React.useState("");
-  const getters = { token, emailGlobal };
-  const setters = { setToken, setEmailGlobal };
+  const [userTypeGlobal, setUserTypeGlobal] = React.useState("");
+  const getters = { token, emailGlobal, userTypeGlobal };
+  const setters = { setToken, setEmailGlobal, setUserTypeGlobal };
 
   return (
     <ThemeProvider theme={theme}>

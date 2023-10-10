@@ -20,11 +20,20 @@ import ErrorIcon from "@mui/icons-material/Error";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
+import { Context, useContext } from '../Context';
+
 // import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const [alignment, setAlignment] = React.useState("Student");
+
+  const { setters } = useContext(Context);
+  const setToken = setters.setToken;
+  const setEmailGlobal = setters.setEmailGlobal;
+  const setUserTypeGlobal = setters.setUserTypeGlobal;
+
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -51,9 +60,11 @@ const Register = () => {
     const data = await response.json();
     if (data.error) {
       alert(data.error);
-    } else {
-      // setToken(data.token);
-      // setEmailGlobal(email);
+    } else if (validEmail() && validPwd()){
+      setToken(data.token);
+      setEmailGlobal(email);
+      setUserTypeGlobal(userType);
+      navigate('/Profile');
     }
   };
 
@@ -61,8 +72,6 @@ const Register = () => {
     const emailRegex = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
     return emailRegex.test(email);
   };
-
-  const validUserName = () => {};
 
   const validPwd = () => {
     // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
