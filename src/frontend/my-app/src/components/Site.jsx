@@ -27,10 +27,12 @@ function Site(props) {
       <Routes>
         <Route path="/dashboard" />
         <Route path="/register" element={<Register />} />
-        <Route
+        {/* <Route
           path="/profile"
           element={userType ? <StudentProfile /> : <TutorProfile />}
-        />
+        /> */}
+        <Route path="/profile" element={<Profile></Profile>} />
+        <Route path="/studentprofile" element={<StudentProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/home" element={<Home />} />
