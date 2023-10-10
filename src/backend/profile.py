@@ -1,4 +1,6 @@
-from DBFunctions import checkRegisterDuplicateUsername, checkRegisterDuplicateEmail
+from urllib.error import HTTPError
+from DBFunctions import * # CHANGE THIS TO SPECIFIC IMPORTS EVENTUALLY
+from helper import getHashOf, SECRET
 
 listOfAllCourses = ["Maths", "English"]
 
@@ -11,13 +13,13 @@ def changeUsername(session_token: str, newUsername: str) -> dict:
     Returns:
       { session_token: String }
   """
-  # Verify token validity
   
   # Find user in database from token
-  checkTokenExists(session_token) # -> if true it means proceed if false stop here
+  if not checkTokenExists(session_token):
+    raise HTTPError("changePassword", 403, "Token is invalid.")
 
   # Check if new username is valid -> if true then raise error else proceed
-  if not checkRegisterDuplicateUsername(newUsername): return "This username is already in use!"
+  if checkRegisterDuplicateUsername(newUsername): raise HTTPError(400, "This username is already in use!")
   
   # This function actually goes into the database and changes the data stored
   dbChangeUsername(session_token, newUsername) 
@@ -32,15 +34,16 @@ def changeEmail(session_token: str, newEmail: str) -> dict:
       session_token: String
       newEmail: String
     Returns:
-      session_token: String
+      { session_token: String }
   """
   # Verify token validity
 
   # Find user in database from token
-  checkTokenExists(session_token) # -> if true it means proceed if false stop here
+  if not checkTokenExists(session_token):
+    raise HTTPError("changePassword", 403, "Token is invalid.")
 
   # Check if new email is already in use, if it is stop here else proceed
-  if not checkRegisterDuplicateEmail(newEmail): return "This email is already in use!"
+  if checkRegisterDuplicateEmail(newEmail): raise HTTPError(400, "This email is already in use!")
   
   # This function actually goes into the database and changes the data stored
   dbChangeEmail(session_token, newEmail) 
@@ -57,13 +60,11 @@ def changePassword(session_token: str, newPassword: str) -> dict:
     Returns:
       { session_token: String }
   """
-  # Verify token validity
-
   # Find user in database from token
-  checkTokenExists(session_token) # -> if true it means proceed if false stop here
+  if not checkTokenExists(session_token):
+    raise HTTPError("changePassword", 403, "Token is invalid.")
 
-  # This function actually goes into the database and changes the data stored
-  dbChangePassword(session_token, newPassword) 
+  dbChangePassword(session_token, getHashOf(newPassword)) 
 
   return {
     "token": session_token
@@ -77,12 +78,10 @@ def changeBio(session_token: str, newBio: str) -> dict:
     Returns:
       { session_token: String }
   """
-  # Verify token validity
+  # Find user in database from token
+  if not checkTokenExists(session_token):
+    raise HTTPError("changeBio", 403, "Token is invalid.")
 
-   # Find user in database from token
-  checkTokenExists(session_token) # -> if true it means proceed if false stop here
-
-  # This function actually goes into the database and changes the data stored
   dbChangeBio(session_token, newBio) 
 
   return {
@@ -98,17 +97,15 @@ def addNewCourse(session_token: str, newCourse: str) -> dict:
     Returns:
       { session_token: String }
   """
-  # Verify token validity
-
-   # Find user in database from token
-  checkTokenExists(session_token) # -> if true it means proceed if false stop here
+  # Find user in database from token
+  if not checkTokenExists(session_token):
+    raise HTTPError("addNewCourse", 403, "Token is invalid.")
 
   # Check if course added is valid from the listOfAllCourses 
-  # If failed stop here
+  if newCourse not in listOfAllCourses: 
+    raise HTTPError("addNewCourse", 403, "Course is not in the valid courses list.")
 
-  # This function actually goes into the database and changes the data stored
-  dbAddCourse(session_token, newCourse) # This function returns True if successful or false if failed
-
+  dbAddCourse(session_token, newCourse)
 
   return {
     "token": session_token
@@ -117,7 +114,10 @@ def addNewCourse(session_token: str, newCourse: str) -> dict:
 # Admins are allowed to add new courses to the list
 def adminAddCourse (newCourse):
   # Check if it exists already then Add a new course to the listOfAllCourses
-  return
+  if newCourse not in listOfAllCourses:
+    listOfAllCourses.append(newCourse)
+
+  raise HTTPError("adminAddCourse", 403, "Course is already added.")
 
 
 def deleteCourse(session_token: str, courseToBeDeleted: str) -> dict:
@@ -129,10 +129,9 @@ def deleteCourse(session_token: str, courseToBeDeleted: str) -> dict:
     Returns:
       { session_token: String }
   """
-  # Verify token validity
-
-   # Find user in database from token
-  checkTokenExists(session_token) # -> if true it means proceed if false stop here
+  # Find user in database from token
+  if not checkTokenExists(session_token):
+    raise HTTPError("deleteCourse", 403, "Token is invalid.")
 
   # This function actually goes into the database and changes the data stored
   dbDeleteCourse(session_token, courseToBeDeleted) # This function returns True if successful or false if failed
@@ -153,14 +152,12 @@ def deleteAccount(session_token: list, password: str) -> dict:
     Returns:
       { session_token: String }
   """
-
-  # Verify token validity
-
   # Find user in database from token
-  checkTokenExists(session_token) # -> if true it means proceed if false stop here
+  if not checkTokenExists(session_token):
+    raise HTTPError("addNewCourse", 403, "Token is invalid.")
 
   # This function actually goes into the database and changes the data stored
-  dbDeleteAccount(session_token, password) # This function returns True if successful or false if failed
+  dbDeleteAccount(session_token, getHashOf(password)) # This function returns True if successful or false if failed
 
   return {
     "token": session_token
@@ -177,7 +174,8 @@ def viewProfile(session_token: str, targetProfile: str) -> dict:
   # Verify token validity
 
   # Find user in database from token
-  checkTokenExists(session_token) # -> if true it means proceed if false stop here
+  if not checkTokenExists(session_token):
+    raise HTTPError("viewProfile", 403, "Token is invalid.")
 
   # Find user in database from token
 
@@ -196,16 +194,12 @@ def adminDelete(session_token: str, targetProfile: str) -> dict:
     Returns:
       { session_token: String }
   """
-  # Verify token validity
   # Find user in database from token and check if admin
-  checkTokenAdmin(session_token) # -> if true it means proceed if false stop here
-
-  # Find user in database from targetProfile
+  if not checkTokenAdmin(session_token):
+    raise HTTPError("adminDelete", 403, "Token is invalid.")
 
   # Delete user associated with targetProfile from DB
   dbAdminDelete(targetProfile)
-  # (Admin has extra privileges so should delete targetProfile without any checks)
-  # Can do additional check to see if user is correctly deleted
 
   return {
     "token": session_token
