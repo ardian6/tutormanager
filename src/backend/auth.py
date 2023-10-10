@@ -60,7 +60,9 @@ def register(email, username, password, firstName, lastName, userType):
 def logout(token):
   # Below functions stores info on database
   dblogout(token)
-  return
+  return {
+    "token": token
+  }
 
 
 if __name__ == '__main__':
