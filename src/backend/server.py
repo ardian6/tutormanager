@@ -1,13 +1,8 @@
-import sys
 import signal
-import token
-import jwt
 from json import dumps
 from flask import Flask, request, redirect
 from flask import send_from_directory
-#from flask_mail import Mail, Message
 from flask_cors import CORS
-#from src.echo import echo
 
 from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
@@ -131,15 +126,14 @@ def delete_course():
 
 ## User Profile Delete Account Implementation to Server ##
 
-@APP.route("/<username>/profile/delete-account", methods = ['PUT'])
+@APP.route("/<username>/profile/delete-account", methods = ['POST'])
 def delete_account():
     data = request.get_json()
     return dumps(deleteAccount(data['token'], data['password']))
 
 ## User Profile Delete Account Implementation to Server ##
 
-# Should this be a DELETE???
-@APP.route("/<username>/profile/admin-delete", methods = ['PUT'])
+@APP.route("/<username>/profile/admin-delete", methods = ['POST'])
 def admin_delete():
     data = request.get_json()
     return dumps(adminDelete(data['token'], data['targetProfile']))

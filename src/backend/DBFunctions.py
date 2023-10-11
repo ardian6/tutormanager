@@ -1,5 +1,4 @@
 import psycopg2
-import sys
 
 # This is a helper function that connects to the database ()
 def connectDB():
@@ -44,7 +43,7 @@ def dbregister(token, email, username, password, firstName, lastName, userType):
     return
 
 # Checks if there is already another user in the database with the same username
-def checkRegisterDuplicateUsername(username):
+def checkDuplicateUsername(username):
     alreadyExist = False
     db = connectDB()
     cur = db.cursor()
@@ -58,7 +57,7 @@ def checkRegisterDuplicateUsername(username):
     return alreadyExist #Returns true if there username is already in use and false otherwise
 
 # Checks if there is already another user in the database with the same email
-def checkRegisterDuplicateEmail(email):
+def checkDuplicateEmail(email):
     alreadyExist = False
     db = connectDB()
     cur = db.cursor()

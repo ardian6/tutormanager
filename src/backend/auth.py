@@ -1,5 +1,4 @@
-from urllib.error import HTTPError
-from DBFunctions import dblogin, dbregister, checkRegisterDuplicateEmail, checkRegisterDuplicateUsername, dblogout
+from DBFunctions import dblogin, dbregister, checkDuplicateEmail, checkDuplicateUsername, dblogout
 import jwt
 from helper import getHashOf, SECRET
 
@@ -22,7 +21,8 @@ def login(username: str, password: str) -> dict:
     'userType': userType
   }
 
-def register(email, username, password, firstName, lastName, userType):
+def register(email: str, username: str, password: str, firstName: str, 
+             lastName: str, userType: str) -> dict:
   """User provides credentials to register.
     Paramaters:
       email: String
@@ -32,13 +32,13 @@ def register(email, username, password, firstName, lastName, userType):
       lastName: String
       userType: String
     Returns:
-      session_token: String
+      { session_token: String }
   """
   # Below functions stores info on database
-  if checkRegisterDuplicateUsername(username) is True:
-    return {'error' : 'Username in use'}
-  if checkRegisterDuplicateEmail(email) is True:
-    return {'error' : 'Email in use'}
+  if checkDuplicateUsername(username) is True:
+    return {'error' : 'Email is already in use.'}
+  if checkDuplicateEmail(email) is True:
+    return {'error' : 'Email is already in use.'}
 
   encryptedPassword = getHashOf(password)
   token = jwt.encode({'email' : email, 'username' : username,'password': encryptedPassword,
@@ -53,8 +53,13 @@ def register(email, username, password, firstName, lastName, userType):
     'token': token
   }
 
-def logout(token):
-  # Below functions stores info on database
+def logout(token: str) -> dict:
+  """User logs out
+    Paramaters:
+      token: String
+    Returns:
+      {session_token: String}
+  """
   dblogout(token)
   return {
     "token": token
