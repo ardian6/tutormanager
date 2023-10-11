@@ -4,12 +4,9 @@ import "./Login.css";
 // import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Logo from "./TutorManagerLogo.png";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
-
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
-
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
@@ -21,6 +18,8 @@ import Button from "@mui/material/Button";
 
 import { Link } from "react-router-dom";
 
+import { Context, useContext } from '../Context';
+
 const Login = () => {
   // const [alignment, setAlignment] = React.useState("Student");
 
@@ -28,8 +27,14 @@ const Login = () => {
   //   setAlignment(newAlignment);
   // };
 
+
   const [email, setEmail] = React.useState("");
   const [pwd, setPwd] = React.useState("");
+
+  const { setters } = useContext(Context);
+  const setToken = setters.setToken;
+  const setEmailGlobal = setters.setEmailGlobal;
+  const setUserTypeGlobal = setters.setUserType;
 
   // Login Button - calls backend API
   const loginBtn = async () => {
@@ -47,7 +52,11 @@ const Login = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      console.log(data);
+      setToken(data.token);
+      setEmailGlobal(email);
+      // Get full user info and set userType
+      //setUserTypeGlobal(userType);
+      navigate('/Profile')
     }
   };
 

@@ -11,9 +11,9 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
-function SideBar() {
+export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
-    left: false,
+    Menu: false
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -76,5 +76,3 @@ function SideBar() {
     </div>
   );
 }
-
-export default SideBar;

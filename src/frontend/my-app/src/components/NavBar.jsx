@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import "./NavBar.css";
 
 function NavBar() {
+
   return (
     <div className="NavBarContainer">
       <div className="NavBar">
