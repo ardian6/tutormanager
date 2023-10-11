@@ -1,8 +1,13 @@
+import sys
 import signal
+import token
+import jwt
 from json import dumps
 from flask import Flask, request, redirect
 from flask import send_from_directory
+#from flask_mail import Mail, Message
 from flask_cors import CORS
+#from src.echo import echo
 
 from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
@@ -70,10 +75,10 @@ ROUTES FOR PROFILE FUNCTIONS
 
 ## User Profile Implementation to Server ##
 
-@APP.route("/<username>/profile/view", methods = ['GET'])
+@APP.route("/profile", methods = ['GET'])
 def user_profile_view():
-    data = request.get_json()
-    return dumps(viewProfile(data['token'], data['targetProfile']))
+    username = request.args.get('username')
+    return dumps(viewProfile(username))
 
 ## User Profile Change Username Implementation to Server ##
 
@@ -126,14 +131,15 @@ def delete_course():
 
 ## User Profile Delete Account Implementation to Server ##
 
-@APP.route("/<username>/profile/delete-account", methods = ['POST'])
+@APP.route("/<username>/profile/delete-account", methods = ['PUT'])
 def delete_account():
     data = request.get_json()
     return dumps(deleteAccount(data['token'], data['password']))
 
 ## User Profile Delete Account Implementation to Server ##
 
-@APP.route("/<username>/profile/admin-delete", methods = ['POST'])
+# Should this be a DELETE???
+@APP.route("/<username>/profile/admin-delete", methods = ['PUT'])
 def admin_delete():
     data = request.get_json()
     return dumps(adminDelete(data['token'], data['targetProfile']))
