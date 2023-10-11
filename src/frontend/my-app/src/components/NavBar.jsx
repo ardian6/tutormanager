@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import PositionedMenu from "./PositionedMenu";
-import SideBar from "./SideBar";
+//import SideBar from "./SideBar";
 import { Button } from "@mui/material";
 import "./NavBar.css";
 
@@ -10,7 +10,7 @@ function NavBar() {
     <div className="NavBarContainer">
       <div className="NavBar">
         <div className="NavBarInfo">
-          <SideBar></SideBar>
+          {/* <SideBar></SideBar> */}
           <div>
             <Link to="/dashboard">
               <Button>Dashboard</Button>

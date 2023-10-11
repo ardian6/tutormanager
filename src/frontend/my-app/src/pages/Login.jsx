@@ -27,24 +27,28 @@ const Login = () => {
   //   setAlignment(newAlignment);
   // };
 
-  const [email, setEmail] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [pwd, setPwd] = React.useState("");
 
   const { setters } = useContext(Context);
   const setToken = setters.setToken;
   const setEmailGlobal = setters.setEmailGlobal;
-  const setUserTypeGlobal = setters.setUserType;
+  const setUserTypeGlobal = setters.setUserTypeGlobal;
   const navigate = useNavigate();
 
   // Login Button - calls backend API
   const loginBtn = async () => {
+    if (username.length === 0 || pwd.length === 0) {
+      alert('Ensure username and email is valid');
+      return
+    }
     const response = await fetch("http://localhost:5005/auth/login/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        email: email,
+        username: username,
         password: pwd,
       }),
     });
@@ -53,10 +57,8 @@ const Login = () => {
       alert(data.error);
     } else {
       setToken(data.token);
-      setEmailGlobal(email);
-      // Get full user info and set userType
-      //setUserTypeGlobal(userType);
-
+      setEmailGlobal(data.email);
+      setUserTypeGlobal(data.userType);     
       navigate("/Profile");
     }
   };
@@ -84,11 +86,11 @@ const Login = () => {
         <Box sx={{ display: "flex", flexWrap: "wrap" }}>
           <div>
             <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-              <InputLabel htmlFor="standard-adornment-email">Email</InputLabel>
+              <InputLabel htmlFor="standard-adornment-email">Username</InputLabel>
               <Input
                 id="standard-adornment-email"
                 onChange={(event) => {
-                  setEmail(event.target.value);
+                  setUsername(event.target.value);
                 }}
               />
             </FormControl>

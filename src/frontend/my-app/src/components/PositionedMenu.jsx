@@ -74,10 +74,6 @@ function PositionedMenu() {
         }}
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
-
-//         <MenuItem onClick={handleClose}>Settings</MenuItem>
-//         <MenuItem onClick={handleClose}>Logout</MenuItem>
-
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={logoutBtn}>Logout</MenuItem>
 
