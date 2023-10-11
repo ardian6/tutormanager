@@ -8,7 +8,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import HomeImage from "./HomeImage.jpeg";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const theme = createTheme({
@@ -19,19 +19,6 @@ const Home = () => {
       },
     },
   });
-
-  // Redirect to Login page
-  let navigate = useNavigate();
-  const loginRouteChange = () => {
-    let path = `../login`;
-    navigate(path);
-  };
-
-  // Redirect to Register page
-  const registerRouteChange = () => {
-    let path = `../register`;
-    navigate(path);
-  };
 
   return (
     <div className="home-container">
@@ -47,34 +34,36 @@ const Home = () => {
 
         <ThemeProvider theme={theme}>
           <Stack spacing={2} direction="row">
-            <Button
-              variant="contained"
-              style={{
-                maxWidth: "200px",
-                minWidth: "200px",
-                minHeight: "30px",
-              }}
-              sx={{ borderRadius: "30px" }}
-              onClick={loginRouteChange}
-            >
-              Login
-            </Button>
+            <Link to="/login">
+              <Button
+                variant="contained"
+                style={{
+                  maxWidth: "200px",
+                  minWidth: "200px",
+                  minHeight: "30px",
+                }}
+                sx={{ borderRadius: "30px" }}
+              >
+                Login
+              </Button>
+            </Link>
           </Stack>
         </ThemeProvider>
         <ThemeProvider theme={theme}>
           <Stack spacing={2} direction="row">
-            <Button
-              variant="contained"
-              style={{
-                maxWidth: "200px",
-                minWidth: "200px",
-                minHeight: "30px",
-              }}
-              sx={{ borderRadius: "30px" }}
-              onClick={registerRouteChange}
-            >
-              Register
-            </Button>
+            <Link to="/register">
+              <Button
+                variant="contained"
+                style={{
+                  maxWidth: "200px",
+                  minWidth: "200px",
+                  minHeight: "30px",
+                }}
+                sx={{ borderRadius: "30px" }}
+              >
+                Register
+              </Button>
+            </Link>
           </Stack>
         </ThemeProvider>
       </div>

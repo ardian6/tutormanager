@@ -1,18 +1,18 @@
 import psycopg2
 import sys
 
-db = None 
+db = None
 
 # Creating all the tables and types
 def setupTables():
   cur = db.cursor()
-  
+
   cur.execute("""create type uType as ENUM (
 	'student',
   'tutor',
   'admin'
   )""")
-  
+
   cur.execute("""create table Users (
 	username    varchar(30) not null,
   password    varchar(30) not null,
@@ -27,7 +27,7 @@ def setupTables():
   approved    boolean,
 	primary key (username)
   )""")
- 
+
   cur.execute("""create table Sessions (
 	sessID      varchar(30),
   username    varchar(30),
@@ -48,9 +48,11 @@ def setupTables():
 # Deleting all tables and types
 def deleteTables():
   cur = db.cursor()
+
   cur.execute("""drop table Sessions""")
   cur.execute("""drop table userCourse""")
   cur.execute("""drop table Users""")
+
   cur.execute("""drop type uType""")
   cur.close()
   db.commit()
@@ -87,7 +89,7 @@ def inputData2():
   cur.execute("""insert into Sessions values ('3', 'username4')""")
   cur.close()
   db.commit()
-  return 
+  return
 
 # Input dummy data for userCourse table
 def inputData3():
@@ -139,6 +141,7 @@ if __name__ == '__main__':
         user="penguin3900",
         password="3900PenguinDBtest",
         port='5432')
+
         # deleteTables()
         # setupTables()
         # clearData()

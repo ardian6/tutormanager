@@ -9,11 +9,12 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { SvgIcon } from "@mui/material";
-import Avatar from '@mui/material/Avatar';
+import Avatar from "@mui/material/Avatar";
 import CenteredTabs from "../components/CenteredTabs";
 import { Context, useContext } from "../Context";
 import { CourseListing } from "../components/CourseListing"
 
+import "./studentProfile.css";
 
 const TutorProfile = () => {
     const [userName, setUserName] = React.useState('Micluu');
@@ -45,7 +46,9 @@ const TutorProfile = () => {
             // setFirstName(data.firstName);
             // setLastName(data.lastName);
         }
+
     }
+  };
 
     React.useEffect(() => {
         //getUser();
@@ -53,6 +56,7 @@ const TutorProfile = () => {
     
 
   return (
+
     <div>
         <NavBar></NavBar>
         <div className="profile">
@@ -97,7 +101,9 @@ const TutorProfile = () => {
                     </div>
                 </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
   );
 };

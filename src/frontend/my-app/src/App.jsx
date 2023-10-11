@@ -11,7 +11,7 @@ function App() {
       allVariants: {
         fontFamily: "Sora",
         textTransform: "none",
-        fontSize: 11,
+        // fontSize: "14px",
       },
     },
   });
@@ -23,13 +23,15 @@ function App() {
   const setters = { setToken, setEmailGlobal, setUserTypeGlobal };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Context.Provider value={{ getters, setters }}>
-        <Router>
-          <Site></Site>
-        </Router>
-      </Context.Provider>
-    </ThemeProvider>
+    <div className="app-container">
+      <ThemeProvider theme={theme}>
+        <Context.Provider value={{ getters, setters }}>
+          <Router>
+            <Site></Site>
+          </Router>
+        </Context.Provider>
+      </ThemeProvider>
+    </div>
   );
 }
 

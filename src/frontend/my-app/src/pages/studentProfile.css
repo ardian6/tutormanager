@@ -1,0 +1,56 @@
+.studentProfileContainer {
+  background-color: #4960a6;
+  height: 100vh;
+  width: 100vw;
+}
+
+.profileContainer {
+  height: 87vh;
+}
+
+.profileUsername {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0px 10px 0px;
+
+  background-color: aqua;
+}
+
+.profileInfo {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px 20px 0px;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+}
+
+.profile1 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.profile2 {
+  padding-left: 10px;
+}
+
+.profile3 {
+  font-size: 10px;
+  color: grey;
+}
+
+.item {
+  flex: 1 1 0px;
+  padding: 0px 10px 0px 10px;
+}
+
+.item1 {
+  border-right: 1px solid #0000003b;
+}
+
+.item3 {
+  border-left: 1px solid #0000003b;
+}
