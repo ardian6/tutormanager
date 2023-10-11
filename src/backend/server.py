@@ -48,6 +48,8 @@ ROUTES FOR AUTH FUNCTIONS
 def auth_login():
     data = request.get_json()
     loginData = login(data['username'], data['password'])
+    if (loginData['userType'] == ''):
+        return {'error' : 'Invalid login credentials'}
     return dumps(loginData)
 
 ## Auth Register Implementation to Server ##

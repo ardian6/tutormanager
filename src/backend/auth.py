@@ -16,7 +16,6 @@ def login(username: str, password: str) -> dict:
 
   # Below functions stores info on database
   userType = dblogin(token, username, encryptedPassword)
-
   return {
     'username': username,
     'token': token,

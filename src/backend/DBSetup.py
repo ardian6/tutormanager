@@ -145,10 +145,10 @@ if __name__ == '__main__':
 
         # deleteTables()
         # setupTables()
-        clearData()
-        inputData1()
-        inputData2()
-        inputData3()
+        #clearData()
+        #inputData1()
+        #inputData2()
+        #inputData3()
         # test()
         printData()
 
