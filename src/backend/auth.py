@@ -36,9 +36,9 @@ def register(email, username, password, firstName, lastName, userType):
   """
   # Below functions stores info on database
   if checkRegisterDuplicateUsername(username) is True:
-    raise HTTPError("register", 400, "Username is already in use.")
+    return {'error' : 'Username in use'}
   if checkRegisterDuplicateEmail(email) is True:
-    raise HTTPError("register", 400, "Email is already in use.")
+    return {'error' : 'Email in use'}
 
   encryptedPassword = getHashOf(password)
   token = jwt.encode({'email' : email, 'username' : username,'password': encryptedPassword,
