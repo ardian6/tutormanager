@@ -17,7 +17,12 @@ def dblogin(token, username, password):
     cur = db.cursor()
     cur.execute("""select u.username, u.password, u.userType from Users u where u.username = %s and u.password = %s""", [username, password])
     typeOfUser = cur.fetchone()[2]
-    cur.execute("""insert into Sessions values (%s, %s)""", [token, username])
+    cur.execute("""Select s.sessID from Sessions s where s.sessID = %s""", [token])
+    sessExist = False
+    for t in cur.fetchall():
+        sessExist = True
+    if not sessExist:
+        cur.execute("""insert into Sessions values (%s, %s)""", [token, username])
     cur.close()
     db.commit()
     db.close()

@@ -47,7 +47,7 @@ ROUTES FOR AUTH FUNCTIONS
 @APP.route("/auth/login/", methods = ['POST'])
 def auth_login():
     data = request.get_json()
-    loginData = login(data['email'], data['password'])
+    loginData = login(data['username'], data['password'])
     return dumps(loginData)
 
 ## Auth Register Implementation to Server ##
