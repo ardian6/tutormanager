@@ -32,7 +32,7 @@ const Register = () => {
 
   const { setters } = useContext(Context);
   const setToken = setters.setToken;
-  const setEmailGlobal = setters.setEmailGlobal;
+  const setUsernameGlobal = setters.setxUsernameGlobal;
   const setUserTypeGlobal = setters.setUserTypeGlobal;
 
   const [firstName, setFirstName] = React.useState("");
@@ -44,6 +44,14 @@ const Register = () => {
   const [userType, setUserType] = React.useState("student");
   const navigate = useNavigate();
   const registerBtn = async () => {
+    if (!validEmail()) {
+      alert("Correct email");
+      return
+    }
+    if (!validPwd()) {
+      alert("Correct password");
+      return
+    }
     const response = await fetch("http://localhost:5005/auth/register/", {
       method: "POST",
       headers: {
@@ -63,7 +71,7 @@ const Register = () => {
       alert(data.error);
     } else if (validEmail() && validPwd()) {
       setToken(data.token);
-      setEmailGlobal(email);
+      setUsernameGlobal(email);
       setUserTypeGlobal(userType);
       navigate("/Profile");
     }

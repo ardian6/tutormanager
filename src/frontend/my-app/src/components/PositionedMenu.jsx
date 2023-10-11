@@ -5,6 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Context, useContext } from '../Context';
 import { useNavigate } from 'react-router-dom';
+import BasicModal from './BasicModal';
 
 
 function PositionedMenu() {
@@ -20,7 +21,7 @@ function PositionedMenu() {
   const { getters, setters } = useContext(Context);
   const token = getters.token;
   const setToken = setters.setToken;
-  const setEmailGlobal = setters.setEmailGlobal;
+  const setUsernameGlobal = setters.setUsernameGlobal;
   const setUserTypeGlobal = setters.setUserTypeGlobal;
 
   let navigate = useNavigate();
@@ -40,7 +41,7 @@ function PositionedMenu() {
       alert(data.error);
     } else {
       setToken('');
-      setEmailGlobal('');
+      setUsernameGlobal('');
       setUserTypeGlobal('');
       navigate('/');
     }
@@ -74,7 +75,7 @@ function PositionedMenu() {
         }}
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem><BasicModal></BasicModal></MenuItem>
         <MenuItem onClick={logoutBtn}>Logout</MenuItem>
 
       </Menu>
