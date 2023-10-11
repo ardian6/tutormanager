@@ -48,8 +48,6 @@ ROUTES FOR AUTH FUNCTIONS
 def auth_login():
     data = request.get_json()
     loginData = login(data['email'], data['password'])
-
-    # encoded_token = generate_token(user_id)
     return dumps(loginData)
 
 ## Auth Register Implementation to Server ##
@@ -58,7 +56,6 @@ def auth_login():
 def auth_register():
     data = request.get_json()
     loginData = register(data['email'], data['userName'], data['password'], data['firstName'], data['lastName'], data['userType'])
-    # encoded_token = generate_token(user_id)
     return dumps(loginData)
 
 ## Auth Logout Implementation to Server ##
