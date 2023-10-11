@@ -16,9 +16,6 @@ def login(username: str, password: str) -> dict:
 
   # Below functions stores info on database
   userType = dblogin(token, username, encryptedPassword)
-  if len(userType) <= 0:
-    # This error should never be raised
-    raise HTTPError("login", 400, "User does not have a valid user type.")
 
   return {
     'username': username,
