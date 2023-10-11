@@ -136,6 +136,7 @@ const Login = () => {
               minHeight: "30px",
             }}
             sx={{ borderRadius: "30px" }}
+            onClick={loginBtn}
           >
             Login
           </Button>
