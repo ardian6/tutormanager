@@ -10,6 +10,8 @@ from flask_cors import CORS
 #from src.echo import echo
 
 from auth import login, register, logout
+from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
+from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete
 
 
 def quit_gracefully(*args):
@@ -35,14 +37,17 @@ APP.register_error_handler(Exception, defaultHandler)
 
 #### NO NEED TO MODIFY ABOVE THIS POINT, EXCEPT IMPORTS
 
+
+""" 
+ROUTES FOR AUTH FUNCTIONS
+
+"""
 # Auth Login Implementation to Server ##
 
 @APP.route("/auth/login/", methods = ['POST'])
 def auth_login():
     data = request.get_json()
     loginData = login(data['email'], data['password'])
-
-    # encoded_token = generate_token(user_id)
     return dumps(loginData)
 
 ## Auth Register Implementation to Server ##
@@ -51,34 +56,9 @@ def auth_login():
 def auth_register():
     data = request.get_json()
     loginData = register(data['email'], data['userName'], data['password'], data['firstName'], data['lastName'], data['userType'])
-    # encoded_token = generate_token(user_id)
     return dumps(loginData)
 
-## Auth Register Implementation to Server ##
-
-# @APP.route("/auth/logout/", methods = ['POST'])
-# def auth_login_v2():
-    # load()
-    # data = request.get_json()
-    # user_id = auth_login_v1(data['email'],
-    # data['password'])
-
-    # encoded_token = generate_token(user_id)
-    # result = {'token' : encoded_token, 'auth_user_id' : user_id['auth_user_id']}
-    # save()
-    # return dumps(result)
-
-# @APP.route("/auth/profile/", methods = ['POST'])
-# def auth_login_v2():
-    # load()
-    # data = request.get_json()
-    # user_id = auth_login_v1(data['email'],
-    # data['password'])
-
-    # encoded_token = generate_token(user_id)
-    # result = {'token' : encoded_token, 'auth_user_id' : user_id['auth_user_id']}
-    # save()
-    # return dumps(result)
+## Auth Logout Implementation to Server ##
 
 @APP.route("/auth/logout/", methods = ["POST"])
 def logout_v1():
@@ -86,7 +66,87 @@ def logout_v1():
     logout(data['token'])
     return dumps({})
 
-## Auth Register Implementation to Server ##
+""" 
+ROUTES FOR PROFILE FUNCTIONS
+
+"""
+
+## User Profile Implementation to Server ##
+
+@APP.route("/<username>/profile/view", methods = ['GET'])
+def user_profile_view():
+    data = request.get_json()
+    return dumps(viewProfile(data['token'], data['targetProfile']))
+
+## User Profile Change Username Implementation to Server ##
+
+@APP.route("/<username>/profile/change-username", methods = ['PUT'])
+def change_username():
+    data = request.get_json()
+    return dumps(changeUsername(data['token'], data['newUsername']))
+
+## User Profile Change Password Implementation to Server ##
+
+@APP.route("/<username>/profile/change-password", methods = ['PUT'])
+def change_password():
+    data = request.get_json()
+    return dumps(changePassword(data['token'], data['newPassword']))
+
+## User Profile Change Email Implementation to Server ##
+
+@APP.route("/<username>/profile/change-email", methods = ['PUT'])
+def change_email():
+    data = request.get_json()
+    return dumps(changeEmail(data['token'], data['newEmail']))
+
+## User Profile Change Bio Implementation to Server ##
+
+@APP.route("/<username>/profile/change-bio", methods = ['PUT'])
+def change_bio():
+    data = request.get_json()
+    return dumps(changeBio(data['token'], data['newBio']))
+
+## User Profile Add New Course Implementation to Server ##
+
+@APP.route("/<username>/profile/add-course", methods = ['PUT'])
+def add_course():
+    data = request.get_json()
+    return dumps(addNewCourse(data['token'], data['newBio']))
+
+# ## User Profile Admin Add Course Implementation to Server ##
+
+# @APP.route("/<username>/profile/admin-add-course", methods = ['PUT'])
+# def admin_add_course():
+#     data = request.get_json()
+#     return dumps(adminAddCourse(data['token'], data['newBio']))
+
+## User Profile Delete Course Implementation to Server ##
+
+@APP.route("/<username>/profile/delete-course", methods = ['PUT'])
+def delete_course():
+    data = request.get_json()
+    return dumps(deleteCourse(data['token'], data['courseToBeDeleted']))
+
+## User Profile Delete Account Implementation to Server ##
+
+@APP.route("/<username>/profile/delete-account", methods = ['PUT'])
+def delete_account():
+    data = request.get_json()
+    return dumps(deleteAccount(data['token'], data['password']))
+
+## User Profile Delete Account Implementation to Server ##
+
+# Should this be a DELETE???
+@APP.route("/<username>/profile/admin-delete", methods = ['PUT'])
+def admin_delete():
+    data = request.get_json()
+    return dumps(adminDelete(data['token'], data['targetProfile']))
+
+
+""" 
+END OF ROUTES
+
+"""
 
 
 ### NO NEED TO MODIFY BELOW THIS POINT
