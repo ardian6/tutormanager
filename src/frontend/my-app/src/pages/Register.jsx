@@ -17,10 +17,11 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormHelperText from "@mui/material/FormHelperText";
 import ErrorIcon from "@mui/icons-material/Error";
 
+import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-import { Context, useContext } from '../Context';
+import { Context, useContext } from "../Context";
 
 // import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
@@ -41,7 +42,7 @@ const Register = () => {
   const [pwd, setPwd] = React.useState("");
   const [checkPwd, setCheckPwd] = React.useState("");
   const [userType, setUserType] = React.useState("student");
-
+  const navigate = useNavigate();
   const registerBtn = async () => {
     const response = await fetch("http://localhost:5005/auth/register/", {
       method: "POST",
@@ -60,11 +61,11 @@ const Register = () => {
     const data = await response.json();
     if (data.error) {
       alert(data.error);
-    } else if (validEmail() && validPwd()){
+    } else if (validEmail() && validPwd()) {
       setToken(data.token);
       setEmailGlobal(email);
       setUserTypeGlobal(userType);
-      navigate('/Profile');
+      navigate("/Profile");
     }
   };
 

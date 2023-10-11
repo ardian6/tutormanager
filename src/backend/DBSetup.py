@@ -130,7 +130,7 @@ def test():
   cur.execute("""insert into Sessions values (%s, %s)""", ['3', 'ChangeUsername'])
   cur.close()
   db.commit()
-  return 
+  return
 
 # Running this file connects to the database and executes whatever function you want in this file
 if __name__ == '__main__':
@@ -149,7 +149,7 @@ if __name__ == '__main__':
         # inputData2()
         # inputData3()
         # test()
-        # printData()
+        printData()
 
     except psycopg2.Error as err:
         print("DB error: ", err)
