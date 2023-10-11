@@ -17,10 +17,10 @@ function App() {
   });
 
   const [token, setToken] = React.useState("");
-  const [emailGlobal, setEmailGlobal] = React.useState("");
+  const [usernameGlobal, setUsernameGlobal] = React.useState("");
   const [userTypeGlobal, setUserTypeGlobal] = React.useState("");
-  const getters = { token, emailGlobal, userTypeGlobal };
-  const setters = { setToken, setEmailGlobal, setUserTypeGlobal };
+  const getters = { token, usernameGlobal, userTypeGlobal };
+  const setters = { setToken, setUsernameGlobal, setUserTypeGlobal };
 
   return (
     <div className="app-container">

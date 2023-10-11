@@ -32,7 +32,7 @@ const Login = () => {
 
   const { setters } = useContext(Context);
   const setToken = setters.setToken;
-  const setEmailGlobal = setters.setEmailGlobal;
+  const setUsernameGlobal = setters.setUsernameGlobal;
   const setUserTypeGlobal = setters.setUserTypeGlobal;
   const navigate = useNavigate();
 
@@ -57,8 +57,9 @@ const Login = () => {
       alert(data.error);
     } else {
       setToken(data.token);
-      setEmailGlobal(data.email);
-      setUserTypeGlobal(data.userType);     
+      setUsernameGlobal(username);
+      setUserTypeGlobal(data.userType);    
+      console.log(username) 
       navigate("/Profile");
     }
   };
