@@ -83,6 +83,7 @@ const Login = () => {
       setEmailGlobal(email);
       // Get full user info and set userType
       //setUserTypeGlobal(userType);
+      navigate('/Profile')
     }
   }
 

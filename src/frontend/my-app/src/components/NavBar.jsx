@@ -8,7 +8,7 @@ function NavBar() {
         <div className="NavBarContainer">
             <div className="NavBar">
                 <div className="NavBarInfo">
-                    <SideBar></SideBar>
+                    {/* <SideBar></SideBar> */}
                     <div><Link to="/Dashboard"><Button>Dashboard</Button></Link></div>
                 </div>
                 <h4>

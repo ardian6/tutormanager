@@ -11,32 +11,46 @@ import { useNavigate } from "react-router-dom";
 import { SvgIcon } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import CenteredTabs from "../components/CenteredTabs";
+import { Context, useContext } from "../Context";
+import { CourseListing } from "../components/CourseListing"
 
 
 const TutorProfile = () => {
-    const [userName, setUserName] = React.useState('zid');
+    const [userName, setUserName] = React.useState('Micluu');
     const [email, setEmail] = React.useState('zid@ad.unsw.edu.au');
     const [firstName, setFirstName] = React.useState('Michael');
     const [lastName, setLastName] = React.useState('Lu');
     const [bio, setBio] = React.useState("Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).    ")
+    const [courses, setCourses] = React.useState('');
+
+    const { getters } = useContext(Context);
+    const token = getters.token;
+    const userTypeGlobal = getters.userTypeGlobal;
 
     const getUser = async() => {
-        const response = await fetch('http://localhost:5005/user/info', {
+        const response = await fetch('http://localhost:5005/user/info' + token, {
             method: 'GET',
             headers: {
             'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-            })
+            }
         });
         const data = await response.json();
         if (data.error) {
             alert(data.error);
         } else {
-            // setToken(data.token);
-            // setEmailGlobal(email);
+            // setEmailGlobal(data.email);
+            // setUserName(data.userName);
+            // setBio(data.bio);
+            // setCourses(data.courses);
+            // setFirstName(data.firstName);
+            // setLastName(data.lastName);
         }
     }
+
+    React.useEffect(() => {
+        //getUser();
+    }, [])
+    
 
   return (
     <div>
@@ -45,13 +59,13 @@ const TutorProfile = () => {
             <div className="profileContainer">
                 <div className="profileUsername">
                     <div className="profile1">
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                        <Avatar alt={userName} src="/static/images/avatar/1.jpg" />
                         <div className="profile2">
                             <div>
                                 {userName}
                             </div>
                             <div className="profile3">
-                                Student
+                                {userTypeGlobal}
                             </div>
                         </div>
                     </div>
@@ -62,6 +76,7 @@ const TutorProfile = () => {
                 <div className="profileInfo">
                     <div className="item item1" >
                         <h3>Courses</h3>
+                        <CourseListing></CourseListing>
                     </div>
                     <div className="item">
                         <div>
