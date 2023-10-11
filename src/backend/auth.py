@@ -63,4 +63,4 @@ def logout(token):
 
 
 if __name__ == '__main__':
-  login("test1","test2")
+  login("username1","password1")

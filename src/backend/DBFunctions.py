@@ -16,9 +16,8 @@ def dblogin(token, username, password):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select u.username, u.password, u.userType from Users u where u.username = %s and u.password = %s""", [username, password])
-    for t in cur.fetchall():
-        cur.execute("""insert into Sessions values (%s, %s)""", [token, username])
-        typeOfUser = t[2]
+    typeOfUser = cur.fetchone()[2]
+    cur.execute("""insert into Sessions values (%s, %s)""", [token, username])
     cur.close()
     db.commit()
     db.close()
@@ -254,4 +253,4 @@ def dbAdminDelete(targetProfile):
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    dbAdminDelete('username3')
+    dblogin('10','username2', 'password2')
