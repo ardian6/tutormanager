@@ -87,7 +87,7 @@ export default function BasicModal({username, token}) {
   const changeBtn = () => {
     if (email.length != 0) {
       if (!validEmail()) {
-        alert('Ensure password is valid')
+        alert('Ensure Email is valid')
         return;
       }
     }
