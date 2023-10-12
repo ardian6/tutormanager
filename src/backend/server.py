@@ -75,35 +75,35 @@ ROUTES FOR PROFILE FUNCTIONS
 
 ## User Profile Implementation to Server ##
 
-@APP.route("/profile", methods = ['GET'])
+@APP.route("/profile/view", methods = ['GET'])
 def user_profile_view():
     username = request.args.get('username')
     return dumps(viewProfile(username))
 
 ## User Profile Change Username Implementation to Server ##
 
-@APP.route("/<username>/profile/change-username", methods = ['PUT'])
+@APP.route("/profile/change-username", methods = ['PUT'])
 def change_username():
     data = request.get_json()
     return dumps(changeUsername(data['token'], data['newUsername']))
 
 ## User Profile Change Password Implementation to Server ##
 
-@APP.route("/<username>/profile/change-password", methods = ['PUT'])
+@APP.route("/profile/change-password", methods = ['PUT'])
 def change_password():
     data = request.get_json()
     return dumps(changePassword(data['token'], data['newPassword']))
 
 ## User Profile Change Email Implementation to Server ##
 
-@APP.route("/<username>/profile/change-email", methods = ['PUT'])
+@APP.route("/profile/change-email", methods = ['PUT'])
 def change_email():
     data = request.get_json()
     return dumps(changeEmail(data['token'], data['newEmail']))
 
 ## User Profile Change Bio Implementation to Server ##
 
-@APP.route("/<username>/profile/change-bio", methods = ['PUT'])
+@APP.route("/profile/change-bio", methods = ['PUT'])
 def change_bio():
     data = request.get_json()
     return dumps(changeBio(data['token'], data['newBio']))
