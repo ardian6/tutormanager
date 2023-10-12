@@ -10,7 +10,6 @@ function NavBar() {
     <div className="NavBarContainer">
       <div className="NavBar">
         <div className="NavBarInfo">
-          {/* <SideBar></SideBar> */}
           <div>
             <Link to="/dashboard">
               <Button>Dashboard</Button>

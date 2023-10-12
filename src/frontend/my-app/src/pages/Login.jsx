@@ -59,7 +59,6 @@ const Login = () => {
       setToken(data.token);
       setUsernameGlobal(username);
       setUserTypeGlobal(data.userType);    
-      console.log(username) 
       navigate("/Profile");
     }
   };

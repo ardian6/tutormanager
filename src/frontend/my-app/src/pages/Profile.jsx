@@ -16,12 +16,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Context, useContext } from "../Context";
 
 const Profile = () => {
-  const [email, setEmail] = React.useState("zid@ad.unsw.edu.au");
-  const [firstName, setFirstName] = React.useState("Michael");
-  const [lastName, setLastName] = React.useState("Lu");
-  const [bio, setBio] = React.useState(
-    "Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).    "
-  );
+  const [email, setEmail] = React.useState("");
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [bio, setBio] = React.useState("");
   //const [subjects, setSubjects] = React.useState("English");
   const [city, setCity] = React.useState("Sydney");
 
@@ -30,7 +28,10 @@ const Profile = () => {
   const token = getters.tokenGlobal;
 
   const getUser = async () => {
-    const response = await fetch("http://localhost:5005/profile?username=" + userName, {
+    if (!token || !userName) {
+      return;
+    }
+    const response = await fetch("http://localhost:5005/profile/view?username=" + userName, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -49,7 +50,6 @@ const Profile = () => {
     }
   };
   React.useEffect(() => {
-    console.log(userName)
     getUser();
   }, []);
 

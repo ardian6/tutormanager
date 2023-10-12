@@ -37,8 +37,8 @@ const Register = () => {
 
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
-  const [email, setEmail] = React.useState("");
   const [userName, setUserName] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [checkPwd, setCheckPwd] = React.useState("");
   const [userType, setUserType] = React.useState("student");
