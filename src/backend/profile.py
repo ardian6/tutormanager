@@ -163,7 +163,7 @@ def deleteAccount(session_token: list, password: str) -> dict:
     "token": session_token
   }
 
-def viewProfile(session_token: str, targetProfile: str) -> dict:
+def viewProfile(targetProfile: str) -> dict:
   """Current user views target user's profile.
     Paramaters:
       session_token: String
@@ -171,17 +171,7 @@ def viewProfile(session_token: str, targetProfile: str) -> dict:
     Returns:
       { session_token: String }
   """
-  # Verify token validity
-
-  # Find user in database from token
-  if not checkTokenExists(session_token):
-    return {"error": "Token is invalid."}
-
-  dbViewProfile(targetProfile)
-
-  return {
-    "token": session_token
-  }
+  return dbViewProfile(targetProfile)
 
 def adminDelete(session_token: str, targetProfile: str) -> dict:
   """Admin user deletes the target user.
