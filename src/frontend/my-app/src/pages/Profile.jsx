@@ -25,7 +25,7 @@ const Profile = () => {
 
   const { getters } = useContext(Context);
   const userName = getters.usernameGlobal;
-  const token = getters.tokenGlobal;
+  const token = getters.token;
 
   const getUser = async () => {
     if (!token || !userName) {
@@ -38,6 +38,7 @@ const Profile = () => {
       }
     });
     const data = await response.json();
+    console.log(data);
     if (data.error) {
       alert(data.error);
     } else {
