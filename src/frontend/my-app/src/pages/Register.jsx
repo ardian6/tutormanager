@@ -32,7 +32,7 @@ const Register = () => {
 
   const { setters } = useContext(Context);
   const setToken = setters.setToken;
-  const setUsernameGlobal = setters.setxUsernameGlobal;
+  const setUsernameGlobal = setters.setUsernameGlobal;
   const setUserTypeGlobal = setters.setUserTypeGlobal;
 
   const [firstName, setFirstName] = React.useState("");
