@@ -71,7 +71,7 @@ const Register = () => {
       alert(data.error);
     } else if (validEmail() && validPwd()) {
       setToken(data.token);
-      setUsernameGlobal(email);
+      setUsernameGlobal(userName);
       setUserTypeGlobal(userType);
       navigate("/Profile");
     }
