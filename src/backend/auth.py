@@ -10,8 +10,8 @@ def login(username: str, password: str) -> dict:
     Returns:
       session_token: String
   """
-  token = jwt.encode({'username' : username, 'password': password}, SECRET,  algorithm = 'HS256')
   encryptedPassword = getHashOf(password)
+  token = jwt.encode({'username' : username, 'password': encryptedPassword}, SECRET,  algorithm = 'HS256')
 
   # Below functions stores info on database
   userType = dblogin(token, username, encryptedPassword)
