@@ -26,3 +26,12 @@ because no one else in the group will be able to connect to it making it pretty 
 Thus, I decided throughout the week to set up a postgres database on AWS and I have managed to get this to work before the Friday tutorial.
 During the Friday tutorial we cleared some things up with the tutor such as how to exactly use the Jira board and also confirmed with each other 
 what tasks we should complete before another meeting next monday.
+
+Week 5
+For this week my primary job was to code all functions related to manipulating the database. This includes creating functions that set up and delete all tables, clearing all data from the database, inputing dummy data
+into the database and printing out all the data from the database. 
+Furthermore, I implemented all the database related functions that are called by the backend for auth and profile. Specifically these functions retrieve or store information from and into the database.
+Also, we had a lot of meeting through out the week to make sure everything was working properly.
+Overall, the entire group this week completed everything related to the profile and authentication. This includes frontend, backend and database. 
+At the end of the week, we did the week 5 demo which went really well.
+Then after the demo we completed the retrospective. 
