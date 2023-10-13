@@ -1,13 +1,19 @@
 Ardian Magjarraj (z5312076) Diary
 
 Week 1:
-Created the team with Michael, Mathew, Ryan and Hayka, where Mathew became the Scrum Master. We reviewed the skills/knowledge of each group member and decided that Project 16 was ideal for our combined skillset. We discussed and defined basic roles for completing the project proposal.
-We didn't fully understand how to create the System Architecture diagram and Storyboards for the proposal, because of this we decided to wait for the Week 2 lecture/lab to learn more and ask questions.
+Created the team with Michael, Mathew, Ryan and Hayka, where Mathew became the Scrum Master. We reviewed the skills/knowledge of each group member and decided that Project 16 was ideal for our combined skillset. We discussed and defined basic roles for completing the project proposal. We didn't fully understand how to create the System Architecture diagram and Storyboards for the proposal, because of this we decided to wait for the Week 2 lecture/lab to learn more and ask questions.
 
 Week 2:
-The team started work on the project proposal, where I was assigned to creating the Storyboard. I began working on the Storyboard using Balsamiq and collaborated with Ryan to finish a rough draft. We weren't completely confident on creating the Storyboard, but after reviewing the lecture material and learning Balsamiq's features, we felt as if we had a good idea as to how to complete the Storyboard by the due date in Week 3. In our Friday lab we also chose a 8:30 pm meeting time every Wednesday 
-which everyone confirmed their availability for.
+The team started work on the project proposal, where I was assigned to creating the Storyboard. I began working on the Storyboard using Balsamiq and collaborated with Ryan to finish a rough draft. We weren't completely confident on creating the Storyboard, but after reviewing the lecture material and learning Balsamiq's features, we felt as if we had a good idea as to how to complete the Storyboard by the due date in Week 3. In our Friday lab we also chose a 8:30 pm meeting time every Wednesday which everyone confirmed their availability for.
 
 Week 3:
-Struggled with finishing the storyboard, as I wasn't sure of the correct format, so I referred to lecture slides and asked my Mentor for assistance. By Friday week 3, Ryan and I finished the storyboard and met up with the rest of the team to finalise the proposal. We agreed to meet on
-the following Monday to talk about coding the project.
+Struggled with finishing the storyboard, as I wasn't sure of the correct format, so I referred to lecture slides and asked my Mentor for assistance. By Friday week 3, Ryan and I finished the storyboard and met up with the rest of the team to finalise the proposal. We agreed to meet on the following Monday to talk about coding the project.
+
+Week 4:
+After meeting on Monday, Hayka and I were assigned to work together to create the backend for the application, we'd be working closely with Mathew as he is managing the SQL database. I started off creating a few functions
+for authentication of the user, this included logging in, registering and logging out. I was unsure on how to encrypt passwords or create tokens to represent a user's session, so I researched common Python modules that were able to do this. I decided to import both 'PyJWT' and 'hashlib' to do this.
+
+Week 5:
+The group had another meeting on Monday where we acknowledged that some parts of Sprint 1 were better suited for Sprint 2 and decided to move them. We were unable to establish a line of communication between certain members of the group, and hope to improve our communication in Sprint 2. I was able to create both the server routes and backend functions for the user's profile. The main issue I faced was communicating with Mathew, who was in charge of the database, to access certain parts of the database in the backend. We were able to have a 1-on-1 meeting to fix these issues.
+
+Week 6:
