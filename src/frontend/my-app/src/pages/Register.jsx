@@ -32,7 +32,7 @@ const Register = () => {
 
   const { setters } = useContext(Context);
   const setToken = setters.setToken;
-  const setUsernameGlobal = setters.setxUsernameGlobal;
+  const setUsernameGlobal = setters.setUsernameGlobal;
   const setUserTypeGlobal = setters.setUserTypeGlobal;
 
   const [firstName, setFirstName] = React.useState("");
@@ -71,7 +71,7 @@ const Register = () => {
       alert(data.error);
     } else if (validEmail() && validPwd()) {
       setToken(data.token);
-      setUsernameGlobal(email);
+      setUsernameGlobal(userName);
       setUserTypeGlobal(userType);
       navigate("/Profile");
     }
