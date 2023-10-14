@@ -75,7 +75,6 @@ function PositionedMenu() {
         }}
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem><BasicModal username={getters.usernameGlobal} token={getters.token}></BasicModal></MenuItem>
         <MenuItem onClick={logoutBtn}>Logout</MenuItem>
 
       </Menu>

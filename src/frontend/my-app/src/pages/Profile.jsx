@@ -14,6 +14,7 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { Context, useContext } from "../Context";
+import BasicModal from "../components/BasicModal";
 
 const Profile = () => {
   const [email, setEmail] = React.useState("");
@@ -38,7 +39,7 @@ const Profile = () => {
       }
     });
     const data = await response.json();
-    console.log(data);
+
     if (data.error) {
       alert(data.error);
     } else {
@@ -66,7 +67,6 @@ const Profile = () => {
 
           <div className="profile-upper">
             <div className="upper-box-one">
-              <EditIcon className="edit-icon"></EditIcon>
               <img
                 src={defaultImage}
                 alt="default-image"
@@ -74,7 +74,7 @@ const Profile = () => {
               />
             </div>
             <div className="upper-box-two">
-              <EditIcon className="edit-icon"></EditIcon>
+            <BasicModal emailState={setEmail} bioState={setBio} cityState={setCity} ></BasicModal>
               <div>
                 <b>Username:</b> {userName}
               </div>
@@ -84,17 +84,12 @@ const Profile = () => {
               <div>
                 <b>City:</b> {city}
               </div>
+              <div>
+                <b>Bio:</b> {bio}
+              </div>
             </div>
             <div className="upper-box-three">
-              <EditIcon className="edit-icon"></EditIcon>
               Subjects
-            </div>
-            <div className="upper-box-four">
-              <EditIcon className="edit-icon"></EditIcon>
-              <div>
-                <b>Bio:</b>
-              </div>
-              <div> {bio}</div>
             </div>
           </div>
         </div>

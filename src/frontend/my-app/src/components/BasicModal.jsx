@@ -14,9 +14,10 @@ import ErrorIcon from "@mui/icons-material/Error";
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";  
 import Stack from "@mui/material/Stack";
+import EditIcon from "@mui/icons-material/Edit";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Context, useContext } from '../Context';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Context, useContext } from "../Context";
 
 const style = {
   position: 'absolute',
@@ -39,8 +40,11 @@ const theme = createTheme({
   },
 });
 
-export default function BasicModal({username, token}) {
-  const { setters } = useContext(Context);
+const BasicModal = ({emailState, bioState, cityState}) => {
+  const { getters } = useContext(Context);
+  const username = getters.usernameGlobal;
+  const token = getters.token;
+
   const validEmail = () => {
     const emailRegex = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
     return emailRegex.test(editEmail);
@@ -82,7 +86,6 @@ export default function BasicModal({username, token}) {
   const [editCity, setEdityCity] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [checkPwd, setCheckPwd] = React.useState("");
-  const getters = React.useContext(Context);
 
   const changeBtn = () => {
     if (email.length != 0) {
@@ -106,7 +109,7 @@ export default function BasicModal({username, token}) {
     if (pwd == checkPwd && pwd.length != 0 && validPwd()) {
       changePwd();
     }
-    setters.setUsernameGlobal(username);
+    //navigate(0);
     handleClose();
   }
 
@@ -143,6 +146,7 @@ export default function BasicModal({username, token}) {
     if (data.error) {
       alert(data.error);
     } else {
+      emailState(editEmail);
     }
   };
 
@@ -161,6 +165,7 @@ export default function BasicModal({username, token}) {
     if (data.error) {
       alert(data.error);
     } else {
+      bioState(editBio);
     }
   };
 
@@ -187,7 +192,7 @@ export default function BasicModal({username, token}) {
 
   return (
     <div>
-      <div onClick={handleOpen}>Settings</div>
+      <div onClick={handleOpen}><EditIcon className="edit-icon"></EditIcon></div>
       <Modal
         open={open}
         onClose={handleClose}
@@ -360,3 +365,5 @@ export default function BasicModal({username, token}) {
     </div>
   );
 }
+
+export default BasicModal;
