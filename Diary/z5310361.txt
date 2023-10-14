@@ -16,3 +16,9 @@ Again, met up with team earlier on the week to organise and delegate which funti
 Finalised and edited the project proposal. I decided to be a full stack developer helping on all 3 sides of the project.
 Since then, I have mainly helped developing frontend especially functionality with react jsx. The goal is to finish authentication
 by Sprint 1 with acceptable UI.
+
+Week 5
+Met up with team earlier the week to finalise sprint 1. We established that some user stories were better off postponed till sprint 2.
+This is beacuse some functionality was required before it could be properly implemented which was reasonable. It is worth noting
+that better communication between team members can allow for better allocation and clarity of workload. Nevertheless, work achieved
+for sprint 1 was rather sound.
