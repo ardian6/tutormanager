@@ -36,12 +36,17 @@ def setupTables():
   foreign key (username) references users(username)
   )""")
 
-  cur.execute("""create table userCourse (
-	course      varchar(30),
-  username    varchar(30),
-	primary key (course, username),
-  foreign key (username) references users(username)
+  cur.execute("""create table Courses (
+  courseName  varchar(30),
+  primary key(courseName)
   )""")
+
+  cur.execute("""create table userCourse (
+	course      varchar(30) references courses(courseName),
+  username    varchar(30) references users(username),
+	primary key (course, username)
+  )""")
+
   cur.close()
   db.commit()
   return
@@ -52,6 +57,7 @@ def deleteTables():
 
   cur.execute("""drop table Sessions""")
   cur.execute("""drop table userCourse""")
+  cur.execute("""drop table Courses""")
   cur.execute("""drop table Users""")
 
   cur.execute("""drop type uType""")
@@ -65,6 +71,7 @@ def clearData():
   cur.execute("""delete from Sessions""")
   cur.execute("""delete from userCourse""")
   cur.execute("""delete from Users""")
+  cur.execute("""delete from Courses""")
   cur.close()
   db.commit()
   return
@@ -95,11 +102,20 @@ def inputData2():
 # Input dummy data for userCourse table
 def inputData3():
   cur = db.cursor()
-  cur.execute("""insert into userCourse values ('Maths', 'username3')""")
-  cur.execute("""insert into userCourse values ('English', 'username5')""")
-  cur.execute("""insert into userCourse values ('Maths', 'username2')""")
+  cur.execute("""insert into Courses values ('maths')""")
+  cur.execute("""insert into Courses values ('english')""")
   cur.close()
   db.commit()
+  return
+
+def inputData4():
+  cur = db.cursor()
+  cur.execute("""insert into userCourse values ('maths', 'username3')""")
+  cur.execute("""insert into userCourse values ('english', 'username5')""")
+  cur.execute("""insert into userCourse values ('maths', 'username2')""")
+  cur.close()
+  db.commit()
+  return
 
 # Print out all the data in the database currently
 def printData():
@@ -113,6 +129,10 @@ def printData():
   for t in cur.fetchall():
     print(t)
   print('Course table')
+  cur.execute("""select c.courseName from Courses c""")
+  for t in cur.fetchall():
+    print(t)
+  print('UserCourse table')
   cur.execute("""select c.course, c.username from userCourse c""")
   for t in cur.fetchall():
     print(t)
@@ -149,6 +169,7 @@ if __name__ == '__main__':
         # inputData1()
         # inputData2()
         # inputData3()
+        # inputData4()
         # test()
         printData()
 

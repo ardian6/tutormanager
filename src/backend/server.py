@@ -11,7 +11,7 @@ from flask_cors import CORS
 
 from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
-from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete
+from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers
 
 
 def quit_gracefully(*args):
@@ -110,28 +110,42 @@ def change_bio():
 
 ## User Profile Add New Course Implementation to Server ##
 
-@APP.route("/<username>/profile/add-course", methods = ['PUT'])
+@APP.route("/profile/add-course", methods = ['PUT'])
 def add_course():
     data = request.get_json()
-    return dumps(addNewCourse(data['token'], data['newBio']))
+    return dumps(addNewCourse(data['token'], data['newCourse']))
 
 # ## User Profile Admin Add Course Implementation to Server ##
 
-# @APP.route("/<username>/profile/admin-add-course", methods = ['PUT'])
-# def admin_add_course():
-#     data = request.get_json()
-#     return dumps(adminAddCourse(data['token'], data['newBio']))
+@APP.route("/profile/admin-add-course", methods = ['PUT'])
+def admin_add_course():
+    data = request.get_json()
+    return dumps(adminAddCourse(data['token'], data['newCourse']))
 
 ## User Profile Delete Course Implementation to Server ##
 
-@APP.route("/<username>/profile/delete-course", methods = ['PUT'])
+@APP.route("/profile/delete-course", methods = ['PUT'])
 def delete_course():
     data = request.get_json()
     return dumps(deleteCourse(data['token'], data['courseToBeDeleted']))
 
+## User Profile View All Courses Implementation to Server ##
+
+@APP.route("/profile/view-all-courses", methods = ['POST'])
+def view_all_courses():
+    data = request.get_json()
+    return dumps(viewAllCourses(data['token']))
+
+## User Profile View My Courses Implementation to Server ##
+
+@APP.route("/profile/view-my-courses", methods = ['POST'])
+def view_my_courses():
+    data = request.get_json()
+    return dumps(viewUserCourses(data['token']))
+
 ## User Profile Delete Account Implementation to Server ##
 
-@APP.route("/<username>/profile/delete-account", methods = ['PUT'])
+@APP.route("/profile/delete-account", methods = ['PUT'])
 def delete_account():
     data = request.get_json()
     return dumps(deleteAccount(data['token'], data['password']))
@@ -139,10 +153,17 @@ def delete_account():
 ## User Profile Delete Account Implementation to Server ##
 
 # Should this be a DELETE???
-@APP.route("/<username>/profile/admin-delete", methods = ['PUT'])
+@APP.route("/profile/admin-delete", methods = ['PUT'])
 def admin_delete():
     data = request.get_json()
     return dumps(adminDelete(data['token'], data['targetProfile']))
+
+## User Profile View All Users Implementation to Server ##
+
+@APP.route("/profile/view-all-users", methods = ['POST'])
+def view_all_Users():
+    data = request.get_json()
+    return dumps(allUsers(data['token']))
 
 
 """ 

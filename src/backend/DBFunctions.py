@@ -256,6 +256,56 @@ def dbAdminDelete(targetProfile):
     db.commit()
     return
 
+# This function retrieves all the courses stored in the database
+def dbCourseList():
+    allCourseList = []
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select c.courseName from Courses c""")
+    for t in cur.fetchall():
+        allCourseList.append(t[0].lower())
+    cur.close()
+    db.commit()
+    return allCourseList
+
+# This function adds a new course to the list of all courses in the database
+def dbAddCourseToList(courseName):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""insert into Courses values (%s)""", [courseName])
+    cur.close()
+    db.commit()
+    return 
+
+# This function retrieves the courses the user is doing
+def dbViewMyCourses(token):
+    myCourseList = []
+    db = connectDB()
+    cur = db.cursor()
+    # Grab username
+    cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
+    currUsername = None
+    for t in cur.fetchall():
+        currUsername = t[0]
+    # Grab courses
+    cur.execute("""select uc.course from userCourse uc where uc.username = %s""", [currUsername])
+    for t in cur.fetchall():
+        myCourseList.append(t[0].lower())
+    cur.close()
+    db.commit()
+    return myCourseList
+
+def dbAllUsernames():
+    listOfAllUsers = []
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select u.username from Users u""")
+    for t in cur.fetchall():
+        listOfAllUsers.append(t[0].lower())
+    cur.close()
+    db.commit()
+    return listOfAllUsers
+
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    dblogin('10','username2', 'password2')
+    print(dbAllUsernames())
