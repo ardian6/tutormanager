@@ -24,15 +24,44 @@
   position: relative;
 }
 
-.dashboard-title {
+.tutor-dashboard-title {
   font-size: 25px;
   position: absolute;
   top: 30px;
   left: 30px;
 }
 
-.calendar {
-  width: 600px;
-  height: 600px;
+.tutor-calendar {
+  width: 550px;
+  height: 550px;
   background-color: white;
+}
+
+.tutor-request-column {
+  background-color: white;
+  width: 320px;
+  height: 600px;
+  margin-top: auto;
+  left: 50px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+
+.tutor-request-title {
+  font-size: 15px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.tutor-request-word {
+  padding: 10px;
+}
+
+.tutor-no-request-message {
+  width: 100%;
+  text-align: center;
 }
