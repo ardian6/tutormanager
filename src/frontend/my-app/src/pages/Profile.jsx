@@ -29,6 +29,7 @@ const Profile = () => {
   const token = getters.token;
 
   const getUser = async () => {
+    console.log('request');
     if (!token || !userName) {
       return;
     }

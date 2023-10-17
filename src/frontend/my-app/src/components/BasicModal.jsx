@@ -109,28 +109,9 @@ const BasicModal = ({emailState, bioState, cityState}) => {
     if (pwd == checkPwd && pwd.length != 0 && validPwd()) {
       changePwd();
     }
-    //navigate(0);
     handleClose();
   }
 
-
-  const getUser = async () => {
-    const response = await fetch("http://localhost:5005/profile/view?username=" + username, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      }
-    });
-    const data = await response.json();
-    if (data.error) {
-      alert(data.error);
-    } else {
-      setEmail(data.email);
-      setBio(data.bio);
-      setCity(data.location);
-    }
-  };
-  
   const changeEmail = async () => {
     const response = await fetch("http://localhost:5005/profile/change-email", {
       method: "PUT",
@@ -186,9 +167,6 @@ const BasicModal = ({emailState, bioState, cityState}) => {
     } else {
     }
   };
-  React.useEffect(() => {
-    getUser();
-  }, []);
 
   return (
     <div>
