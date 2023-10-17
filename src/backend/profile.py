@@ -1,9 +1,7 @@
 from DBFunctions import checkTokenExists, checkDuplicateEmail, checkDuplicateUsername, checkTokenAdmin 
 from DBFunctions import dbChangeUsername, dbChangePassword, dbChangeEmail, dbChangeBio, dbAddCourse
-from DBFunctions import dbDeleteAccount, dbAdminDelete, dbDeleteCourse, dbViewProfile
+from DBFunctions import dbDeleteAccount, dbAdminDelete, dbDeleteCourse, dbViewProfile, dbCourseList, dbAddCourseToList, dbViewMyCourses, dbAllUsernames
 from helper import getHashOf
-
-listOfAllCourses = ["Maths", "English"]
 
 def changeUsername(session_token: str, newUsername: str) -> dict:
   """Changes a given user's username.
@@ -101,21 +99,29 @@ def addNewCourse(session_token: str, newCourse: str) -> dict:
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
 
-  # Check if course added is valid from the listOfAllCourses 
-  if newCourse not in listOfAllCourses: 
+  # Check if course added is valid from the list Of all courses retrieved from the database
+  if newCourse.lower() not in dbCourseList(): 
     return {"error": "Course is not in the valid course list."}
 
-  dbAddCourse(session_token, newCourse)
+  checkValid = dbAddCourse(session_token, newCourse.lower())
+
+  if checkValid is False:
+    return {"error": 'Invalid course addition because you already added the course'}
 
   return {
     "token": session_token
   }
 
 # Admins are allowed to add new courses to the list
-def adminAddCourse (newCourse):
-  # Check if it exists already then Add a new course to the listOfAllCourses
-  if newCourse not in listOfAllCourses:
-    listOfAllCourses.append(newCourse)
+def adminAddCourse(session_token, newCourse):
+  # Find user in database from token and check if admin
+  if not checkTokenAdmin(session_token):
+    return {"error": "Admin token is invalid."}
+  
+  # Check if the course already exists and if it dosen't add it to the database
+  if newCourse.lower() not in dbCourseList(): 
+    dbAddCourseToList(newCourse.lower())
+    return {}
 
   return {"error": "Course is already in the course list."}
 
@@ -133,15 +139,38 @@ def deleteCourse(session_token: str, courseToBeDeleted: str) -> dict:
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
 
-  # This function actually goes into the database and changes the data stored
-  dbDeleteCourse(session_token, courseToBeDeleted) # This function returns True if successful or false if failed
-  # Get users course list
-    # Check if courseToBeDeleted is in user's course list
-      # If yes: remove that course from list and update DB
-      # If no:
-        # add it to user's course list and update DB
+  # Calls the database delete course function
+  checkValid = dbDeleteCourse(session_token, courseToBeDeleted.lower()) # This function returns True if successful or false if failed
+  
+  if checkValid is False:
+    return {"error": 'Invalid course deletion because you have not previously added the course'}
+  
   return {
     "token": session_token
+  }
+
+# Views all the avaliable courses
+def viewAllCourses(session_token):
+  if not checkTokenExists(session_token):
+    return {"error": "Token is invalid."}
+  
+  listOfAllCourses = dbCourseList()
+
+  return {
+    "token": session_token,
+    "listcourses": listOfAllCourses
+  }
+
+# Views a user specific course
+def viewUserCourses(session_token):
+  if not checkTokenExists(session_token):
+    return {"error": "Token is invalid."}
+
+  listOfMyCourses = dbViewMyCourses(session_token)
+
+  return {
+    "token": session_token,
+    'myCourses': listOfMyCourses
   }
 
 def deleteAccount(session_token: list, password: str) -> dict:
@@ -207,5 +236,20 @@ def adminDelete(session_token: str, targetProfile: str) -> dict:
     "token": session_token
   }
 
+def allUsers(session_token):
+  if not checkTokenExists(session_token):
+    return {"error": "Token is invalid."}
+  
+  listOfAllUsers = dbAllUsernames()
+
+  return {
+    "token": session_token,
+    "usersList": listOfAllUsers
+  }
+
 # def uploadDocumentation(session_token)
 #   return
+
+# Below is for myself (Mathew) to test out functions
+if __name__ == '__main__':
+    print(allUsers('2'))
