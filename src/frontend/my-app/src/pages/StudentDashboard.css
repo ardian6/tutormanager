@@ -24,6 +24,13 @@
   position: relative;
 }
 
+.dashboard-title {
+  font-size: 25px;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
 .calendar {
   width: 600px;
   height: 600px;
@@ -33,7 +40,7 @@
 .request-column {
   background-color: white;
   width: 320px;
-  height: 700px;
+  height: 600px;
   margin-top: auto;
   left: 50px;
   position: absolute;
@@ -43,7 +50,7 @@
 }
 
 .request-title {
-  font-size: 25px;
+  font-size: 15px;
   position: absolute;
   top: 0;
   width: 100%;

@@ -15,22 +15,35 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 
 function Site(props) {
   const [userType, setUserType] = React.useState("true");
-  const { getters } = useContext(Context);
+  const { getters } = React.useContext(Context);
   const token = getters.token;
   const navigate = useNavigate();
   React.useEffect(() => {
     // navigate("/");
   }, [token]);
 
-  // currUserType = getters.userTypeGlobal;
-  // console.log(getters.userTypeGlobal);
+  // const { getters, setters } = useContext(Context);
+  const currUserType = getters.userTypeGlobal;
+  console.log(currUserType);
+
   return (
     <div className="SiteContainer">
       <Routes>
-        <Route path="/admindashboard" />
+        {/* <Route path="/admindashboard" />
         <Route path="/tutordashboard" />
-        <Route path="/studentdashboard" />
-        <Route path="/dashboard" element={<AdminDashboard />} />
+        <Route path="/studentdashboard" /> */}
+        <Route
+          path="/dashboard"
+          element={
+            currUserType === "student" ? (
+              <StudentDashboard />
+            ) : currUserType === "tutor" ? (
+              <TutorDashboard />
+            ) : (
+              <AdminDashboard />
+            )
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile></Profile>} />
         <Route path="/login" element={<Login />} />

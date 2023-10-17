@@ -9,6 +9,8 @@ const StudentDashboard = () => {
       <NavBar></NavBar>
       <div className="studentdashboard-container">
         <div className="studentdashboard-card">
+          <div className="dashboard-title">Student Dashboard</div>
+
           <div className="calendar">Calendar</div>
           <div className="request-column">
             <div className="no-request-message">

@@ -24,6 +24,13 @@
   position: relative;
 }
 
+.dashboard-title {
+  font-size: 25px;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
 .calendar {
   width: 600px;
   height: 600px;

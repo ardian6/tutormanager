@@ -8,6 +8,7 @@ const TutorDashboard = () => {
       <NavBar></NavBar>
       <div className="tutordashboard-container">
         <div className="tutordashboard-card">
+          <div className="tutor-title">Tutor Dashboard</div>
           <div className="calendar">Calendar Tutor</div>
         </div>
       </div>

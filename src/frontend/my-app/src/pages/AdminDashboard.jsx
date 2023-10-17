@@ -7,7 +7,9 @@ const AdminDashboard = () => {
     <>
       <NavBar></NavBar>
       <div className="admindashboard-container">
-        <div className="admindashboard-card">Admin</div>
+        <div className="admindashboard-card">
+          <div className="dashboard-title">Admin Dashboard</div>Admin
+        </div>
       </div>
     </>
   );
