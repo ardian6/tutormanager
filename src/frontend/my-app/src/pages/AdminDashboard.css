@@ -1,4 +1,4 @@
-.tutordashboard-container {
+.admindashboard-container {
   background-color: #4960a6;
   width: 100vw;
   height: 100vh;
@@ -7,7 +7,7 @@
   justify-content: center;
 }
 
-.tutordashboard-card {
+.admindashboard-card {
   margin-top: 60px;
   height: 85vh;
   width: 92vw;
@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
   /* flex-direction: column;
-      gap: 20px; */
+        gap: 20px; */
   position: relative;
 }
 

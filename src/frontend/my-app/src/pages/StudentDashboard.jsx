@@ -1,6 +1,7 @@
 import React from "react";
 import "./StudentDashboard.css";
 import NavBar from "../components/NavBar";
+import { Context, useContext } from "../Context";
 
 const StudentDashboard = () => {
   return (
@@ -17,7 +18,6 @@ const StudentDashboard = () => {
               <div className="request-word">Tutor Requests</div>
             </div>
           </div>
-          <div className=""></div>
         </div>
       </div>
     </>

@@ -7,26 +7,30 @@ import Profile from "../pages/Profile";
 import OpenIconSpeedDial from "./OpenIconSpeedDial";
 import NavBar from "./NavBar";
 import StudentDashboard from "../pages/StudentDashboard";
+import TutorDashboard from "../pages/TutorDashboard";
+import AdminDashboard from "../pages/AdminDashboard";
 import TutorProfile from "../pages/tutorProfile";
 import { Context, useContext } from "../Context";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 function Site(props) {
-  const [userType, setUserType] = React.useState(true);
-  const getters = React.useContext(Context);
+  const [userType, setUserType] = React.useState("true");
+  const { getters } = useContext(Context);
   const token = getters.token;
   const navigate = useNavigate();
   React.useEffect(() => {
-    navigate("/");
+    // navigate("/");
   }, [token]);
 
+  // currUserType = getters.userTypeGlobal;
+  // console.log(getters.userTypeGlobal);
   return (
     <div className="SiteContainer">
       <Routes>
         <Route path="/admindashboard" />
         <Route path="/tutordashboard" />
         <Route path="/studentdashboard" />
-        <Route path="/dashboard" element={<StudentDashboard />} />
+        <Route path="/dashboard" element={<AdminDashboard />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile></Profile>} />
         <Route path="/login" element={<Login />} />

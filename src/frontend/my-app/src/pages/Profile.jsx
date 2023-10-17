@@ -22,7 +22,7 @@ const Profile = () => {
   const [lastName, setLastName] = React.useState("");
   const [bio, setBio] = React.useState("");
   //const [subjects, setSubjects] = React.useState("English");
-  const [city, setCity] = React.useState("Sydney");
+  const [city, setCity] = React.useState("");
 
   const { getters } = useContext(Context);
   const userName = getters.usernameGlobal;
@@ -32,17 +32,21 @@ const Profile = () => {
     if (!token || !userName) {
       return;
     }
-    const response = await fetch("http://localhost:5005/profile/view?username=" + userName, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
+    const response = await fetch(
+      "http://localhost:5005/profile/view?username=" + userName,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
       }
-    });
+    );
     const data = await response.json();
 
     if (data.error) {
       alert(data.error);
     } else {
+      // console.log(data);
       setEmail(data.email);
       setBio(data.bio);
       //setSubjects(data.courses);
@@ -74,7 +78,11 @@ const Profile = () => {
               />
             </div>
             <div className="upper-box-two">
-            <BasicModal emailState={setEmail} bioState={setBio} cityState={setCity} ></BasicModal>
+              <BasicModal
+                emailState={setEmail}
+                bioState={setBio}
+                cityState={setCity}
+              ></BasicModal>
               <div>
                 <b>Username:</b> {userName}
               </div>
@@ -88,9 +96,7 @@ const Profile = () => {
                 <b>Bio:</b> {bio}
               </div>
             </div>
-            <div className="upper-box-three">
-              Subjects
-            </div>
+            <div className="upper-box-three">Subjects</div>
           </div>
         </div>
       </div>
