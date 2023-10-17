@@ -29,7 +29,6 @@ const Profile = () => {
   const token = getters.token;
 
   const getUser = async () => {
-    console.log('request');
     if (!token || !userName) {
       return;
     }
@@ -47,10 +46,8 @@ const Profile = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      // console.log(data);
       setEmail(data.email);
       setBio(data.bio);
-      //setSubjects(data.courses);
       setFirstName(data.givenName);
       setLastName(data.familyName);
       setCity(data.location);

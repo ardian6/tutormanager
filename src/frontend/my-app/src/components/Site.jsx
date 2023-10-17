@@ -19,7 +19,9 @@ function Site(props) {
   const token = getters.token;
   const navigate = useNavigate();
   React.useEffect(() => {
-    // navigate("/");
+    if (token === "" || token === null) {
+      navigate("/");
+    }
   }, [token]);
 
   // const { getters, setters } = useContext(Context);
