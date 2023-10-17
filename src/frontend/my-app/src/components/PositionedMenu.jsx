@@ -1,12 +1,11 @@
-
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { Context, useContext } from '../Context';
-import { useNavigate } from 'react-router-dom';
-import BasicModal from './BasicModal';
-
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { Context, useContext } from "../Context";
+import { useNavigate } from "react-router-dom";
+import BasicModal from "./BasicModal";
+import { Link } from "react-router-dom";
 
 function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -14,7 +13,10 @@ function PositionedMenu() {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  let navigate = useNavigate();
   const handleClose = () => {
+    navigate("../profile");
     setAnchorEl(null);
   };
 
@@ -24,26 +26,24 @@ function PositionedMenu() {
   const setUsernameGlobal = setters.setUsernameGlobal;
   const setUserTypeGlobal = setters.setUserTypeGlobal;
 
-  let navigate = useNavigate();
-
   const logoutBtn = async () => {
-    const response = await fetch('http://localhost:5005/auth/logout/', {
-      method: 'POST',
+    const response = await fetch("http://localhost:5005/auth/logout/", {
+      method: "POST",
       headers: {
-        'Content-type': 'application/json',
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
-        token: token
-      })
+        token: token,
+      }),
     });
     const data = await response.json();
     if (data.error) {
       alert(data.error);
     } else {
-      setToken('');
-      setUsernameGlobal('');
-      setUserTypeGlobal('');
-      navigate('/');
+      setToken("");
+      setUsernameGlobal("");
+      setUserTypeGlobal("");
+      navigate("/");
     }
     handleClose();
   };
@@ -59,6 +59,7 @@ function PositionedMenu() {
       >
         Profile
       </Button>
+
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
@@ -76,7 +77,6 @@ function PositionedMenu() {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={logoutBtn}>Logout</MenuItem>
-
       </Menu>
     </div>
   );
