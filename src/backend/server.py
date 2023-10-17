@@ -138,10 +138,12 @@ def view_all_courses():
 
 ## User Profile View My Courses Implementation to Server ##
 
-@APP.route("/profile/view-my-courses", methods = ['POST'])
+@APP.route("/profile/view-my-courses", methods = ['GET'])
 def view_my_courses():
-    data = request.get_json()
-    return dumps(viewUserCourses(data['token']))
+    # data = request.get_json()
+    token = request.args.get('token')
+    return dumps(viewUserCourses(token))
+    #return dumps(viewUserCourses(data['token']))
 
 ## User Profile Delete Account Implementation to Server ##
 

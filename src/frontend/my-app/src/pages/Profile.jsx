@@ -21,7 +21,7 @@ const Profile = () => {
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [bio, setBio] = React.useState("");
-  //const [subjects, setSubjects] = React.useState("English");
+  const [classes, setClasses] = React.useState("");
   const [city, setCity] = React.useState("");
 
   const { getters } = useContext(Context);
@@ -42,7 +42,6 @@ const Profile = () => {
       }
     );
     const data = await response.json();
-
     if (data.error) {
       alert(data.error);
     } else {
@@ -51,6 +50,22 @@ const Profile = () => {
       setFirstName(data.givenName);
       setLastName(data.familyName);
       setCity(data.location);
+    }
+
+    const classes = await fetch(
+      "http://localhost:5005/profile/view-my-courses?token=" + token,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
+    const classData = await classes.json();
+    if (classData.error) {
+      alert(classData.error);
+    } else {
+      setClasses(classData.listcourses);
     }
   };
   React.useEffect(() => {
