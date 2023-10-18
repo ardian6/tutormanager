@@ -90,7 +90,6 @@ def addNewCourse(session_token: str, newCourse: str) -> dict:
   """Adds a course to the given user's courses.
     Paramaters:
       session_token: String
-      courses: String[]
       newCourse: String
     Returns:
       { session_token: String }
@@ -112,19 +111,23 @@ def addNewCourse(session_token: str, newCourse: str) -> dict:
     "token": session_token
   }
 
-# Admins are allowed to add new courses to the list
-def adminAddCourse(session_token, newCourse):
-  # Find user in database from token and check if admin
+def adminAddCourse(session_token: str, newCourse: str) -> dict:
+  """Admin user adds a course to the TutorManager course list.
+    Paramaters:
+      session_token: String
+      newCourse: String
+    Returns:
+      {}
+  """
+  # Check if user is an admin/in database
   if not checkTokenAdmin(session_token):
     return {"error": "Admin token is invalid."}
   
-  # Check if the course already exists and if it dosen't add it to the database
   if newCourse.lower() not in dbCourseList(): 
     dbAddCourseToList(newCourse.lower())
     return {}
 
   return {"error": "Course is already in the course list."}
-
 
 def deleteCourse(session_token: str, courseToBeDeleted: str) -> dict:
   """Deletes a course from a given user.
@@ -140,7 +143,7 @@ def deleteCourse(session_token: str, courseToBeDeleted: str) -> dict:
     return {"error": "Token is invalid."}
 
   # Calls the database delete course function
-  checkValid = dbDeleteCourse(session_token, courseToBeDeleted.lower()) # This function returns True if successful or false if failed
+  checkValid = dbDeleteCourse(session_token, courseToBeDeleted.lower())
   
   if checkValid is False:
     return {"error": 'Invalid course deletion because you have not previously added the course'}
@@ -149,8 +152,13 @@ def deleteCourse(session_token: str, courseToBeDeleted: str) -> dict:
     "token": session_token
   }
 
-# Views all the avaliable courses
-def viewAllCourses(session_token):
+def viewAllCourses(session_token: str) -> dict:
+  """User views all the avaliable courses.
+    Paramaters:
+      session_token: String
+    Returns:
+      { session_token: String }
+  """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
   
@@ -162,7 +170,13 @@ def viewAllCourses(session_token):
   }
 
 # Views a user specific course
-def viewUserCourses(session_token):
+def viewUserCourses(session_token: str) -> dict:
+  """User views their ENROLLED courses
+    Paramaters:
+      session_token: String
+    Returns:
+      { token: String, myCourses: String[] }
+  """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
 
@@ -185,7 +199,6 @@ def deleteAccount(session_token: list, password: str) -> dict:
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
 
-  # This function actually goes into the database and changes the data stored
   dbDeleteAccount(session_token, getHashOf(password))
 
   return {
@@ -209,12 +222,6 @@ def viewProfile(targetProfile: str) -> dict:
         'timezone': allData[8],
     }
   """
-  # Verify token validity
-
-  # Find user in database from token  
-  # if not checkTokenExists(session_token):
-  #   return {"error": "Token is invalid."}
-
   return dbViewProfile(targetProfile)
 
 def adminDelete(session_token: str, targetProfile: str) -> dict:
@@ -236,7 +243,13 @@ def adminDelete(session_token: str, targetProfile: str) -> dict:
     "token": session_token
   }
 
-def allUsers(session_token):
+def allUsers(session_token: str) -> dict:
+  """Returns all users.
+    Paramaters:
+      session_token: String
+    Returns:
+      { token: String, usersList: String[] }
+  """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
   

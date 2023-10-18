@@ -13,7 +13,6 @@ from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
 from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers
 
-
 def quit_gracefully(*args):
     '''For coverage'''
     exit(0)
@@ -36,7 +35,6 @@ APP.config['TRAP_HTTP_EXCEPTIONS'] = True
 APP.register_error_handler(Exception, defaultHandler)
 
 #### NO NEED TO MODIFY ABOVE THIS POINT, EXCEPT IMPORTS
-
 
 """ 
 ROUTES FOR AUTH FUNCTIONS
@@ -140,10 +138,8 @@ def view_all_courses():
 
 @APP.route("/profile/view-my-courses", methods = ['GET'])
 def view_my_courses():
-    # data = request.get_json()
     token = request.args.get('token')
     return dumps(viewUserCourses(token))
-    #return dumps(viewUserCourses(data['token']))
 
 ## User Profile Delete Account Implementation to Server ##
 
@@ -154,7 +150,6 @@ def delete_account():
 
 ## User Profile Delete Account Implementation to Server ##
 
-# Should this be a DELETE???
 @APP.route("/profile/admin-delete", methods = ['PUT'])
 def admin_delete():
     data = request.get_json()
@@ -167,20 +162,12 @@ def view_all_Users():
     data = request.get_json()
     return dumps(allUsers(data['token']))
 
-
 """ 
 END OF ROUTES
 
 """
 
-
 ### NO NEED TO MODIFY BELOW THIS POINT
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, quit_gracefully) # For coverage
     APP.run(port=5005) # Do not edit this port
-
-# 400 bad request,
-# 200 good request,
-# 401 authorised error,
-# 403 forbidden,
-# 404 not found
