@@ -15,13 +15,15 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import { Context, useContext } from "../Context";
 import BasicModal from "../components/BasicModal";
+import BasicStack from "../components/BasicStack";
+import AddCourseModal from "../components/AddCourseModal";
 
 const Profile = () => {
   const [email, setEmail] = React.useState("");
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [bio, setBio] = React.useState("");
-  const [classes, setClasses] = React.useState("");
+  const [classes, setClasses] = React.useState(['math', 'english', 'science']);
   const [city, setCity] = React.useState("");
 
   const { getters } = useContext(Context);
@@ -65,7 +67,7 @@ const Profile = () => {
     if (classData.error) {
       alert(classData.error);
     } else {
-      setClasses(classData.listcourses);
+      setClasses(classData.myCourses);
     }
   };
   React.useEffect(() => {
@@ -109,7 +111,13 @@ const Profile = () => {
                 <b>Bio:</b> {bio}
               </div>
             </div>
-            <div className="upper-box-three">Subjects</div>
+            <div className="upper-box-three">
+              <b>Subjects:</b>
+              <div>
+                <BasicStack classes={classes} setClasses={setClasses}></BasicStack>
+                <AddCourseModal classes={classes} setClasses={setClasses}></AddCourseModal>
+              </div>
+            </div>
           </div>
         </div>
       </div>
