@@ -25,42 +25,32 @@ Messaging system (Twilio) for real-time communication.
 Calendar integration (Outlook Calendar API).
 
 
----Installation---
-Do in order
----Register ssh key---
-ssh-keygen
-cat ~/.ssh/id_rsa.pub
-Copy ssh key into GitHub account
-
----Install Python---
-sudo apt update && upgrade
-sudo apt install python3 python3-pip
-python3 --version
-
----Install Node---
-npm install
-sudo apt-get install -y nodejs
-
----Install yarn---
-npm install --global yarn
-
----Install React---
-yarn add react-scripts
-
----Install dependencies---
-yarn install 
-yarn
-
----Install Flask---
-pip3 install flask
-
----Install psycopg2---
-pip3 install flask_cors
-
----Install psycopg2 ---
-sudo apt-get install build-dep python-psycopg2
-pip install psycopg2-binary 
-
-
-
-
+# Installation
+**Do in order:**
+> use 'pip3 freeze' to see if you've installed python modules correctly.
+1. Register ssh key
+   * ssh-keygen
+   * cat ~/.ssh/id_rsa.pub
+   * Copy ssh key into GitHub account
+2. Install Python3
+   * sudo apt update && upgrade
+   * sudo apt install python3 python3-pip
+   * python3 --version
+3. Install Node
+   * npm install
+   * sudo apt-get install -y nodejs
+4. Install yarn
+   * npm install --global yarn
+5. Install React
+   * yarn add react-scripts
+6. Install Dependencies
+   * yarn install
+   * yarn
+7. Install Flask and Flask_Cors
+   * pip3 install flask
+   * pip3 install flask_cors
+8. Install psycopg2
+   * sudo apt-get install build-dep python-psycopg2
+   * pip3 install psycopg2-binary
+9. Install PyJWT
+   * pip3 install PyJWT
