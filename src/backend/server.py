@@ -158,7 +158,7 @@ def delete_account():
 @APP.route("/profile/admin-delete", methods = ['PUT'])
 def admin_delete():
     data = request.get_json()
-    return dumps(adminDelete(data['token'], data['targetProfile']))
+    return dumps(adminDelete(data['token'], data['targetProfile']['users']))
 
 ## User Profile View All Users Implementation to Server ##
 
