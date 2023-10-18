@@ -23,7 +23,7 @@ const Profile = () => {
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [bio, setBio] = React.useState("");
-  const [classes, setClasses] = React.useState(['math', 'english', 'science']);
+  const [classes, setClasses] = React.useState([]);
   const [city, setCity] = React.useState("");
 
   const { getters } = useContext(Context);

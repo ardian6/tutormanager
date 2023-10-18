@@ -12,6 +12,7 @@ import AdminDashboard from "../pages/AdminDashboard";
 import TutorProfile from "../pages/tutorProfile";
 import { Context, useContext } from "../Context";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import TempView from "../pages/TempView";
 
 function Site(props) {
   const [userType, setUserType] = React.useState("true");
@@ -26,8 +27,6 @@ function Site(props) {
 
   // const { getters, setters } = useContext(Context);
   const currUserType = getters.userTypeGlobal;
-  console.log(currUserType);
-
   return (
     <div className="SiteContainer">
       <Routes>
@@ -51,6 +50,7 @@ function Site(props) {
         <Route path="/login" element={<Login />} />
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/Profile/:username" element={<TempView />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </div>
