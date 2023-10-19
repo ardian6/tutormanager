@@ -176,7 +176,7 @@ def view_all_bookings():
 
 ## User booking View my bookings Implementation to Server ##
 
-@APP.route("/bookings/view-my-users", methods = ['POST'])
+@APP.route("/bookings/view-my-bookings", methods = ['POST'])
 def view_my_bookings():
     data = request.get_json()
     return dumps(listMyBookings(data['token']))
