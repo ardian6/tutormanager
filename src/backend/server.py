@@ -12,6 +12,7 @@ from flask_cors import CORS
 from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
 from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers
+from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking
 
 def quit_gracefully(*args):
     '''For coverage'''
@@ -161,6 +162,39 @@ def admin_delete():
 def view_all_Users():
     data = request.get_json()
     return dumps(allUsers(data['token']))
+
+""" 
+ROUTES FOR Booking FUNCTIONS
+
+"""
+## User booking View All bookings Implementation to Server ##
+
+@APP.route("/bookings/view-all-bookings", methods = ['POST'])
+def view_all_bookings():
+    data = request.get_json()
+    return dumps(listAllBookings(data['token']))
+
+## User booking View my bookings Implementation to Server ##
+
+@APP.route("/bookings/view-my-users", methods = ['POST'])
+def view_my_bookings():
+    data = request.get_json()
+    return dumps(listMyBookings(data['token']))
+
+## User booking make booking Implementation to Server ##
+
+@APP.route("/booking/make-booking", methods = ['PUT'])
+def view_create_bookings():
+    data = request.get_json()
+    # studentUser and tutorUser are just the usernames while startTime and endTime is a string in this format '%Y-%m-%d %H:%M:%S'
+    return dumps(makeBooking(data['token'], data['studentUser'], data['tutorUser'], data['startTime'], data['endTime']))
+
+## User booking delete booking Implementation to Server ##
+
+@APP.route("/booking/delete-booking", methods = ['PUT'])
+def view_delete_bookings():
+    data = request.get_json()
+    return dumps(deleteBooking(data['token'], data['studentUser'], data['tutorUser']))
 
 """ 
 END OF ROUTES
