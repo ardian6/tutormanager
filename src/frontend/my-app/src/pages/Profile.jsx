@@ -15,13 +15,15 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import { Context, useContext } from "../Context";
 import BasicModal from "../components/BasicModal";
+import BasicStack from "../components/BasicStack";
+import AddCourseModal from "../components/AddCourseModal";
 
 const Profile = () => {
   const [email, setEmail] = React.useState("");
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [bio, setBio] = React.useState("");
-  //const [subjects, setSubjects] = React.useState("English");
+  const [classes, setClasses] = React.useState([]);
   const [city, setCity] = React.useState("");
 
   const { getters } = useContext(Context);
@@ -42,17 +44,30 @@ const Profile = () => {
       }
     );
     const data = await response.json();
-
     if (data.error) {
       alert(data.error);
     } else {
-      // console.log(data);
       setEmail(data.email);
       setBio(data.bio);
-      //setSubjects(data.courses);
       setFirstName(data.givenName);
       setLastName(data.familyName);
       setCity(data.location);
+    }
+
+    const classes = await fetch(
+      "http://localhost:5005/profile/view-my-courses?token=" + token,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
+    const classData = await classes.json();
+    if (classData.error) {
+      alert(classData.error);
+    } else {
+      setClasses(classData.myCourses);
     }
   };
   React.useEffect(() => {
@@ -96,7 +111,13 @@ const Profile = () => {
                 <b>Bio:</b> {bio}
               </div>
             </div>
-            <div className="upper-box-three">Subjects</div>
+            <div className="upper-box-three">
+              <b>Subjects:</b>
+              <div>
+                <BasicStack classes={classes} setClasses={setClasses}></BasicStack>
+                <AddCourseModal classes={classes} setClasses={setClasses}></AddCourseModal>
+              </div>
+            </div>
           </div>
         </div>
       </div>

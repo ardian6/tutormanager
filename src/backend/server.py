@@ -12,7 +12,7 @@ from flask_cors import CORS
 from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
 from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers
-
+from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking
 
 def quit_gracefully(*args):
     '''For coverage'''
@@ -36,7 +36,6 @@ APP.config['TRAP_HTTP_EXCEPTIONS'] = True
 APP.register_error_handler(Exception, defaultHandler)
 
 #### NO NEED TO MODIFY ABOVE THIS POINT, EXCEPT IMPORTS
-
 
 """ 
 ROUTES FOR AUTH FUNCTIONS
@@ -138,10 +137,10 @@ def view_all_courses():
 
 ## User Profile View My Courses Implementation to Server ##
 
-@APP.route("/profile/view-my-courses", methods = ['POST'])
+@APP.route("/profile/view-my-courses", methods = ['GET'])
 def view_my_courses():
-    data = request.get_json()
-    return dumps(viewUserCourses(data['token']))
+    token = request.args.get('token')
+    return dumps(viewUserCourses(token))
 
 ## User Profile Delete Account Implementation to Server ##
 
@@ -152,11 +151,10 @@ def delete_account():
 
 ## User Profile Delete Account Implementation to Server ##
 
-# Should this be a DELETE???
 @APP.route("/profile/admin-delete", methods = ['PUT'])
 def admin_delete():
     data = request.get_json()
-    return dumps(adminDelete(data['token'], data['targetProfile']))
+    return dumps(adminDelete(data['token'], data['targetProfile']['user']))
 
 ## User Profile View All Users Implementation to Server ##
 
@@ -165,20 +163,45 @@ def view_all_Users():
     data = request.get_json()
     return dumps(allUsers(data['token']))
 
+""" 
+ROUTES FOR Booking FUNCTIONS
+
+"""
+## User booking View All bookings Implementation to Server ##
+
+@APP.route("/bookings/view-all-bookings", methods = ['POST'])
+def view_all_bookings():
+    data = request.get_json()
+    return dumps(listAllBookings(data['token']))
+
+## User booking View my bookings Implementation to Server ##
+
+@APP.route("/bookings/view-my-bookings", methods = ['POST'])
+def view_my_bookings():
+    data = request.get_json()
+    return dumps(listMyBookings(data['token']))
+
+## User booking make booking Implementation to Server ##
+
+@APP.route("/booking/make-booking", methods = ['PUT'])
+def view_create_bookings():
+    data = request.get_json()
+    # studentUser and tutorUser are just the usernames while startTime and endTime is a string in this format '%Y-%m-%d %H:%M:%S'
+    return dumps(makeBooking(data['token'], data['studentUser'], data['tutorUser'], data['startTime'], data['endTime']))
+
+## User booking delete booking Implementation to Server ##
+
+@APP.route("/booking/delete-booking", methods = ['PUT'])
+def view_delete_bookings():
+    data = request.get_json()
+    return dumps(deleteBooking(data['token'], data['studentUser'], data['tutorUser']))
 
 """ 
 END OF ROUTES
 
 """
 
-
 ### NO NEED TO MODIFY BELOW THIS POINT
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, quit_gracefully) # For coverage
     APP.run(port=5005) # Do not edit this port
-
-# 400 bad request,
-# 200 good request,
-# 401 authorised error,
-# 403 forbidden,
-# 404 not found

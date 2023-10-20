@@ -1,4 +1,5 @@
 import psycopg2
+import datetime
 
 # This is a helper function that connects to the database ()
 def connectDB():
@@ -93,6 +94,18 @@ def checkTokenExists(token):
     db.commit()
     db.close()
     return tokenExist # -> Returns true if token exists otherwise false.
+
+# Returns username of a session id
+def getUsername(token):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select s.username from sessions s where s.sessID = %s""", [token])
+    state = cur.fetchall()
+    uName = state[0][0]
+    cur.close()
+    db.commit()
+    db.close()
+    return uName
 
 # Check if token exists and is an admin
 def checkTokenAdmin(token):
@@ -216,6 +229,7 @@ def dbDeleteAccount(token, password):
     if correctInfo == True:
         cur.execute("""delete from Sessions s where s.username = %s""", [currUsername])
         cur.execute("""delete from userCourse c where c.username = %s""", [currUsername])
+        cur.execute("""delete from bookings b where b.stuUser = %s or b.tutUser = %s""", [currUsername, currUsername])
         cur.execute("""delete from Users u where u.username = %s""", [currUsername])
     cur.close()
     db.commit()
@@ -251,6 +265,7 @@ def dbAdminDelete(targetProfile):
     cur = db.cursor()
     cur.execute("""delete from Sessions s where s.username = %s""", [targetProfile])
     cur.execute("""delete from userCourse c where c.username = %s""", [targetProfile])
+    cur.execute("""delete from bookings b where b.stuUser = %s or b.tutUser = %s""", [targetProfile, targetProfile])
     cur.execute("""delete from Users u where u.username = %s""", [targetProfile])
     cur.close()
     db.commit()
@@ -295,6 +310,7 @@ def dbViewMyCourses(token):
     db.commit()
     return myCourseList
 
+# This function returns all usernames
 def dbAllUsernames():
     listOfAllUsers = []
     db = connectDB()
@@ -306,6 +322,83 @@ def dbAllUsernames():
     db.commit()
     return listOfAllUsers
 
+# This function returns all bookings from database
+def dbListAllBookings():
+    listOfAllBookings = []
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime from bookings b""")
+    for t in cur.fetchall():
+        newStorage = []
+        newStorage.append(t[0])
+        newStorage.append(t[1].lower())
+        newStorage.append(t[2].lower())
+        newStorage.append(t[3].strftime("%Y/%m/%d %H:%M:%S"))
+        newStorage.append(t[4].strftime("%Y/%m/%d %H:%M:%S"))
+        listOfAllBookings.append(newStorage)
+    cur.close()
+    db.commit()
+    return listOfAllBookings
+
+# This function returns all my bookings from database
+def dbListMyBookings(token):
+    listOfAllBookings = []
+    db = connectDB()
+    cur = db.cursor()
+    # Grab username
+    cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
+    givenUser = None
+    for t in cur.fetchall():
+        givenUser = t[0]
+    # Find bookings
+    cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime from bookings b where b.stuUser = %s or b.tutUser = %s""", [givenUser, givenUser])
+    for t in cur.fetchall():
+        newStorage = []
+        newStorage.append(t[0])
+        newStorage.append(t[1].lower())
+        newStorage.append(t[2].lower())
+        newStorage.append(t[3].strftime("%Y/%m/%d %H:%M:%S"))
+        newStorage.append(t[4].strftime("%Y/%m/%d %H:%M:%S"))
+        listOfAllBookings.append(newStorage)
+    cur.close()
+    db.commit()
+    return listOfAllBookings
+
+# This function makes a booking and stores into database
+def dbMakeBooking(studentUser, tutorUser, startTime, endTime):
+    db = connectDB()
+    cur = db.cursor()
+    # Insert into database
+    bookingId = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+    sTime = datetime.datetime.strptime(startTime, '%Y-%m-%d %H:%M:%S')
+    dTime = datetime.datetime.strptime(endTime, '%Y-%m-%d %H:%M:%S')
+    cur.execute("""insert into bookings values (%s, %s, %s, %s, %s)""", [bookingId, studentUser, tutorUser, sTime, dTime])
+    cur.close()
+    db.commit()
+    return
+
+# This function deletes a booking and removes it from database
+def dbDeleteBooking(studentUser, tutorUser):
+    db = connectDB()
+    cur = db.cursor()
+    # Delete from database
+    cur.execute("""delete from bookings b where b.stuUser = %s and b.tutUser = %s""", [studentUser, tutorUser])
+    cur.close()
+    db.commit()
+    return
+
+# This function checks if the booking exists.
+def dbCheckDuplicateBooking(studentUser, tutorUser):
+    existingBooking = False
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime from bookings b where b.stuUser = %s and b.tutUser = %s""", [studentUser, tutorUser])
+    for t in cur.fetchall():
+        existingBooking = True
+    cur.close()
+    db.commit()
+    return existingBooking # Returns false if the booking dosent exist, otherwise true
+
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbAllUsernames())
+    print(dbAdminDelete('username3'))

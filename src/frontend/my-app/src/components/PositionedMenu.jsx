@@ -16,7 +16,7 @@ function PositionedMenu() {
 
   let navigate = useNavigate();
   const handleClose = () => {
-    navigate("../profile");
+    // navigate("../profile");
     setAnchorEl(null);
   };
 
@@ -43,10 +43,14 @@ function PositionedMenu() {
       setToken("");
       setUsernameGlobal("");
       setUserTypeGlobal("");
-      navigate("/");
     }
     handleClose();
   };
+
+  const profileBtn = () => {
+    navigate("../profile");
+    handleClose();
+  }
 
   return (
     <div>
@@ -75,7 +79,7 @@ function PositionedMenu() {
           horizontal: "left",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={profileBtn}>Profile</MenuItem>
         <MenuItem onClick={logoutBtn}>Logout</MenuItem>
       </Menu>
     </div>

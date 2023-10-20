@@ -47,6 +47,15 @@ def setupTables():
 	primary key (course, username)
   )""")
 
+  cur.execute("""create table bookings (
+	bookingID   varchar(30),
+  stuUser     varchar(30) references users(username),
+  tutUser     varchar(30) references users(username),
+  startTime   timestamp,
+  endTime     timestamp,
+	primary key (bookingID)
+  )""")
+
   cur.close()
   db.commit()
   return
@@ -58,6 +67,7 @@ def deleteTables():
   cur.execute("""drop table Sessions""")
   cur.execute("""drop table userCourse""")
   cur.execute("""drop table Courses""")
+  cur.execute("""drop table bookings""")
   cur.execute("""drop table Users""")
 
   cur.execute("""drop type uType""")
@@ -70,8 +80,9 @@ def clearData():
   cur = db.cursor()
   cur.execute("""delete from Sessions""")
   cur.execute("""delete from userCourse""")
-  cur.execute("""delete from Users""")
+  cur.execute("""delete from bookings""")
   cur.execute("""delete from Courses""")
+  cur.execute("""delete from Users""")
   cur.close()
   db.commit()
   return
@@ -85,6 +96,8 @@ def inputData1():
   cur.execute(f"""insert into Users values ('username4', '{getHashOf('password4')}', 'email4@gmail.com', 'givenname4', 'famailyName4', 'tutor', 'bio4', 'location4', 'phone4', 'timezone4', True)""")
   cur.execute(f"""insert into Users values ('username5', '{getHashOf('password5')}', 'email5@gmail.com', 'givenname5', 'famailyName5', 'student', 'bio5', 'location5', 'phone5', 'timezone5', True)""")
   cur.execute(f"""insert into Users values ('username6', '{getHashOf('password6')}', 'email6@gmail.com', 'givenname6', 'famailyName6', 'tutor', 'bio6', 'location6', 'phone6', 'timezone6', False)""")
+  cur.execute(f"""insert into Users values ('username7', '{getHashOf('password7')}', 'email7@gmail.com', 'givenname7', 'famailyName7', 'tutor', 'bio7', 'location7', 'phone7', 'timezone7', True)""")
+  cur.execute(f"""insert into Users values ('username8', '{getHashOf('password8')}', 'email8@gmail.com', 'givenname8', 'famailyName8', 'student', 'bio8', 'location8', 'phone8', 'timezone8', True)""")
   cur.close()
   db.commit()
   return
@@ -99,7 +112,7 @@ def inputData2():
   db.commit()
   return
 
-# Input dummy data for userCourse table
+# Input dummy data for course table
 def inputData3():
   cur = db.cursor()
   cur.execute("""insert into Courses values ('maths')""")
@@ -108,11 +121,22 @@ def inputData3():
   db.commit()
   return
 
+# Input dummy data for userCourse table
 def inputData4():
   cur = db.cursor()
   cur.execute("""insert into userCourse values ('maths', 'username3')""")
   cur.execute("""insert into userCourse values ('english', 'username5')""")
   cur.execute("""insert into userCourse values ('maths', 'username2')""")
+  cur.close()
+  db.commit()
+  return
+
+# Input dummy data for bookings table
+def inputData5():
+  cur = db.cursor()
+  cur.execute("""insert into bookings values ('1', 'username2', 'username4', '2023-05-25 13:00:00', '2023-05-25 14:00:00')""")
+  cur.execute("""insert into bookings values ('2', 'username3', 'username4', '2023-06-15 15:00:00', '2023-05-25 17:00:00')""")
+  cur.execute("""insert into bookings values ('3', 'username5', 'username4', '2023-08-08 20:00:00', '2023-05-25 22:00:00')""")
   cur.close()
   db.commit()
   return
@@ -134,6 +158,10 @@ def printData():
     print(t)
   print('UserCourse table')
   cur.execute("""select c.course, c.username from userCourse c""")
+  for t in cur.fetchall():
+    print(t)
+  print('Bookings table')
+  cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime from bookings b""")
   for t in cur.fetchall():
     print(t)
   cur.close()
@@ -170,6 +198,7 @@ if __name__ == '__main__':
         # inputData2()
         # inputData3()
         # inputData4()
+        # inputData5()
         # test()
         printData()
 

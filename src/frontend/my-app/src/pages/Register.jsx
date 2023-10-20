@@ -247,7 +247,6 @@ const Register = () => {
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton>
-                        {validEmail() ? <></> : <ErrorIcon color="error" />}
                       </IconButton>
                     </InputAdornment>
                   }
