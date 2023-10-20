@@ -2,8 +2,8 @@ import React from "react";
 import "./AdminDashboard.css";
 import NavBar from "../components/NavBar";
 import { Context, useContext } from "../Context";
-import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const AdminDashboard = () => {
   const [users, setUsers] = React.useState([]);
@@ -29,7 +29,7 @@ const AdminDashboard = () => {
     } else {
       setUsers(data.usersList);
     }
-  }
+  };
 
   const removeUser = async (user) => {
     const response = await fetch("http://localhost:5005/profile/admin-delete", {
@@ -46,9 +46,9 @@ const AdminDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      setUsers(users.filter((x) => x !== user['user']));
+      setUsers(users.filter((x) => x !== user["user"]));
     }
-  }
+  };
 
   React.useEffect(() => {
     getUsers();
@@ -64,10 +64,22 @@ const AdminDashboard = () => {
             <b>All Tutors</b>
             <div>
               {users.map((user, idx) => {
-                return (<div key={idx}>
-                  {user}
-                  <Button className="removebtn"variant="outlined" startIcon={<DeleteIcon />} size="small" onClick={() => {removeUser({user})}}>Delete</Button>
-                </div>)
+                return (
+                  <div key={idx}>
+                    {user}
+                    <Button
+                      className="removebtn"
+                      variant="outlined"
+                      startIcon={<DeleteIcon />}
+                      size="small"
+                      onClick={() => {
+                        removeUser({ user });
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                );
               })}
             </div>
           </div>

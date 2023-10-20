@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import defaultImage from "./DefaultProfile.png";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { Context, useContext } from "../Context";
@@ -28,6 +28,7 @@ const Profile = () => {
 
   const { getters } = useContext(Context);
   const userName = getters.usernameGlobal;
+  const userType = getters.userTypeGlobal;
   const token = getters.token;
 
   const getUser = async () => {
@@ -80,7 +81,7 @@ const Profile = () => {
       <div className="profile-container">
         <div className="profile-card">
           <div className="profile-title-container">
-            <PermIdentityIcon className="profile-title-icon" />
+            <AccountBoxIcon className="profile-title-icon" />
             <div className="profile-title">{firstName + " " + lastName}</div>
           </div>
 
@@ -112,10 +113,19 @@ const Profile = () => {
               </div>
             </div>
             <div className="upper-box-three">
+              <span>
+                <b>User Type:</b> {userType}
+              </span>
               <b>Subjects:</b>
               <div>
-                <BasicStack classes={classes} setClasses={setClasses}></BasicStack>
-                <AddCourseModal classes={classes} setClasses={setClasses}></AddCourseModal>
+                <BasicStack
+                  classes={classes}
+                  setClasses={setClasses}
+                ></BasicStack>
+                <AddCourseModal
+                  classes={classes}
+                  setClasses={setClasses}
+                ></AddCourseModal>
               </div>
             </div>
           </div>
