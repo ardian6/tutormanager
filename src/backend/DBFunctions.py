@@ -329,6 +329,7 @@ def dbListAllBookings():
     cur = db.cursor()
     cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime from bookings b""")
     for t in cur.fetchall():
+        print(t)
         newStorage = []
         newStorage.append(t[0])
         newStorage.append(t[1].lower())
@@ -351,14 +352,16 @@ def dbListMyBookings(token):
     for t in cur.fetchall():
         givenUser = t[0]
     # Find bookings
-    cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime from bookings b where b.stuUser = %s or b.tutUser = %s""", [givenUser, givenUser])
+    cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.day, b.startTime, b.endTime, b.approved from bookings b where b.stuUser = %s or b.tutUser = %s""", [givenUser, givenUser])
     for t in cur.fetchall():
         newStorage = []
         newStorage.append(t[0])
         newStorage.append(t[1].lower())
         newStorage.append(t[2].lower())
-        newStorage.append(t[3].strftime("%Y/%m/%d %H:%M:%S"))
-        newStorage.append(t[4].strftime("%Y/%m/%d %H:%M:%S"))
+        newStorage.append(t[3].strftime("%Y/%m/%d"))
+        newStorage.append(t[4].strftime("%H:%M:%S"))
+        newStorage.append(t[5].strftime("%H:%M:%S"))
+        newStorage.append(t[6])
         listOfAllBookings.append(newStorage)
     cur.close()
     db.commit()
