@@ -51,8 +51,10 @@ def setupTables():
 	bookingID   varchar(30),
   stuUser     varchar(30) references users(username),
   tutUser     varchar(30) references users(username),
-  startTime   timestamp,
-  endTime     timestamp,
+  day         date,            
+  startTime   time,
+  endTime     time,
+  approved    boolean,
 	primary key (bookingID)
   )""")
 
@@ -134,9 +136,9 @@ def inputData4():
 # Input dummy data for bookings table
 def inputData5():
   cur = db.cursor()
-  cur.execute("""insert into bookings values ('1', 'username2', 'username4', '2023-05-25 13:00:00', '2023-05-25 14:00:00')""")
-  cur.execute("""insert into bookings values ('2', 'username3', 'username4', '2023-06-15 15:00:00', '2023-05-25 17:00:00')""")
-  cur.execute("""insert into bookings values ('3', 'username5', 'username4', '2023-08-08 20:00:00', '2023-05-25 22:00:00')""")
+  cur.execute("""insert into bookings values ('1', 'username2', 'username4', '2023-05-25', '13:00:00', '14:00:00', 'False')""")
+  cur.execute("""insert into bookings values ('2', 'username3', 'username4', '2023-06-15', '15:00:00', '17:00:00', 'True')""")
+  cur.execute("""insert into bookings values ('3', 'username5', 'username4', '2023-08-08', '20:00:00', '22:00:00', 'False')""")
   cur.close()
   db.commit()
   return
@@ -193,12 +195,12 @@ if __name__ == '__main__':
 
         # deleteTables()
         # setupTables()
-        # clearData()
-        # inputData1()
-        # inputData2()
-        # inputData3()
-        # inputData4()
-        # inputData5()
+        clearData()
+        inputData1()
+        inputData2()
+        inputData3()
+        inputData4()
+        inputData5()
         # test()
         printData()
 
