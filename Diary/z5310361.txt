@@ -22,3 +22,8 @@ Met up with team earlier the week to finalise sprint 1. We established that some
 This is beacuse some functionality was required before it could be properly implemented which was reasonable. It is worth noting
 that better communication between team members can allow for better allocation and clarity of workload. Nevertheless, work achieved
 for sprint 1 was rather sound.
+
+Week 6
+Spent the flex week implementing functionality for the user Dashboards. Users should be able to message/book other users depending on their needs.
+Admins should also be able to delete users, add/delete courses and etc. communication and so as planning has improved since last sprint
+leading to completions of items at the required soft deadliens. 
