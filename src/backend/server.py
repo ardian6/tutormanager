@@ -11,7 +11,7 @@ from flask_cors import CORS
 
 from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
-from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers
+from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking
 
 def quit_gracefully(*args):
@@ -162,6 +162,13 @@ def admin_delete():
 def view_all_Users():
     data = request.get_json()
     return dumps(allUsers(data['token']))
+
+## User Profile View All Users Meta Data Implementation to Server ##
+
+@APP.route("/profile/view-all-users-data", methods = ['POST'])
+def view_all_UsersData():
+    data = request.get_json()
+    return dumps(allUsersData(data['token']))
 
 """ 
 ROUTES FOR Booking FUNCTIONS
