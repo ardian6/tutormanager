@@ -41,8 +41,7 @@ const StudentDashboard = () => {
     }
   };
 
-
-//   const navigate = useNavigate()
+  //   const navigate = useNavigate()
 
   const navigate = useNavigate();
   const getBookings = async () => {
@@ -66,7 +65,6 @@ const StudentDashboard = () => {
     }
   };
 
-
   const redirectStudent = (id) => {
     const path = "/Profile/" + id;
     navigate(path);
@@ -88,9 +86,7 @@ const StudentDashboard = () => {
         <div className="studentdashboard-card">
           <div className="student-dashboard-title">Student Dashboard</div>
 
-
           {/* <div className="student-calendar">Calendar</div> */}
-
 
           <div className="student-calendar">
             <Calendar token={token}></Calendar>
@@ -150,13 +146,51 @@ const StudentDashboard = () => {
                         <div className="individual-profile-info">
                           {/* <div>{student["username"]}</div> */}
                           <div>
+                            <b>Name: </b>
                             {student["givenName"] + " " + student["familyName"]}
                           </div>
-                          <div>{student["email"]}</div>
+                          <div>
+                            <b>Email: </b>
+                            {student["email"]}
+                          </div>
 
-                          <div>{student["location"]}</div>
-                          <div>{student["timezone"]}</div>
-                          <div>{student["bio"]}</div>
+                          <div>
+                            <b>Location: </b>
+                            {student["location"]}
+                          </div>
+                          <div>
+                            <b>Timezone: </b>
+                            {student["timezone"]}
+                          </div>
+                          <div>
+                            <b>Reviews: </b>
+                            {/* {student["bio"]} */}
+                          </div>
+                          <div className="individual-profile-buttons">
+                            <Stack spacing={1.5} direction="row" variant="text">
+                              <Button
+                                className="individual-profile-button"
+                                variant="contained"
+                                onClick={() =>
+                                  redirectStudent(student["username"])
+                                }
+                              >
+                                Profile
+                              </Button>
+                              <Button
+                                className="individual-profile-button"
+                                variant="outlined"
+                              >
+                                Message
+                              </Button>
+                              <Button
+                                className="individual-profile-button"
+                                variant="outlined"
+                              >
+                                Book
+                              </Button>
+                            </Stack>
+                          </div>
                         </div>
                       </div>
                     );
