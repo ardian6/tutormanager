@@ -26,3 +26,8 @@ This week, I was set with the task of creating most of the UI and UX design of t
 I utilised materialUI as a framework to create most of the buttons. This saved me alot of time since I did not need to create it from scratch. 
 We had meetings throughout the week to connect the backend to the frontend. Michael completed most of the functionality aspects of the frontend. He made sure that the frontend properly connected to
 the backend without any errors. Our meetings throughout the week consisted of debugging alot of server function issues. We eventually got everything working and sprint 1 was done on time. 
+
+Week 6
+We set up meetings during the week. At the start of the week, we set to clean up sprint 1 from any remaining issues. I started to create new pages for the dashboard, and profile view. 
+The dashboard would change depending on if the logged in user was an admin, student, or tutor. I had alot of discussions with Michael as to what we would both be doing so that we don't
+conflict in tasks. Overall, this week was also to discussing with others as to how to plan the weeks ahead of us. 
