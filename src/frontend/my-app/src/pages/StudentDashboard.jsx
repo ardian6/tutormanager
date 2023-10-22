@@ -87,7 +87,6 @@ const StudentDashboard = () => {
           <div className="student-dashboard-title">Student Dashboard</div>
 
           {/* <div className="student-calendar">Calendar</div> */}
-
           <div className="student-calendar">
             <Calendar token={token}></Calendar>
           </div>
