@@ -260,9 +260,22 @@ def allUsers(session_token: str) -> dict:
     "usersList": listOfAllUsers
   }
 
+def allUsersData(session_token):
+  if not checkTokenExists(session_token):
+    return {"error": "Token is invalid."}
+  listOfAllUsers = dbAllUsernames()
+  listofallData = []
+  for userN in listOfAllUsers:
+    listofallData.append(dbViewProfile(userN))
+  return {
+    "token": session_token,
+    "listofalldata": listofallData
+  }
+
+
 # def uploadDocumentation(session_token)
 #   return
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(allUsers('2'))
+    print(allUsersData('2'))
