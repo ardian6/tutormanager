@@ -41,6 +41,9 @@ const StudentDashboard = () => {
     }
   };
 
+
+//   const navigate = useNavigate()
+
   const navigate = useNavigate();
   const getBookings = async () => {
     const response = await fetch(
@@ -63,6 +66,7 @@ const StudentDashboard = () => {
     }
   };
 
+
   const redirectStudent = (id) => {
     const path = "/Profile/" + id;
     navigate(path);
@@ -70,7 +74,6 @@ const StudentDashboard = () => {
 
   React.useEffect(() => {
     getAllStudents();
-    getBookings();
   }, []);
 
   const [age, setAge] = React.useState("");
@@ -85,10 +88,12 @@ const StudentDashboard = () => {
         <div className="studentdashboard-card">
           <div className="student-dashboard-title">Student Dashboard</div>
 
+
           {/* <div className="student-calendar">Calendar</div> */}
 
+
           <div className="student-calendar">
-            <Calendar></Calendar>
+            <Calendar token={token}></Calendar>
           </div>
 
           <div className="student-request-column">
