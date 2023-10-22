@@ -89,7 +89,6 @@ const StudentDashboard = () => {
           <div className="student-calendar">
             <Calendar token={token}></Calendar>
           </div>
-
           <div className="student-request-column">
             <div className="student-no-request-message">
               {students.map((student, idx) => {
