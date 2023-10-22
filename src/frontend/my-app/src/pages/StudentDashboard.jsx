@@ -11,6 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import defaultImage from "./DefaultProfile.png";
 import Calendar from "../components/Calendar";
 
 const StudentDashboard = () => {
@@ -19,7 +20,7 @@ const StudentDashboard = () => {
   const [students, setStudents] = React.useState([]);
   const getAllStudents = async () => {
     const response = await fetch(
-      "http://localhost:5005/profile/view-all-users",
+      "http://localhost:5005/profile/view-all-users-data",
       {
         method: "POST",
         headers: {
@@ -34,7 +35,9 @@ const StudentDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      setStudents(data.usersList);
+      console.log(data.listofalldata);
+      setStudents(data.listofalldata);
+      // setStudents(data.usersList);
     }
   };
 
@@ -82,7 +85,7 @@ const StudentDashboard = () => {
         <div className="studentdashboard-card">
           <div className="student-dashboard-title">Student Dashboard</div>
 
-          <div className="student-calendar">Calendar</div>
+          {/* <div className="student-calendar">Calendar</div> */}
 
           <div className="student-calendar">
             <Calendar></Calendar>
@@ -92,8 +95,11 @@ const StudentDashboard = () => {
             <div className="student-no-request-message">
               {students.map((student, idx) => {
                 return (
-                  <div key={idx} onClick={() => redirectStudent(student)}>
-                    {student}
+                  <div
+                    key={idx}
+                    onClick={() => redirectStudent(student["username"])}
+                  >
+                    {student["username"]}
                   </div>
                 );
               })}
@@ -119,17 +125,37 @@ const StudentDashboard = () => {
             <div className="lower-box-container">
               <div className="tutor-search-scroll">
                 {students.map((student, idx) => {
-                  return (
-                    // <div key={idx} onClick={() => redirectStudent(student)}>
-                    //   {student}
-                    // </div>
-                    <div
-                      key={idx}
-                      className="tutor-search-individual-container"
-                    >
-                      {student}
-                    </div>
-                  );
+                  if (student["userType"] === "tutor") {
+                    return (
+                      // <div key={idx} onClick={() => redirectStudent(student)}>
+                      //   {student}
+                      // </div>
+
+                      <div
+                        key={idx}
+                        className="tutor-search-individual-container"
+                      >
+                        <div className="individual-profile-image-container">
+                          <img
+                            src={defaultImage}
+                            alt="default-image"
+                            className="individual-profile-image"
+                          />
+                        </div>
+                        <div className="individual-profile-info">
+                          {/* <div>{student["username"]}</div> */}
+                          <div>
+                            {student["givenName"] + " " + student["familyName"]}
+                          </div>
+                          <div>{student["email"]}</div>
+
+                          <div>{student["location"]}</div>
+                          <div>{student["timezone"]}</div>
+                          <div>{student["bio"]}</div>
+                        </div>
+                      </div>
+                    );
+                  }
                 })}
               </div>
             </div>

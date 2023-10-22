@@ -115,18 +115,45 @@
 
 .tutor-search-scroll {
   width: 100%;
-
   display: flex;
   align-items: center;
-  gap: 10px;
   /* border: 1px black solid; */
   flex-direction: column;
 }
 
 .tutor-search-individual-container {
   /* background-color: #4960a6; */
-  width: 90%;
-  height: 100px;
+  width: 93%;
+  height: 130px;
   border: 1px black solid;
-  border-radius: 5px;
+  border-radius: 10px;
+  margin: 7.1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.individual-profile-image-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  border: 1px black solid;
+  position: absolute;
+  left: 10px;
+}
+
+.individual-profile-image {
+  height: 100%;
+  width: 100%;
+}
+
+.individual-profile-info {
+  width: 270px;
+  height: 100px;
+  border-radius: 10px;
+  /* border: 1px black solid; */
+  position: absolute;
+  right: 10px;
+  font-size: 11px;
 }
