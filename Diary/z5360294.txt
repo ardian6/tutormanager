@@ -30,4 +30,4 @@ the backend without any errors. Our meetings throughout the week consisted of de
 Week 6
 We set up meetings during the week. At the start of the week, we set to clean up sprint 1 from any remaining issues. I started to create new pages for the dashboard, and profile view. 
 The dashboard would change depending on if the logged in user was an admin, student, or tutor. I had alot of discussions with Michael as to what we would both be doing so that we don't
-conflict in tasks. Overall, this week was also to discussing with others as to how to plan the weeks ahead of us. 
+conflict in tasks. Overall, this week was also to discussing with others as to how to plan the weeks ahead of us.
