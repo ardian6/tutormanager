@@ -35,3 +35,9 @@ Also, we had a lot of meeting through out the week to make sure everything was w
 Overall, the entire group this week completed everything related to the profile and authentication. This includes frontend, backend and database. 
 At the end of the week, we did the week 5 demo which went really well.
 Then after the demo we completed the retrospective. 
+
+Week 6
+This week the primary goal as a group was to make the functionality of the bookings (allowing students to book sessions with tutors).
+My job was to make sure to set up the database to ensure there is storage for all the bookings.
+Furthermore, I also created all the database functions and the backend functions that call the database functions related to booking.
+Finally, I created the routes for all the backend functions.
