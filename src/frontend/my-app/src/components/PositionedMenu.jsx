@@ -50,7 +50,7 @@ function PositionedMenu() {
   const profileBtn = () => {
     navigate("../profile");
     handleClose();
-  }
+  };
 
   return (
     <div>
