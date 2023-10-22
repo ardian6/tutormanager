@@ -50,10 +50,9 @@ def setupTables():
   cur.execute("""create table bookings (
 	bookingID   varchar(30),
   stuUser     varchar(30) references users(username),
-  tutUser     varchar(30) references users(username),
-  day         date,            
-  startTime   time,
-  endTime     time,
+  tutUser     varchar(30) references users(username),           
+  startTime   timestamp,
+  endTime     timestamp,
   approved    boolean,
 	primary key (bookingID)
   )""")
@@ -136,9 +135,9 @@ def inputData4():
 # Input dummy data for bookings table
 def inputData5():
   cur = db.cursor()
-  cur.execute("""insert into bookings values ('1', 'username2', 'username4', '2023-05-25', '13:00:00', '14:00:00', 'False')""")
-  cur.execute("""insert into bookings values ('2', 'username3', 'username4', '2023-06-15', '15:00:00', '17:00:00', 'True')""")
-  cur.execute("""insert into bookings values ('3', 'username5', 'username4', '2023-08-08', '20:00:00', '22:00:00', 'False')""")
+  cur.execute("""insert into bookings values ('1', 'username2', 'username4', '2023-05-25 13:00:00', '2023-05-25 14:00:00', 'False')""")
+  cur.execute("""insert into bookings values ('2', 'username3', 'username4', '2023-06-15 15:00:00', '2023-06-15 17:00:00', 'True')""")
+  cur.execute("""insert into bookings values ('3', 'username5', 'username4', '2023-08-08 20:00:00', '2023-08-08 22:00:00', 'False')""")
   cur.close()
   db.commit()
   return
@@ -193,8 +192,8 @@ if __name__ == '__main__':
         password="3900PenguinDBtest",
         port='5432')
 
-        # deleteTables()
-        # setupTables()
+        deleteTables()
+        setupTables()
         clearData()
         inputData1()
         inputData2()
