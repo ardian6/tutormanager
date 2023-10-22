@@ -131,7 +131,6 @@ const StudentDashboard = () => {
                       // <div key={idx} onClick={() => redirectStudent(student)}>
                       //   {student}
                       // </div>
-
                       <div
                         key={idx}
                         className="tutor-search-individual-container"
