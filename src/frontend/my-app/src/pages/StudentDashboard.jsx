@@ -119,7 +119,6 @@ const StudentDashboard = () => {
                 {/* <div className="sort-container">Sort</div> */}
               </Stack>
             </div>
-
             <div className="search-for-tutors-title">
               <div className="search-for-tutors-word">Search For Tutors</div>
             </div>
