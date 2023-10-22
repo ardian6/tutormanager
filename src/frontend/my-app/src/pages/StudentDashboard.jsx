@@ -11,12 +11,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import Calendar from "../components/Calendar";
+
 const StudentDashboard = () => {
   const { getters } = useContext(Context);
   const token = getters.token;
   const [students, setStudents] = React.useState([]);
   const getAllStudents = async () => {
-    console.log(token);
     const response = await fetch(
       "http://localhost:5005/profile/view-all-users",
       {
@@ -38,6 +39,27 @@ const StudentDashboard = () => {
   };
 
   const navigate = useNavigate();
+  const getBookings = async () => {
+    const response = await fetch(
+      "http://localhost:5005/bookings/view-my-bookings",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token,
+        }),
+      }
+    );
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      console.log(data);
+    }
+  };
+
   const redirectStudent = (id) => {
     const path = "/Profile/" + id;
     navigate(path);
@@ -45,6 +67,7 @@ const StudentDashboard = () => {
 
   React.useEffect(() => {
     getAllStudents();
+    getBookings();
   }, []);
 
   const [age, setAge] = React.useState("");
@@ -58,7 +81,13 @@ const StudentDashboard = () => {
       <div className="studentdashboard-container">
         <div className="studentdashboard-card">
           <div className="student-dashboard-title">Student Dashboard</div>
+
           <div className="student-calendar">Calendar</div>
+
+          <div className="student-calendar">
+            <Calendar></Calendar>
+          </div>
+
           <div className="student-request-column">
             <div className="student-no-request-message">
               {students.map((student, idx) => {
