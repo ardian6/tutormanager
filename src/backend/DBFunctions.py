@@ -327,7 +327,7 @@ def dbListAllBookings():
     listOfAllBookings = []
     db = connectDB()
     cur = db.cursor()
-    cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime from bookings b""")
+    cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime, b.approved, b.description from bookings b""")
     for t in cur.fetchall():
         print(t)
         newStorage = []
@@ -336,6 +336,8 @@ def dbListAllBookings():
         newStorage.append(t[2].lower())
         newStorage.append(t[3].strftime("%Y/%m/%d %H:%M:%S"))
         newStorage.append(t[4].strftime("%Y/%m/%d %H:%M:%S"))
+        newStorage.append(t[5])
+        newStorage.append(t[6])
         listOfAllBookings.append(newStorage)
     cur.close()
     db.commit()
@@ -352,7 +354,7 @@ def dbListMyBookings(token):
     for t in cur.fetchall():
         givenUser = t[0]
     # Find bookings
-    cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime, b.approved from bookings b where b.stuUser = %s or b.tutUser = %s""", [givenUser, givenUser])
+    cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime, b.approved, b.description from bookings b where b.stuUser = %s or b.tutUser = %s""", [givenUser, givenUser])
     for t in cur.fetchall():
         newStorage = []
         newStorage.append(t[0])
@@ -361,20 +363,21 @@ def dbListMyBookings(token):
         newStorage.append(t[3].strftime("%Y-%m-%d %H:%M:%S"))
         newStorage.append(t[4].strftime("%Y-%m-%d %H:%M:%S"))
         newStorage.append(t[5])
+        newStorage.append(t[6])
         listOfAllBookings.append(newStorage)
     cur.close()
     db.commit()
     return listOfAllBookings
 
 # This function makes a booking and stores into database
-def dbMakeBooking(studentUser, tutorUser, startTime, endTime):
+def dbMakeBooking(studentUser, tutorUser, startTime, endTime, description):
     db = connectDB()
     cur = db.cursor()
     # Insert into database
     bookingId = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
     sTime = datetime.datetime.strptime(startTime, '%Y-%m-%d %H:%M:%S')
     dTime = datetime.datetime.strptime(endTime, '%Y-%m-%d %H:%M:%S')
-    cur.execute("""insert into bookings values (%s, %s, %s, %s, %s)""", [bookingId, studentUser, tutorUser, sTime, dTime])
+    cur.execute("""insert into bookings values (%s, %s, %s, %s, %s, %s, %s)""", [bookingId, studentUser, tutorUser, sTime, dTime, False, description])
     cur.close()
     db.commit()
     return
@@ -403,4 +406,4 @@ def dbCheckDuplicateBooking(studentUser, tutorUser):
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbAdminDelete('username3'))
+    print(dbListMyBookings('2'))

@@ -24,7 +24,7 @@ def listMyBookings(session_token):
     "bookingsList": listOfAllBookings
   }
 
-def makeBooking(session_token, sUser, tUser, sTime, eTime):
+def makeBooking(session_token, sUser, tUser, sTime, eTime, description):
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
   
@@ -32,7 +32,7 @@ def makeBooking(session_token, sUser, tUser, sTime, eTime):
   if dbCheckDuplicateBooking(sUser, tUser):
     return {"error": "Booking already exists."}
   
-  dbMakeBooking(sUser, tUser, sTime, eTime)
+  dbMakeBooking(sUser, tUser, sTime, eTime, description)
 
   return {
     "token": session_token

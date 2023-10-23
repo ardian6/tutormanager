@@ -17,3 +17,6 @@ Week 5:
 The group had another meeting on Monday where we acknowledged that some parts of Sprint 1 were better suited for Sprint 2 and decided to move them. We were unable to establish a line of communication between certain members of the group, and hope to improve our communication in Sprint 2. I was able to create both the server routes and backend functions for the user's profile. The main issue I faced was communicating with Mathew, who was in charge of the database, to access certain parts of the database in the backend. We were able to have a 1-on-1 meeting to fix these issues.
 
 Week 6:
+I attended our weekly meeting where we talked about completing Sprint 2 and assigned tasks to everyone. Mathew and I decided it would be faster if he completed the backend and database portion for the booking functionality, where Hayka and I will complete the tutor filtering in Week 7.
+
+Week 7:
