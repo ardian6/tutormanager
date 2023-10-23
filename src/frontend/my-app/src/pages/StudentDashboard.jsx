@@ -83,13 +83,10 @@ const StudentDashboard = () => {
       <div className="studentdashboard-container">
         <div className="studentdashboard-card">
           <div className="student-dashboard-title">Student Dashboard</div>
-
           {/* <div className="student-calendar">Calendar</div> */}
-
           <div className="student-calendar">
             <Calendar token={token}></Calendar>
           </div>
-
           <div className="student-request-column">
             <div className="student-no-request-message">
               {students.map((student, idx) => {
