@@ -194,7 +194,7 @@ def view_my_bookings():
 def view_create_bookings():
     data = request.get_json()
     # studentUser and tutorUser are just the usernames while startTime and endTime is a string in this format '%Y-%m-%d %H:%M:%S'
-    return dumps(makeBooking(data['token'], data['studentUser'], data['tutorUser'], data['startTime'], data['endTime']))
+    return dumps(makeBooking(data['token'], data['studentUser'], data['tutorUser'], data['startTime'], data['endTime'], data['description']))
 
 ## User booking delete booking Implementation to Server ##
 
