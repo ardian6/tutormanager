@@ -13,6 +13,7 @@ from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
 from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking
+from filterT import filterTutors
 
 def quit_gracefully(*args):
     '''For coverage'''
@@ -202,6 +203,17 @@ def view_create_bookings():
 def view_delete_bookings():
     data = request.get_json()
     return dumps(deleteBooking(data['token'], data['studentUser'], data['tutorUser']))
+
+""" 
+ROUTES FOR Filters FUNCTIONS
+
+"""
+## User Filters Tutors Implementation to Server ##
+
+@APP.route("/filter/filter-tutor", methods = ['POST'])
+def view_all_bookings():
+    data = request.get_json()
+    return dumps(filterTutors(data['token'], data['course'], data['location'], data['timezone'], data['rating']))
 
 """ 
 END OF ROUTES

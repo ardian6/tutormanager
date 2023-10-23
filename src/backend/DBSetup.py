@@ -129,6 +129,7 @@ def inputData4():
   cur.execute("""insert into userCourse values ('maths', 'username3')""")
   cur.execute("""insert into userCourse values ('english', 'username5')""")
   cur.execute("""insert into userCourse values ('maths', 'username2')""")
+  cur.execute("""insert into userCourse values ('maths', 'username4')""")
   cur.close()
   db.commit()
   return
@@ -193,14 +194,14 @@ if __name__ == '__main__':
         password="3900PenguinDBtest",
         port='5432')
 
-        deleteTables()
-        setupTables()
-        clearData()
-        inputData1()
-        inputData2()
-        inputData3()
-        inputData4()
-        inputData5()
+        # deleteTables()
+        # setupTables()
+        # clearData()
+        # inputData1()
+        # inputData2()
+        # inputData3()
+        # inputData4()
+        # inputData5()
         # test()
         printData()
 

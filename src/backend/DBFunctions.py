@@ -310,6 +310,19 @@ def dbViewMyCourses(token):
     db.commit()
     return myCourseList
 
+# This function retrieves the courses the user is doing through username
+def dbViewUsernameCourses(username):
+    myCourseList = []
+    db = connectDB()
+    cur = db.cursor()
+    # Grab courses
+    cur.execute("""select uc.course from userCourse uc where uc.username = %s""", [username])
+    for t in cur.fetchall():
+        myCourseList.append(t[0].lower())
+    cur.close()
+    db.commit()
+    return myCourseList
+
 # This function returns all usernames
 def dbAllUsernames():
     listOfAllUsers = []
