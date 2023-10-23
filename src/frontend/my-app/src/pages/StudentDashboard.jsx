@@ -18,19 +18,20 @@ const StudentDashboard = () => {
   const { getters } = useContext(Context);
   const token = getters.token;
   const [students, setStudents] = React.useState([]);
-  const getAllStudents = async () => {
-    const response = await fetch(
-      "http://localhost:5005/profile/view-all-users-data",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          token: token,
-        }),
-      }
-    );
+  const getAllStudents = async (course, location, timezone, rating) => {
+    const response = await fetch("http://localhost:5005/filter/filter-tutor", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+        course: course,
+        location: location,
+        timezone: timezone,
+        rating: rating,
+      }),
+    });
     const data = await response.json();
     if (data.error) {
       alert(data.error);
@@ -69,7 +70,7 @@ const StudentDashboard = () => {
   };
 
   React.useEffect(() => {
-    getAllStudents();
+    getAllStudents("", "", "", 0);
   }, []);
 
   const [age, setAge] = React.useState("");
@@ -120,74 +121,75 @@ const StudentDashboard = () => {
             <div className="lower-box-container">
               <div className="tutor-search-scroll">
                 {students.map((student, idx) => {
-                  if (student["userType"] === "tutor") {
-                    return (
-                      // <div key={idx} onClick={() => redirectStudent(student)}>
-                      //   {student}
-                      // </div>
-                      <div
-                        key={idx}
-                        className="tutor-search-individual-container"
-                      >
-                        <div className="individual-profile-image-container">
-                          <img
-                            src={defaultImage}
-                            alt="default-image"
-                            className="individual-profile-image"
-                          />
+                  return (
+                    // <div key={idx} onClick={() => redirectStudent(student)}>
+                    //   {student}
+                    // </div>
+                    <div
+                      key={idx}
+                      className="tutor-search-individual-container"
+                    >
+                      <div className="individual-profile-image-container">
+                        <img
+                          src={defaultImage}
+                          alt="default-image"
+                          className="individual-profile-image"
+                        />
+                      </div>
+                      <div className="individual-profile-info">
+                        {/* <div>{student["username"]}</div> */}
+                        <div>
+                          <b>Name: </b>
+                          {student["givenName"] + " " + student["familyName"]}
                         </div>
-                        <div className="individual-profile-info">
-                          {/* <div>{student["username"]}</div> */}
-                          <div>
-                            <b>Name: </b>
-                            {student["givenName"] + " " + student["familyName"]}
-                          </div>
-                          <div>
-                            <b>Email: </b>
-                            {student["email"]}
-                          </div>
+                        <div>
+                          <b>Courses: </b>
+                          {student["courseList"].map((course, idx) => {
+                            return <span key={idx}>{course} </span>;
+                          })}
+                        </div>
 
-                          <div>
-                            <b>Location: </b>
-                            {student["location"]}
-                          </div>
-                          <div>
-                            <b>Timezone: </b>
-                            {student["timezone"]}
-                          </div>
-                          <div>
-                            <b>Reviews: </b>
-                            {/* {student["bio"]} */}
-                          </div>
-                          <div className="individual-profile-buttons">
-                            <Stack spacing={1.5} direction="row" variant="text">
-                              <Button
-                                className="individual-profile-button"
-                                variant="contained"
-                                onClick={() =>
-                                  redirectStudent(student["username"])
-                                }
-                              >
-                                Profile
-                              </Button>
-                              <Button
-                                className="individual-profile-button"
-                                variant="outlined"
-                              >
-                                Message
-                              </Button>
-                              <Button
-                                className="individual-profile-button"
-                                variant="outlined"
-                              >
-                                Book
-                              </Button>
-                            </Stack>
-                          </div>
+                        <div>
+                          <b>Location: </b>
+                          {student["location"]}
+                        </div>
+                        <div>
+                          <b>Timezone: </b>
+                          {student["timezone"]}
+                        </div>
+
+                        <div>
+                          <b>Reviews: </b>
+                          {/* {student["bio"]} */}
+                        </div>
+                        <div className="individual-profile-buttons">
+                          <Stack spacing={1.5} direction="row" variant="text">
+                            <Button
+                              className="individual-profile-button"
+                              variant="contained"
+                              onClick={() =>
+                                redirectStudent(student["username"])
+                              }
+                            >
+                              Profile
+                            </Button>
+                            <Button
+                              className="individual-profile-button"
+                              variant="outlined"
+                            >
+                              Message
+                            </Button>
+                            <Button
+                              className="individual-profile-button"
+                              variant="outlined"
+                            >
+                              Book
+                            </Button>
+                          </Stack>
                         </div>
                       </div>
-                    );
-                  }
+                    </div>
+                  );
                 })}
               </div>
             </div>
