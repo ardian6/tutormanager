@@ -2,11 +2,18 @@ import React from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
+import { makeStyles } from '@mui/styles';
 
 const localizer = momentLocalizer(moment);
 
+const useStyles = makeStyles(() => ({
+  event: {
+  },
+}));
+
 export default function BasicDateCalendar({token}) {
   const [bookings, setBookings] = React.useState("");
+  
   const getBookings = async () => {
     const response = await fetch(
       "http://localhost:5005/bookings/view-my-bookings",
@@ -37,6 +44,15 @@ export default function BasicDateCalendar({token}) {
   React.useEffect(() => {
     getBookings();
   }, []);
+
+  const classes = useStyles();
+
+  const eventStyleGetter = (event, start, end, isSelected) => {
+    const style = {
+      className: classes.event,
+    };
+    return { style };
+  };
   return (
     <div>
       <Calendar
@@ -45,7 +61,7 @@ export default function BasicDateCalendar({token}) {
         startAccessor="start"
         endAccessor="end"
         style={{ height: 500 }}
-        // eventPropGetter={eventStyleGetter}
+        eventPropGetter={eventStyleGetter}
       />
     </div>
   );

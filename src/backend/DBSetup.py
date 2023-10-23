@@ -54,6 +54,7 @@ def setupTables():
   startTime   timestamp,
   endTime     timestamp,
   approved    boolean,
+  description  varchar(300),
 	primary key (bookingID)
   )""")
 
@@ -128,6 +129,7 @@ def inputData4():
   cur.execute("""insert into userCourse values ('maths', 'username3')""")
   cur.execute("""insert into userCourse values ('english', 'username5')""")
   cur.execute("""insert into userCourse values ('maths', 'username2')""")
+  cur.execute("""insert into userCourse values ('maths', 'username4')""")
   cur.close()
   db.commit()
   return
@@ -135,9 +137,9 @@ def inputData4():
 # Input dummy data for bookings table
 def inputData5():
   cur = db.cursor()
-  cur.execute("""insert into bookings values ('1', 'username2', 'username4', '2023-05-25 13:00:00', '2023-05-25 14:00:00', 'False')""")
-  cur.execute("""insert into bookings values ('2', 'username3', 'username4', '2023-06-15 15:00:00', '2023-06-15 17:00:00', 'True')""")
-  cur.execute("""insert into bookings values ('3', 'username5', 'username4', '2023-08-08 20:00:00', '2023-08-08 22:00:00', 'False')""")
+  cur.execute("""insert into bookings values ('1', 'username2', 'username4', '2023-05-25 13:00:00', '2023-05-25 14:00:00', 'False', 'Maths')""")
+  cur.execute("""insert into bookings values ('2', 'username3', 'username4', '2023-06-15 15:00:00', '2023-06-15 17:00:00', 'True', 'Need help in algebra')""")
+  cur.execute("""insert into bookings values ('3', 'username5', 'username4', '2023-08-08 20:00:00', '2023-08-08 22:00:00', 'False', 'Grammar')""")
   cur.close()
   db.commit()
   return
@@ -192,14 +194,14 @@ if __name__ == '__main__':
         password="3900PenguinDBtest",
         port='5432')
 
-        deleteTables()
-        setupTables()
-        clearData()
-        inputData1()
-        inputData2()
-        inputData3()
-        inputData4()
-        inputData5()
+        # deleteTables()
+        # setupTables()
+        # clearData()
+        # inputData1()
+        # inputData2()
+        # inputData3()
+        # inputData4()
+        # inputData5()
         # test()
         printData()
 

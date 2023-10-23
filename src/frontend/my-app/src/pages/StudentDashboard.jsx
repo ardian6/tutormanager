@@ -41,8 +41,6 @@ const StudentDashboard = () => {
     }
   };
 
-  //   const navigate = useNavigate()
-
   const navigate = useNavigate();
   const getBookings = async () => {
     const response = await fetch(

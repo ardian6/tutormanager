@@ -3,6 +3,7 @@ import "./TutorDashboard.css";
 import NavBar from "../components/NavBar";
 import { Context, useContext } from "../Context";
 import { useNavigate } from "react-router-dom";
+import Calendar from "../components/Calendar";
 
 const TutorDashboard = () => {
   const { getters } = useContext(Context);
@@ -46,7 +47,7 @@ const TutorDashboard = () => {
       <div className="tutordashboard-container">
         <div className="tutordashboard-card">
           <div className="tutor-dashboard-title">Tutor Dashboard</div>
-          <div className="tutor-calendar">Calendar Tutor</div>
+          <div className="tutor-calendar"><Calendar token={token}></Calendar></div>
           <div className="tutor-request-column">
             <div className="tutor-no-request-message">
               {students.map((student, idx) => {
