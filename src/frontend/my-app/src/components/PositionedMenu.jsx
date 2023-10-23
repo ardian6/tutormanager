@@ -16,7 +16,6 @@ function PositionedMenu() {
 
   let navigate = useNavigate();
   const handleClose = () => {
-    // navigate("../profile");
     setAnchorEl(null);
   };
 
@@ -43,6 +42,7 @@ function PositionedMenu() {
       setToken("");
       setUsernameGlobal("");
       setUserTypeGlobal("");
+      navigate("/");
     }
     handleClose();
   };
