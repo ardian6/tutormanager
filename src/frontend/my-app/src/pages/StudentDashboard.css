@@ -38,8 +38,9 @@
 }
 
 .student-request-column {
+  font-size: 13px;
   background-color: white;
-  width: 320px;
+  width: 450px;
   height: 600px;
   margin-top: auto;
   left: 50px;
@@ -164,4 +165,165 @@
 }
 .individual-profile-button {
   font-size: 10px !important;
+}
+
+.search-tutor-loading {
+  position: absolute;
+  margin-top: 230px;
+}
+
+.student-request-lower-container {
+  width: 100%;
+  height: 560px;
+  /* background-color: aqua; */
+  margin-top: 40px;
+  overflow-y: scroll;
+}
+
+.student-request-lower-scroll {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* border: 1px black solid; */
+  flex-direction: column;
+}
+
+.student-request-info-bar {
+  width: 430px;
+  height: 30px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-self: space-between;
+  margin-top: 5px;
+  /* gap: 8px; */
+}
+
+.student-request-info-bar > * {
+  /* border: 1px solid black; */
+  padding: 3px;
+}
+
+.tutor-title {
+  text-align: center;
+  width: 180px;
+  /* background-color: blue; */
+  border-right: 1px solid black;
+  line-height: 20px;
+}
+
+.subject-title {
+  text-align: center;
+  width: 140px;
+  /* background-color: red; */
+  border-right: 1px solid black;
+  line-height: 20px;
+}
+
+.time-title {
+  text-align: center;
+  width: 180px;
+  /* background-color: orange; */
+  border-right: 1px solid black;
+  line-height: 20px;
+}
+
+.status-title {
+  text-align: center;
+  width: 100px;
+  /* background-color: pink; */
+  border-right: 1px solid black;
+  line-height: 20px;
+}
+
+.change-title {
+  text-align: center;
+  width: 120px;
+  /* background-color: grey; */
+}
+
+.student-individual-requests {
+  width: 430px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 11px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.student-request-lower-scroll .student-individual-requests {
+  margin-top: 10px;
+}
+
+.individual-tutor-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 180px;
+  height: 30px;
+
+  /* background-color: blue; */
+  border-right: 1px solid black;
+
+  overflow: hidden;
+}
+
+.individual-subject-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 140px;
+  height: 30px;
+  padding-left: 3px;
+  border-right: 1px solid black;
+
+  overflow: auto;
+}
+
+.individual-time-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  width: 180px;
+  height: 30px;
+  /* background-color: orange; */
+  border-right: 1px solid black;
+}
+
+.individual-status-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  height: 30px;
+  /* background-color: pink; */
+  border-radius: 4px;
+  border-right: 2.5px solid white;
+}
+
+.individual-change-title {
+  text-align: center;
+  width: 120px;
+  /* background-color: grey; */
+}
+
+.accepted-div {
+  color: green;
+}
+
+.pending-div {
+  color: orange;
 }
