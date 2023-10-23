@@ -38,7 +38,7 @@ APP.register_error_handler(Exception, defaultHandler)
 
 #### NO NEED TO MODIFY ABOVE THIS POINT, EXCEPT IMPORTS
 
-""" 
+"""
 ROUTES FOR AUTH FUNCTIONS
 
 """
@@ -68,7 +68,7 @@ def logout_v1():
     logout(data['token'])
     return dumps({})
 
-""" 
+"""
 ROUTES FOR PROFILE FUNCTIONS
 
 """
@@ -171,7 +171,7 @@ def view_all_UsersData():
     data = request.get_json()
     return dumps(allUsersData(data['token']))
 
-""" 
+"""
 ROUTES FOR Booking FUNCTIONS
 
 """
@@ -204,18 +204,18 @@ def view_delete_bookings():
     data = request.get_json()
     return dumps(deleteBooking(data['token'], data['studentUser'], data['tutorUser']))
 
-""" 
+"""
 ROUTES FOR Filters FUNCTIONS
 
 """
 ## User Filters Tutors Implementation to Server ##
 
 @APP.route("/filter/filter-tutor", methods = ['POST'])
-def view_all_bookings():
+def view_all_filtered_bookings():
     data = request.get_json()
     return dumps(filterTutors(data['token'], data['course'], data['location'], data['timezone'], data['rating']))
 
-""" 
+"""
 END OF ROUTES
 
 """
