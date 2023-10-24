@@ -6,11 +6,6 @@ import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import TuneIcon from "@mui/icons-material/Tune";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormHelperText from "@mui/material/FormHelperText";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import defaultImage from "./DefaultProfile.png";
 import Calendar from "../components/Calendar";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -125,19 +120,6 @@ const StudentDashboard = () => {
           </div>
 
           <div className="student-request-column">
-            {/* <div className="student-no-request-message">
-              {students.map((student, idx) => {
-                return (
-                  <div
-                    key={idx}
-                    onClick={() => redirectStudent(student["username"])}
-                  >
-                    {student["username"]}
-                  </div>
-                );
-              })}
-            </div> */}
-
             <div className="student-request-lower-container">
               <div className="student-request-lower-scroll">
                 {mybookings.length === 0 && (
@@ -159,7 +141,15 @@ const StudentDashboard = () => {
                       // onClick={() => redirectStudent(student["username"])}
                       className="student-individual-requests"
                     >
-                      <div className="individual-tutor-title">{booking[2]}</div>
+                      <div className="individual-tutor-title">
+                        <Button
+                          className="individual-profile-button"
+                          variant="outlined"
+                          onClick={() => redirectStudent(booking[2])}
+                        >
+                          {booking[2]}
+                        </Button>
+                      </div>
                       <div className="individual-subject-title">
                         {booking[6]}
                       </div>
@@ -180,27 +170,6 @@ const StudentDashboard = () => {
                       </div>
                       <div className="individual-change-title">
                         <Stack spacing={1} direction="row" variant="text">
-                          {/* {booking[5] ? (
-                            <>
-                              <Button
-                                className="individual-profile-button"
-                                variant="contained"
-                                // onClick={() => redirectStudent(student["username"])}
-                              >
-                                Change
-                              </Button>
-                            </>
-                          ) : (
-                            <>
-                              <Button
-                                disabled
-                                variant="contained"
-                                className="individual-profile-button"
-                              >
-                                Change
-                              </Button>
-                            </>
-                          )} */}
                           <Button
                             className="individual-profile-button"
                             variant="contained"
