@@ -9,6 +9,7 @@ import TuneIcon from "@mui/icons-material/Tune";
 import defaultImage from "./DefaultProfile.png";
 import Calendar from "../components/Calendar";
 import CircularProgress from "@mui/material/CircularProgress";
+import BookModal from "../components/BookModal"
 
 const StudentDashboard = () => {
   const { getters } = useContext(Context);
@@ -34,7 +35,6 @@ const StudentDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      // console.log(data.listofalldata);
       setStudents(data.listofalldata);
     }
   };
@@ -57,8 +57,6 @@ const StudentDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      // console.log(data);
-      // console.log(data.bookingsList);
       setMybookings(data.bookingsList);
     }
   };
@@ -268,12 +266,7 @@ const StudentDashboard = () => {
                             >
                               Message
                             </Button>
-                            <Button
-                              className="individual-profile-button"
-                              variant="outlined"
-                            >
-                              Book
-                            </Button>
+                            <BookModal stuToken={token} tutToken={student['token']} tutUser={student["username"]}></BookModal>
                           </Stack>
                         </div>
                       </div>
