@@ -18,7 +18,7 @@ const Payment = () => {
         <h2>Enter your payment details</h2>
         <Box sx={{ display: "flex", flexWrap: "wrap"}} className="inputBox">
             <div>
-                <InputLabel htmlFor="Booking description">
+                <InputLabel>
                     Cardholder Name
                 </InputLabel>
                 <Input
@@ -29,7 +29,7 @@ const Payment = () => {
         </Box>
         <Box sx={{ display: "flex", flexWrap: "wrap" }} className="inputBox">
             <div sx={{padding: '50px'}}>
-                <InputLabel htmlFor="Booking description">
+                <InputLabel>
                     Card Number
                 </InputLabel>
                 <Input
@@ -40,7 +40,7 @@ const Payment = () => {
         </Box>
         <Box className="inputBox2">
             <div>
-                <InputLabel htmlFor="Booking description">
+                <InputLabel>
                     Expiry Date
                 </InputLabel>
                 <Input
@@ -49,7 +49,7 @@ const Payment = () => {
                 />
             </div>
             <div>
-                <InputLabel htmlFor="Booking description">
+                <InputLabel>
                     CVV
                 </InputLabel>
                 <Input

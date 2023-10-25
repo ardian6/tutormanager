@@ -5,11 +5,11 @@ import { Context, useContext } from "../Context";
 import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import TuneIcon from "@mui/icons-material/Tune";
 import defaultImage from "./DefaultProfile.png";
 import Calendar from "../components/Calendar";
 import CircularProgress from "@mui/material/CircularProgress";
 import BookModal from "../components/BookModal"
+import FilterModal from "../components/FilterModal"
 
 const StudentDashboard = () => {
   const { getters } = useContext(Context);
@@ -190,10 +190,7 @@ const StudentDashboard = () => {
           <div className="search-container">
             <div className="filters-container">
               <Stack spacing={2} direction="row">
-                <Button variant="outlined">
-                  <TuneIcon className="filter-icon" />
-                  Filters
-                </Button>
+                <FilterModal token={token} setStudents={setStudents}></FilterModal>
                 {/* <div className="sort-container">Sort</div> */}
               </Stack>
             </div>
