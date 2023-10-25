@@ -10,6 +10,7 @@ import Calendar from "../components/Calendar";
 import CircularProgress from "@mui/material/CircularProgress";
 import BookModal from "../components/BookModal"
 import FilterModal from "../components/FilterModal"
+import ChangeBookModal from "../components/ChangeBookModal";
 
 const StudentDashboard = () => {
   const { getters } = useContext(Context);
@@ -168,13 +169,7 @@ const StudentDashboard = () => {
                       </div>
                       <div className="individual-change-title">
                         <Stack spacing={1} direction="row" variant="text">
-                          <Button
-                            className="individual-profile-button"
-                            variant="contained"
-                            // onClick={() => redirectStudent(student["username"])}
-                          >
-                            Change
-                          </Button>
+                          <ChangeBookModal info={booking} token={token}></ChangeBookModal>
                         </Stack>
                       </div>
                     </div>

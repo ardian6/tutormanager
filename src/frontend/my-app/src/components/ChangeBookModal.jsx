@@ -3,14 +3,13 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import Input from "@mui/material/Input";
-import InputLabel from "@mui/material/InputLabel";
-import { useNavigate } from "react-router-dom";
-import { Context, useContext } from "../Context";
+import dayjs from 'dayjs';
 
 const style = {
   position: 'absolute',
@@ -24,28 +23,24 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({stuToken, tutUser}) {
+export default function ChangeBookModal({info, token}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [startTime, setStartTime] = React.useState('');
-  const [endTime, setEndTime] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const navigate = useNavigate();
-  const { getters } = useContext(Context);
-  const studUser = getters.usernameGlobal;
+  const [startTime, setStartTime] = React.useState(info[3]);
+  const [endTime, setEndTime] = React.useState(info[4]);
+  const [description, setDescription] = React.useState(info[6]);
 
-  const book = async () => {
-
-    const response = await fetch("http://localhost:5005/booking/make-booking", {
+  const changeBooking = async () => {
+    const response = await fetch("http://localhost:5005/booking/change-booking", {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          token: stuToken,
-          studentUser: studUser,
-          tutorUser: tutUser,
+          token: token,
+          studentUser: info[1],
+          tutorUser: info[2],
           startTime: startTime,
           endTime: endTime,
           description: description,
@@ -55,28 +50,29 @@ export default function BasicModal({stuToken, tutUser}) {
     if (data.error) {
         alert(data.error);
     } else {
-      navigate('/Payment/'+studUser);
+      handleClose();
     }
   }
 
   return (
     <div>
-      <Button className="individual-profile-button" variant="outlined" onClick={handleOpen}>Book</Button>
+      <Button className="individual-profile-button" variant="contained" onClick={handleOpen}>Change</Button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="make-booking-modal"
-        aria-describedby="student-request-tutor"
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <Typography id="booking-title" variant="h6" component="h2">
-            Request appointment with {tutUser}
-            </Typography>
-            <InputLabel htmlFor="Booking description">
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Change Booking with {info[1]}
+          </Typography>
+          <InputLabel htmlFor="Booking description">
                 Description
             </InputLabel>
             <Input
                 id="standard-adornment-Last-Name"
+                defaultValue={description}
                 onChange={(event) => {setDescription(event.target.value)
                 }}
             />
@@ -84,6 +80,7 @@ export default function BasicModal({stuToken, tutUser}) {
                 <DemoContainer components={["DateTimePicker"]}>
                     <DateTimePicker
                     label="Starting Time"
+                    defaultValue={dayjs(startTime)}
                     onChange={(event, date) => {
                         const temp = 
                             event["$y"] +
@@ -105,6 +102,7 @@ export default function BasicModal({stuToken, tutUser}) {
                 <DemoContainer components={["DateTimePicker"]}>
                     <DateTimePicker
                     label="End Time"
+                    defaultValue={dayjs(endTime)}
                     onChange={(event, date) => {
                         const temp = 
                             event["$y"] +
@@ -122,8 +120,8 @@ export default function BasicModal({stuToken, tutUser}) {
                     />
                 </DemoContainer>
             </LocalizationProvider>
-            <Button className="individual-profile-button" variant="outlined" onClick={book}>
-                Request appointment
+            <Button className="individual-profile-button" variant="outlined" onClick={changeBooking}>
+                Change appointment
             </Button>
         </Box>
       </Modal>
