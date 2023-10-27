@@ -69,7 +69,9 @@ def acceptBooking(session_token, bookingID):
 def changeBooking(session_token, sUser, tUser, sTime, eTime, des):
   deleteBooking(session_token, sUser, tUser)
   makeBooking(session_token, sUser, tUser, sTime, eTime, des)
-  return
+  return {
+    "token": session_token
+  }
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
