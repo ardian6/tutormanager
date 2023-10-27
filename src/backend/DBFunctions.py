@@ -210,20 +210,31 @@ def dbDeleteCourse(token, courseToBeDeleted):
     db.commit()
     return deletedCourse # Returns True if successful or false if failed (Failed if course cannot be deleted because they didnt have it in the first place)
 
-# This function goes into the database and removes all data related to the user
-def dbDeleteAccount(token, password):
+def dbDeleteAccount(token: str, password: str):
+    """Removes all data related to the given user information.
+    Paramaters:
+        token: String
+        password: String
+    Returns:
+        True for profile successfully deleted
+    Returns:
+        False for profile being unsuccessful in deletion.
+    """
     db = connectDB()
     cur = db.cursor()
+    
     # Check if the user assoicated with the sess token and the password match to the ones in the database
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
     currUsername = None
     for t in cur.fetchall():
         currUsername = t[0]
+
     # Checks if the password is correct
     cur.execute("""select u.username, u.password from Users u where u.username = %s and u.password = %s""", [currUsername, password])
     correctInfo = False
     for t in cur.fetchall():
         correctInfo = True
+
     # Warning to my future self, must delete data from all other tables first (including future ones) before deleting data from the user table
     # This warning applies to the dbAdminDelete function as well
     if correctInfo == True:
@@ -231,12 +242,13 @@ def dbDeleteAccount(token, password):
         cur.execute("""delete from userCourse c where c.username = %s""", [currUsername])
         cur.execute("""delete from bookings b where b.stuUser = %s or b.tutUser = %s""", [currUsername, currUsername])
         cur.execute("""delete from Users u where u.username = %s""", [currUsername])
+
     cur.close()
     db.commit()
-    return correctInfo # Returns true for profile successfully deleted Returns False for profile being unsuccessful in deletion.
+    return correctInfo
 
 # This function goes into the database and retrieves the information for the profile of a specific user
-def dbViewProfile(targetProfile):
+def dbViewProfile(targetProfile: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute(""" select u.username, u.email, u.givenName, u.familyName, u.userType, u.bio, u.location, u.phone, u.timezone
@@ -258,7 +270,7 @@ def dbViewProfile(targetProfile):
     }
 
 # This function goes into the database and removes all data related to the targeted user
-def dbAdminDelete(targetProfile):
+def dbAdminDelete(targetProfile: str):
     # Same warning as the dbDeleteAccount function
     # Delete the targeted profile
     db = connectDB()
@@ -272,7 +284,7 @@ def dbAdminDelete(targetProfile):
     return
 
 # This function retrieves all the courses stored in the database
-def dbCourseList():
+def dbCourseList() -> list:
     allCourseList = []
     db = connectDB()
     cur = db.cursor()
@@ -284,7 +296,7 @@ def dbCourseList():
     return allCourseList
 
 # This function adds a new course to the list of all courses in the database
-def dbAddCourseToList(courseName):
+def dbAddCourseToList(courseName: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""insert into Courses values (%s)""", [courseName])
@@ -293,7 +305,7 @@ def dbAddCourseToList(courseName):
     return 
 
 # This function retrieves the courses the user is doing
-def dbViewMyCourses(token):
+def dbViewMyCourses(token: str) -> list:
     myCourseList = []
     db = connectDB()
     cur = db.cursor()
@@ -311,7 +323,7 @@ def dbViewMyCourses(token):
     return myCourseList
 
 # This function retrieves the courses the user is doing through username
-def dbViewUsernameCourses(username):
+def dbViewUsernameCourses(username: str) -> list:
     myCourseList = []
     db = connectDB()
     cur = db.cursor()
@@ -324,7 +336,7 @@ def dbViewUsernameCourses(username):
     return myCourseList
 
 # This function returns all usernames
-def dbAllUsernames():
+def dbAllUsernames() -> list:
     listOfAllUsers = []
     db = connectDB()
     cur = db.cursor()
@@ -336,7 +348,7 @@ def dbAllUsernames():
     return listOfAllUsers
 
 # This function returns all bookings from database
-def dbListAllBookings():
+def dbListAllBookings() -> list:
     listOfAllBookings = []
     db = connectDB()
     cur = db.cursor()
@@ -357,7 +369,7 @@ def dbListAllBookings():
     return listOfAllBookings
 
 # This function returns all my bookings from database
-def dbListMyBookings(token):
+def dbListMyBookings(token: str) -> list:
     listOfAllBookings = []
     db = connectDB()
     cur = db.cursor()
@@ -383,7 +395,7 @@ def dbListMyBookings(token):
     return listOfAllBookings
 
 # This function makes a booking and stores into database
-def dbMakeBooking(studentUser, tutorUser, startTime, endTime, description):
+def dbMakeBooking(studentUser: str, tutorUser: str, startTime: str, endTime: str, description: str):
     db = connectDB()
     cur = db.cursor()
     # Insert into database
@@ -396,7 +408,7 @@ def dbMakeBooking(studentUser, tutorUser, startTime, endTime, description):
     return
 
 # This function deletes a booking and removes it from database
-def dbDeleteBooking(studentUser, tutorUser):
+def dbDeleteBooking(studentUser: str, tutorUser: str):
     db = connectDB()
     cur = db.cursor()
     # Delete from database
@@ -406,7 +418,7 @@ def dbDeleteBooking(studentUser, tutorUser):
     return
 
 # This function checks if the booking exists.
-def dbCheckDuplicateBooking(studentUser, tutorUser):
+def dbCheckDuplicateBooking(studentUser: str, tutorUser: str) -> bool:
     existingBooking = False
     db = connectDB()
     cur = db.cursor()
@@ -415,10 +427,10 @@ def dbCheckDuplicateBooking(studentUser, tutorUser):
         existingBooking = True
     cur.close()
     db.commit()
-    return existingBooking # Returns false if the booking dosent exist, otherwise true
+    return existingBooking
 
 # This functions goes into a database and changes a booking accepted value to true
-def dbAcceptBooking(bID):
+def dbAcceptBooking(bID: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""update Bookings set approved = %s where bookingID = %s""", [True, bID])
