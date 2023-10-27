@@ -12,7 +12,7 @@ from flask_cors import CORS
 from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
 from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
-from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking
+from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
 from filterT import filterTutors
 
 def quit_gracefully(*args):
@@ -210,6 +210,13 @@ def delete_bookings():
 def accept_bookings():
     data = request.get_json()
     return dumps(acceptBooking(data['token'], data['bookingID']))
+
+## User booking change booking Implementation to Server ##
+
+@APP.route("/booking/change-booking", methods = ['PUT'])
+def change_bookings():
+    data = request.get_json()
+    return dumps(changeBooking(data['token'], data['studentUser'], data['tutorUser'], data['startTime'], data['endTime'], data['description']))
 
 """
 ROUTES FOR Filters FUNCTIONS
