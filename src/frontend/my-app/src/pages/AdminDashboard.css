@@ -30,3 +30,13 @@
   top: 30px;
   left: 30px;
 }
+
+.flex-box-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.all-tutors-container {
+  width: 400px;
+}
