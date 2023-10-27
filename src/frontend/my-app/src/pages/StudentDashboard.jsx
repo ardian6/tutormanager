@@ -5,10 +5,12 @@ import { Context, useContext } from "../Context";
 import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import TuneIcon from "@mui/icons-material/Tune";
 import defaultImage from "./DefaultProfile.png";
 import Calendar from "../components/Calendar";
 import CircularProgress from "@mui/material/CircularProgress";
+import BookModal from "../components/BookModal"
+import FilterModal from "../components/FilterModal"
+import ChangeBookModal from "../components/ChangeBookModal";
 
 const StudentDashboard = () => {
   const { getters } = useContext(Context);
@@ -34,7 +36,6 @@ const StudentDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      // console.log(data.listofalldata);
       setStudents(data.listofalldata);
     }
   };
@@ -57,8 +58,6 @@ const StudentDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      // console.log(data);
-      // console.log(data.bookingsList);
       setMybookings(data.bookingsList);
     }
   };
@@ -170,13 +169,7 @@ const StudentDashboard = () => {
                       </div>
                       <div className="individual-change-title">
                         <Stack spacing={1} direction="row" variant="text">
-                          <Button
-                            className="individual-profile-button"
-                            variant="contained"
-                            // onClick={() => redirectStudent(student["username"])}
-                          >
-                            Change
-                          </Button>
+                          <ChangeBookModal info={booking} token={token}></ChangeBookModal>
                         </Stack>
                       </div>
                     </div>
@@ -192,10 +185,7 @@ const StudentDashboard = () => {
           <div className="search-container">
             <div className="filters-container">
               <Stack spacing={2} direction="row">
-                <Button variant="outlined">
-                  <TuneIcon className="filter-icon" />
-                  Filters
-                </Button>
+                <FilterModal token={token} setStudents={setStudents}></FilterModal>
                 {/* <div className="sort-container">Sort</div> */}
               </Stack>
             </div>
@@ -268,12 +258,7 @@ const StudentDashboard = () => {
                             >
                               Message
                             </Button>
-                            <Button
-                              className="individual-profile-button"
-                              variant="outlined"
-                            >
-                              Book
-                            </Button>
+                            <BookModal stuToken={token} tutToken={student['token']} tutUser={student["username"]}></BookModal>
                           </Stack>
                         </div>
                       </div>

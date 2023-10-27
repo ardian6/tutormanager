@@ -13,6 +13,7 @@ import TutorProfile from "../pages/tutorProfile";
 import { Context, useContext } from "../Context";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import TempView from "../pages/TempView";
+import Payment from "../pages/Payment";
 
 function Site(props) {
   const [userType, setUserType] = React.useState("true");
@@ -51,6 +52,7 @@ function Site(props) {
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/home" element={<Home />} />
         <Route path="/Profile/:username" element={<TempView />} />
+        <Route path="/Payment/:username" element={<Payment />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </div>

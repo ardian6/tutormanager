@@ -1,4 +1,4 @@
-from DBFunctions import checkTokenExists, dbListAllBookings, dbListMyBookings, dbMakeBooking, dbDeleteBooking, dbCheckDuplicateBooking, getUsername
+from DBFunctions import checkTokenExists, dbListAllBookings, dbListMyBookings, dbMakeBooking, dbDeleteBooking, dbCheckDuplicateBooking, getUsername, dbAcceptBooking
 
 # Grabs all bookings in a list
 def listAllBookings(session_token):
@@ -24,6 +24,7 @@ def listMyBookings(session_token):
     "bookingsList": listOfAllBookings
   }
 
+# Make a booking
 def makeBooking(session_token, sUser, tUser, sTime, eTime, description):
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
@@ -38,6 +39,7 @@ def makeBooking(session_token, sUser, tUser, sTime, eTime, description):
     "token": session_token
   }
 
+# Delete a booking
 def deleteBooking(session_token, sUser, tUser):
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
@@ -51,8 +53,26 @@ def deleteBooking(session_token, sUser, tUser):
   return {
     "token": session_token
   }
-  return
+
+# Accept a booking
+def acceptBooking(session_token, bookingID):
+  if not checkTokenExists(session_token):
+    return {"error": "Token is invalid."}
+  
+  dbAcceptBooking(bookingID)
+
+  return {
+    "token": session_token
+  }
+
+# Change a booking
+def changeBooking(session_token, sUser, tUser, sTime, eTime, des):
+  deleteBooking(session_token, sUser, tUser)
+  makeBooking(session_token, sUser, tUser, sTime, eTime, des)
+  return {
+    "token": session_token
+  }
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(deleteBooking('1', 'username8', 'username7'))
+    print(acceptBooking('2', '3'))

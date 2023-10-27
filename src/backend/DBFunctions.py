@@ -417,6 +417,24 @@ def dbCheckDuplicateBooking(studentUser, tutorUser):
     db.commit()
     return existingBooking # Returns false if the booking dosent exist, otherwise true
 
+# This functions goes into a database and changes a booking accepted value to true
+def dbAcceptBooking(bID):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""update Bookings set approved = %s where bookingID = %s""", [True, bID])
+    cur.close()
+    db.commit()
+    return
+
+# This functions allow for the admin to change password
+def dbAdminChangePassword(profile, newPass):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""update users set password = %s where username = %s""", [newPass, profile])
+    cur.close()
+    db.commit()
+    return
+
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbListMyBookings('2'))
+    print(dbAdminChangePassword('username2', 'newpassword'))

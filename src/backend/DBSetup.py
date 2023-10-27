@@ -164,7 +164,7 @@ def printData():
   for t in cur.fetchall():
     print(t)
   print('Bookings table')
-  cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime from bookings b""")
+  cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime, b.approved, b.description from bookings b""")
   for t in cur.fetchall():
     print(t)
   cur.close()

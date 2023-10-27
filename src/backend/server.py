@@ -10,9 +10,9 @@ from flask_cors import CORS
 #from src.echo import echo
 
 from auth import login, register, logout
-from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
+from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword
 from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
-from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking
+from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
 from filterT import filterTutors
 
 def quit_gracefully(*args):
@@ -171,6 +171,13 @@ def view_all_UsersData():
     data = request.get_json()
     return dumps(allUsersData(data['token']))
 
+## User Profile admin change password Implementation to Server ##
+
+@APP.route("/profile/admin-change-password", methods = ['POST'])
+def admin_change_password():
+    data = request.get_json()
+    return dumps(adminChangePassword(data['token'], data['targetProfile'], data['newPassword']))
+
 """
 ROUTES FOR Booking FUNCTIONS
 
@@ -192,7 +199,7 @@ def view_my_bookings():
 ## User booking make booking Implementation to Server ##
 
 @APP.route("/booking/make-booking", methods = ['PUT'])
-def view_create_bookings():
+def create_bookings():
     data = request.get_json()
     # studentUser and tutorUser are just the usernames while startTime and endTime is a string in this format '%Y-%m-%d %H:%M:%S'
     return dumps(makeBooking(data['token'], data['studentUser'], data['tutorUser'], data['startTime'], data['endTime'], data['description']))
@@ -200,9 +207,23 @@ def view_create_bookings():
 ## User booking delete booking Implementation to Server ##
 
 @APP.route("/booking/delete-booking", methods = ['PUT'])
-def view_delete_bookings():
+def delete_bookings():
     data = request.get_json()
     return dumps(deleteBooking(data['token'], data['studentUser'], data['tutorUser']))
+
+## User booking accept booking Implementation to Server ##
+
+@APP.route("/booking/accept-booking", methods = ['PUT'])
+def accept_bookings():
+    data = request.get_json()
+    return dumps(acceptBooking(data['token'], data['bookingID']))
+
+## User booking change booking Implementation to Server ##
+
+@APP.route("/booking/change-booking", methods = ['PUT'])
+def change_bookings():
+    data = request.get_json()
+    return dumps(changeBooking(data['token'], data['studentUser'], data['tutorUser'], data['startTime'], data['endTime'], data['description']))
 
 """
 ROUTES FOR Filters FUNCTIONS
