@@ -1,4 +1,4 @@
-from DBFunctions import checkTokenExists, dbListAllBookings, dbListMyBookings, dbMakeBooking, dbDeleteBooking, dbCheckDuplicateBooking, getutorUsername, dbAcceptBooking
+from DBFunctions import checkTokenExists, dbListAllBookings, dbListMyBookings, dbMakeBooking, dbDeleteBooking, dbCheckDuplicateBooking, dbAcceptBooking
 
 def listAllBookings(session_token: str) -> dict:
   """Grabs all bookings in a list

@@ -12,7 +12,6 @@ def changeUsername(session_token: str, newUsername: str) -> dict:
     Returns:
       { session_token: String }
   """
-  
   # Find user in database from token
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
@@ -21,7 +20,7 @@ def changeUsername(session_token: str, newUsername: str) -> dict:
   if checkDuplicateUsername(newUsername): return {"error": "Username is invalid."}
   
   # This function actually goes into the database and changes the data stored
-  dbChangeUsername(session_token, newUsername) 
+  dbChangeUsername(session_token, newUsername)
 
   return {
     "token": session_token
@@ -169,7 +168,6 @@ def viewAllCourses(session_token: str) -> dict:
     "listcourses": listOfAllCourses
   }
 
-# Views a user specific course
 def viewUserCourses(session_token: str) -> dict:
   """User views their ENROLLED courses
     Paramaters:
@@ -187,7 +185,7 @@ def viewUserCourses(session_token: str) -> dict:
     'myCourses': listOfMyCourses
   }
 
-def deleteAccount(session_token: list, password: str) -> dict:
+def deleteAccount(session_token: str, password: str) -> dict:
   """Deletes the given user's account.
     Paramaters:
       session_token: String
@@ -260,20 +258,35 @@ def allUsers(session_token: str) -> dict:
     "usersList": listOfAllUsers
   }
 
-def allUsersData(session_token):
+def allUsersData(session_token: str) -> dict:
+  """Retrieves the data of all users
+    Paramaters:
+      session_token: String
+      targetProfile: String
+    Returns:
+      { session_token: String }
+  """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
+  
   listOfAllUsers = dbAllUsernames()
   listofallData = []
   for userN in listOfAllUsers:
     listofallData.append(dbViewProfile(userN))
+  
   return {
     "token": session_token,
     "listofalldata": listofallData
   }
 
-def adminChangePassword(session_token, targetProfile, newPassword):
-  # Find user in database from token and check if admin
+def adminChangePassword(session_token: str, targetProfile: str, newPassword: str) -> dict:
+  """Retrieves the data of all users
+    Paramaters:
+      session_token: String
+      targetProfile: String
+    Returns:
+      { session_token: String }
+  """
   if not checkTokenAdmin(session_token):
     return {"error": "Admin token is invalid."}
   
@@ -282,7 +295,6 @@ def adminChangePassword(session_token, targetProfile, newPassword):
   return {
     "token": session_token,
   }
-
 
 # def uploadDocumentation(session_token)
 #   return
