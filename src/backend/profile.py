@@ -272,6 +272,17 @@ def allUsersData(session_token):
     "listofalldata": listofallData
   }
 
+def adminChangePassword(session_token, targetProfile, newPassword);
+  # Find user in database from token and check if admin
+  if not checkTokenAdmin(session_token):
+    return {"error": "Admin token is invalid."}
+  
+  dbAdminChangePassword(targetProfile, getHashOf(newPassword)) 
+
+  return {
+    "token": session_token,
+  }
+
 
 # def uploadDocumentation(session_token)
 #   return

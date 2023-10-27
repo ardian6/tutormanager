@@ -426,6 +426,15 @@ def dbAcceptBooking(bID):
     db.commit()
     return
 
+# This functions allow for the admin to change password
+def dbAdminChangePassword(profile, newPass):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""update users set password = %s where username = %s""", [newPass, profile])
+    cur.close()
+    db.commit()
+    return
+
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbAcceptBooking('1'))
+    print(dbAdminChangePassword('username2', 'newpassword'))

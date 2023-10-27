@@ -10,7 +10,7 @@ from flask_cors import CORS
 #from src.echo import echo
 
 from auth import login, register, logout
-from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio
+from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword
 from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
 from filterT import filterTutors
@@ -170,6 +170,13 @@ def view_all_Users():
 def view_all_UsersData():
     data = request.get_json()
     return dumps(allUsersData(data['token']))
+
+## User Profile admin change password Implementation to Server ##
+
+@APP.route("/profile/admin-change-password", methods = ['POST'])
+def admin_change_password():
+    data = request.get_json()
+    return dumps(adminChangePassword(data['token'], data['targetProfile'], data['newPassword']))
 
 """
 ROUTES FOR Booking FUNCTIONS
