@@ -11,7 +11,7 @@ def connectDB():
         port='5432')
 
 # Check if the login information is correct by retrieving information from the database
-def dblogin(token, username, password):
+def dblogin(token: str, username: str, password: str) -> str:
     typeOfUser = ""
     db = connectDB()
     cur = db.cursor()
@@ -30,7 +30,7 @@ def dblogin(token, username, password):
     return typeOfUser # Returns the usertype in string format or empty string if invalid login
 
 # Stores a new user into the database
-def dbregister(token, email, username, password, firstName, lastName, userType):
+def dbregister(token: str, email: str, username: str, password: str, firstName: str, lastName: str, userType: str):
     db = connectDB()
     cur = db.cursor()
     if userType == 'tutor':
@@ -44,7 +44,7 @@ def dbregister(token, email, username, password, firstName, lastName, userType):
     return
 
 # Checks if there is already another user in the database with the same username
-def checkDuplicateUsername(username):
+def checkDuplicateUsername(username: str):
     alreadyExist = False
     db = connectDB()
     cur = db.cursor()
@@ -58,7 +58,7 @@ def checkDuplicateUsername(username):
     return alreadyExist #Returns true if there username is already in use and false otherwise
 
 # Checks if there is already another user in the database with the same email
-def checkDuplicateEmail(email):
+def checkDuplicateEmail(email: str):
     alreadyExist = False
     db = connectDB()
     cur = db.cursor()
@@ -72,7 +72,7 @@ def checkDuplicateEmail(email):
     return alreadyExist #Returns true if there email is already in use and false otherwise
 
 # Remove session token from the database
-def dblogout(token):
+def dblogout(token: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""delete from Sessions s where s.sessID = %s""", [token])
@@ -82,7 +82,7 @@ def dblogout(token):
     return
 
  # Check if the token exists
-def checkTokenExists(token):
+def checkTokenExists(token: str):
     tokenExist = False
     db = connectDB()
     cur = db.cursor()
@@ -96,7 +96,7 @@ def checkTokenExists(token):
     return tokenExist # -> Returns true if token exists otherwise false.
 
 # Returns username of a session id
-def getUsername(token):
+def getUsername(token: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from sessions s where s.sessID = %s""", [token])
@@ -108,7 +108,7 @@ def getUsername(token):
     return uName
 
 # Check if token exists and is an admin
-def checkTokenAdmin(token):
+def checkTokenAdmin(token: str):
     tokenAdmin = False
     db = connectDB()
     cur = db.cursor()
@@ -121,7 +121,7 @@ def checkTokenAdmin(token):
     return tokenAdmin # -> Returns true if token exists and it belongs to an admin otherwise false.
 
 # This function goes into the database and changes the username stored into the new desired username
-def dbChangeUsername(token, newUsername):
+def dbChangeUsername(token: str, newUsername: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -136,7 +136,7 @@ def dbChangeUsername(token, newUsername):
     return
 
 # This function goes into the database and changes the email stored
-def dbChangeEmail(token, newEmail):
+def dbChangeEmail(token: str, newEmail: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -149,7 +149,7 @@ def dbChangeEmail(token, newEmail):
     return
 
 # This function goes into the database and changes the password stored
-def dbChangePassword(token, newPass):
+def dbChangePassword(token: str, newPass: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -162,7 +162,7 @@ def dbChangePassword(token, newPass):
     return
 
 # This function goes into the database and changes the bio stored
-def dbChangeBio(token, newBio):
+def dbChangeBio(token: str, newBio: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -175,7 +175,7 @@ def dbChangeBio(token, newBio):
     return
 
 # This function goes into the database and stores a user with a course
-def dbAddCourse(token, newCourse):
+def dbAddCourse(token: str, newCourse: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -193,7 +193,7 @@ def dbAddCourse(token, newCourse):
     return addedCourse  # Returns True if successful or false if failed (Failed if course has already added)
 
 # This function goes into the database and removes a user with a course
-def dbDeleteCourse(token, courseToBeDeleted):
+def dbDeleteCourse(token: str, courseToBeDeleted: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
