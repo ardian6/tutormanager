@@ -1,7 +1,14 @@
-from DBFunctions import checkTokenExists, dbListAllBookings, dbListMyBookings, dbMakeBooking, dbDeleteBooking, dbCheckDuplicateBooking, getUsername, dbAcceptBooking
+from DBFunctions import checkTokenExists, dbListAllBookings, dbListMyBookings, dbMakeBooking, dbDeleteBooking, dbCheckDuplicateBooking, getutorUsername, dbAcceptBooking
 
-# Grabs all bookings in a list
-def listAllBookings(session_token):
+def listAllBookings(session_token: str) -> dict:
+  """Grabs all bookings in a list
+    Paramaters:
+      session_token: String
+
+    Returns:
+      { session_token: String,
+        bookingsList: list }
+  """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
   
@@ -12,8 +19,15 @@ def listAllBookings(session_token):
     "bookingsList": listOfAllBookings
   }
 
-# Grabs all bookings related to the user
-def listMyBookings(session_token):
+def listMyBookings(session_token: str) -> dict:
+  """Grabs all bookings related to the user
+    Paramaters:
+      session_token: String
+
+    Returns:
+      { session_token: String,
+        bookingsList: list }
+  """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
   
@@ -25,37 +39,57 @@ def listMyBookings(session_token):
   }
 
 # Make a booking
-def makeBooking(session_token, sUser, tUser, sTime, eTime, description):
+def makeBooking(session_token: str, studentUser: str, tutorUser: str, 
+                startTime: str, endTime: str, description: str) -> dict:
+  """Student makes a booking with a tutor.
+    Paramaters:
+      session_token: String
+
+    Returns:
+      { session_token: String }
+  """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
   
   # Check if booking between the two already exist
-  if dbCheckDuplicateBooking(sUser, tUser):
+  if dbCheckDuplicateBooking(studentUser, tutorUser):
     return {"error": "Booking already exists."}
   
-  dbMakeBooking(sUser, tUser, sTime, eTime, description)
+  dbMakeBooking(studentUser, tutorUser, startTime, endTime, description)
 
   return {
     "token": session_token
   }
 
-# Delete a booking
-def deleteBooking(session_token, sUser, tUser):
+def deleteBooking(session_token: str, studentUser: str, tutorUser: str) -> dict:
+  """Student deletes their booking with selected tutor.
+    Paramaters:
+      session_token: String
+
+    Returns:
+      { token: String }
+  """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
   
   # Check if booking between the two already exist
-  if not dbCheckDuplicateBooking(sUser, tUser):
-    return {"error": "Booking doesn't exists."}
+  if not dbCheckDuplicateBooking(studentUser, tutorUser):
+    return {"error": "Booking doesn't exist."}
 
-  dbDeleteBooking(sUser, tUser)
+  dbDeleteBooking(studentUser, tutorUser)
 
   return {
     "token": session_token
   }
 
-# Accept a booking
-def acceptBooking(session_token, bookingID):
+def acceptBooking(session_token: str, bookingID: str) -> dict:
+  """An already created booking is accepted and updated in the database.
+    Paramaters:
+      session_token: String
+
+    Returns:
+      { token: String }
+  """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
   
@@ -65,10 +99,17 @@ def acceptBooking(session_token, bookingID):
     "token": session_token
   }
 
-# Change a booking
-def changeBooking(session_token, sUser, tUser, sTime, eTime, des):
-  deleteBooking(session_token, sUser, tUser)
-  makeBooking(session_token, sUser, tUser, sTime, eTime, des)
+def changeBooking(session_token: str, studentUser: str, tutorUser: str,
+                  startTime: str, endTime: str, description: str) -> dict:
+  """Student changes booking allocation with selected tutor.
+    Paramaters:
+      session_token: String
+
+    Returns:
+      { token: String }
+  """
+  deleteBooking(session_token, studentUser, tutorUser)
+  makeBooking(session_token, studentUser, tutorUser, startTime, endTime, description)
   return {
     "token": session_token
   }

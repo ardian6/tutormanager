@@ -1,4 +1,4 @@
-from DBFunctions import checkTokenExists, checkDuplicateEmail, checkDuplicateUsername, checkTokenAdmin 
+from DBFunctions import checkTokenExists, checkDuplicateEmail, checkDuplicateUsername, checkTokenAdmin, dbAdminChangePassword 
 from DBFunctions import dbChangeUsername, dbChangePassword, dbChangeEmail, dbChangeBio, dbAddCourse
 from DBFunctions import dbDeleteAccount, dbAdminDelete, dbDeleteCourse, dbViewProfile, dbCourseList, dbAddCourseToList, dbViewMyCourses, dbAllUsernames
 from helper import getHashOf
@@ -272,7 +272,7 @@ def allUsersData(session_token):
     "listofalldata": listofallData
   }
 
-def adminChangePassword(session_token, targetProfile, newPassword);
+def adminChangePassword(session_token, targetProfile, newPassword):
   # Find user in database from token and check if admin
   if not checkTokenAdmin(session_token):
     return {"error": "Admin token is invalid."}
