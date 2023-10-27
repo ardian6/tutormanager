@@ -13,7 +13,7 @@ from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword
 from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
-from filterT import filterTutors
+from filterT import filterTutors, getUserGroups
 
 def quit_gracefully(*args):
     '''For coverage'''
@@ -235,6 +235,13 @@ ROUTES FOR Filters FUNCTIONS
 def view_all_filtered_bookings():
     data = request.get_json()
     return dumps(filterTutors(data['token'], data['course'], data['location'], data['timezone'], data['rating']))
+
+## Admin gets all user types ##
+
+@APP.route("/filter/admin-filter", methods = ['POST'])
+def admin_filter():
+    data = request.get_json()
+    return dumps(getUserGroups(data['token']))
 
 """
 END OF ROUTES
