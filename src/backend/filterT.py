@@ -1,6 +1,6 @@
 from DBFunctions import checkTokenExists, dbViewUsernameCourses, dbViewProfile, dbAllUsernames, dbGroupUsers
 
-def filterTutors(session_token, course, location, timezone, rating): 
+def filterTutors(session_token, course, location, timezone, rating):
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
   listOfAllUsers = dbAllUsernames()
@@ -23,7 +23,7 @@ def filterTutors(session_token, course, location, timezone, rating):
 def getUserGroups(session_token: str):
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
-  
+
   students, tutors, admins = dbGroupUsers()
 
   return {
