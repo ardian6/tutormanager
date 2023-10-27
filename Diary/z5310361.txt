@@ -27,3 +27,8 @@ Week 6
 Spent the flex week implementing functionality for the user Dashboards. Users should be able to message/book other users depending on their needs.
 Admins should also be able to delete users, add/delete courses and etc. communication and so as planning has improved since last sprint
 leading to completions of items at the required soft deadliens. 
+
+Week 7
+Spent this week implementing the functionality for Booking Page and how users and tutors could react with each. In addition,
+each user can see their appointments on calendar event interface. They are also able to also manage their appointments to either modify or cancel.
+There is also a mock payment page.
