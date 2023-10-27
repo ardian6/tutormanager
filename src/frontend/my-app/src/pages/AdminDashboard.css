@@ -38,5 +38,13 @@
 }
 
 .all-tutors-container {
-  width: 400px;
+  width: 500px;
+}
+
+.all-students-container {
+  width: 500px;
+}
+
+.all-admins-container {
+  width: 500px;
 }

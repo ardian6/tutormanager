@@ -4,46 +4,32 @@ import NavBar from "../components/NavBar";
 import { Context, useContext } from "../Context";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import AdminChangePasswordModal from "../components/AdminChangePasswordModal";
+import Stack from "@mui/material/Stack";
 const AdminDashboard = () => {
   const [tutorUsers, setTutorUsers] = React.useState([]);
+  const [studentUsers, setStudentUsers] = React.useState([]);
+  const [adminUsers, setAdminUsers] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [curruser, setCurrUser] = React.useState("");
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => setOpen(false);
   const { getters } = useContext(Context);
   const token = getters.token;
-
-  // const getUsers = async () => {
-  //   const response = await fetch(
-  //     "http://localhost:5005/profile/view-all-users",
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         token: token,
-  //       }),
-  //     }
-  //   );
-  //   const data = await response.json();
-  //   if (data.error) {
-  //     alert(data.error);
-  //   } else {
-  //     console.log(data);
-  //     setUsers(data.usersList);
-  //   }
-  // };
+  const ownUsername = getters.usernameGlobal;
 
   const getUsers = async () => {
-    const response = await fetch("http://localhost:5005/filter/filter-tutor", {
+    const response = await fetch("http://localhost:5005/filter/admin-filter", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
         token: token,
-        course: "",
-        location: "",
-        timezone: "",
-        rating: "",
       }),
     });
     const data = await response.json();
@@ -51,8 +37,10 @@ const AdminDashboard = () => {
       alert(data.error);
     } else {
       // setStudents(data.listofalldata);
-      console.log(data.listofalldata);
-      setTutorUsers(data.listofalldata);
+      // console.log(data);
+      setTutorUsers(data.tutorList);
+      setStudentUsers(data.studentList);
+      setAdminUsers(data.adminList);
     }
   };
 
@@ -72,6 +60,8 @@ const AdminDashboard = () => {
       alert(data.error);
     } else {
       setTutorUsers(tutorUsers.filter((x) => x !== user["user"]));
+      setStudentUsers(studentUsers.filter((x) => x !== user["user"]));
+      setAdminUsers(adminUsers.filter((x) => x !== user["user"]));
     }
   };
 
@@ -90,17 +80,71 @@ const AdminDashboard = () => {
               <b>All Tutors</b>
               <div>
                 {tutorUsers.map((user, idx) => {
-                  // console.log(users);
                   return (
                     <div key={idx}>
-                      {user["username"]}
+                      {user}
                       <Button
                         className="removebtn"
                         variant="outlined"
                         startIcon={<DeleteIcon />}
                         size="small"
                         onClick={() => {
-                          removeUser(user["username"]);
+                          handleOpen();
+                          setCurrUser(user);
+                        }}
+                      >
+                        Change Password
+                      </Button>
+                      <Button
+                        className="removebtn"
+                        variant="outlined"
+                        startIcon={<DeleteIcon />}
+                        size="small"
+                        onClick={() => {
+                          removeUser({ user });
+                        }}
+                      >
+                        Delete
+                      </Button>
+                      <AdminChangePasswordModal
+                        open={open}
+                        handleClose={handleClose}
+                        token={token}
+                        currentuser={curruser}
+                      ></AdminChangePasswordModal>
+                      {console.log(curruser)}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="all-students-container">
+              <b>All Students</b>
+              <div>
+                {studentUsers.map((user, idx) => {
+                  // console.log(users);
+                  return (
+                    <div key={idx}>
+                      {user}
+                      <Button
+                        className="removebtn"
+                        variant="outlined"
+                        startIcon={<DeleteIcon />}
+                        size="small"
+                        onClick={() => {
+                          handleOpen();
+                          setCurrUser(user);
+                        }}
+                      >
+                        Change Password
+                      </Button>
+                      <Button
+                        className="removebtn"
+                        variant="outlined"
+                        startIcon={<DeleteIcon />}
+                        size="small"
+                        onClick={() => {
+                          removeUser({ user });
                         }}
                       >
                         Delete
@@ -110,27 +154,29 @@ const AdminDashboard = () => {
                 })}
               </div>
             </div>
-            <div className="all-students-container">
-              <b>All Students</b>
+            <div className="all-admin-container">
+              <b>All Admins</b>
               <div>
-                {tutorUsers.map((user, idx) => {
+                {adminUsers.map((user, idx) => {
                   // console.log(users);
-                  return (
-                    <div key={idx}>
-                      {user["username"]}
-                      <Button
-                        className="removebtn"
-                        variant="outlined"
-                        startIcon={<DeleteIcon />}
-                        size="small"
-                        onClick={() => {
-                          removeUser(user["username"]);
-                        }}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  );
+                  if (ownUsername !== user) {
+                    return (
+                      <div key={idx}>
+                        {user}
+                        <Button
+                          className="removebtn"
+                          variant="outlined"
+                          startIcon={<DeleteIcon />}
+                          size="small"
+                          onClick={() => {
+                            removeUser({ user });
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    );
+                  }
                 })}
               </div>
             </div>

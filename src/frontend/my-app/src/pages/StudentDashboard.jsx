@@ -8,8 +8,8 @@ import Button from "@mui/material/Button";
 import defaultImage from "./DefaultProfile.png";
 import Calendar from "../components/Calendar";
 import CircularProgress from "@mui/material/CircularProgress";
-import BookModal from "../components/BookModal"
-import FilterModal from "../components/FilterModal"
+import BookModal from "../components/BookModal";
+import FilterModal from "../components/FilterModal";
 import ChangeBookModal from "../components/ChangeBookModal";
 
 const StudentDashboard = () => {
@@ -169,7 +169,10 @@ const StudentDashboard = () => {
                       </div>
                       <div className="individual-change-title">
                         <Stack spacing={1} direction="row" variant="text">
-                          <ChangeBookModal info={booking} token={token}></ChangeBookModal>
+                          <ChangeBookModal
+                            info={booking}
+                            token={token}
+                          ></ChangeBookModal>
                         </Stack>
                       </div>
                     </div>
@@ -185,7 +188,10 @@ const StudentDashboard = () => {
           <div className="search-container">
             <div className="filters-container">
               <Stack spacing={2} direction="row">
-                <FilterModal token={token} setStudents={setStudents}></FilterModal>
+                <FilterModal
+                  token={token}
+                  setStudents={setStudents}
+                ></FilterModal>
                 {/* <div className="sort-container">Sort</div> */}
               </Stack>
             </div>
@@ -258,7 +264,11 @@ const StudentDashboard = () => {
                             >
                               Message
                             </Button>
-                            <BookModal stuToken={token} tutToken={student['token']} tutUser={student["username"]}></BookModal>
+                            <BookModal
+                              stuToken={token}
+                              tutToken={student["token"]}
+                              tutUser={student["username"]}
+                            ></BookModal>
                           </Stack>
                         </div>
                       </div>
