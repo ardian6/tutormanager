@@ -1,4 +1,5 @@
-from DBFunctions import checkTokenExists, dbViewUsernameCourses, dbViewProfile, dbAllUsernames
+from DBFunctions import checkTokenExists, dbViewUsernameCourses, dbViewProfile, dbAllUsernames, dbGroupUsers
+
 
 def filterTutors(session_token, course, location, timezone, rating): 
   if not checkTokenExists(session_token):
@@ -18,6 +19,19 @@ def filterTutors(session_token, course, location, timezone, rating):
   return {
     "token": session_token,
     "listofalldata": listofValidTutors
+  }
+
+def getUserGroups(session_token: str): 
+  if not checkTokenExists(session_token):
+    return {"error": "Token is invalid."}
+  
+  students, tutors, admins = dbGroupUsers()
+
+  return {
+    "token": session_token,
+    "studentList": students,
+    "tutorList": tutors,
+    "adminList": admins
   }
 
 if __name__ == '__main__':

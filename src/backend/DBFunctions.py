@@ -447,42 +447,29 @@ def dbAdminChangePassword(profile, newPass):
     db.commit()
     return
 
-# This functions returns all students
-def dbAllStudents ():
+# This functions returns all users
+def dbGroupUsers():
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select u.username from users u where userType = %s""", ['student'])
     allStudents = []
     for t in cur.fetchall():
         allStudents.append(t[0])
-    cur.close()
-    db.commit()
-    return allStudents
-
-# This functions returns all tutors
-def dbAllTutors ():
-    db = connectDB()
-    cur = db.cursor()
+    
     cur.execute("""select u.username from users u where userType = %s""", ['tutor'])
     allTutors = []
     for t in cur.fetchall():
         allTutors.append(t[0])
-    cur.close()
-    db.commit()
-    return allTutors
-
-# This functions returns all students
-def dbAllAdmins ():
-    db = connectDB()
-    cur = db.cursor()
+    
     cur.execute("""select u.username from users u where userType = %s""", ['admin'])
     allAdmins = []
     for t in cur.fetchall():
         allAdmins.append(t[0])
+
     cur.close()
     db.commit()
-    return allAdmins
+    return allStudents, allTutors, allAdmins
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbAllAdmins())
+    print(dbGroupUsers())
