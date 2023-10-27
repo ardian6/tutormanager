@@ -6,11 +6,6 @@ import { makeStyles } from '@mui/styles';
 
 const localizer = momentLocalizer(moment);
 
-const useStyles = makeStyles(() => ({
-  event: {
-  },
-}));
-
 export default function BasicDateCalendar({token}) {
   const [bookings, setBookings] = React.useState("");
   
@@ -31,7 +26,6 @@ export default function BasicDateCalendar({token}) {
     if (data.error) {
       alert(data.error);
     } else {
-      console.log(data.bookingsList)
       const dates = data.bookingsList.map((element) => {
         return {
           start: moment(element[3]).toDate(),
@@ -45,14 +39,6 @@ export default function BasicDateCalendar({token}) {
     getBookings();
   }, []);
 
-  const classes = useStyles();
-
-  const eventStyleGetter = (event, start, end, isSelected) => {
-    const style = {
-      className: classes.event,
-    };
-    return { style };
-  };
   return (
     <div>
       <Calendar
@@ -61,7 +47,6 @@ export default function BasicDateCalendar({token}) {
         startAccessor="start"
         endAccessor="end"
         style={{ height: 500 }}
-        eventPropGetter={eventStyleGetter}
       />
     </div>
   );
