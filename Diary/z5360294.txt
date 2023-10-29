@@ -31,3 +31,10 @@ Week 6
 We set up meetings during the week. At the start of the week, we set to clean up sprint 1 from any remaining issues. I started to create new pages for the dashboard, and profile view. 
 The dashboard would change depending on if the logged in user was an admin, student, or tutor. I had alot of discussions with Michael as to what we would both be doing so that we don't
 conflict in tasks. Overall, this week was also to discussing with others as to how to plan the weeks ahead of us.
+
+Week 7
+We had meetings throughout the week to complete the sprint 2 features. I went through the Jira board to see if we missed anything especially on the admin login pages. I did alot of bug fixes
+on the studentdashboard pages such as modal not showing correct username that was pressed on. I finished the UI for the student and tutor requests that show their requests. Alot of this week was 
+communicating with the backend engineers with how the backend worked before I was able to complete my features as I required dummy data. We made plans for the next week to complete and polish our sprint 2 
+before sprint 2 deadline. I worked with Michael to create most of the frontend features. Majority of the UI was created my me. Michael would go in after the UI was finished and implement most of the 
+functionality features. 
