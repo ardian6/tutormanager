@@ -32,3 +32,7 @@ Week 7
 Spent this week implementing the functionality for Booking Page and how users and tutors could react with each. In addition,
 each user can see their appointments on calendar event interface. They are also able to also manage their appointments to either modify or cancel.
 There is also a mock payment page.
+
+Week 8
+With most user stories implemented for Sprint 2. This week is left to tidy up the project for project demo b. Media queries are still 
+an item and will be completed by the end of this week.

@@ -41,3 +41,11 @@ This week the primary goal as a group was to make the functionality of the booki
 My job was to make sure to set up the database to ensure there is storage for all the bookings.
 Furthermore, I also created all the database functions and the backend functions that call the database functions related to booking.
 Finally, I created the routes for all the backend functions.
+
+Week 7
+This week as a group we wanted to try to complete all of the user stories and functionality for sprint 2. 
+This includes all the functionality related to bookings, calender, filtering and all the user stories from sprint 1 that were not completed. 
+The reason for this is because we wanted to give ourselves a week to start working on the report and media queries for the frontend.
+This is because we do not think we have enough time to do all of that in sprint 3.
+At the end of the week we managed to get all of the user stories done with the exception of one or two because of bugs.
+My part in all of this was to ensure the backend was all done and working including the database.
