@@ -11,7 +11,7 @@ from flask_cors import CORS
 
 from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword
-from profile import addNewCourse, adminAddCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
+from profile import addNewCourse, adminAddCourse, adminDeleteCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
 from filterT import filterTutors, getUserGroups
 
@@ -115,12 +115,19 @@ def add_course():
     data = request.get_json()
     return dumps(addNewCourse(data['token'], data['newCourse']))
 
-# ## User Profile Admin Add Course Implementation to Server ##
+## User Profile Admin Add Course Implementation to Server ##
 
 @APP.route("/profile/admin-add-course", methods = ['PUT'])
 def admin_add_course():
     data = request.get_json()
     return dumps(adminAddCourse(data['token'], data['newCourse']))
+
+## User Profile Admin Delete Course Implementation to Server ##
+
+@APP.route("/profile/admin-delete-course", methods = ['PUT'])
+def admin_delete_course():
+    data = request.get_json()
+    return dumps(adminDeleteCourse(data['token'], data['courseName']))
 
 ## User Profile Delete Course Implementation to Server ##
 

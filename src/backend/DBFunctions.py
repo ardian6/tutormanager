@@ -304,6 +304,16 @@ def dbAddCourseToList(courseName: str):
     db.commit()
     return 
 
+# This function removes a course from the list of all courses in the database
+def dbRemoveCourseFromList(courseName: str):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""delete from userCourse uc where uc.course = %s""", [courseName])
+    cur.execute("""delete from courses c where c.courseName = %s""", [courseName])
+    cur.close()
+    db.commit()
+    return 
+
 # This function retrieves the courses the user is doing
 def dbViewMyCourses(token: str) -> list:
     myCourseList = []
