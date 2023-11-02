@@ -21,34 +21,36 @@ const style = {
   p: 4,
 };
 
-const AdminDashboard = ({
-  open,
-  token,
-  handleClose,
-  currentuser,
-  newPassword,
-}) => {
-  //   const changeUserPassword = async (user, newPassword) => {
-  //     const response = await fetch(
-  //       "http://localhost:5005/profile/admin-change-password",
-  //       {
-  //         method: "PUT",
-  //         headers: {
-  //           "Content-type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           token: token,
-  //           targetProfile: user,
-  //           newPassword: newPassword,
-  //         }),
-  //       }
-  //     );
-  //     const data = await response.json();
-  //     if (data.error) {
-  //       alert(data.error);
-  //     } else {
-  //     }
-  //   };
+const AdminDashboard = ({ open, token, handleClose, currentuser }) => {
+  const [password, setPassword] = React.useState("");
+  const [confirmpassword, setConfirmPassword] = React.useState("");
+
+  const changeUserPassword = async (user) => {
+    if (password !== confirmpassword) {
+      alert("Passwords Do not match");
+      return;
+    }
+
+    const response = await fetch(
+      "http://localhost:5005/profile/admin-change-password",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token,
+          targetProfile: user,
+          newPassword: confirmpassword,
+        }),
+      }
+    );
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+    }
+  };
 
   return (
     <>
@@ -77,15 +79,28 @@ const AdminDashboard = ({
               id="new-password"
               label="New Password"
               variant="standard"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <TextField
               id="confirm-new-password"
               label="Confirm New Password"
               variant="standard"
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+              }}
             />
           </Box>
           <Stack spacing={2} direction="row">
-            <Button variant="contained">Change Password</Button>
+            <Button
+              variant="contained"
+              onClick={() => {
+                changeUserPassword(currentuser);
+              }}
+            >
+              Change Password
+            </Button>
           </Stack>
         </Box>
       </Modal>
