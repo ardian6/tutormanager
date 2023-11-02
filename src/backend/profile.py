@@ -1,4 +1,4 @@
-from DBFunctions import checkTokenExists, checkDuplicateEmail, checkDuplicateUsername, checkTokenAdmin, dbAdminChangePassword 
+from DBFunctions import checkTokenExists, checkDuplicateEmail, checkDuplicateUsername, checkTokenAdmin, dbAdminChangePassword, dbRemoveCourseFromList
 from DBFunctions import dbChangeUsername, dbChangePassword, dbChangeEmail, dbChangeBio, dbAddCourse
 from DBFunctions import dbDeleteAccount, dbAdminDelete, dbDeleteCourse, dbViewProfile, dbCourseList, dbAddCourseToList, dbViewMyCourses, dbAllUsernames
 from helper import getHashOf
