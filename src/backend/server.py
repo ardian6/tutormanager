@@ -14,6 +14,7 @@ from profile import changeUsername, changeEmail, changePassword, viewProfile, ch
 from profile import addNewCourse, adminAddCourse, adminDeleteCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
 from filterT import filterTutors, getUserGroups
+from messages import listMessages, sendMessage
 
 def quit_gracefully(*args):
     '''For coverage'''
@@ -249,6 +250,24 @@ def view_all_filtered_bookings():
 def admin_filter():
     data = request.get_json()
     return dumps(getUserGroups(data['token']))
+
+"""
+ROUTES FOR Messages FUNCTIONS
+
+"""
+## User Message List Implementation to Server ##
+
+@APP.route("/message/list-messages", methods = ['POST'])
+def message_list():
+    data = request.get_json()
+    return dumps(listMessages(data['token'], data['studentUsername'], data['tutorUsername']))
+
+## User Message Send Implementation to Server ##
+
+@APP.route("/message/send-message", methods = ['PUT'])
+def message_send():
+    data = request.get_json()
+    return dumps(sendMessage(data['token'], data['studentUsername'], data['tutorUsername'], data['sentBy'], data['timestamp'], data['message']))
 
 """
 END OF ROUTES
