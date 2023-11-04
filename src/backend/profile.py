@@ -1,4 +1,4 @@
-from DBFunctions import checkTokenExists, checkDuplicateEmail, checkDuplicateUsername, checkTokenAdmin, dbAdminChangePassword 
+from DBFunctions import checkTokenExists, checkDuplicateEmail, checkDuplicateUsername, checkTokenAdmin, dbAdminChangePassword, dbRemoveCourseFromList
 from DBFunctions import dbChangeUsername, dbChangePassword, dbChangeEmail, dbChangeBio, dbAddCourse
 from DBFunctions import dbDeleteAccount, dbAdminDelete, dbDeleteCourse, dbViewProfile, dbCourseList, dbAddCourseToList, dbViewMyCourses, dbAllUsernames
 from helper import getHashOf
@@ -127,6 +127,24 @@ def adminAddCourse(session_token: str, newCourse: str) -> dict:
     return {}
 
   return {"error": "Course is already in the course list."}
+
+def adminDeleteCourse(session_token: str, courseName: str) -> dict:
+  """Admin user adds a course to the TutorManager course list.
+    Paramaters:
+      session_token: String
+      courseName: String
+    Returns:
+      {}
+  """
+  # Check if user is an admin/in database
+  if not checkTokenAdmin(session_token):
+    return {"error": "Admin token is invalid."}
+  
+  if courseName.lower() in dbCourseList(): 
+    dbRemoveCourseFromList(courseName.lower())
+    return {}
+  
+  return {"error": "Course is not in the course list."}
 
 def deleteCourse(session_token: str, courseToBeDeleted: str) -> dict:
   """Deletes a course from a given user.

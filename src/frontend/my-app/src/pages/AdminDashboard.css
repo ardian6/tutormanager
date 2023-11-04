@@ -48,3 +48,10 @@
 .all-admins-container {
   width: 500px;
 }
+
+@media only screen and (max-width: 1200px) {
+  .flex-box-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

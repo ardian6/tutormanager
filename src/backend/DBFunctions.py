@@ -304,6 +304,16 @@ def dbAddCourseToList(courseName: str):
     db.commit()
     return 
 
+# This function removes a course from the list of all courses in the database
+def dbRemoveCourseFromList(courseName: str):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""delete from userCourse uc where uc.course = %s""", [courseName])
+    cur.execute("""delete from courses c where c.courseName = %s""", [courseName])
+    cur.close()
+    db.commit()
+    return 
+
 # This function retrieves the courses the user is doing
 def dbViewMyCourses(token: str) -> list:
     myCourseList = []
@@ -470,6 +480,37 @@ def dbGroupUsers():
     db.commit()
     return allStudents, allTutors, allAdmins
 
+# This function gives all messages between two users
+def dbListMessages(stuUser, tutUser):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select m.msgID, m.stuUser, m.tutUser, m.timeSent, m.message, m.sentBy from messages m where m.stuUser = %s and m.tutUser = %s""", [stuUser, tutUser])
+    messageList = []
+    for t in cur.fetchall():
+        specificMessage = []
+        specificMessage.append(t[0])
+        specificMessage.append(t[1])
+        specificMessage.append(t[2])
+        specificMessage.append(t[3])
+        specificMessage.append(t[4])
+        specificMessage.append(t[5])
+        messageList.append(specificMessage)
+    cur.close()
+    db.commit()
+    return messageList
+
+# This function stores a new message that was sent into the database
+def dbSendMessage(stuUser, tutUser, sentBy, timeSent, message):
+    db = connectDB()
+    cur = db.cursor()
+    # Insert into database
+    messageID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+    timeFormat = datetime.datetime.strptime(timeSent, '%Y-%m-%d %H:%M:%S')
+    cur.execute("""insert into messages values (%s, %s, %s, %s, %s, %s)""", [messageID, stuUser, tutUser, timeFormat, message, sentBy])
+    cur.close()
+    db.commit()
+    return
+
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbGroupUsers())
+    dbSendMessage('username3', 'username4', 'username3', '2023-11-3 19:02:10', 'hello nice to meet you')

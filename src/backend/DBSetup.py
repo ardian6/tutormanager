@@ -58,6 +58,16 @@ def setupTables():
 	primary key (bookingID)
   )""")
 
+  cur.execute("""create table messages (
+	msgID       varchar(30),
+  stuUser     varchar(30) references users(username),
+  tutUser     varchar(30) references users(username),           
+  timeSent    timestamp,
+  message     varchar(300),
+  sentBy      varchar(30) references users(username),
+	primary key (msgID)
+  )""")
+
   cur.close()
   db.commit()
   return
@@ -70,6 +80,7 @@ def deleteTables():
   cur.execute("""drop table userCourse""")
   cur.execute("""drop table Courses""")
   cur.execute("""drop table bookings""")
+  cur.execute("""drop table messages""")
   cur.execute("""drop table Users""")
 
   cur.execute("""drop type uType""")
@@ -84,6 +95,7 @@ def clearData():
   cur.execute("""delete from userCourse""")
   cur.execute("""delete from bookings""")
   cur.execute("""delete from Courses""")
+  cur.execute("""delete from messages""")
   cur.execute("""delete from Users""")
   cur.close()
   db.commit()
@@ -144,6 +156,16 @@ def inputData5():
   db.commit()
   return
 
+# Input dummy data for messages table
+def inputData6():
+  cur = db.cursor()
+  cur.execute("""insert into messages values ('1', 'username2', 'username4', '2023-05-25 13:00:00', 'Hello, are you avaliable', 'username2')""")
+  cur.execute("""insert into messages values ('2', 'username2', 'username4', '2023-05-25 13:00:30', 'yes I am', 'username4')""")
+  cur.execute("""insert into messages values ('3', 'username2', 'username4', '2023-05-25 13:02:10', 'Do you offer algebra specific tutoring', 'username2')""")
+  cur.close()
+  db.commit()
+  return
+
 # Print out all the data in the database currently
 def printData():
   cur = db.cursor()
@@ -165,6 +187,10 @@ def printData():
     print(t)
   print('Bookings table')
   cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime, b.approved, b.description from bookings b""")
+  for t in cur.fetchall():
+    print(t)
+  print('Messages table')
+  cur.execute("""select m.msgID, m.stuUser, m.tutUser, m.timeSent, m.message, m.sentBy from messages m""")
   for t in cur.fetchall():
     print(t)
   cur.close()
@@ -202,6 +228,7 @@ if __name__ == '__main__':
         # inputData3()
         # inputData4()
         # inputData5()
+        # inputData6()
         # test()
         printData()
 

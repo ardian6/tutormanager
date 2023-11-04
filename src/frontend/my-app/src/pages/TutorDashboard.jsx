@@ -37,6 +37,51 @@ const TutorDashboard = () => {
     }
   };
 
+  const acceptBooking = async (bookingID) => {
+    const response = await fetch(
+      "http://localhost:5005/booking/accept-booking",
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token,
+          bookingID: bookingID,
+        }),
+      }
+    );
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      getBookings();
+    }
+  };
+
+  const declineBooking = async (studID, tutID) => {
+    const response = await fetch(
+      "http://localhost:5005/booking/delete-booking",
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token,
+          studentUser: studID,
+          tutorUser: tutID
+        }),
+      }
+    );
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      getBookings();
+    }
+  };
+
   React.useEffect(() => {
     getBookings();
   }, []);
@@ -142,7 +187,7 @@ const TutorDashboard = () => {
                                 className="individual-profile-button"
                                 variant="contained"
                                 color="success"
-                                // onClick={() => redirectStudent(student["username"])}
+                                onClick={() => {acceptBooking(booking[0])}}
                               >
                                 Accept
                               </Button>
@@ -169,7 +214,7 @@ const TutorDashboard = () => {
                                 className="individual-profile-button"
                                 variant="contained"
                                 color="error"
-                                // onClick={() => redirectStudent(student["username"])}
+                                onClick={() => {declineBooking(booking[1], booking[2])}}
                               >
                                 Reject
                               </Button>
