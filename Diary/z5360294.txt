@@ -38,3 +38,7 @@ on the studentdashboard pages such as modal not showing correct username that wa
 communicating with the backend engineers with how the backend worked before I was able to complete my features as I required dummy data. We made plans for the next week to complete and polish our sprint 2 
 before sprint 2 deadline. I worked with Michael to create most of the frontend features. Majority of the UI was created my me. Michael would go in after the UI was finished and implement most of the 
 functionality features. 
+
+Week 8
+We went back and polished most of the program. I fixed the change password in the admin page that allows the admin to change the password of users and tutors. Started some media queries for some main pages. 
+I cleaned up most of the UI changes for sprint 2 ahead of the demo. Went through and found some bugs where the modal was not properly displaying the correct username that was being displayed. 
