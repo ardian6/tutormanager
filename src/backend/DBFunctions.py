@@ -364,7 +364,6 @@ def dbListAllBookings() -> list:
     cur = db.cursor()
     cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime, b.approved, b.description from bookings b""")
     for t in cur.fetchall():
-        print(t)
         newStorage = []
         newStorage.append(t[0])
         newStorage.append(t[1].lower())
@@ -513,4 +512,5 @@ def dbSendMessage(stuUser, tutUser, sentBy, timeSent, message):
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    dbSendMessage('username3', 'username4', 'username3', '2023-11-3 19:02:10', 'hello nice to meet you')
+    #print(dbListMessages('username2', 'username4'))
+    print(dbListAllBookings())
