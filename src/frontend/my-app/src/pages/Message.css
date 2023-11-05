@@ -1,0 +1,41 @@
+.message-container {
+  background-color: #4960a6;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-card {
+  margin-top: 60px;
+  height: 750px;
+  width: 600px;
+  /* border: 1px solid; */
+  border-radius: 10px;
+  background-color: #ebf3ff;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex-direction: column;
+      gap: 20px; */
+  position: relative;
+}
+
+.message-title {
+  font-size: 25px;
+  position: absolute;
+  top: 20px;
+  margin: auto;
+}
+
+.inner-container {
+  height: 620px;
+  width: 500px;
+  background-color: aliceblue;
+  border: 1px solid gray;
+
+  overflow-y: scroll;
+}

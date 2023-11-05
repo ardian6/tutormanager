@@ -91,7 +91,6 @@ const TempView = () => {
           {loggedInUserType === "student" && userType === "tutor" && (
             <div className="view-profile-feature-buttons">
               <Stack spacing={2} direction="row">
-                <Button variant="contained">Book Tutor</Button>
                 <Button variant="contained">Message {firstName}</Button>
               </Stack>
             </div>

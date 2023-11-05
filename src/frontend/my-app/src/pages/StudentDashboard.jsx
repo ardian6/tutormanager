@@ -62,8 +62,13 @@ const StudentDashboard = () => {
     }
   };
 
-  const redirectStudent = (id) => {
+  const redirectStudentProfile = (id) => {
     const path = "/Profile/" + id;
+    navigate(path);
+  };
+
+  const redirectStudentMessage = (id) => {
+    const path = "/Message/" + id;
     navigate(path);
   };
 
@@ -144,7 +149,7 @@ const StudentDashboard = () => {
                         <Button
                           className="individual-profile-button"
                           variant="outlined"
-                          onClick={() => redirectStudent(booking[2])}
+                          onClick={() => redirectStudentProfile(booking[2])}
                         >
                           {booking[2]}
                         </Button>
@@ -253,7 +258,7 @@ const StudentDashboard = () => {
                               className="individual-profile-button"
                               variant="contained"
                               onClick={() =>
-                                redirectStudent(student["username"])
+                                redirectStudentProfile(student["username"])
                               }
                             >
                               Profile
@@ -261,6 +266,9 @@ const StudentDashboard = () => {
                             <Button
                               className="individual-profile-button"
                               variant="outlined"
+                              onClick={() =>
+                                redirectStudentMessage(student["username"])
+                              }
                             >
                               Message
                             </Button>
