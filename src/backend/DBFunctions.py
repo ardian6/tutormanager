@@ -491,7 +491,7 @@ def dbListMessages(stuUser, tutUser):
         specificMessage.append(t[0])
         specificMessage.append(t[1])
         specificMessage.append(t[2])
-        specificMessage.append(t[3])
+        specificMessage.append(t[3].strftime("%Y-%m-%d %H:%M:%S"))
         specificMessage.append(t[4])
         specificMessage.append(t[5])
         messageList.append(specificMessage)
