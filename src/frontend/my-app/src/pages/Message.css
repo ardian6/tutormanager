@@ -36,6 +36,67 @@
   width: 500px;
   background-color: aliceblue;
   border: 1px solid gray;
-
   overflow-y: scroll;
+}
+
+.inner-container-scroll {
+  width: 100%;
+  min-height: 620px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.inner-container-scroll .each-message {
+  width: 450px;
+  min-height: 100px;
+  background-color: aliceblue;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  position: relative;
+}
+
+.individual-profile-image-message {
+  width: 50px;
+}
+
+.image-div {
+  width: 50px;
+  height: 100px;
+  position: absolute;
+  left: 0;
+}
+
+.message-div {
+  width: 390px;
+  margin-left: 60px;
+}
+
+.message-time {
+  font-size: 11px;
+}
+
+.message-text {
+  margin-top: 12px;
+}
+
+.send-container {
+  position: absolute;
+  bottom: 0;
+  width: 99.5%;
+  min-height: 100px;
+  z-index: 5;
+  border: solid 1px black;
+}
+
+.send-button {
+  margin-top: 100px;
+  position: absolute;
+  z-index: 5;
+  right: 5px;
+  bottom: 5px;
 }
