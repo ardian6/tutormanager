@@ -491,7 +491,7 @@ def dbGroupUsers():
 def dbListMessages(stuUser: str, tutUser: str) -> list:
     db = connectDB()
     cur = db.cursor()
-    cur.execute("""select m.msgID, m.stuUser, m.tutUser, m.timeSent, m.message, m.sentBy from messages m where m.stuUser = %s and m.tutUser = %s""", [stuUser, tutUser])
+    cur.execute("""select m.msgID, m.stuUser, m.tutUser, m.timeSent, m.message, m.sentBy from messages m where m.stuUser = %s and m.tutUser = %s order by m.timeSent""", [stuUser, tutUser])
     messageList = []
     for t in cur.fetchall():
         specificMessage = []
@@ -570,4 +570,4 @@ def dbAverageRatings (tutUser: str) -> float:
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbAdminDelete('username4'))
+    print(dbListMessages('username2', 'username4'))

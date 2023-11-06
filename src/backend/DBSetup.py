@@ -172,9 +172,9 @@ def inputData5():
 # Input dummy data for messages table
 def inputData6():
   cur = db.cursor()
+  cur.execute("""insert into messages values ('3', 'username2', 'username4', '2023-05-25 13:02:10', 'Do you offer algebra specific tutoring', 'username2')""")
   cur.execute("""insert into messages values ('1', 'username2', 'username4', '2023-05-25 13:00:00', 'Hello, are you avaliable', 'username2')""")
   cur.execute("""insert into messages values ('2', 'username2', 'username4', '2023-05-25 13:00:30', 'yes I am', 'username4')""")
-  cur.execute("""insert into messages values ('3', 'username2', 'username4', '2023-05-25 13:02:10', 'Do you offer algebra specific tutoring', 'username2')""")
   cur.execute("""insert into messages values ('4', 'username3', 'username6', '2023-05-25 13:02:10', 'Delete Test', 'username3')""")
   cur.close()
   db.commit()
