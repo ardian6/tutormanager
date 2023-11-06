@@ -319,4 +319,4 @@ def adminChangePassword(session_token: str, targetProfile: str, newPassword: str
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(allUsersData('2'))
+    print(deleteAccount('3', 'password4'))

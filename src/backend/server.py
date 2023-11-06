@@ -15,6 +15,7 @@ from profile import addNewCourse, adminAddCourse, adminDeleteCourse, deleteCours
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
 from filterT import filterTutors, getUserGroups
 from messages import listMessages, sendMessage
+from ratings import makeRatings, tutorWrittenRatings, tutorAverageRatings
 
 def quit_gracefully(*args):
     '''For coverage'''
@@ -268,6 +269,31 @@ def message_list():
 def message_send():
     data = request.get_json()
     return dumps(sendMessage(data['token'], data['studentUsername'], data['tutorUsername'], data['sentBy'], data['timestamp'], data['message']))
+
+"""
+ROUTES FOR Ratings FUNCTIONS
+
+"""
+## User Ratings Make a Rating Implementation to Server ##
+
+@APP.route("/ratings/make-rating", methods = ['PUT'])
+def ratings_make():
+    data = request.get_json()
+    return dumps(makeRatings(data['token'], data['studentUsername'], data['tutorUsername'], data['ratingNumber'], data['ratingMessage']))
+
+## User Ratings View All Ratings Implementation to Server ##
+
+@APP.route("/ratings/view-all-tutor-ratings", methods = ['POST'])
+def ratings_view_all():
+    data = request.get_json()
+    return dumps(tutorWrittenRatings(data['token'], data['tutorUsername']))
+
+## User Ratings View Average Rating Implementation to Server ##
+
+@APP.route("/ratings/view-average-tutor-ratings", methods = ['POST'])
+def ratings_view_average():
+    data = request.get_json()
+    return dumps(tutorAverageRatings(data['token'], data['tutorUsername']))
 
 """
 END OF ROUTES
