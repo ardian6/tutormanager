@@ -257,6 +257,9 @@ def dbViewProfile(targetProfile: str):
     allData = cur.fetchone()
     cur.close()
     db.commit()
+    averageRatings = 0.0
+    if allData[4] == 'tutor':
+        averageRatings = dbAverageRatings(targetProfile)
     return { # Return it in a dictionary format with all information 
         'username': allData[0],
         'email': allData[1],
@@ -267,6 +270,7 @@ def dbViewProfile(targetProfile: str):
         'location': allData[6],
         'phone': allData[7],
         'timezone': allData[8],
+        'averageRating': averageRatings
     }
 
 # This function goes into the database and removes all data related to the targeted user
@@ -562,4 +566,4 @@ def dbAverageRatings (tutUser: str) -> float:
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbAverageRatings('username6'))
+    print(dbViewProfile('username2'))
