@@ -241,6 +241,8 @@ def dbDeleteAccount(token: str, password: str):
         cur.execute("""delete from Sessions s where s.username = %s""", [currUsername])
         cur.execute("""delete from userCourse c where c.username = %s""", [currUsername])
         cur.execute("""delete from bookings b where b.stuUser = %s or b.tutUser = %s""", [currUsername, currUsername])
+        cur.execute("""delete from messages m where m.stuUser = %s or m.tutUser = %s""", [currUsername, currUsername])
+        cur.execute("""delete from ratings r where r.stuUser = %s or r.tutUser = %s""", [currUsername, currUsername])
         cur.execute("""delete from Users u where u.username = %s""", [currUsername])
 
     cur.close()
@@ -282,6 +284,8 @@ def dbAdminDelete(targetProfile: str):
     cur.execute("""delete from Sessions s where s.username = %s""", [targetProfile])
     cur.execute("""delete from userCourse c where c.username = %s""", [targetProfile])
     cur.execute("""delete from bookings b where b.stuUser = %s or b.tutUser = %s""", [targetProfile, targetProfile])
+    cur.execute("""delete from messages m where m.stuUser = %s or m.tutUser = %s""", [targetProfile, targetProfile])
+    cur.execute("""delete from ratings r where r.stuUser = %s or r.tutUser = %s""", [targetProfile, targetProfile])
     cur.execute("""delete from Users u where u.username = %s""", [targetProfile])
     cur.close()
     db.commit()
@@ -566,4 +570,4 @@ def dbAverageRatings (tutUser: str) -> float:
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbViewProfile('username2'))
+    print(dbAdminDelete('username4'))
