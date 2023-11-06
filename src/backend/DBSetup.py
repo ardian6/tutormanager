@@ -63,9 +63,19 @@ def setupTables():
   stuUser     varchar(30) references users(username),
   tutUser     varchar(30) references users(username),           
   timeSent    timestamp,
-  message     varchar(300),
+  message     varchar(1000),
   sentBy      varchar(30) references users(username),
 	primary key (msgID)
+  )""")
+
+  cur.execute("""create table ratings (
+  ratingID      varchar(30),
+  stuUser       varchar(30) references users(username),
+  tutUser       varchar(30) references users(username),           
+  timeSent      timestamp,
+  ratingMessage varchar(1000),
+  ratingNumber  numeric,
+	primary key (ratingID)
   )""")
 
   cur.close()
@@ -81,6 +91,7 @@ def deleteTables():
   cur.execute("""drop table Courses""")
   cur.execute("""drop table bookings""")
   cur.execute("""drop table messages""")
+  cur.execute("""drop table ratings""")
   cur.execute("""drop table Users""")
 
   cur.execute("""drop type uType""")
@@ -96,6 +107,7 @@ def clearData():
   cur.execute("""delete from bookings""")
   cur.execute("""delete from Courses""")
   cur.execute("""delete from messages""")
+  cur.execute("""delete from ratings""")
   cur.execute("""delete from Users""")
   cur.close()
   db.commit()
@@ -152,6 +164,7 @@ def inputData5():
   cur.execute("""insert into bookings values ('1', 'username2', 'username4', '2023-05-25 13:00:00', '2023-05-25 14:00:00', 'False', 'Maths')""")
   cur.execute("""insert into bookings values ('2', 'username3', 'username4', '2023-06-15 15:00:00', '2023-06-15 17:00:00', 'True', 'Need help in algebra')""")
   cur.execute("""insert into bookings values ('3', 'username5', 'username4', '2023-08-08 20:00:00', '2023-08-08 22:00:00', 'False', 'Grammar')""")
+  cur.execute("""insert into bookings values ('4', 'username8', 'username4', '2023-12-01 05:00:00', '2023-12-01 08:00:00', 'False', 'Future meeting')""")
   cur.close()
   db.commit()
   return
@@ -162,6 +175,16 @@ def inputData6():
   cur.execute("""insert into messages values ('1', 'username2', 'username4', '2023-05-25 13:00:00', 'Hello, are you avaliable', 'username2')""")
   cur.execute("""insert into messages values ('2', 'username2', 'username4', '2023-05-25 13:00:30', 'yes I am', 'username4')""")
   cur.execute("""insert into messages values ('3', 'username2', 'username4', '2023-05-25 13:02:10', 'Do you offer algebra specific tutoring', 'username2')""")
+  cur.close()
+  db.commit()
+  return
+
+# Input dummy data for ratings table
+def inputData7():
+  cur = db.cursor()
+  cur.execute("""insert into ratings values ('1', 'username2', 'username4', '2023-11-05 13:22:11', 'Good Tutor', 5)""")
+  cur.execute("""insert into ratings values ('2', 'username3', 'username4', '2023-11-05 16:33:40', 'Bad Tutor', 1.5)""")
+  cur.execute("""insert into ratings values ('3', 'username5', 'username4', '2023-11-05 18:09:20', 'Ok Tutor', 3.5)""")
   cur.close()
   db.commit()
   return
@@ -191,6 +214,10 @@ def printData():
     print(t)
   print('Messages table')
   cur.execute("""select m.msgID, m.stuUser, m.tutUser, m.timeSent, m.message, m.sentBy from messages m""")
+  for t in cur.fetchall():
+    print(t)
+  print('Ratings table')
+  cur.execute("""select r.ratingID, r.stuUser, r.tutUser, r.timeSent, r.ratingMessage, r.ratingNumber from ratings r""")
   for t in cur.fetchall():
     print(t)
   cur.close()
@@ -229,6 +256,7 @@ if __name__ == '__main__':
         # inputData4()
         # inputData5()
         # inputData6()
+        # inputData7()
         # test()
         printData()
 
