@@ -16,6 +16,7 @@ from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking
 from filterT import filterTutors, getUserGroups
 from messages import listMessages, sendMessage
 from ratings import makeRatings, tutorWrittenRatings, tutorAverageRatings
+from notification import checkMyNotifications, dismissNotif
 
 def quit_gracefully(*args):
     '''For coverage'''
@@ -294,6 +295,24 @@ def ratings_view_all():
 def ratings_view_average():
     data = request.get_json()
     return dumps(tutorAverageRatings(data['token'], data['tutorUsername']))
+
+"""
+ROUTES FOR Notification FUNCTIONS
+
+"""
+## User Notification List all notification for User Implementation to Server ##
+
+@APP.route("/notification/view", methods = ['POST'])
+def notification_view():
+    data = request.get_json()
+    return dumps(checkMyNotifications(data['token']))
+
+## User Notification Dismiss a single notification Implementation to Server ##
+
+@APP.route("/notification/dismiss", methods = ['PUT'])
+def notification_dismiss():
+    data = request.get_json()
+    return dumps(dismissNotif(data['token'], data['notificationID']))
 
 """
 END OF ROUTES

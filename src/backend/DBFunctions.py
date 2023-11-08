@@ -243,6 +243,7 @@ def dbDeleteAccount(token: str, password: str):
         cur.execute("""delete from bookings b where b.stuUser = %s or b.tutUser = %s""", [currUsername, currUsername])
         cur.execute("""delete from messages m where m.stuUser = %s or m.tutUser = %s""", [currUsername, currUsername])
         cur.execute("""delete from ratings r where r.stuUser = %s or r.tutUser = %s""", [currUsername, currUsername])
+        cur.execute("""delete from notifications n where n.nameOfuser = %s""", [currUsername])
         cur.execute("""delete from Users u where u.username = %s""", [currUsername])
 
     cur.close()
@@ -286,6 +287,7 @@ def dbAdminDelete(targetProfile: str):
     cur.execute("""delete from bookings b where b.stuUser = %s or b.tutUser = %s""", [targetProfile, targetProfile])
     cur.execute("""delete from messages m where m.stuUser = %s or m.tutUser = %s""", [targetProfile, targetProfile])
     cur.execute("""delete from ratings r where r.stuUser = %s or r.tutUser = %s""", [targetProfile, targetProfile])
+    cur.execute("""delete from notifications n where n.nameOfuser = %s""", [targetProfile])
     cur.execute("""delete from Users u where u.username = %s""", [targetProfile])
     cur.close()
     db.commit()
@@ -420,6 +422,12 @@ def dbMakeBooking(studentUser: str, tutorUser: str, startTime: str, endTime: str
     sTime = datetime.datetime.strptime(startTime, '%Y-%m-%d %H:%M:%S')
     dTime = datetime.datetime.strptime(endTime, '%Y-%m-%d %H:%M:%S')
     cur.execute("""insert into bookings values (%s, %s, %s, %s, %s, %s, %s)""", [bookingId, studentUser, tutorUser, sTime, dTime, False, description])
+    
+    notifID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+    notifstr = "A booking has been made by " + studentUser
+    timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, tutorUser, timeNow, notifstr])
+
     cur.close()
     db.commit()
     return
@@ -430,6 +438,12 @@ def dbDeleteBooking(studentUser: str, tutorUser: str):
     cur = db.cursor()
     # Delete from database
     cur.execute("""delete from bookings b where b.stuUser = %s and b.tutUser = %s""", [studentUser, tutorUser])
+
+    notifID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+    notifstr = "The booking with " + tutorUser + " has been rejected/deleted"
+    timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, studentUser, timeNow, notifstr])
+
     cur.close()
     db.commit()
     return
@@ -451,6 +465,18 @@ def dbAcceptBooking(bID: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""update Bookings set approved = %s where bookingID = %s""", [True, bID])
+
+    cur.execute("""select b.stuUser, b.tutUser from Bookings b where bookingID = %s""", [bID])
+    studentUsername = ""
+    tutorUsername = ""
+    for t in cur.fetchall():
+        studentUsername = t[0]
+        tutorUsername = t[1]
+    notifID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+    notifstr = "The booking with " + tutorUsername + " has been accepted"
+    timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, studentUsername, timeNow, notifstr])
+
     cur.close()
     db.commit()
     return
@@ -491,7 +517,7 @@ def dbGroupUsers():
 def dbListMessages(stuUser: str, tutUser: str) -> list:
     db = connectDB()
     cur = db.cursor()
-    cur.execute("""select m.msgID, m.stuUser, m.tutUser, m.timeSent, m.message, m.sentBy from messages m where m.stuUser = %s and m.tutUser = %s""", [stuUser, tutUser])
+    cur.execute("""select m.msgID, m.stuUser, m.tutUser, m.timeSent, m.message, m.sentBy from messages m where m.stuUser = %s and m.tutUser = %s order by m.timeSent""", [stuUser, tutUser])
     messageList = []
     for t in cur.fetchall():
         specificMessage = []
@@ -514,6 +540,17 @@ def dbSendMessage(stuUser: str, tutUser: str, sentBy: str, timeSent: str, messag
     messageID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
     timeFormat = datetime.datetime.strptime(timeSent, '%Y-%m-%d %H:%M:%S')
     cur.execute("""insert into messages values (%s, %s, %s, %s, %s, %s)""", [messageID, stuUser, tutUser, timeFormat, message, sentBy])
+
+    notifID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+    timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    notifstr = ""
+    if stuUser == sentBy:
+        notifstr = "You have recieved a message from " + stuUser
+        cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, tutUser, timeNow, notifstr])
+    else:
+        notifstr = "You have recieved a message from " + tutUser
+        cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, stuUser, timeNow, notifstr])
+
     cur.close()
     db.commit()
     return
@@ -533,6 +570,11 @@ def dbMakeRating(stuUser: str, tutUser: str, numberRate: float, reviewRate: str)
         ratingID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
         timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         cur.execute("""insert into ratings values (%s, %s, %s, %s, %s, %s)""", [ratingID, stuUser, tutUser, timeNow, reviewRate, numberRate])
+
+        notifID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+        notifstr = "A new rating has been made on you by " + stuUser
+        timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, tutUser, timeNow, notifstr])
     cur.close()
     db.commit()
     return valid
@@ -550,7 +592,7 @@ def dbTutorRatings(tutUser: str) -> list:
         singleReview.append(t[2])
         singleReview.append(t[3].strftime("%Y-%m-%d %H:%M:%S"))
         singleReview.append(t[4])
-        singleReview.append(t[5])
+        singleReview.append(str(t[5]))
         listOfAllReviews.append(singleReview)
     cur.close()
     db.commit()
@@ -568,6 +610,35 @@ def dbAverageRatings (tutUser: str) -> float:
         return 0.0
     return total/amount
 
+# This functions retrieves all the notifications associated with this specific user from the database
+def dbAllNotifications(token: str) -> list:
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
+    currUsername = None
+    for t in cur.fetchall():
+        currUsername = t[0]
+    cur.execute("""select n.notifID, n.nameOfuser, n.timeSent, n.notifMessage from notifications n where n.nameOfUser = %s""", [currUsername])
+    listOfAllNotif = []
+    for t in cur.fetchall():
+        singleNotif = []
+        singleNotif.append(t[0])
+        singleNotif.append(t[1])
+        singleNotif.append(t[2].strftime("%Y-%m-%d %H:%M:%S"))
+        singleNotif.append(t[3])
+        listOfAllNotif.append(singleNotif)
+    cur.close()
+    db.commit()
+    return listOfAllNotif
+
+def dbDismissNotif(notificationID):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""delete from notifications n where n.notifID = %s""", [notificationID])
+    cur.close()
+    db.commit()
+    return
+
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbAdminDelete('username4'))
+    print(dbAverageRatings('username4'))
