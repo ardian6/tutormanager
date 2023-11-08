@@ -48,7 +48,14 @@ const Payment = () => {
             </div>
           </Box>
           <div>
-            <Button variant="outlined">Process Payment</Button>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                navigate("/dashboard");
+              }}
+            >
+              Process Payment
+            </Button>
           </div>
         </div>
       </div>
