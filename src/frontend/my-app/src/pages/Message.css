@@ -1,0 +1,119 @@
+.message-container {
+  background-color: #4960a6;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-card {
+  margin-top: 60px;
+  height: 750px;
+  width: 600px;
+  /* border: 1px solid; */
+  border-radius: 10px;
+  background-color: #ebf3ff;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex-direction: column;
+      gap: 20px; */
+  position: relative;
+}
+
+.message-title {
+  font-size: 25px;
+  position: absolute;
+  top: 20px;
+  margin: auto;
+}
+
+.inner-container {
+  height: 500px;
+  width: 500px;
+  background-color: aliceblue;
+  border: 1px solid gray;
+  overflow-y: scroll;
+  margin-bottom: 100px;
+}
+
+.inner-container-scroll {
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.inner-container-scroll .each-message {
+  width: 450px;
+  min-height: 400px;
+  background-color: aliceblue;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  position: relative;
+}
+
+.individual-profile-image-message {
+  width: 50px;
+}
+
+.image-div {
+  width: 50px;
+  height: 100px;
+  position: absolute;
+  left: 0;
+}
+
+.message-div {
+  width: 390px;
+  margin-left: 60px;
+}
+
+.message-time {
+  font-size: 11px;
+}
+
+.message-text {
+  margin-top: 12px;
+}
+
+.send-container {
+  position: absolute;
+  /* bottom: 0;  */
+  margin-top: 505px;
+  width: 500px;
+  min-height: 100px;
+  z-index: 5;
+  border: solid 1px black;
+}
+
+.send-button {
+  margin-top: 100px;
+  position: absolute;
+  z-index: 5;
+  right: 5px;
+  bottom: 5px;
+}
+
+.message-loading {
+  position: absolute;
+  margin-top: 230px;
+  margin-left: 230px;
+}
+
+.no-messages-message {
+  position: absolute;
+  margin-top: 230px;
+  margin-left: 55px;
+  text-align: center;
+  width: 380px;
+  height: 50px;
+}

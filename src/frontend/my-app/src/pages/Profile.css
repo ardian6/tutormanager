@@ -11,7 +11,7 @@
 .profile-card {
   margin-top: 60px;
   height: 80vh;
-  width: 85vw;
+  width: 60vw;
   /* border: 1px solid; */
   border-radius: 10px;
   background-color: #ebf3ff;
@@ -140,7 +140,6 @@
   transition: color 0.3s ease-out;
   padding: 6px;
 }
-
 
 @media only screen and (max-width: 900px) {
   .profile-upper {

@@ -327,3 +327,12 @@
 .pending-div {
   color: orange;
 }
+
+.search-tutor-none-message {
+  margin-top: 250px;
+  position: absolute;
+}
+
+.search-tutor-none-message {
+  text-align: center;
+}
