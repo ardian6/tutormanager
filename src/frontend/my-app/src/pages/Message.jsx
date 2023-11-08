@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
+import moment from "moment";
 
 const Message = () => {
   const { getters } = useContext(Context);
@@ -51,33 +52,40 @@ const Message = () => {
     }
   };
 
-  // const sendMessage = async (message) => {
-  //   // console.log(message);
-  //   const response = await fetch("http://localhost:5005/message/send-message", {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       token: token,
-  //       studentUsername:
-  //         myUsertype === "student" ? myUsername : viewingUsername,
-  //       tutorUsername: myUsertype === "tutor" ? myUsername : viewingUsername,
-  //       sentBy: myUsername,
-  //       timestamp: moment().format(),
-  //       message: message,
-  //     }),
-  //   });
+  const sendMessage = async () => {
+    if (message.length === 0) {
+      alert("Message must not be an empty string.");
+      return;
+    }
+    var moment = require("moment");
+    var time = moment().format("YYYY-MM-DD H:mm:ss");
+    console.log(time);
+    const response = await fetch("http://localhost:5005/message/send-message", {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+        studentUsername:
+          myUsertype === "student" ? myUsername : viewingUsername,
+        tutorUsername: myUsertype === "tutor" ? myUsername : viewingUsername,
+        sentBy: myUsername,
+        timestamp: time,
+        message: message,
+      }),
+    });
 
-  //   const data = await response.json();
-  //   if (data.error) {
-  //     alert(data.error);
-  //   } else {
-  //     console.log(data.messageList);
-  //     setMyMessages(data.messageList);
-  //     // setCheckedAsync(true);
-  //   }
-  // };
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      // console.log(data.messageList);
+      // setMyMessages(data.messageList);
+      // setCheckedAsync(true);
+      getMessages();
+    }
+  };
 
   React.useEffect(() => {
     getMessages();
@@ -124,25 +132,49 @@ const Message = () => {
 
             <div className="inner-container-scroll">
               {myMessages.map((message, idx) => {
-                return (
-                  <span key={idx} className="each-message">
-                    <div className="image-div">
+                // {
+                //   console.log(message[5]);
+                // }
+                return message[5] !== myUsername ? (
+                  <span key={idx} className="each-message-other">
+                    <div className="other-image-div">
                       <img
                         src={defaultImage}
                         alt="default-image"
-                        className="individual-profile-image-message"
+                        className="other-individual-profile-image-message"
                       />
                     </div>
 
-                    <div className="message-div">
+                    <div className="other-message-div">
                       <div>
                         {message[5]}
-                        <span className="message-time">
+                        <span className="other-message-time">
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           {change_date_format(message[3])}
                         </span>
                       </div>
-                      <div className="message-text">{message[4]}</div>
+                      <div className="other-message-text">{message[4]}</div>
+                    </div>
+                  </span>
+                ) : (
+                  <span key={idx} className="each-message-mine">
+                    <div className="mine-image-div">
+                      <img
+                        src={defaultImage}
+                        alt="default-image"
+                        className="mine-individual-profile-image-message"
+                      />
+                    </div>
+
+                    <div className="mine-message-div">
+                      <div className="mine-message-info">
+                        {message[5]}
+                        <span className="mine-message-time">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          {change_date_format(message[3])}
+                        </span>
+                      </div>
+                      <div className="mine-message-text">{message[4]}</div>
                     </div>
                   </span>
                 );
@@ -167,9 +199,9 @@ const Message = () => {
             <Stack spacing={1} direction="row" className="send-button">
               <Button
                 variant="contained"
-                // onClick={() => {
-                //   sendMessage(message);
-                // }}
+                onClick={() => {
+                  sendMessage();
+                }}
               >
                 Send
               </Button>
