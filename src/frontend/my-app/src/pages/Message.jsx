@@ -8,6 +8,7 @@ import defaultImage from "./DefaultProfile.png";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Message = () => {
   const { getters } = useContext(Context);
@@ -20,6 +21,9 @@ const Message = () => {
 
   const [myMessages, setMyMessages] = React.useState([]);
 
+  const [checkedAsync, setCheckedAsync] = React.useState(false);
+
+  const [message, setMessage] = React.useState("");
   const getMessages = async () => {
     const response = await fetch(
       "http://localhost:5005/message/list-messages",
@@ -43,12 +47,48 @@ const Message = () => {
     } else {
       setMyMessages(data.messageList);
       console.log(data.messageList);
+      setCheckedAsync(true);
     }
   };
+
+  // const sendMessage = async (message) => {
+  //   // console.log(message);
+  //   const response = await fetch("http://localhost:5005/message/send-message", {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       token: token,
+  //       studentUsername:
+  //         myUsertype === "student" ? myUsername : viewingUsername,
+  //       tutorUsername: myUsertype === "tutor" ? myUsername : viewingUsername,
+  //       sentBy: myUsername,
+  //       timestamp: moment().format(),
+  //       message: message,
+  //     }),
+  //   });
+
+  //   const data = await response.json();
+  //   if (data.error) {
+  //     alert(data.error);
+  //   } else {
+  //     console.log(data.messageList);
+  //     setMyMessages(data.messageList);
+  //     // setCheckedAsync(true);
+  //   }
+  // };
 
   React.useEffect(() => {
     getMessages();
   }, []);
+
+  React.useEffect(() => {
+    if (document.getElementById("scroll-bottom")) {
+      let scroll_to_bottom = document.getElementById("scroll-bottom");
+      scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
+    }
+  }, [myMessages]);
 
   function change_date_format(date) {
     var year = date.slice(0, 4);
@@ -69,24 +109,20 @@ const Message = () => {
       <div className="message-container">
         <div className="message-card">
           <div className="message-title">{viewingUsername}</div>
-          <div className="inner-container">
-            <div className="inner-container-scroll">
-              <div className="send-container">
-                <div>
-                  <TextField
-                    id="filled-multiline-static"
-                    label="Message"
-                    multiline
-                    rows={3}
-                    defaultValue=""
-                    variant="filled"
-                    fullWidth
-                  />
-                </div>
-                <Stack spacing={1} direction="row" className="send-button">
-                  <Button variant="contained">Send</Button>
-                </Stack>
+          <div className="inner-container" id="scroll-bottom">
+            {checkedAsync === false && (
+              <div className="message-loading">
+                <CircularProgress />
               </div>
+            )}
+            {checkedAsync === true && myMessages.length === 0 && (
+              <div className="no-messages-message">
+                No existing conversation with {viewingUsername}. Start Messaging
+                now!
+              </div>
+            )}
+
+            <div className="inner-container-scroll">
               {myMessages.map((message, idx) => {
                 return (
                   <span key={idx} className="each-message">
@@ -112,6 +148,32 @@ const Message = () => {
                 );
               })}
             </div>
+          </div>
+          <div className="send-container">
+            <div>
+              <TextField
+                id="filled-multiline-static"
+                label="Message"
+                multiline
+                rows={3}
+                defaultValue=""
+                variant="filled"
+                fullWidth
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              />
+            </div>
+            <Stack spacing={1} direction="row" className="send-button">
+              <Button
+                variant="contained"
+                // onClick={() => {
+                //   sendMessage(message);
+                // }}
+              >
+                Send
+              </Button>
+            </Stack>
           </div>
         </div>
       </div>

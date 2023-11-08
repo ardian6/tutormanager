@@ -30,6 +30,7 @@ const TempView = () => {
   const loggedInUserName = getters.usernameGlobal;
   const loggedInUserType = getters.userTypeGlobal;
   const token = getters.token;
+  const navigate = useNavigate();
 
   const getUser = async () => {
     if (!token || !loggedInUserName) {
@@ -72,9 +73,15 @@ const TempView = () => {
       setClasses(classData.myCourses);
     }
   };
+
   React.useEffect(() => {
     getUser();
   }, []);
+
+  const redirectStudentMessage = (id) => {
+    const path = "/Message/" + id;
+    navigate(path);
+  };
 
   return (
     <>
@@ -91,14 +98,28 @@ const TempView = () => {
           {loggedInUserType === "student" && userType === "tutor" && (
             <div className="view-profile-feature-buttons">
               <Stack spacing={2} direction="row">
-                <Button variant="contained">Message {firstName}</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    redirectStudentMessage(viewingUsername);
+                  }}
+                >
+                  Message {firstName}
+                </Button>
               </Stack>
             </div>
           )}
           {loggedInUserType === "tutor" && userType === "student" && (
             <div className="view-profile-feature-buttons">
               <Stack spacing={2} direction="row">
-                <Button variant="contained">Message {firstName}</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    redirectStudentMessage(viewingUsername);
+                  }}
+                >
+                  Message {firstName}
+                </Button>
               </Stack>
             </div>
           )}

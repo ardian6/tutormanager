@@ -32,18 +32,19 @@
 }
 
 .inner-container {
-  height: 620px;
+  height: 500px;
   width: 500px;
   background-color: aliceblue;
   border: 1px solid gray;
   overflow-y: scroll;
+  margin-bottom: 100px;
 }
 
 .inner-container-scroll {
   width: 100%;
-  min-height: 620px;
+  min-height: 500px;
   display: flex;
-  justify-content: start;
+  justify-content: end;
   align-items: center;
   flex-direction: column;
   position: relative;
@@ -51,7 +52,7 @@
 
 .inner-container-scroll .each-message {
   width: 450px;
-  min-height: 100px;
+  min-height: 400px;
   background-color: aliceblue;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -86,8 +87,9 @@
 
 .send-container {
   position: absolute;
-  bottom: 0;
-  width: 99.5%;
+  /* bottom: 0;  */
+  margin-top: 505px;
+  width: 500px;
   min-height: 100px;
   z-index: 5;
   border: solid 1px black;
@@ -99,4 +101,19 @@
   z-index: 5;
   right: 5px;
   bottom: 5px;
+}
+
+.message-loading {
+  position: absolute;
+  margin-top: 230px;
+  margin-left: 230px;
+}
+
+.no-messages-message {
+  position: absolute;
+  margin-top: 230px;
+  margin-left: 55px;
+  text-align: center;
+  width: 380px;
+  height: 50px;
 }
