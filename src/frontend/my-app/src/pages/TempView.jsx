@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+ import { useParams } from "react-router-dom";
 import React from "react";
 import "./TempView.css";
 
@@ -13,6 +13,8 @@ import defaultImage from "./DefaultProfile.png";
 import EditIcon from "@mui/icons-material/Edit";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { Context, useContext } from "../Context";
+import BookModal from "../components/BookModal";
+import RatingModal from "../components/RatingModal";
 
 const TempView = () => {
   const param = useParams();
@@ -91,15 +93,20 @@ const TempView = () => {
           {loggedInUserType === "student" && userType === "tutor" && (
             <div className="view-profile-feature-buttons">
               <Stack spacing={2} direction="row">
-                <Button variant="contained">Book Tutor</Button>
-                <Button variant="contained">Message {firstName}</Button>
+                <BookModal
+                    variant="contained"
+                    stuToken={token}
+                    tutUser={viewingUsername}
+                ></BookModal>
+                <Button variant="outlined" className="individual-profile-button">Message {firstName}</Button>
+                <RatingModal token={token} tutorUser={viewingUsername}></RatingModal>
               </Stack>
             </div>
           )}
           {loggedInUserType === "tutor" && userType === "student" && (
             <div className="view-profile-feature-buttons">
               <Stack spacing={2} direction="row">
-                <Button variant="contained">Message {firstName}</Button>
+                <Button variant="contained" className="individual-profile-button" >Message {firstName}</Button>
               </Stack>
             </div>
           )}
