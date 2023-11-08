@@ -58,7 +58,7 @@ const Message = () => {
       return;
     }
     var moment = require("moment");
-    var time = moment().format("YYYY-MM-DD H:mm:ss");
+    var time = moment().format("YYYY-MM-DD HH:mm:ss");
     console.log(time);
     const response = await fetch("http://localhost:5005/message/send-message", {
       method: "PUT",
