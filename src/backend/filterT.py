@@ -14,7 +14,9 @@ def filterTutors(session_token, course, location, timezone, rating):
           courseList = dbViewUsernameCourses(dictHolder['username'])
           dictHolder['courseList'] = courseList
           if (course == '' or course in courseList):
-            listofValidTutors.append(dictHolder)
+            if (rating == '' or float(rating) <= float(dictHolder['averageRating'])):
+              listofValidTutors.append(dictHolder)
+
   return {
     "token": session_token,
     "listofalldata": listofValidTutors
@@ -34,4 +36,4 @@ def getUserGroups(session_token: str):
   }
 
 if __name__ == '__main__':
-    print(filterTutors('2', '', '', '', 0))
+    print(filterTutors('2', '', '', '', '5'))

@@ -641,4 +641,4 @@ def dbDismissNotif(notificationID):
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbAverageRatings('username4'))
+    print(dbListMessages('username2', 'username4'))
