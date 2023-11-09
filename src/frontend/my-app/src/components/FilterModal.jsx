@@ -156,6 +156,7 @@ export default function FilterModal({
               <Input
                 id="Card Number"
                 value={review}
+                type="number"
                 onChange={(event) => {
                   setReview(event.target.value);
                 }}
