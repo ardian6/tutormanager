@@ -157,11 +157,7 @@ export default function FilterModal({
                 id="Card Number"
                 value={review}
                 type="number"
-                InputProps={{
-                  inputProps: { 
-                      max: 5, min: 0 
-                    }
-                }}
+                InputProps={{ inputProps: { min: "0", max: "5", step: "1" } }}
                 onChange={(event) => {
                   setReview(event.target.value);
                 }}
