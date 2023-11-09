@@ -592,7 +592,7 @@ def dbTutorRatings(tutUser: str) -> list:
         singleReview.append(t[2])
         singleReview.append(t[3].strftime("%Y-%m-%d %H:%M:%S"))
         singleReview.append(t[4])
-        singleReview.append(t[5])
+        singleReview.append(str(t[5]))
         listOfAllReviews.append(singleReview)
     cur.close()
     db.commit()
@@ -641,4 +641,4 @@ def dbDismissNotif(notificationID):
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
-    print(dbDismissNotif('1'))
+    print(dbAverageRatings('username4'))

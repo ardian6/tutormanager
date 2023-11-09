@@ -13,7 +13,7 @@ const TutorDashboard = () => {
   const { getters } = useContext(Context);
   const token = getters.token;
   const [mybookings, setMybookings] = React.useState([]);
-
+  const [checkedRequests, setCheckedRequests] = React.useState(false);
   const getBookings = async () => {
     const response = await fetch(
       "http://localhost:5005/bookings/view-my-bookings",
@@ -32,8 +32,9 @@ const TutorDashboard = () => {
       alert(data.error);
     } else {
       // console.log(data);
-      console.log(data.bookingsList);
+      // console.log(data.bookingsList);
       setMybookings(data.bookingsList);
+      setCheckedRequests(true);
     }
   };
 
@@ -70,7 +71,7 @@ const TutorDashboard = () => {
         body: JSON.stringify({
           token: token,
           studentUser: studID,
-          tutorUser: tutID
+          tutorUser: tutID,
         }),
       }
     );
@@ -139,9 +140,14 @@ const TutorDashboard = () => {
             </div> */}
             <div className="tutor-request-lower-container">
               <div className="tutor-request-lower-scroll">
-                {mybookings.length === 0 && (
+                {checkedRequests === false && (
                   <div className="search-tutor-loading">
                     <CircularProgress></CircularProgress>
+                  </div>
+                )}
+                {checkedRequests === true && mybookings.length === 0 && (
+                  <div className="student-requests-none-message">
+                    You currently have no incoming student requests.
                   </div>
                 )}
                 <div className="tutor-request-info-bar">
@@ -187,7 +193,9 @@ const TutorDashboard = () => {
                                 className="individual-profile-button"
                                 variant="contained"
                                 color="success"
-                                onClick={() => {acceptBooking(booking[0])}}
+                                onClick={() => {
+                                  acceptBooking(booking[0]);
+                                }}
                               >
                                 Accept
                               </Button>
@@ -214,7 +222,9 @@ const TutorDashboard = () => {
                                 className="individual-profile-button"
                                 variant="contained"
                                 color="error"
-                                onClick={() => {declineBooking(booking[1], booking[2])}}
+                                onClick={() => {
+                                  declineBooking(booking[1], booking[2]);
+                                }}
                               >
                                 Reject
                               </Button>
@@ -235,7 +245,10 @@ const TutorDashboard = () => {
                       </div>
                       <div className="tutor-individual-change-title">
                         <Stack spacing={1} direction="row" variant="text">
-                          <ChangeBookModal info={booking} token={token}></ChangeBookModal>
+                          <ChangeBookModal
+                            info={booking}
+                            token={token}
+                          ></ChangeBookModal>
                         </Stack>
                       </div>
                     </div>
