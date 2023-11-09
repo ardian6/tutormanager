@@ -40,12 +40,13 @@ const StudentDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
+      console.log(data);
       setCheckedAsyncSearch(true);
       setStudents(data.listofalldata);
     }
   };
 
-  const getUserRating = async (username) => {
+/*   const getUserRating = async (username) => {
     const response = await fetch("http://localhost:5005/ratings/view-average-tutor-ratings", {
       method: "POST",
       headers: {
@@ -60,9 +61,9 @@ const StudentDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      console.log(data['averageRating']);
+      return data['averageRating'];
     }
-  };
+  }; */
 
   
 
@@ -251,11 +252,7 @@ const StudentDashboard = () => {
                   </div>
                 )}
                 {students.map((student, idx) => {
-                  const val = getUserRating(student["username"]);
                   return (
-                    // <div key={idx} onClick={() => redirectStudent(student)}>
-                    //   {student}
-                    // </div>
                     <div
                       key={idx}
                       className="tutor-search-individual-container"
@@ -290,7 +287,7 @@ const StudentDashboard = () => {
                         </div>
 
                         <div>
-                          <b>Reviews:<Rating name="read-only" value={val} size='small' readOnly /> </b>
+                          <b>Reviews:<Rating name="read-only" value={student["averageRating"]} size='small' readOnly /> </b>
                         </div>
                         <div className="individual-profile-buttons">
                           <Stack spacing={1.5} direction="row" variant="text">

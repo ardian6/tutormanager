@@ -34,7 +34,8 @@
 .flex-box-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-grow: 1;
 }
 
 .all-tutors-container {
@@ -47,6 +48,10 @@
 
 .all-admins-container {
   width: 500px;
+}
+
+.removebtn {
+  position: relative;
 }
 
 @media only screen and (max-width: 1200px) {
