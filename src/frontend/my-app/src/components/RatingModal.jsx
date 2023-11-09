@@ -3,8 +3,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { Rating, TextField } from '@mui/material';
+import { List, ListItem, ListItemButton, Rating, TextField } from '@mui/material';
 import { Context, useContext } from '../Context';
+import "./RatingModal.css";
+import Divider from '@mui/material/Divider';
 
 const style = {
   position: 'absolute',
@@ -49,7 +51,7 @@ export default function RatingModal({token, tutorUser}) {
       if (data.error) {
         alert(data.error);
       } else {
-        //setRatings(data);
+        setRatings(data['allRatingsTutor']);
       }
     }
     const makeRating = async () => {
@@ -90,20 +92,26 @@ export default function RatingModal({token, tutorUser}) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {tutorUser} reviews
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <List>
+            {ratings?.map((rating, idx) => {
+                return (
+                <ListItem disablePadding>
+                  <ListItemButton class='rating-item'>
+                    <div>
+                        {rating[1]}
+                      <br></br>
+                      <Rating name="read-only" value={rating[5]} size='small' readOnly />
+                      {rating[4]}
+                    </div>
+                  </ListItemButton>
+                  <Divider />
+                </ListItem>)
+            })}
+          </List>
           <hr></hr>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Make a rating
           </Typography>
-          <div>
-            {ratings?.map((rating, idx) => {
-                return (<div key={idx}>
-
-                </div>)
-            })}
-          </div>
           <TextField onChange={(e) => {setReview(e.target.value)}}>
 
           </TextField>

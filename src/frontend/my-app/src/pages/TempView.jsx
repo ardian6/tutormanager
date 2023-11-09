@@ -99,7 +99,7 @@ const TempView = () => {
                     tutUser={viewingUsername}
                 ></BookModal>
                 <Button variant="outlined" className="individual-profile-button">Message {firstName}</Button>
-                <RatingModal token={token} tutorUser={viewingUsername}></RatingModal>
+                <RatingModal token={token} tutorUser={viewingUsername} precision={0.1}></RatingModal>
               </Stack>
             </div>
           )}
