@@ -49,7 +49,7 @@ export default function AddCourse({getCourses}) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add Course</Button>
+      <Button onClick={handleOpen} variant='outlined'>Add Course</Button>
       <Modal
         open={open}
         onClose={handleClose}

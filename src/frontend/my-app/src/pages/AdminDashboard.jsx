@@ -114,19 +114,19 @@ const AdminDashboard = () => {
         <div className="admindashboard-card">
           <div className="admin-dashboard-title">Admin Dashboard</div>
           <div className="flex-box-container">
-          <div>
-            Add/Delete Courses
             <div>
-              {courses?.map((course, idx) => {
-                return (<div key={idx}>{course} <Button className="removebtn"
-                variant="outlined"
-                startIcon={<DeleteIcon />}
-                size="small"
-                onClick={() => {deleteCourses(course)}}>Delete</Button></div>)
-              })}
-              <AddCourse getCourses={getCourses}></AddCourse>
+              Add/Delete Courses
+              <div>
+                {courses?.map((course, idx) => {
+                  return (<div key={idx}>{course} <Button className="removebtn"
+                  variant="outlined"
+                  startIcon={<DeleteIcon />}
+                  size="small"
+                  onClick={() => {deleteCourses(course)}}>Delete</Button></div>)
+                })}
+                <AddCourse getCourses={getCourses}></AddCourse>
+              </div>
             </div>
-          </div>
             <div className="all-tutors-container">
               <b>All Tutors</b>
               <div>
