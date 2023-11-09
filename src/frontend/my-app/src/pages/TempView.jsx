@@ -32,6 +32,7 @@ const TempView = () => {
   const loggedInUserName = getters.usernameGlobal;
   const loggedInUserType = getters.userTypeGlobal;
   const token = getters.token;
+  const navigate = useNavigate();
 
   const getUser = async () => {
     if (!token || !loggedInUserName) {
@@ -74,9 +75,15 @@ const TempView = () => {
       setClasses(classData.myCourses);
     }
   };
+
   React.useEffect(() => {
     getUser();
   }, []);
+
+  const redirectStudentMessage = (id) => {
+    const path = "/Message/" + id;
+    navigate(path);
+  };
 
   return (
     <>
@@ -98,15 +105,34 @@ const TempView = () => {
                     stuToken={token}
                     tutUser={viewingUsername}
                 ></BookModal>
+<<<<<<< HEAD
                 <Button variant="outlined" className="individual-profile-button">Message {firstName}</Button>
                 <RatingModal token={token} tutorUser={viewingUsername} precision={0.1}></RatingModal>
+=======
+                <RatingModal token={token} tutorUser={viewingUsername}></RatingModal>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    redirectStudentMessage(viewingUsername);
+                  }}
+                >
+                  Message {firstName}
+                </Button>
+>>>>>>> 1d5ac342850f04ab471829b7bae1bf8f45f4cc53
               </Stack>
             </div>
           )}
           {loggedInUserType === "tutor" && userType === "student" && (
             <div className="view-profile-feature-buttons">
               <Stack spacing={2} direction="row">
-                <Button variant="contained" className="individual-profile-button" >Message {firstName}</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    redirectStudentMessage(viewingUsername);
+                  }}
+                >
+                  Message {firstName}
+                </Button>
               </Stack>
             </div>
           )}
