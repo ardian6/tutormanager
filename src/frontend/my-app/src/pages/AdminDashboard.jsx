@@ -115,7 +115,7 @@ const AdminDashboard = () => {
           <div className="admin-dashboard-title">Admin Dashboard</div>
           <div className="flex-box-container">
             <div>
-              Add/Delete Courses
+              <b>Add/Delete Courses</b>
               <div>
                 {courses?.map((course, idx) => {
                   return (<div key={idx}>{course} <Button className="removebtn"
