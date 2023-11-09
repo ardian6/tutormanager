@@ -3,6 +3,7 @@ import PositionedMenu from "./PositionedMenu";
 //import SideBar from "./SideBar";
 import { Button } from "@mui/material";
 import "./NavBar.css";
+import NotificationDrawer from "../components/NotificationDrawer"
 
 function NavBar() {
 
@@ -10,7 +11,8 @@ function NavBar() {
     <div className="NavBarContainer">
       <div className="NavBar">
         <div className="NavBarInfo">
-          <div>
+          <div className="NavBarLeft">
+            <NotificationDrawer></NotificationDrawer>
             <Link to="/dashboard">
               <Button>Dashboard</Button>
             </Link>

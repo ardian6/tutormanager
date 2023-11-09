@@ -156,3 +156,10 @@
   /* margin-left: 63%; */
   right: 80px;
 }
+
+.individual-profile-buttons {
+  margin-top: 5px;
+}
+.individual-profile-button {
+  font-size: 10px !important;
+}

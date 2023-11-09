@@ -11,6 +11,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import BookModal from "../components/BookModal";
 import FilterModal from "../components/FilterModal";
 import ChangeBookModal from "../components/ChangeBookModal";
+import { Rating } from "@mui/material";
 
 const StudentDashboard = () => {
   const { getters } = useContext(Context);
@@ -39,10 +40,32 @@ const StudentDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
+      console.log(data);
       setCheckedAsyncSearch(true);
       setStudents(data.listofalldata);
     }
   };
+
+/*   const getUserRating = async (username) => {
+    const response = await fetch("http://localhost:5005/ratings/view-average-tutor-ratings", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+        tutorUsername: username,
+      }),
+    });
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      return data['averageRating'];
+    }
+  }; */
+
+  
 
   const navigate = useNavigate();
   const getBookings = async () => {
@@ -230,9 +253,6 @@ const StudentDashboard = () => {
                 )}
                 {students.map((student, idx) => {
                   return (
-                    // <div key={idx} onClick={() => redirectStudent(student)}>
-                    //   {student}
-                    // </div>
                     <div
                       key={idx}
                       className="tutor-search-individual-container"
@@ -267,8 +287,7 @@ const StudentDashboard = () => {
                         </div>
 
                         <div>
-                          <b>Reviews: </b>
-                          {/* {student["bio"]} */}
+                          <b>Reviews:<Rating name="read-only" value={student["averageRating"]} size='small' readOnly /> </b>
                         </div>
                         <div className="individual-profile-buttons">
                           <Stack spacing={1.5} direction="row" variant="text">
@@ -292,7 +311,6 @@ const StudentDashboard = () => {
                             </Button>
                             <BookModal
                               stuToken={token}
-                              tutToken={student["token"]}
                               tutUser={student["username"]}
                             ></BookModal>
                           </Stack>

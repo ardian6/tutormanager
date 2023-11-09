@@ -115,6 +115,12 @@
   align-items: center;
   gap: 5px;
 }
+
+.upper-box-three > * {
+  width: 200px;
+  /* border: #4960a6 1px solid; */
+  /* margin: auto; */
+}
 .profile-data {
   width: 80px;
   height: 20px;
