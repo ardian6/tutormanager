@@ -11,12 +11,16 @@ import CircularProgress from "@mui/material/CircularProgress";
 import BookModal from "../components/BookModal";
 import FilterModal from "../components/FilterModal";
 import ChangeBookModal from "../components/ChangeBookModal";
+import { Rating } from "@mui/material";
 
 const StudentDashboard = () => {
   const { getters } = useContext(Context);
   const token = getters.token;
   const [students, setStudents] = React.useState([]);
   const [mybookings, setMybookings] = React.useState([]);
+
+  const [checkedAsyncRequests, setCheckedAsyncRequests] = React.useState(false);
+  const [checkedAsyncSearch, setCheckedAsyncSearch] = React.useState(false);
 
   const getAllStudents = async (course, location, timezone, rating) => {
     const response = await fetch("http://localhost:5005/filter/filter-tutor", {
@@ -36,9 +40,31 @@ const StudentDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
+      setCheckedAsyncSearch(true);
       setStudents(data.listofalldata);
     }
   };
+
+  const getUserRating = async (username) => {
+    const response = await fetch("http://localhost:5005/ratings/view-average-tutor-ratings", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+        tutorUsername: username,
+      }),
+    });
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      console.log(data['averageRating']);
+    }
+  };
+
+  
 
   const navigate = useNavigate();
   const getBookings = async () => {
@@ -59,11 +85,17 @@ const StudentDashboard = () => {
       alert(data.error);
     } else {
       setMybookings(data.bookingsList);
+      setCheckedAsyncRequests(true);
     }
   };
 
-  const redirectStudent = (id) => {
+  const redirectStudentProfile = (id) => {
     const path = "/Profile/" + id;
+    navigate(path);
+  };
+
+  const redirectStudentMessage = (id) => {
+    const path = "/Message/" + id;
     navigate(path);
   };
 
@@ -121,9 +153,14 @@ const StudentDashboard = () => {
           <div className="student-request-column">
             <div className="student-request-lower-container">
               <div className="student-request-lower-scroll">
-                {mybookings.length === 0 && (
+                {checkedAsyncRequests === false && (
                   <div className="search-tutor-loading">
-                    <CircularProgress></CircularProgress>
+                    <CircularProgress />
+                  </div>
+                )}
+                {checkedAsyncRequests === true && mybookings.length === 0 && (
+                  <div className="search-tutor-none-message">
+                    You currently have no outgoing tutor requests.
                   </div>
                 )}
                 <div className="student-request-info-bar">
@@ -144,7 +181,7 @@ const StudentDashboard = () => {
                         <Button
                           className="individual-profile-button"
                           variant="outlined"
-                          onClick={() => redirectStudent(booking[2])}
+                          onClick={() => redirectStudentProfile(booking[2])}
                         >
                           {booking[2]}
                         </Button>
@@ -191,6 +228,8 @@ const StudentDashboard = () => {
                 <FilterModal
                   token={token}
                   setStudents={setStudents}
+                  setCheckedAsyncSearch={setCheckedAsyncSearch}
+                  checkedAsyncSearch={checkedAsyncSearch}
                 ></FilterModal>
                 {/* <div className="sort-container">Sort</div> */}
               </Stack>
@@ -200,12 +239,19 @@ const StudentDashboard = () => {
             </div>
             <div className="lower-box-container">
               <div className="tutor-search-scroll">
-                {students.length === 0 && (
+                {checkedAsyncSearch === false && (
                   <div className="search-tutor-loading">
                     <CircularProgress></CircularProgress>
                   </div>
                 )}
+                {checkedAsyncSearch === true && students.length === 0 && (
+                  <div className="search-tutor-none-message">
+                    No tutors available currently. Please check again later or
+                    change filters.
+                  </div>
+                )}
                 {students.map((student, idx) => {
+                  const val = getUserRating(student["username"]);
                   return (
                     // <div key={idx} onClick={() => redirectStudent(student)}>
                     //   {student}
@@ -244,8 +290,7 @@ const StudentDashboard = () => {
                         </div>
 
                         <div>
-                          <b>Reviews: </b>
-                          {/* {student["bio"]} */}
+                          <b>Reviews:<Rating name="read-only" value={val} size='small' readOnly /> </b>
                         </div>
                         <div className="individual-profile-buttons">
                           <Stack spacing={1.5} direction="row" variant="text">
@@ -253,7 +298,7 @@ const StudentDashboard = () => {
                               className="individual-profile-button"
                               variant="contained"
                               onClick={() =>
-                                redirectStudent(student["username"])
+                                redirectStudentProfile(student["username"])
                               }
                             >
                               Profile
@@ -261,12 +306,14 @@ const StudentDashboard = () => {
                             <Button
                               className="individual-profile-button"
                               variant="outlined"
+                              onClick={() =>
+                                redirectStudentMessage(student["username"])
+                              }
                             >
                               Message
                             </Button>
                             <BookModal
                               stuToken={token}
-                              tutToken={student["token"]}
                               tutUser={student["username"]}
                             ></BookModal>
                           </Stack>

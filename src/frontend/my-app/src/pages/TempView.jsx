@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+ import { useParams } from "react-router-dom";
 import React from "react";
 import "./TempView.css";
 
@@ -13,6 +13,8 @@ import defaultImage from "./DefaultProfile.png";
 import EditIcon from "@mui/icons-material/Edit";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { Context, useContext } from "../Context";
+import BookModal from "../components/BookModal";
+import RatingModal from "../components/RatingModal";
 
 const TempView = () => {
   const param = useParams();
@@ -30,6 +32,7 @@ const TempView = () => {
   const loggedInUserName = getters.usernameGlobal;
   const loggedInUserType = getters.userTypeGlobal;
   const token = getters.token;
+  const navigate = useNavigate();
 
   const getUser = async () => {
     if (!token || !loggedInUserName) {
@@ -72,9 +75,15 @@ const TempView = () => {
       setClasses(classData.myCourses);
     }
   };
+
   React.useEffect(() => {
     getUser();
   }, []);
+
+  const redirectStudentMessage = (id) => {
+    const path = "/Message/" + id;
+    navigate(path);
+  };
 
   return (
     <>
@@ -91,15 +100,34 @@ const TempView = () => {
           {loggedInUserType === "student" && userType === "tutor" && (
             <div className="view-profile-feature-buttons">
               <Stack spacing={2} direction="row">
-                <Button variant="contained">Book Tutor</Button>
-                <Button variant="contained">Message {firstName}</Button>
+                <BookModal
+                    variant="contained"
+                    stuToken={token}
+                    tutUser={viewingUsername}
+                ></BookModal>
+                <RatingModal token={token} tutorUser={viewingUsername}></RatingModal>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    redirectStudentMessage(viewingUsername);
+                  }}
+                >
+                  Message {firstName}
+                </Button>
               </Stack>
             </div>
           )}
           {loggedInUserType === "tutor" && userType === "student" && (
             <div className="view-profile-feature-buttons">
               <Stack spacing={2} direction="row">
-                <Button variant="contained">Message {firstName}</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    redirectStudentMessage(viewingUsername);
+                  }}
+                >
+                  Message {firstName}
+                </Button>
               </Stack>
             </div>
           )}

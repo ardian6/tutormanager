@@ -222,3 +222,8 @@
   width: 120px;
   /* background-color: grey; */
 }
+
+.student-requests-none-message {
+  position: absolute;
+  margin-top: 200px;
+}

@@ -160,13 +160,6 @@
   gap: 5px;
 }
 
-.individual-profile-buttons {
-  margin-top: 5px;
-}
-.individual-profile-button {
-  font-size: 10px !important;
-}
-
 .search-tutor-loading {
   position: absolute;
   margin-top: 230px;
@@ -326,4 +319,13 @@
 
 .pending-div {
   color: orange;
+}
+
+.search-tutor-none-message {
+  margin-top: 250px;
+  position: absolute;
+}
+
+.search-tutor-none-message {
+  text-align: center;
 }
