@@ -110,10 +110,6 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    git clone git@github.com:unsw-cse-comp3900-9900-23T3/capstone-project-3900f12apenguin.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
 4. Start the backend
    ```sh
    python3 src/backend/server.py
