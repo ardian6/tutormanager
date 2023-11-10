@@ -5,7 +5,7 @@ import "./Profile.css";
 import Logo from "./TutorManagerLogo.png";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import NavBar from "../components/NavBar";
-
+import Filetodata from "./Filetodata.jsx";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +25,11 @@ const Profile = () => {
   const [bio, setBio] = React.useState("");
   const [classes, setClasses] = React.useState([]);
   const [city, setCity] = React.useState("");
+
+  const [hours, setHours] = React.useState("");
+
+  const [pdf, setPdf] = React.useState("");
+  const [listPdf, setListPdf] = React.useState([]);
 
   const { getters } = useContext(Context);
   const userName = getters.usernameGlobal;
@@ -53,6 +58,8 @@ const Profile = () => {
       setFirstName(data.givenName);
       setLastName(data.familyName);
       setCity(data.location);
+      setListPdf(data.pdfStr);
+      // console.log(data.pdfStr);
     }
 
     const classes = await fetch(
@@ -71,9 +78,64 @@ const Profile = () => {
       setClasses(classData.myCourses);
     }
   };
+
+  const getHours = async () => {
+    const response = await fetch("http://localhost:5005/hours/total-hours", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+      }),
+    });
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      // console.log(data.hours);
+      setHours(data.hours);
+    }
+  };
+
   React.useEffect(() => {
     getUser();
+    if (userType === "tutor") {
+      getHours();
+    }
   }, []);
+
+  const uploadPdf = async () => {
+    if (pdf === "") {
+      alert("No PDF file currently chosen.");
+      return;
+    }
+
+    const response = await fetch("http://localhost:5005/profile/upload-doc", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+        dataStr: pdf,
+      }),
+    });
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      // setEmail(data.email);
+      getUser();
+    }
+  };
+
+  const storePdf = () => {
+    Filetodata(document.getElementById("pdf").files[0]).then((data) => {
+      setPdf(data);
+      // console.log(data);
+    });
+  };
 
   return (
     <>
@@ -84,7 +146,6 @@ const Profile = () => {
             <AccountBoxIcon className="profile-title-icon" />
             <div className="profile-title">{firstName + " " + lastName}</div>
           </div>
-
           <div className="profile-upper">
             <div className="upper-box-one">
               <img
@@ -116,9 +177,12 @@ const Profile = () => {
               <span>
                 <b>User Type:</b> {userType}
               </span>
-              <span>
-                <b>Hours taught:</b> 123
-              </span>
+              {userType === "tutor" && (
+                <span>
+                  <b>Hours taught:</b> {hours}
+                </span>
+              )}
+
               <b>Subjects:</b>
               <div>
                 <BasicStack
@@ -132,6 +196,46 @@ const Profile = () => {
               </div>
             </div>
           </div>
+          {userType === "tutor" && (
+            <>
+              <div className="lower-container-profile">
+                <div className="lower-box-one">
+                  <b>Upload Documents. One at a time.</b>
+                  <input
+                    type="file"
+                    id="pdf"
+                    name="pdf"
+                    accept="application/pdf, image/png, image/jpeg, image/jpg"
+                    onChange={() => {
+                      storePdf();
+                    }}
+                    className="pdf-input"
+                  />
+                  <Stack spacing={2} direction="row">
+                    <Button
+                      variant="contained"
+                      onClick={() => {
+                        uploadPdf();
+                      }}
+                    >
+                      Submit pdf file
+                    </Button>
+                  </Stack>
+                  {listPdf.map((eachPdf, idx) => {
+                    return (
+                      <div key={idx}>
+                        <a download="PDF Title" href={eachPdf}>
+                          Download Pdf document {idx + 1}
+                        </a>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="lower-box-two"></div>
+                {/* <div className="lower-box-three"></div> */}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>
