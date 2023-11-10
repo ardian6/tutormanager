@@ -29,7 +29,7 @@ Notifications for upcoming tutorial sessions and messages.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This Project was created using WSL (Ubuntu 18.04) with Windows 10.
+This Project was created using WSL (Ubuntu 18.04) with Windows 10, hence the installation assumes the user uses those.
 
 ### Prerequisites
 This installation assumes the user has a GitHub account with a valid SSH key.
