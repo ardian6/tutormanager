@@ -16,6 +16,7 @@ import { Context, useContext } from "../Context";
 import BookModal from "../components/BookModal";
 import RatingModal from "../components/RatingModal";
 import CircularProgress from "@mui/material/CircularProgress";
+import VerifiedIcon from "@mui/icons-material/Verified";
 
 const TempView = () => {
   const param = useParams();
@@ -30,10 +31,10 @@ const TempView = () => {
   const [userType, setUserType] = React.useState("");
   const [pdfs, setPdfs] = React.useState("");
   const [profilePicture, setProfilePicture] = React.useState("");
-  const [youtubeLink, setYoutubeLink] = React.useState("");
-
   const [checkedProfilePicture, setCheckedProfilePicture] =
     React.useState(false);
+  const [youtubeLink, setYoutubeLink] = React.useState("");
+  const [approval, setApproval] = React.useState("");
 
   const { getters } = useContext(Context);
   const loggedInUserName = getters.usernameGlobal;
@@ -68,6 +69,7 @@ const TempView = () => {
       setProfilePicture(data.profilePicture);
       setCheckedProfilePicture(true);
       setYoutubeLink(data.youtubeLink);
+      setApproval(data.approval);
     }
 
     const classes = await fetch(
@@ -105,6 +107,9 @@ const TempView = () => {
             <AccountBoxIcon className="view-profile-title-icon" />
             <div className="view-profile-title">
               {firstName + " " + lastName}
+              {approval === true && userType == "tutor" && (
+                <VerifiedIcon className="verified-icon" />
+              )}
             </div>
           </div>
 

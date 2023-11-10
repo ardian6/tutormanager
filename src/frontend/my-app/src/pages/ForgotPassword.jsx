@@ -16,6 +16,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { useRef, useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
+import Alert from "../components/Alert";
 
 const ForgotPassword = () => {
   const [email, setEmail] = React.useState("");
@@ -36,6 +37,7 @@ const ForgotPassword = () => {
         // name: nameRef.current.value,
         recipient: email,
       });
+
       alert("email successfully sent check inbox");
     } catch (error) {
       console.log(error);
