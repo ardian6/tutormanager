@@ -120,13 +120,13 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    python3 src/backend/server.py
    ```
 5.  Create terminal 2 and run frontend
-   ```sh
-   cd /capstone-project-3900f12apenguin/src/frontend/my-app
-   ```
-    **Opens a new tab in your default browser.**
-   ```sh
-   yarn start
-   ```
+      ```sh
+      cd /capstone-project-3900f12apenguin/src/frontend/my-app
+      ```
+       **Opens a new tab in your default browser.**
+      ```sh
+      yarn start
+      ```
     
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
