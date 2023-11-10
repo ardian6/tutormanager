@@ -29,6 +29,9 @@ Notifications for upcoming tutorial sessions and messages.
 [![Flask][Flask]][Flask-url] <br />
 [![NPM][NPM]][NPM-url] <br />
 [![Yarn][Yarn]][Yarn-url] <br />
+[![JS][JS]][JS-url] <br />
+[![CSS3][CSS3]][CSS3-url] <br />
+[![HTML5][HTML5]][HTML5-url] <br />
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -148,3 +151,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [NPM-url]: https://www.npmjs.com/
 [Yarn-url]: https://classic.yarnpkg.com/lang/en/docs/
 [Yarn]: https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white
+[JS]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
+[JS-url]: https://www.javascript.com/
+[CSS3]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
+[CSS3-url]: https://www.w3.org/TR/CSS/#css
+[HTML5]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
+[HTML5-url]: https://html.spec.whatwg.org/
+
