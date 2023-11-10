@@ -395,8 +395,8 @@ def dbListAllBookings() -> list:
     for t in cur.fetchall():
         newStorage = []
         newStorage.append(t[0])
-        newStorage.append(t[1].lower())
-        newStorage.append(t[2].lower())
+        newStorage.append(t[1])
+        newStorage.append(t[2])
         newStorage.append(t[3].strftime("%Y/%m/%d %H:%M:%S"))
         newStorage.append(t[4].strftime("%Y/%m/%d %H:%M:%S"))
         newStorage.append(t[5])
@@ -421,8 +421,8 @@ def dbListMyBookings(token: str) -> list:
     for t in cur.fetchall():
         newStorage = []
         newStorage.append(t[0])
-        newStorage.append(t[1].lower())
-        newStorage.append(t[2].lower())
+        newStorage.append(t[1])
+        newStorage.append(t[2])
         newStorage.append(t[3].strftime("%Y-%m-%d %H:%M:%S"))
         newStorage.append(t[4].strftime("%Y-%m-%d %H:%M:%S"))
         newStorage.append(t[5])
@@ -670,6 +670,17 @@ def dbUploadDoc(token: str, pdfDataStr: str):
     
     docID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
     cur.execute("""insert into documentation values (%s, %s, %s)""", [docID, currUsername, pdfDataStr])
+    
+    #Creates a notification for all admins of a tutor uploading documentation
+    cur.execute("""select u.username from users u where userType = %s""", ['admin'])
+    allAdmins = []
+    for t in cur.fetchall():
+        allAdmins.append(t[0])
+    for a in allAdmins:
+        notifID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+        notifstr = "A new file has been uploaded by tutor " + currUsername
+        timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, a, timeNow, notifstr])
     
     cur.close()
     db.commit()
