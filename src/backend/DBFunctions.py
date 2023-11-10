@@ -668,8 +668,6 @@ def dbRetrieveDoc(username:str) -> list:
     for t in cur.fetchall():
         singleStr = []
         singleStr.append(t[0])
-        singleStr.append(t[1])
-        singleStr.append(t[2])
         listOfAllData.append(singleStr)
     cur.close()
     db.commit()
