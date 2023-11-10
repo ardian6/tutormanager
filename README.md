@@ -45,7 +45,7 @@ Calendar integration (Outlook Calendar API).
 ### Installation
 **Do in order:**
 > use 'pip3 freeze' to see if you've installed python modules correctly.
-1. Clone the repo with ssh
+1. Clone the repo with SSH.
    ```sh
    git clone git@github.com:unsw-cse-comp3900-9900-23T3/capstone-project-3900f12apenguin.git
    ```
@@ -59,40 +59,40 @@ Calendar integration (Outlook Calendar API).
    ```sh
    python3 --version
    ```
-6. Install Flask and Flask_Cors
+6. Install Flask and Flask_Cors.
    ```sh
    pip3 install flask
    ```
    ```sh
    pip3 install flask_cors
    ```
-7. Install psycopg2
+7. Install psycopg2.
    ```sh
    sudo apt-get install build-dep python-psycopg2
    ```
    ```sh
    pip3 install psycopg2-binary
    ```
-8. Install PyJWT
+8. Install PyJWT.
    ```sh
    pip3 install PyJWT
    ```
-2. Install Node
+2. Install Node.
    ```sh
    npm install
    ```
    ```sh
    sudo apt-get install -y nodejs
    ```
-3. Install yarn 
+3. Install yarn.
    ```sh
    npm install --global yarn
    ```
-4. Install React
+4. Install React.
    ```sh
    yarn add react-scripts
    ```
-5. Install Dependencies for Yarn. You should be at the directory path: /capstone-project-3900f12apenguin/src/frontend/my-app
+5. Install Dependencies for Yarn. You should be at the directory path: /capstone-project-3900f12apenguin/src/frontend/my-app.
    ```sh
    yarn install
    ```
