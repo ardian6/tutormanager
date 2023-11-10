@@ -2,7 +2,7 @@ from DBFunctions import checkTokenExists, checkDuplicateEmail, checkDuplicateUse
 from DBFunctions import dbChangeUsername, dbChangePassword, dbChangeEmail, dbChangeBio, dbAddCourse
 from DBFunctions import dbDeleteAccount, dbAdminDelete, dbDeleteCourse, dbViewProfile, dbCourseList, dbAddCourseToList, dbViewMyCourses, dbAllUsernames
 from helper import getHashOf
-from DBFunctions import dbUploadDoc, dbChangeProfilePic, dbChangeYTLink
+from DBFunctions import dbUploadDoc, dbChangeProfilePic, dbChangeYTLink, dbAdminApprove
 
 def changeUsername(session_token: str, newUsername: str) -> dict:
   """Changes a given user's username.
@@ -367,6 +367,25 @@ def changeYTLink(session_token: str, link: str) -> dict:
   
   # This function actually goes into the database and changes the data stored
   dbChangeYTLink(session_token, link)
+
+  return {
+    "token": session_token
+  }
+
+def adminApprove(session_token: str, targetProfile: str) -> dict:
+  """Admin user deletes the target user.
+    Paramaters:
+      session_token: String
+      targetProfile: String
+    Returns:
+      { session_token: String }
+  """
+  # Find user in database from token and check if admin
+  if not checkTokenAdmin(session_token):
+    return {"error": "Admin token is invalid."}
+
+  # Approve the targeted user in the database
+  dbAdminApprove(targetProfile)
 
   return {
     "token": session_token

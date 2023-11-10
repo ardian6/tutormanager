@@ -10,7 +10,7 @@ from flask_cors import CORS
 #from src.echo import echo
 
 from auth import login, register, logout
-from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword, uploadDocumentation, changePicture, changeYTLink
+from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword, uploadDocumentation, changePicture, changeYTLink, adminApprove
 from profile import addNewCourse, adminAddCourse, adminDeleteCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
 from filterT import filterTutors, getUserGroups
@@ -209,6 +209,13 @@ def user_change_profile_picture():
 def user_change_youtube():
     data = request.get_json()
     return dumps(changeYTLink(data['token'], data['link']))
+
+## User Profile Approve Tutor Implementation to Server ##
+
+@APP.route("/profile/change-youtube", methods = ['PUT'])
+def admin_approve():
+    data = request.get_json()
+    return dumps(adminApprove(data['token'], data['targetTutor']))
 
 """
 ROUTES FOR Booking FUNCTIONS
