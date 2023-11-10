@@ -215,17 +215,28 @@ const StudentDashboard = () => {
                   </div>
                 )}
                 {students.map((student, idx) => {
+                  {
+                    console.log(student);
+                  }
                   return (
                     <div
                       key={idx}
                       className="tutor-search-individual-container"
                     >
                       <div className="individual-profile-image-container">
-                        <img
-                          src={defaultImage}
-                          alt="default-image"
-                          className="individual-profile-image"
-                        />
+                        {student["profilePicture"] === "" ? (
+                          <img
+                            src={defaultImage}
+                            alt="default-image"
+                            className="individual-profile-image"
+                          />
+                        ) : (
+                          <img
+                            src={student["profilePicture"]}
+                            alt="default-image"
+                            className="uploaded-profile-image"
+                          />
+                        )}
                       </div>
                       <div className="individual-profile-info">
                         {/* <div>{student["username"]}</div> */}

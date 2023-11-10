@@ -83,6 +83,7 @@
   position: relative;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .view-upper-box-two {
@@ -200,4 +201,18 @@
   justify-content: center;
   align-items: center;
   gap: 6px;
+}
+
+.view-profile-loading {
+  position: absolute;
+}
+
+.document-title {
+  font-size: 12px;
+}
+
+.pdf-placeholder-description {
+  width: 90%;
+  text-align: center;
+  color: gray;
 }

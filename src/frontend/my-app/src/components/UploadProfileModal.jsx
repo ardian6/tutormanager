@@ -37,7 +37,7 @@ const UploadProfileModal = ({ token, getUser }) => {
     const response = await fetch(
       "http://localhost:5005/profile/change-picture",
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
@@ -61,6 +61,7 @@ const UploadProfileModal = ({ token, getUser }) => {
     Filetodata(document.getElementById("image-file").files[0]).then((data) => {
       setProfileFile(data);
       console.log(data);
+      console.log(data.length);
     });
   };
 
@@ -97,7 +98,7 @@ const UploadProfileModal = ({ token, getUser }) => {
                 type="file"
                 id="image-file"
                 name="image-file"
-                accept="image/png, image/jpeg, image/jpg"
+                accept="image/png, image/jpeg, image/jpg, image/PNG"
                 onChange={() => {
                   storeProfileFile();
                 }}
@@ -108,7 +109,7 @@ const UploadProfileModal = ({ token, getUser }) => {
               <Button
                 variant="contained"
                 onClick={() => {
-                  //   uploadProfileFile();
+                  uploadProfileFile();
                   handleClose();
                 }}
                 className="individual-profile-button"
