@@ -266,7 +266,7 @@ def dbDeleteAccount(token: str, password: str):
 def dbViewProfile(targetProfile: str):
     db = connectDB()
     cur = db.cursor()
-    cur.execute(""" select u.username, u.email, u.givenName, u.familyName, u.userType, u.bio, u.location, u.phone, u.timezone, u.profilePic, u.youtubeLink
+    cur.execute(""" select u.username, u.email, u.givenName, u.familyName, u.userType, u.bio, u.location, u.phone, u.timezone, u.profilePic, u.youtubeLink, u.approved
                     from users u 
                     where u.username = %s""", [targetProfile])   
     allData = cur.fetchone()
@@ -289,6 +289,7 @@ def dbViewProfile(targetProfile: str):
         'timezone': allData[8],
         'profilePicture': allData[9],
         'youtubeLink': allData[10],
+        'approval': allData[11],
         'averageRating': averageRatings,
         'pdfStr': allDocumentation
     }
