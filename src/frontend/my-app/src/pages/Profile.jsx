@@ -2,16 +2,12 @@ import React from "react";
 import "./Profile.css";
 // import ToggleButton from "@mui/material/ToggleButton";
 // import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import Logo from "./TutorManagerLogo.png";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import NavBar from "../components/NavBar";
 import Filetodata from "./Filetodata.jsx";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
 import defaultImage from "./DefaultProfile.png";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import EditIcon from "@mui/icons-material/Edit";
 
 import { Context, useContext } from "../Context";
 import BasicModal from "../components/BasicModal";
@@ -20,7 +16,11 @@ import BasicStack from "../components/BasicStack";
 
 import UploadProfileModal from "../components/UploadProfileModal";
 import AddCourseModal from "../components/AddCourseModal";
+import DeleteYoutubeModal from "../components/DeleteYoutubeModal";
+
 import CircularProgress from "@mui/material/CircularProgress";
+
+import TextField from "@mui/material/TextField";
 
 const Profile = () => {
   const [email, setEmail] = React.useState("");
@@ -35,6 +35,10 @@ const Profile = () => {
   const [profilePicture, setProfilePicture] = React.useState("");
   const [checkedProfilePicture, setCheckedProfilePicture] =
     React.useState(false);
+
+  const [inputYoutubeLink, setInputYoutubeLink] = React.useState("");
+
+  const [youtubeLink, setYoutubeLink] = React.useState("");
 
   const [pdf, setPdf] = React.useState("");
   const [listPdf, setListPdf] = React.useState([]);
@@ -69,6 +73,8 @@ const Profile = () => {
       setListPdf(data.pdfStr);
       setProfilePicture(data.profilePicture);
       setCheckedProfilePicture(true);
+      setYoutubeLink(data.youtubeLink);
+
       console.log(data);
     }
 
@@ -145,6 +151,53 @@ const Profile = () => {
       setPdf(data);
       // console.log(data);
     });
+  };
+
+  const uploadUrl = async (path) => {
+    const newpath = "https://www.youtube.com/embed/" + path;
+    const response = await fetch(
+      "http://localhost:5005/profile/change-youtube",
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token,
+          link: newpath,
+        }),
+      }
+    );
+
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      // console.log(data);
+      // setYoutubeLink(newpath)
+      getUser();
+    }
+  };
+
+  const storeInputYoutubeVideo = () => {
+    // https://www.youtube.com/embed/
+    if (youtubeLink == inputYoutubeLink) {
+      alert(
+        "Youtube link is the same as the current link. Please change to another youtube url link"
+      );
+      return;
+    }
+    // https://www.youtube.com/watch?v=aPO5JaShu2U
+    const found = inputYoutubeLink.match("https://www.youtube.com/watch?");
+    if (found === null) {
+      alert(
+        "Youtube link is in incorrect format. Please copy and paste to the described format"
+      );
+      return;
+    }
+    const path = inputYoutubeLink.slice(32);
+    console.log(inputYoutubeLink.slice(32));
+    uploadUrl(path);
   };
 
   return (
@@ -263,7 +316,59 @@ const Profile = () => {
                     );
                   })}
                 </div>
-                <div className="lower-box-two"></div>
+                <div className="lower-box-two">
+                  <div className="youtube-embed-container">
+                    {youtubeLink === "" ? (
+                      <div className="youtube-embed-placeholder">
+                        You have no uploaded youtube video. Paste the link to
+                        your youtube video in the following:
+                        <TextField
+                          id="standard-basic"
+                          label="Upload youtube url"
+                          variant="standard"
+                          inputProps={{
+                            style: { fontSize: 14 },
+                          }}
+                          InputLabelProps={{
+                            sx: {
+                              color: "#518eb9",
+                              fontSize: "12px",
+                              fontWeight: 1000,
+                            },
+                          }}
+                          onChange={(e) => {
+                            setInputYoutubeLink(e.target.value);
+                          }}
+                          defaultValue={youtubeLink}
+                        />
+                        <Stack spacing={2} direction="row">
+                          <Button
+                            variant="contained"
+                            className="individual-profile-button"
+                            id="upload-youtube-button"
+                            onClick={() => {
+                              storeInputYoutubeVideo();
+                            }}
+                          >
+                            Upload video
+                          </Button>
+                        </Stack>
+                      </div>
+                    ) : (
+                      <>
+                        <DeleteYoutubeModal
+                          token={token}
+                          getUser={getUser}
+                        ></DeleteYoutubeModal>
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src="https://www.youtube.com/embed/aPO5JaShu2U"
+                        ></iframe>
+                      </>
+                    )}
+                  </div>
+                </div>
                 {/* <div className="lower-box-three"></div> */}
               </div>
             </>
