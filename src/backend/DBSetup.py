@@ -196,6 +196,7 @@ def inputData7():
   cur.execute("""insert into ratings values ('1', 'username2', 'username4', '2023-11-05 13:22:11', 'Good Tutor', 5)""")
   cur.execute("""insert into ratings values ('2', 'username3', 'username4', '2023-11-05 16:33:40', 'Bad Tutor', 1.5)""")
   cur.execute("""insert into ratings values ('3', 'username5', 'username4', '2023-11-05 18:09:20', 'Ok Tutor', 3.5)""")
+  cur.execute("""insert into ratings values ('4', 'username2', 'username6', '2023-11-05 18:09:20', 'Excellent Tutor', 5)""")
   cur.close()
   db.commit()
   return

@@ -17,6 +17,7 @@ from filterT import filterTutors, getUserGroups
 from messages import listMessages, sendMessage
 from ratings import makeRatings, tutorWrittenRatings, tutorAverageRatings
 from notification import checkMyNotifications, dismissNotif
+from hours import myTotalHours
 
 def quit_gracefully(*args):
     '''For coverage'''
@@ -313,6 +314,17 @@ def notification_view():
 def notification_dismiss():
     data = request.get_json()
     return dumps(dismissNotif(data['token'], data['notificationID']))
+
+"""
+ROUTES FOR HOURS FUNCTIONS
+
+"""
+## User Hours Check Total Hours Taught Implementation to Server ##
+
+@APP.route("/hours/total-hours", methods = ['POST'])
+def total_hours_view():
+    data = request.get_json()
+    return dumps(myTotalHours(data['token']))
 
 """
 END OF ROUTES
