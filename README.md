@@ -101,7 +101,7 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    yarn add react-scripts
    ```
 5. Install Dependencies for Yarn.
-   **Go to correct directory for the next command to work**
+   **Go to correct directory for commands to work**
    ```sh
    cd /capstone-project-3900f12apenguin/src/frontend/my-app
    ```
@@ -120,7 +120,7 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    cd src/frontend/my-app
    ```
-   **Go to correct directory for the next command to work**
+   **Go to correct directory for commands to work**
    ```sh
    cd /capstone-project-3900f12apenguin/src/frontend/my-app
    ```
