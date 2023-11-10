@@ -8,6 +8,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import defaultImage from "./DefaultProfile.png";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import VerifiedIcon from "@mui/icons-material/Verified";
 
 import { Context, useContext } from "../Context";
 import BasicModal from "../components/BasicModal";
@@ -43,6 +44,8 @@ const Profile = () => {
   const [pdf, setPdf] = React.useState("");
   const [listPdf, setListPdf] = React.useState([]);
 
+  const [approval, setApproval] = React.useState("");
+
   const { getters } = useContext(Context);
   const userName = getters.usernameGlobal;
   const userType = getters.userTypeGlobal;
@@ -70,10 +73,13 @@ const Profile = () => {
       setFirstName(data.givenName);
       setLastName(data.familyName);
       setCity(data.location);
+
       setListPdf(data.pdfStr);
       setProfilePicture(data.profilePicture);
       setCheckedProfilePicture(true);
       setYoutubeLink(data.youtubeLink);
+
+      setApproval(data.approval);
 
       console.log(data);
     }
@@ -208,6 +214,9 @@ const Profile = () => {
           <div className="profile-title-container">
             <AccountBoxIcon className="profile-title-icon" />
             <div className="profile-title">{firstName + " " + lastName}</div>
+            {approval === true && userType == "tutor" && (
+              <VerifiedIcon className="verified-icon" />
+            )}
           </div>
           <div className="profile-upper">
             <div className="upper-box-one">

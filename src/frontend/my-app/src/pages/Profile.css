@@ -42,6 +42,7 @@
   left: 0;
   display: flex;
   align-items: center;
+  justify-content: start;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -238,9 +239,6 @@
   align-items: center;
 }
 
-.embedded-youtube-video {
-}
-
 .youtube-embed-placeholder {
   display: flex;
   flex-direction: column;
@@ -251,4 +249,11 @@
 
 #upload-youtube-button {
   margin-top: 10px;
+}
+
+.verified-icon {
+  size: 15px;
+  color: #1976d2;
+  transform: scale(1.5);
+  margin-left: 20px;
 }
