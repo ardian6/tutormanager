@@ -21,17 +21,20 @@ Notifications for upcoming tutorial sessions and messages.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Built With
+## Built With
 
-[![React][React.js]][React-url] <br />
-[![AWS][AWS]][AWS-url] <br />
+### Backend
 [![Python][Python3]][Python3-url] <br />
 [![Flask][Flask]][Flask-url] <br />
-[![NPM][NPM]][NPM-url] <br />
-[![Yarn][Yarn]][Yarn-url] <br />
+[![AWS][AWS]][AWS-url] <br />
+
+### Frontend
 [![JS][JS]][JS-url] <br />
 [![CSS3][CSS3]][CSS3-url] <br />
 [![HTML5][HTML5]][HTML5-url] <br />
+[![NPM][NPM]][NPM-url] <br />
+[![Yarn][Yarn]][Yarn-url] <br />
+[![React][React.js]][React-url] <br />
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
