@@ -1,16 +1,17 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { Context, useContext } from '../Context';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
+import { Context, useContext } from "../Context";
+import Badge from "@mui/material/Badge";
 
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
@@ -19,7 +20,7 @@ export default function TemporaryDrawer() {
   const { getters } = useContext(Context);
   const token = getters.token;
 
-  const [notifications, setNotifications] = React.useState([])
+  const [notifications, setNotifications] = React.useState([]);
 
   const getNotifications = async () => {
     const response = await fetch("http://localhost:5005/notification/view", {
@@ -28,14 +29,14 @@ export default function TemporaryDrawer() {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        token: token
+        token: token,
       }),
     });
     const data = await response.json();
     if (data.error) {
       alert(data.error);
     } else {
-      setNotifications(data['notifList']);
+      setNotifications(data["notifList"]);
     }
   };
 
@@ -54,7 +55,7 @@ export default function TemporaryDrawer() {
     if (data.error) {
       alert(data.error);
     } else {
-        getNotifications();
+      getNotifications();
     }
   };
 
@@ -63,7 +64,10 @@ export default function TemporaryDrawer() {
   }, []);
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
 
@@ -72,15 +76,17 @@ export default function TemporaryDrawer() {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
     >
       <List>
         {notifications.map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton onClick={() => {
+            <ListItemButton
+              onClick={() => {
                 dismissNotification(text[0]);
-            }}>
+              }}
+            >
               {text[2]}
               <br></br>
               {text[3]}
@@ -94,18 +100,20 @@ export default function TemporaryDrawer() {
 
   return (
     <div>
-      {['Notifications'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
+      <Badge badgeContent={notifications.length} color="error">
+        {["Notifications"].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ))}
+      </Badge>
     </div>
   );
 }

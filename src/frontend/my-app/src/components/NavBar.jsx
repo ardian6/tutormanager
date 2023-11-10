@@ -3,19 +3,20 @@ import PositionedMenu from "./PositionedMenu";
 //import SideBar from "./SideBar";
 import { Button } from "@mui/material";
 import "./NavBar.css";
-import NotificationDrawer from "../components/NotificationDrawer"
+import NotificationDrawer from "../components/NotificationDrawer";
 
 function NavBar() {
-
   return (
     <div className="NavBarContainer">
       <div className="NavBar">
         <div className="NavBarInfo">
           <div className="NavBarLeft">
             <NotificationDrawer></NotificationDrawer>
-            <Link to="/dashboard">
-              <Button>Dashboard</Button>
-            </Link>
+            <div className="dashboard-button">
+              <Link to="/dashboard">
+                <Button>Dashboard</Button>
+              </Link>
+            </div>
           </div>
         </div>
         <h4 className="tutormanager-title">Tutor Manager</h4>
