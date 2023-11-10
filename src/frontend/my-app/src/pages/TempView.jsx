@@ -30,6 +30,7 @@ const TempView = () => {
   const [userType, setUserType] = React.useState("");
   const [pdfs, setPdfs] = React.useState("");
   const [profilePicture, setProfilePicture] = React.useState("");
+  const [youtubeLink, setYoutubeLink] = React.useState("");
 
   const [checkedProfilePicture, setCheckedProfilePicture] =
     React.useState(false);
@@ -66,6 +67,7 @@ const TempView = () => {
       setPdfs(data.pdfStr);
       setProfilePicture(data.profilePicture);
       setCheckedProfilePicture(true);
+      setYoutubeLink(data.youtubeLink);
     }
 
     const classes = await fetch(
@@ -214,7 +216,21 @@ const TempView = () => {
                   </span>
                 )}
               </div>
-              <div className="lower-container-tempview-two"></div>
+              <div className="lower-container-tempview-two">
+                <div className="temp-youtube-embed-container">
+                  {youtubeLink === "" ? (
+                    <div className="temp-youtube-embed-placeholder">
+                      {firstName} currently has no youtube video
+                    </div>
+                  ) : (
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={youtubeLink}
+                    ></iframe>
+                  )}
+                </div>
+              </div>
             </div>
           )}
         </div>

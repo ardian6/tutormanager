@@ -1,0 +1,20 @@
+.edit-youtube-link {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 6px;
+  color: red;
+}
+
+.edit-youtube-link:hover {
+  cursor: pointer;
+  background-color: #da0909;
+  border-radius: 30px;
+  color: white;
+  -webkit-transition: color 0.3s ease-out;
+  -moz-transition: color 0.3s ease-out;
+  -o-transition: color 0.3s ease-out;
+  -ms-transition: color 0.3s ease-out;
+  transition: color 0.3s ease-out;
+  padding: 6px;
+}

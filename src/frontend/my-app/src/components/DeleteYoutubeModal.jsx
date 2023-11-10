@@ -14,28 +14,23 @@ import ErrorIcon from "@mui/icons-material/Error";
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
 import Stack from "@mui/material/Stack";
-import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { Context, useContext } from "../Context";
-import "./UploadProfileModal.css";
+import "./DeleteYoutubeModal.css";
 import Filetodata from "../pages/Filetodata";
 
-const UploadProfileModal = ({ token, getUser }) => {
+const DeleteYoutubeModal = ({ token, getUser }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [profileFile, setProfileFile] = React.useState("");
 
-  const uploadProfileFile = async () => {
-    if (profileFile === "") {
-      alert("No profile image file currently uploaded.");
-      return;
-    }
-
+  const deleteYoutubeLink = async () => {
     const response = await fetch(
-      "http://localhost:5005/profile/change-picture",
+      "http://localhost:5005/profile/change-youtube",
       {
         method: "PUT",
         headers: {
@@ -43,26 +38,20 @@ const UploadProfileModal = ({ token, getUser }) => {
         },
         body: JSON.stringify({
           token: token,
-          pictureString: profileFile,
+          link: "",
         }),
       }
     );
+
     const data = await response.json();
     if (data.error) {
       alert(data.error);
     } else {
+      // console.log(data);
+      // setYoutubeLink(newpath)
       getUser();
     }
   };
-
-  const storeProfileFile = () => {
-    Filetodata(document.getElementById("image-file").files[0]).then((data) => {
-      setProfileFile(data);
-      console.log(data);
-      console.log(data.length);
-    });
-  };
-
   const style = {
     position: "absolute",
     top: "50%",
@@ -77,7 +66,10 @@ const UploadProfileModal = ({ token, getUser }) => {
 
   return (
     <>
-      <EditIcon className="edit-icon" onClick={handleOpen}></EditIcon>
+      <DeleteForeverIcon
+        className="edit-youtube-link"
+        onClick={handleOpen}
+      ></DeleteForeverIcon>
 
       <Modal
         open={open}
@@ -88,31 +80,20 @@ const UploadProfileModal = ({ token, getUser }) => {
         <Box sx={style}>
           <div className="upload-box">
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Upload new profile picture:
+              Delete youtube video
             </Typography>
-            Accepts png, jpeg and jpg files
-            <div>
-              <input
-                type="file"
-                id="image-file"
-                name="image-file"
-                accept="image/png, image/jpeg, image/jpg, image/PNG"
-                onChange={() => {
-                  storeProfileFile();
-                }}
-                //   className="pdf-input"
-              />
-            </div>
+            Your current youtube video link will be deleted forever!
             <Stack spacing={2} direction="row">
               <Button
                 variant="contained"
                 onClick={() => {
-                  uploadProfileFile();
+                  deleteYoutubeLink();
                   handleClose();
                 }}
                 className="individual-profile-button"
+                color="error"
               >
-                Submit new profile image
+                Delete current youtube link
               </Button>
             </Stack>
           </div>
@@ -122,4 +103,4 @@ const UploadProfileModal = ({ token, getUser }) => {
   );
 };
 
-export default UploadProfileModal;
+export default DeleteYoutubeModal;

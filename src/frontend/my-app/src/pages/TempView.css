@@ -216,3 +216,27 @@
   text-align: center;
   color: gray;
 }
+
+.lower-container-tempview-two {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.temp-youtube-embed-container {
+  width: 90%;
+  height: 90%;
+  background-color: rgb(215, 225, 235);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.temp-youtube-embed-placeholder {
+  text-align: center;
+}
