@@ -112,6 +112,10 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    yarn
    ```
 4.   **Create two new terminals**
+   **Go to correct directory for commands to work**
+   ```sh
+   cd /capstone-project-3900f12apenguin/src/backend
+   ```
     Start the backend - create on terminal no. 1
    ```sh
    python3 src/backend/server.py
