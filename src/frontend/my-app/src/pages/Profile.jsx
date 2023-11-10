@@ -320,8 +320,10 @@ const Profile = () => {
                   <div className="youtube-embed-container">
                     {youtubeLink === "" ? (
                       <div className="youtube-embed-placeholder">
-                        You have no uploaded youtube video. Paste the link to
-                        your youtube video in the following:
+                        <b> You have no uploaded youtube video.</b>
+                        Paste the link to your youtube video below. Link must be
+                        in format:
+                        <u>https://www.youtube.com/watch?v=......</u>
                         <TextField
                           id="standard-basic"
                           label="Upload youtube url"
@@ -363,7 +365,7 @@ const Profile = () => {
                         <iframe
                           width="100%"
                           height="100%"
-                          src="https://www.youtube.com/embed/aPO5JaShu2U"
+                          src={youtubeLink}
                         ></iframe>
                       </>
                     )}
