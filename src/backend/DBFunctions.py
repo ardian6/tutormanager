@@ -34,9 +34,9 @@ def dbregister(token: str, email: str, username: str, password: str, firstName: 
     db = connectDB()
     cur = db.cursor()
     if userType == 'tutor':
-        cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType, '', '', '', '', False])
+        cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType, '', '', '', '', False, '', '',])
     else:
-        cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType, '', '', '', '', True])
+        cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType, '', '', '', '', True, '', '',])
     cur.execute("""insert into Sessions values (%s, %s)""", [token, username])
     cur.close()
     db.commit()
@@ -254,7 +254,7 @@ def dbDeleteAccount(token: str, password: str):
 def dbViewProfile(targetProfile: str):
     db = connectDB()
     cur = db.cursor()
-    cur.execute(""" select u.username, u.email, u.givenName, u.familyName, u.userType, u.bio, u.location, u.phone, u.timezone
+    cur.execute(""" select u.username, u.email, u.givenName, u.familyName, u.userType, u.bio, u.location, u.phone, u.timezone, u.profilePic, u.youtubeLink
                     from users u 
                     where u.username = %s""", [targetProfile])   
     allData = cur.fetchone()
@@ -275,6 +275,8 @@ def dbViewProfile(targetProfile: str):
         'location': allData[6],
         'phone': allData[7],
         'timezone': allData[8],
+        'profilePicture': allData[9],
+        'youtubeLink': allData[10],
         'averageRating': averageRatings,
         'pdfStr': allDocumentation
     }
@@ -670,6 +672,34 @@ def dbRetrieveDoc(username:str) -> list:
     cur.close()
     db.commit()
     return listOfAllData
+
+# This function changes the user YouTube Link
+def dbChangeYTLink(token: str, newLink: str):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
+    currUsername = None
+    for t in cur.fetchall():
+        currUsername = t[0]
+    cur.execute("""update Users set youtubeLink = %s where username = %s""", [newLink, currUsername])
+    cur.close()
+    db.commit()
+    return
+
+
+# This function changes the user Profile Pic
+def dbChangeProfilePic(token: str, picStr: str):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
+    currUsername = None
+    for t in cur.fetchall():
+        currUsername = t[0]
+    cur.execute("""update Users set profilePic = %s where username = %s""", [picStr, currUsername])
+    cur.close()
+    db.commit()
+    return
+# Create the two new functions in profile
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':

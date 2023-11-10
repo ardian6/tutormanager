@@ -10,7 +10,7 @@ from flask_cors import CORS
 #from src.echo import echo
 
 from auth import login, register, logout
-from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword, uploadDocumentation
+from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword, uploadDocumentation, changePicture, changeYTLink
 from profile import addNewCourse, adminAddCourse, adminDeleteCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
 from filterT import filterTutors, getUserGroups
@@ -195,6 +195,20 @@ def admin_change_password():
 def user_upload_doc():
     data = request.get_json()
     return dumps(uploadDocumentation(data['token'], data['dataStr']))
+
+## User Profile Change Profile Picture Implementation to Server ##
+
+@APP.route("/profile/change-picture", methods = ['PUT'])
+def user_change_profile_picture():
+    data = request.get_json()
+    return dumps(changePicture(data['token'], data['pictureString']))
+
+## User Profile Change Youtube Video Implementation to Server ##
+
+@APP.route("/profile/change-youtube", methods = ['PUT'])
+def user_change_youtube():
+    data = request.get_json()
+    return dumps(changeYTLink(data['token'], data['link']))
 
 """
 ROUTES FOR Booking FUNCTIONS
