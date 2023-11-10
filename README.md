@@ -72,7 +72,7 @@ Calendar integration (Outlook Calendar API).
    ```sh
    yarn add react-scripts
    ```
-5. Install Dependencies for Yarn
+5. Install Dependencies for Yarn. You should be at the directory path: /capstone-project-3900f12apenguin/src/frontend/my-app
    ```sh
    yarn install
    ```
