@@ -22,7 +22,7 @@ const StudentDashboard = () => {
   const [checkedAsyncRequests, setCheckedAsyncRequests] = React.useState(false);
   const [checkedAsyncSearch, setCheckedAsyncSearch] = React.useState(false);
 
-  const getAllStudents = async (course, location, timezone, rating) => {
+  const getAllTutors = async (course, location, timezone, rating) => {
     const response = await fetch("http://localhost:5005/filter/filter-tutor", {
       method: "POST",
       headers: {
@@ -40,32 +40,11 @@ const StudentDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      console.log(data);
+      const temp = data.listofalldata.sort((t1, t2) => t2.averageRating - t1.averageRating);
       setCheckedAsyncSearch(true);
-      setStudents(data.listofalldata);
+      setStudents(temp);
     }
-  };
-
-/*   const getUserRating = async (username) => {
-    const response = await fetch("http://localhost:5005/ratings/view-average-tutor-ratings", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        token: token,
-        tutorUsername: username,
-      }),
-    });
-    const data = await response.json();
-    if (data.error) {
-      alert(data.error);
-    } else {
-      return data['averageRating'];
-    }
-  }; */
-
-  
+  };  
 
   const navigate = useNavigate();
   const getBookings = async () => {
@@ -101,7 +80,7 @@ const StudentDashboard = () => {
   };
 
   React.useEffect(() => {
-    getAllStudents("", "", "", 0);
+    getAllTutors("", "", "", 0);
     getBookings();
   }, []);
 
@@ -146,7 +125,6 @@ const StudentDashboard = () => {
       <div className="studentdashboard-container">
         <div className="studentdashboard-card">
           <div className="student-dashboard-title">Student Dashboard</div>
-          {/* <div className="student-calendar">Calendar</div> */}
           <div className="student-calendar">
             <Calendar token={token}></Calendar>
           </div>
@@ -175,7 +153,6 @@ const StudentDashboard = () => {
                   return (
                     <div
                       key={idx}
-                      // onClick={() => redirectStudent(student["username"])}
                       className="student-individual-requests"
                     >
                       <div className="individual-tutor-title">
@@ -191,10 +168,6 @@ const StudentDashboard = () => {
                         {booking[6]}
                       </div>
                       <div className="individual-time-title">
-                        {/* {translateDate(booking[4]).slice(8, 18) + "\n"}
-                        {translateDate(booking[3]).slice(0, 8) +
-                          "- " +
-                          translateDate(booking[4]).slice(0, 8)} */}
                         <div>{translateDate(booking[4]).slice(8, 18)}</div>
                         {translateHourGivenTwoDates(booking[3], booking[4])}
                       </div>

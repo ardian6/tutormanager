@@ -631,7 +631,7 @@ def dbAllNotifications(token: str) -> list:
     db.commit()
     return listOfAllNotif
 
-def dbDismissNotif(notificationID):
+def dbDismissNotif(notificationID: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""delete from notifications n where n.notifID = %s""", [notificationID])

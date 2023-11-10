@@ -17,7 +17,6 @@ import Payment from "../pages/Payment";
 import Message from "../pages/Message";
 
 function Site(props) {
-  const [userType, setUserType] = React.useState("true");
   const { getters } = React.useContext(Context);
   const token = getters.token;
   const navigate = useNavigate();
@@ -27,7 +26,6 @@ function Site(props) {
     }
   }, [token]);
 
-  // const { getters, setters } = useContext(Context);
   const currUserType = getters.userTypeGlobal;
   return (
     <div className="SiteContainer">
