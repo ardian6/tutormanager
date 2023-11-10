@@ -1,15 +1,5 @@
 # capstone-project-3900f12apenguin
 
-
-Technologies Used
-Python(Flask) for the backend.
-HTML, CSS, React.js for the frontend.
-Database (PostgreSQL) for data storage.
-Authentication using JWT (JSON Web Tokens).
-Messaging system (Twilio) for real-time communication.
-Calendar integration (Outlook Calendar API).
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 capstone-project-3900f12apenguin created by GitHub Classroom
@@ -47,11 +37,13 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Python(Flask) for the backend.
+HTML, CSS, React.js for the frontend.
+Database (PostgreSQL) for data storage.
+Authentication using JWT (JSON Web Tokens).
+Messaging system (Twilio) for real-time communication.
+Calendar integration (Outlook Calendar API).
+
 
 ### Installation
 **Do in order:**
