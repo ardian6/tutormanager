@@ -105,11 +105,11 @@ const TempView = () => {
         <div className="view-profile-card">
           <div className="view-profile-title-container">
             <AccountBoxIcon className="view-profile-title-icon" />
+            {approval === true && userType == "tutor" && (
+              <VerifiedIcon className="verified-icon" />
+            )}
             <div className="view-profile-title">
               {firstName + " " + lastName}
-              {approval === true && userType == "tutor" && (
-                <VerifiedIcon className="verified-icon" />
-              )}
             </div>
           </div>
 

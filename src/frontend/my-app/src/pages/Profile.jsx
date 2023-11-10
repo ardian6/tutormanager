@@ -213,10 +213,10 @@ const Profile = () => {
         <div className="profile-card">
           <div className="profile-title-container">
             <AccountBoxIcon className="profile-title-icon" />
-            <div className="profile-title">{firstName + " " + lastName}</div>
             {approval === true && userType == "tutor" && (
               <VerifiedIcon className="verified-icon" />
             )}
+            <div className="profile-title">{firstName + " " + lastName}</div>
           </div>
           <div className="profile-upper">
             <div className="upper-box-one">
