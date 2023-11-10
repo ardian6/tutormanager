@@ -20,8 +20,6 @@ Notifications for upcoming tutorial sessions and messages.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 ### Built With
 
 * [![React][React.js]][React-url]
@@ -31,10 +29,10 @@ Notifications for upcoming tutorial sessions and messages.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This Project was created using WSL (Ubuntu 18.04) with Windows 10.
 
 ### Prerequisites
+This installation assumes the user has a GitHub account with a valid SSH key.
 
 Python(Flask) for the backend.
 HTML, CSS, React.js for the frontend.
@@ -47,7 +45,11 @@ Calendar integration (Outlook Calendar API).
 ### Installation
 **Do in order:**
 > use 'pip3 freeze' to see if you've installed python modules correctly.
-1. Install Python3
+1. Clone the repo with ssh
+   ```sh
+   git clone git@github.com:unsw-cse-comp3900-9900-23T3/capstone-project-3900f12apenguin.git
+   ```
+1. Install Python3 and Python3 modules.
    ```sh
    sudo apt update && upgrade
    ```
@@ -56,6 +58,24 @@ Calendar integration (Outlook Calendar API).
    ```
    ```sh
    python3 --version
+   ```
+6. Install Flask and Flask_Cors
+   ```sh
+   pip3 install flask
+   ```
+   ```sh
+   pip3 install flask_cors
+   ```
+7. Install psycopg2
+   ```sh
+   sudo apt-get install build-dep python-psycopg2
+   ```
+   ```sh
+   pip3 install psycopg2-binary
+   ```
+8. Install PyJWT
+   ```sh
+   pip3 install PyJWT
    ```
 2. Install Node
    ```sh
@@ -79,28 +99,6 @@ Calendar integration (Outlook Calendar API).
    ```sh
    yarn
    ```
-6. Install Flask and Flask_Cors
-   ```sh
-   pip3 install flask
-   ```
-   ```sh
-   pip3 install flask_cors
-   ```
-7. Install psycopg2
-   ```sh
-   sudo apt-get install build-dep python-psycopg2
-   ```
-   ```sh
-   pip3 install psycopg2-binary
-   ```
-8. Install PyJWT
-   ```sh
-   pip3 install PyJWT
-   ```
-2. Clone the repo
-   ```sh
-   git clone git@github.com:unsw-cse-comp3900-9900-23T3/capstone-project-3900f12apenguin.git
-   ```
 4. Start the backend
    ```sh
    python3 src/backend/server.py
@@ -113,7 +111,7 @@ Calendar integration (Outlook Calendar API).
    ```sh
    yarn install
    ```
-   **Should open a new tab in your default browser.**
+   **Opens a new tab in your default browser.**
    ```sh
    yarn start
    ```
