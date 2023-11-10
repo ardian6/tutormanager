@@ -724,7 +724,17 @@ def dbChangeProfilePic(token: str, picStr: str):
     cur.close()
     db.commit()
     return
-# Create the two new functions in profile
+
+# This function goes into the database and changes the tutor approval to true
+def dbAdminApprove(targetProfile: str):
+    # Same warning as the dbDeleteAccount function
+    # Delete the targeted profile
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""update Users set approved = %s where username = %s""", [True, targetProfile])
+    cur.close()
+    db.commit()
+    return
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':
