@@ -56,9 +56,6 @@ Calendar integration (Outlook Calendar API).
    ```sh
    sudo apt install python3 python3-pip
    ```
-   ```sh
-   python3 --version
-   ```
 6. Install Flask and Flask_Cors.
    ```sh
    pip3 install flask
