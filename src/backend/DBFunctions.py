@@ -395,8 +395,8 @@ def dbListAllBookings() -> list:
     for t in cur.fetchall():
         newStorage = []
         newStorage.append(t[0])
-        newStorage.append(t[1].lower())
-        newStorage.append(t[2].lower())
+        newStorage.append(t[1])
+        newStorage.append(t[2])
         newStorage.append(t[3].strftime("%Y/%m/%d %H:%M:%S"))
         newStorage.append(t[4].strftime("%Y/%m/%d %H:%M:%S"))
         newStorage.append(t[5])
@@ -421,8 +421,8 @@ def dbListMyBookings(token: str) -> list:
     for t in cur.fetchall():
         newStorage = []
         newStorage.append(t[0])
-        newStorage.append(t[1].lower())
-        newStorage.append(t[2].lower())
+        newStorage.append(t[1])
+        newStorage.append(t[2])
         newStorage.append(t[3].strftime("%Y-%m-%d %H:%M:%S"))
         newStorage.append(t[4].strftime("%Y-%m-%d %H:%M:%S"))
         newStorage.append(t[5])
