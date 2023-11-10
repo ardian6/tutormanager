@@ -28,6 +28,7 @@ Notifications for upcoming tutorial sessions and messages.
 [![Python][Python3]][Python3-url] <br />
 [![Flask][Flask]][Flask-url] <br />
 [![NPM][NPM]][NPM-url] <br />
+[![Yarn][Yarn]][Yarn-url] <br />
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -52,6 +53,9 @@ This installation assumes the user has a GitHub account with a valid SSH key.
 1. Clone the repo with SSH.
    ```sh
    git clone git@github.com:unsw-cse-comp3900-9900-23T3/capstone-project-3900f12apenguin.git
+   ```
+   ```sh
+   cd capstone-project-3900f12apenguin
    ```
 1. Install Python3.
    ```sh
@@ -142,3 +146,5 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [Flask-url]: https://flask.palletsprojects.com/en/3.0.x/
 [NPM]: https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white
 [NPM-url]: https://www.npmjs.com/
+[Yarn-url]: https://classic.yarnpkg.com/lang/en/docs/
+[Yarn]: https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white
