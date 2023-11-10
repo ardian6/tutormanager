@@ -100,24 +100,29 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    yarn add react-scripts
    ```
-5. Install Dependencies for Yarn. You should be at the directory path: /capstone-project-3900f12apenguin/src/frontend/my-app.
+5. Install Dependencies for Yarn.
+   **Go to correct directory for the next command to work**
+   ```sh
+   cd /capstone-project-3900f12apenguin/src/frontend/my-app
+   ```
    ```sh
    yarn install
    ```
    ```sh
    yarn
    ```
-4. Start the backend
+   **Create two new terminals**
+4. Start the backend - create on terminal no. 1
    ```sh
    python3 src/backend/server.py
    ```
-5. Start the frontend
+5. Start the frontend - create on terminal no. 2
    ```sh
    cd src/frontend/my-app
    ```
-   **Install dependencies.**
+   **Go to correct directory for the next command to work**
    ```sh
-   yarn install
+   cd /capstone-project-3900f12apenguin/src/frontend/my-app
    ```
    **Opens a new tab in your default browser.**
    ```sh
