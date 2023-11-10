@@ -10,7 +10,7 @@ from flask_cors import CORS
 #from src.echo import echo
 
 from auth import login, register, logout
-from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword
+from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword, uploadDocumentation
 from profile import addNewCourse, adminAddCourse, adminDeleteCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
 from filterT import filterTutors, getUserGroups
@@ -188,6 +188,13 @@ def view_all_UsersData():
 def admin_change_password():
     data = request.get_json()
     return dumps(adminChangePassword(data['token'], data['targetProfile'], data['newPassword']))
+
+## User Profile Upload Documentation Implementation to Server ##
+
+@APP.route("/profile/upload-doc", methods = ['POST'])
+def user_upload_doc():
+    data = request.get_json()
+    return dumps(uploadDocumentation(data['token'], data['dataStr']))
 
 """
 ROUTES FOR Booking FUNCTIONS
