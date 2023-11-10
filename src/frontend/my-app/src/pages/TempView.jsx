@@ -1,4 +1,4 @@
- import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import React from "react";
 import "./TempView.css";
 
@@ -27,6 +27,7 @@ const TempView = () => {
   const [classes, setClasses] = React.useState([]);
   const [city, setCity] = React.useState("");
   const [userType, setUserType] = React.useState("");
+  const [pdfs, setPdfs] = React.useState("");
 
   const { getters } = useContext(Context);
   const loggedInUserName = getters.usernameGlobal;
@@ -57,6 +58,7 @@ const TempView = () => {
       setLastName(data.familyName);
       setCity(data.location);
       setUserType(data.userType);
+      setPdfs(data.pdfStr);
     }
 
     const classes = await fetch(
@@ -101,16 +103,20 @@ const TempView = () => {
             <div className="view-profile-feature-buttons">
               <Stack spacing={2} direction="row">
                 <BookModal
-                    variant="contained"
-                    stuToken={token}
-                    tutUser={viewingUsername}
+                  variant="contained"
+                  stuToken={token}
+                  tutUser={viewingUsername}
                 ></BookModal>
-                <RatingModal token={token} tutorUser={viewingUsername}></RatingModal>
+                <RatingModal
+                  token={token}
+                  tutorUser={viewingUsername}
+                ></RatingModal>
                 <Button
                   variant="contained"
                   onClick={() => {
                     redirectStudentMessage(viewingUsername);
                   }}
+                  className="message-user-button"
                 >
                   Message {firstName}
                 </Button>
@@ -165,7 +171,27 @@ const TempView = () => {
               </div>
             </div>
           </div>
+          {userType === "tutor" && (
+            <div className="lower-container-tempview">
+              <div className="lower-container-tempview-one">
+                <b>{firstName} PDF documents:</b>
+                {pdfs.map((eachPdf, idx) => {
+                  return (
+                    <div key={idx}>
+                      <a download="PDF Title" href={eachPdf}>
+                        Download Pdf document {idx + 1}
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="lower-container-tempview-two"></div>
+            </div>
+          )}
         </div>
+        {/* <div className="lower-container-profile">
+            <div className="lower-box-one"></div>
+          </div> */}
       </div>
     </>
   );

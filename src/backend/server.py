@@ -212,10 +212,11 @@ def user_change_youtube():
 
 ## User Profile Approve Tutor Implementation to Server ##
 
-@APP.route("/profile/change-youtube", methods = ['PUT'])
+@APP.route("/profile/admin-approve", methods = ['PUT'])
 def admin_approve():
     data = request.get_json()
     return dumps(adminApprove(data['token'], data['targetTutor']))
+
 
 """
 ROUTES FOR Booking FUNCTIONS

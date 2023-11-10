@@ -217,6 +217,7 @@ const Profile = () => {
                       onClick={() => {
                         uploadPdf();
                       }}
+                      className="individual-profile-button"
                     >
                       Submit pdf file
                     </Button>
