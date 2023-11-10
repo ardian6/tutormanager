@@ -19,7 +19,7 @@ def checkMyNotifications(session_token: str) -> dict:
     "notifList": listOfAllNotif
   }
 
-def dismissNotif(session_token: str, notifID) -> dict:
+def dismissNotif(session_token: str, notifID: str) -> dict:
   """Dismisses a single notification
     Paramaters:
       session_token: String
