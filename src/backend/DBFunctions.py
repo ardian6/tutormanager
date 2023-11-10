@@ -35,6 +35,17 @@ def dbregister(token: str, email: str, username: str, password: str, firstName: 
     cur = db.cursor()
     if userType == 'tutor':
         cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType, '', '', '', '', False, '', '',])
+        
+        #Creates a notification for all admins of a new tutor
+        cur.execute("""select u.username from users u where userType = %s""", ['admin'])
+        allAdmins = []
+        for t in cur.fetchall():
+            allAdmins.append(t[0])
+        for a in allAdmins:
+            notifID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+            notifstr = "A new tutor has been registered with name " + username
+            timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, a, timeNow, notifstr])
     else:
         cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType, '', '', '', '', True, '', '',])
     cur.execute("""insert into Sessions values (%s, %s)""", [token, username])
