@@ -13,6 +13,18 @@ import MailIcon from "@mui/icons-material/Mail";
 import { Context, useContext } from "../Context";
 import Badge from "@mui/material/Badge";
 
+function translateDate(date) {
+  var day = date.slice(8, 10);
+  var month = date.slice(5, 7);
+  var year = date.slice(0, 4);
+  var time24hour = date.slice(11, 19);
+  var time = new Date("1970-01-01T" + time24hour + "Z").toLocaleTimeString(
+    "en-US",
+    { timeZone: "UTC", hour12: true, hour: "numeric", minute: "numeric" }
+  );
+  return time + " " + day + "/" + month + "/" + year;
+}
+
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
     Notification: false,
@@ -73,7 +85,6 @@ export default function TemporaryDrawer() {
 
     setState({ ...state, [anchor]: open });
   };
-
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
@@ -87,7 +98,7 @@ export default function TemporaryDrawer() {
                 dismissNotification(text[0]);
               }}
             >
-              {text[2]}
+              {translateDate(text[2])}
               <br></br>
               {text[3]}
             </ListItemButton>
@@ -103,6 +114,7 @@ export default function TemporaryDrawer() {
       <Badge badgeContent={notifications.length} color="error">
         {["Notifications"].map((anchor) => (
           <React.Fragment key={anchor}>
+            {console.log(anchor)}
             <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
             <Drawer
               anchor={anchor}

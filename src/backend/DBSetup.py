@@ -27,7 +27,7 @@ def setupTables():
   timezone    varchar(15),
   approved    boolean,
   profilePic  varchar(60000),
-  youtubeLink varchar(60000), 
+  youtubeLink varchar(60000),
 	primary key (username)
   )""")
 
@@ -52,7 +52,7 @@ def setupTables():
   cur.execute("""create table bookings (
 	bookingID   varchar(30),
   stuUser     varchar(30) references users(username),
-  tutUser     varchar(30) references users(username),           
+  tutUser     varchar(30) references users(username),
   startTime   timestamp,
   endTime     timestamp,
   approved    boolean,
@@ -63,7 +63,7 @@ def setupTables():
   cur.execute("""create table messages (
 	msgID       varchar(30),
   stuUser     varchar(30) references users(username),
-  tutUser     varchar(30) references users(username),           
+  tutUser     varchar(30) references users(username),
   timeSent    timestamp,
   message     varchar(1000),
   sentBy      varchar(30) references users(username),
@@ -73,7 +73,7 @@ def setupTables():
   cur.execute("""create table ratings (
   ratingID      varchar(30),
   stuUser       varchar(30) references users(username),
-  tutUser       varchar(30) references users(username),           
+  tutUser       varchar(30) references users(username),
   timeSent      timestamp,
   ratingMessage varchar(1000),
   ratingNumber  numeric,
@@ -82,7 +82,7 @@ def setupTables():
 
   cur.execute("""create table notifications (
   notifID       varchar(30),
-  nameOfuser    varchar(30) references users(username),           
+  nameOfuser    varchar(30) references users(username),
   timeSent      timestamp,
   notifMessage  varchar(1000),
 	primary key   (notifID)
@@ -90,7 +90,7 @@ def setupTables():
 
   cur.execute("""create table documentation (
   docID         varchar(30),
-  nameOfUser    varchar(30) references users(username),           
+  nameOfUser    varchar(30) references users(username),
   documentData  varchar(60000),
 	primary key   (docID)
   )""")
@@ -217,7 +217,7 @@ def inputData7():
 def inputData8():
   cur = db.cursor()
   cur.execute("""insert into notifications values ('1', 'username2', '2023-05-28 13:00:00', 'Your booking with username4 has been accepted')""")
-  cur.execute("""insert into notifications values ('2', 'username4', '2023-05-25 13:00:00', 'You have recieved new messages from username2')""")
+  cur.execute("""insert into notifications values ('2', 'username4', '2023-05-25 13:00:00', 'You have received new messages from username2')""")
   cur.execute("""insert into notifications values ('3', 'username4', '2023-11-05 13:22:11', 'A new rating has been made on you by username2')""")
   cur.close()
   db.commit()

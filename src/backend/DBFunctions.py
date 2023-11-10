@@ -35,7 +35,7 @@ def dbregister(token: str, email: str, username: str, password: str, firstName: 
     cur = db.cursor()
     if userType == 'tutor':
         cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType, '', '', '', '', False, '', '',])
-        
+
         #Creates a notification for all admins of a new tutor
         cur.execute("""select u.username from users u where userType = %s""", ['admin'])
         allAdmins = []
@@ -194,7 +194,7 @@ def dbAddCourse(token: str, newCourse: str):
     for t in cur.fetchall():
         currUsername = t[0]
     addedCourse = True
-    cur.execute("""select c.course from userCourse c where c.username = %s and c.course = %s""", [currUsername, newCourse])   
+    cur.execute("""select c.course from userCourse c where c.username = %s and c.course = %s""", [currUsername, newCourse])
     for t in cur.fetchall():
         addedCourse = False
     if addedCourse == True:
@@ -212,7 +212,7 @@ def dbDeleteCourse(token: str, courseToBeDeleted: str):
     for t in cur.fetchall():
         currUsername = t[0]
     deletedCourse = False
-    cur.execute("""select c.course from userCourse c where c.username = %s and c.course = %s""", [currUsername, courseToBeDeleted])   
+    cur.execute("""select c.course from userCourse c where c.username = %s and c.course = %s""", [currUsername, courseToBeDeleted])
     for t in cur.fetchall():
         deletedCourse = True
     if deletedCourse == True:
@@ -233,7 +233,7 @@ def dbDeleteAccount(token: str, password: str):
     """
     db = connectDB()
     cur = db.cursor()
-    
+
     # Check if the user assoicated with the sess token and the password match to the ones in the database
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
     currUsername = None
@@ -267,17 +267,17 @@ def dbViewProfile(targetProfile: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute(""" select u.username, u.email, u.givenName, u.familyName, u.userType, u.bio, u.location, u.phone, u.timezone, u.profilePic, u.youtubeLink, u.approved
-                    from users u 
-                    where u.username = %s""", [targetProfile])   
+                    from users u
+                    where u.username = %s""", [targetProfile])
     allData = cur.fetchone()
     cur.close()
     db.commit()
     averageRatings = 0.0
     if allData[4] == 'tutor':
         averageRatings = dbAverageRatings(targetProfile)
-    
+
     allDocumentation = dbRetrieveDoc(targetProfile)
-    return { # Return it in a dictionary format with all information 
+    return { # Return it in a dictionary format with all information
         'username': allData[0],
         'email': allData[1],
         'givenName': allData[2],
@@ -331,7 +331,7 @@ def dbAddCourseToList(courseName: str):
     cur.execute("""insert into Courses values (%s)""", [courseName])
     cur.close()
     db.commit()
-    return 
+    return
 
 # This function removes a course from the list of all courses in the database
 def dbRemoveCourseFromList(courseName: str):
@@ -341,7 +341,7 @@ def dbRemoveCourseFromList(courseName: str):
     cur.execute("""delete from courses c where c.courseName = %s""", [courseName])
     cur.close()
     db.commit()
-    return 
+    return
 
 # This function retrieves the courses the user is doing
 def dbViewMyCourses(token: str) -> list:
@@ -441,7 +441,7 @@ def dbMakeBooking(studentUser: str, tutorUser: str, startTime: str, endTime: str
     sTime = datetime.datetime.strptime(startTime, '%Y-%m-%d %H:%M:%S')
     dTime = datetime.datetime.strptime(endTime, '%Y-%m-%d %H:%M:%S')
     cur.execute("""insert into bookings values (%s, %s, %s, %s, %s, %s, %s)""", [bookingId, studentUser, tutorUser, sTime, dTime, False, description])
-    
+
     notifID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
     notifstr = "A booking has been made by " + studentUser
     timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -517,12 +517,12 @@ def dbGroupUsers():
     allStudents = []
     for t in cur.fetchall():
         allStudents.append(t[0])
-    
+
     cur.execute("""select u.username from users u where userType = %s""", ['tutor'])
     allTutors = []
     for t in cur.fetchall():
         allTutors.append(t[0])
-    
+
     cur.execute("""select u.username from users u where userType = %s""", ['admin'])
     allAdmins = []
     for t in cur.fetchall():
@@ -564,10 +564,10 @@ def dbSendMessage(stuUser: str, tutUser: str, sentBy: str, timeSent: str, messag
     timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     notifstr = ""
     if stuUser == sentBy:
-        notifstr = "You have recieved a message from " + stuUser
+        notifstr = "You have received a message from " + stuUser
         cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, tutUser, timeNow, notifstr])
     else:
-        notifstr = "You have recieved a message from " + tutUser
+        notifstr = "You have received a message from " + tutUser
         cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, stuUser, timeNow, notifstr])
 
     cur.close()
@@ -667,10 +667,10 @@ def dbUploadDoc(token: str, pdfDataStr: str):
     currUsername = None
     for t in cur.fetchall():
         currUsername = t[0]
-    
+
     docID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
     cur.execute("""insert into documentation values (%s, %s, %s)""", [docID, currUsername, pdfDataStr])
-    
+
     #Creates a notification for all admins of a tutor uploading documentation
     cur.execute("""select u.username from users u where userType = %s""", ['admin'])
     allAdmins = []
@@ -681,7 +681,7 @@ def dbUploadDoc(token: str, pdfDataStr: str):
         notifstr = "A new file has been uploaded by tutor " + currUsername
         timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, a, timeNow, notifstr])
-    
+
     cur.close()
     db.commit()
     return
