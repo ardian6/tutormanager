@@ -20,36 +20,13 @@ import { useNavigate } from "react-router-dom";
 import { Context, useContext } from "../Context";
 import "./DeleteYoutubeModal.css";
 import Filetodata from "../pages/Filetodata";
+import EditIcon from "@mui/icons-material/Edit";
 
-const DeleteYoutubeModal = ({ token, getUser }) => {
-  const [open, setOpen] = React.useState(false);
+const DeleteYoutubeModal = ({ message }) => {
+  const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const deleteYoutubeLink = async () => {
-    const response = await fetch(
-      "http://localhost:5005/profile/change-youtube",
-      {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          token: token,
-          link: "",
-        }),
-      }
-    );
-
-    const data = await response.json();
-    if (data.error) {
-      alert(data.error);
-    } else {
-      // console.log(data);
-      // setYoutubeLink(newpath)
-      getUser();
-    }
-  };
   const style = {
     position: "absolute",
     top: "50%",
@@ -64,11 +41,7 @@ const DeleteYoutubeModal = ({ token, getUser }) => {
 
   return (
     <>
-      <DeleteForeverIcon
-        className="edit-youtube-link"
-        onClick={handleOpen}
-      ></DeleteForeverIcon>
-
+      {/* <EditIcon className="edit-icon" onClick={handleOpen}></EditIcon> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -76,25 +49,12 @@ const DeleteYoutubeModal = ({ token, getUser }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="upload-box">
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Delete youtube video
-            </Typography>
-            Your current youtube video link will be deleted forever!
-            <Stack spacing={2} direction="row">
-              <Button
-                variant="contained"
-                onClick={() => {
-                  deleteYoutubeLink();
-                  handleClose();
-                }}
-                className="individual-profile-button"
-                color="error"
-              >
-                Delete current youtube link
-              </Button>
-            </Stack>
-          </div>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
         </Box>
       </Modal>
     </>
