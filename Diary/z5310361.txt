@@ -36,3 +36,7 @@ There is also a mock payment page.
 Week 8
 With most user stories implemented for Sprint 2. This week is left to tidy up the project for project demo b. Media queries are still 
 an item and will be completed by the end of this week.
+
+Week 9
+Implemented rating and notifications for the frontend. Moving on, there should be only a few addition functionality to implement
+before the project is completed.
