@@ -111,15 +111,12 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    yarn
    ```
-   **Create two new terminals**
-4. Start the backend - create on terminal no. 1
+4.   **Create two new terminals**
+    Start the backend - create on terminal no. 1
    ```sh
    python3 src/backend/server.py
    ```
 5. Start the frontend - create on terminal no. 2
-   ```sh
-   cd src/frontend/my-app
-   ```
    **Go to correct directory for commands to work**
    ```sh
    cd /capstone-project-3900f12apenguin/src/frontend/my-app
