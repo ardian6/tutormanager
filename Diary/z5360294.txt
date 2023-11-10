@@ -42,3 +42,6 @@ functionality features.
 Week 8
 We went back and polished most of the program. I fixed the change password in the admin page that allows the admin to change the password of users and tutors. Started some media queries for some main pages. 
 I cleaned up most of the UI changes for sprint 2 ahead of the demo. Went through and found some bugs where the modal was not properly displaying the correct username that was being displayed. 
+
+Week 9
+Went to the README.md file and fix some of the instructions. Fully implemented the user upload profile image function for both studnet and tutor users. Completed the user upload PDF file functionality for tutors. Had to go back to all dashboards and viewtemp pages to implement the two previous new functionality so that it properly shows them. 
