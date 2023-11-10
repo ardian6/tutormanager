@@ -116,6 +116,9 @@ const Profile = () => {
               <span>
                 <b>User Type:</b> {userType}
               </span>
+              <span>
+                <b>Hours taught:</b> 123
+              </span>
               <b>Subjects:</b>
               <div>
                 <BasicStack
