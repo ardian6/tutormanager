@@ -26,6 +26,8 @@ def setupTables():
   phone       varchar(30),
   timezone    varchar(15),
   approved    boolean,
+  profilePic  varchar(60000),
+  youtubeLink varchar(60000), 
 	primary key (username)
   )""")
 
@@ -136,14 +138,14 @@ def clearData():
 # Input dummy data for user table
 def inputData1():
   cur = db.cursor()
-  cur.execute(f"""insert into Users values ('username1', '{getHashOf('password1')}', 'email1@gmail.com', 'givenname1', 'famailyName1', 'admin', 'bio1', 'location1', 'phone1', 'timezone1', True)""")
-  cur.execute(f"""insert into Users values ('username2', '{getHashOf('password2')}', 'email2@gmail.com', 'givenname2', 'famailyName2', 'student', 'bio2', 'location2', 'phone2', 'timezone2', True)""")
-  cur.execute(f"""insert into Users values ('username3', '{getHashOf('password3')}', 'email3@gmail.com', 'givenname3', 'famailyName3', 'student', 'bio3', 'location3', 'phone3', 'timezone3', True)""")
-  cur.execute(f"""insert into Users values ('username4', '{getHashOf('password4')}', 'email4@gmail.com', 'givenname4', 'famailyName4', 'tutor', 'bio4', 'location4', 'phone4', 'timezone4', True)""")
-  cur.execute(f"""insert into Users values ('username5', '{getHashOf('password5')}', 'email5@gmail.com', 'givenname5', 'famailyName5', 'student', 'bio5', 'location5', 'phone5', 'timezone5', True)""")
-  cur.execute(f"""insert into Users values ('username6', '{getHashOf('password6')}', 'email6@gmail.com', 'givenname6', 'famailyName6', 'tutor', 'bio6', 'location6', 'phone6', 'timezone6', False)""")
-  cur.execute(f"""insert into Users values ('username7', '{getHashOf('password7')}', 'email7@gmail.com', 'givenname7', 'famailyName7', 'tutor', 'bio7', 'location7', 'phone7', 'timezone7', True)""")
-  cur.execute(f"""insert into Users values ('username8', '{getHashOf('password8')}', 'email8@gmail.com', 'givenname8', 'famailyName8', 'student', 'bio8', 'location8', 'phone8', 'timezone8', True)""")
+  cur.execute(f"""insert into Users values ('username1', '{getHashOf('password1')}', 'email1@gmail.com', 'givenname1', 'famailyName1', 'admin', 'bio1', 'location1', 'phone1', 'timezone1', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username2', '{getHashOf('password2')}', 'email2@gmail.com', 'givenname2', 'famailyName2', 'student', 'bio2', 'location2', 'phone2', 'timezone2', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username3', '{getHashOf('password3')}', 'email3@gmail.com', 'givenname3', 'famailyName3', 'student', 'bio3', 'location3', 'phone3', 'timezone3', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username4', '{getHashOf('password4')}', 'email4@gmail.com', 'givenname4', 'famailyName4', 'tutor', 'bio4', 'location4', 'phone4', 'timezone4', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username5', '{getHashOf('password5')}', 'email5@gmail.com', 'givenname5', 'famailyName5', 'student', 'bio5', 'location5', 'phone5', 'timezone5', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username6', '{getHashOf('password6')}', 'email6@gmail.com', 'givenname6', 'famailyName6', 'tutor', 'bio6', 'location6', 'phone6', 'timezone6', False, '', '')""")
+  cur.execute(f"""insert into Users values ('username7', '{getHashOf('password7')}', 'email7@gmail.com', 'givenname7', 'famailyName7', 'tutor', 'bio7', 'location7', 'phone7', 'timezone7', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username8', '{getHashOf('password8')}', 'email8@gmail.com', 'givenname8', 'famailyName8', 'student', 'bio8', 'location8', 'phone8', 'timezone8', True, '', '')""")
   cur.close()
   db.commit()
   return

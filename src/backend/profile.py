@@ -2,7 +2,7 @@ from DBFunctions import checkTokenExists, checkDuplicateEmail, checkDuplicateUse
 from DBFunctions import dbChangeUsername, dbChangePassword, dbChangeEmail, dbChangeBio, dbAddCourse
 from DBFunctions import dbDeleteAccount, dbAdminDelete, dbDeleteCourse, dbViewProfile, dbCourseList, dbAddCourseToList, dbViewMyCourses, dbAllUsernames
 from helper import getHashOf
-from DBFunctions import dbUploadDoc
+from DBFunctions import dbUploadDoc, dbChangeProfilePic, dbChangeYTLink
 
 def changeUsername(session_token: str, newUsername: str) -> dict:
   """Changes a given user's username.
@@ -330,6 +330,46 @@ def uploadDocumentation(session_token: str, pdfDataStr: str):
 
   return {
     "token": session_token,
+  }
+
+def changePicture(session_token: str, pictureString: str) -> dict:
+  """Changes a given user's profile picture.
+    Paramaters:
+      session_token: String
+      pictureString: String
+
+    Returns:
+      { session_token: String }
+  """
+  # Find user in database from token
+  if not checkTokenExists(session_token):
+    return {"error": "Token is invalid."}
+  
+  # This function actually goes into the database and changes the data stored
+  dbChangeProfilePic(session_token, pictureString)
+
+  return {
+    "token": session_token
+  }
+
+def changeYTLink(session_token: str, link: str) -> dict:
+  """Changes a given user's youtube video.
+    Paramaters:
+      session_token: String
+      link: String
+
+    Returns:
+      { session_token: String }
+  """
+  # Find user in database from token
+  if not checkTokenExists(session_token):
+    return {"error": "Token is invalid."}
+  
+  # This function actually goes into the database and changes the data stored
+  dbChangeYTLink(session_token, link)
+
+  return {
+    "token": session_token
   }
 
 # Below is for myself (Mathew) to test out functions
