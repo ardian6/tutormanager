@@ -20,3 +20,10 @@ Week 6:
 I attended our weekly meeting where we talked about completing Sprint 2 and assigned tasks to everyone. Mathew and I decided it would be faster if he completed the backend and database portion for the booking functionality, where Hayka and I will complete the tutor filtering in Week 7.
 
 Week 7:
+I started working on the final report, where I began by creating a simple README file detailing all necessary dependencies/technologies to run the project. Additionally, since there are marks dedicated to Software Quality, after conferring with the team, I decided to add comments to our code so someone outside the group would be able to understand our logic. I struggled with understanding all used dependencies, but went back and looked over our codebase to get an idea.
+
+Week 8:
+I attended our scheduled meeting where it was decided that I would have a major part in creating the Report, along with Hayka and Mathew. 
+
+Week 9:
+I continued to work on the final report in preparation for the due date. I finished off the installation section and aim to begin the 'Overview' section by the end of this week. I also added comments and refactored some of the backend code to make it more readable.
