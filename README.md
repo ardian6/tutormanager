@@ -123,7 +123,7 @@ This installation assumes the user has a GitHub account with a valid SSH key.
       ```sh
       cd /capstone-project-3900f12apenguin/src/frontend/my-app
       ```
-       **Opens a new tab in your default browser.**
+       Start the frontend. It automatically opens a new tab in your default browser.
       ```sh
       yarn start
       ```
