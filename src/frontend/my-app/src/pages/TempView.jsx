@@ -105,11 +105,11 @@ const TempView = () => {
         <div className="view-profile-card">
           <div className="view-profile-title-container">
             <AccountBoxIcon className="view-profile-title-icon" />
+            {approval === true && userType == "tutor" && (
+              <VerifiedIcon className="verified-icon" />
+            )}
             <div className="view-profile-title">
               {firstName + " " + lastName}
-              {approval === true && userType == "tutor" && (
-                <VerifiedIcon className="verified-icon" />
-              )}
             </div>
           </div>
 
@@ -205,7 +205,7 @@ const TempView = () => {
             <div className="lower-container-tempview">
               <div className="lower-container-tempview-one">
                 <b className="document-title">{firstName} PDF documents</b>
-                Download the following documents:
+                View documents:
                 {pdfs.map((eachPdf, idx) => {
                   return (
                     <div key={idx}>
