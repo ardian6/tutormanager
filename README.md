@@ -116,7 +116,7 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    python3 src/backend/server.py
    ```
-5. Start the frontend - create on terminal no. 2
+5.  Start the frontend - create on terminal no. 2
    **Go to correct directory for commands to work**
    ```sh
    cd /capstone-project-3900f12apenguin/src/frontend/my-app
