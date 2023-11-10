@@ -255,6 +255,7 @@ def dbDeleteAccount(token: str, password: str):
         cur.execute("""delete from messages m where m.stuUser = %s or m.tutUser = %s""", [currUsername, currUsername])
         cur.execute("""delete from ratings r where r.stuUser = %s or r.tutUser = %s""", [currUsername, currUsername])
         cur.execute("""delete from notifications n where n.nameOfuser = %s""", [currUsername])
+        cur.execute("""delete from documentation d where d.nameOfuser = %s""", [currUsername])
         cur.execute("""delete from Users u where u.username = %s""", [currUsername])
 
     cur.close()
@@ -304,6 +305,7 @@ def dbAdminDelete(targetProfile: str):
     cur.execute("""delete from messages m where m.stuUser = %s or m.tutUser = %s""", [targetProfile, targetProfile])
     cur.execute("""delete from ratings r where r.stuUser = %s or r.tutUser = %s""", [targetProfile, targetProfile])
     cur.execute("""delete from notifications n where n.nameOfuser = %s""", [targetProfile])
+    cur.execute("""delete from documentation d where d.nameOfuser = %s""", [targetProfile])
     cur.execute("""delete from Users u where u.username = %s""", [targetProfile])
     cur.close()
     db.commit()
