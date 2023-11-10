@@ -15,6 +15,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { Context, useContext } from "../Context";
 import BookModal from "../components/BookModal";
 import RatingModal from "../components/RatingModal";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const TempView = () => {
   const param = useParams();
@@ -28,6 +29,10 @@ const TempView = () => {
   const [city, setCity] = React.useState("");
   const [userType, setUserType] = React.useState("");
   const [pdfs, setPdfs] = React.useState("");
+  const [profilePicture, setProfilePicture] = React.useState("");
+
+  const [checkedProfilePicture, setCheckedProfilePicture] =
+    React.useState(false);
 
   const { getters } = useContext(Context);
   const loggedInUserName = getters.usernameGlobal;
@@ -59,6 +64,8 @@ const TempView = () => {
       setCity(data.location);
       setUserType(data.userType);
       setPdfs(data.pdfStr);
+      setProfilePicture(data.profilePicture);
+      setCheckedProfilePicture(true);
     }
 
     const classes = await fetch(
@@ -139,11 +146,27 @@ const TempView = () => {
           )}
           <div className="view-profile-upper">
             <div className="view-upper-box-one">
-              <img
-                src={defaultImage}
-                alt="default-image"
-                className="profile-image"
-              />
+              {checkedProfilePicture === false && (
+                <div className="view-profile-loading">
+                  <CircularProgress />
+                </div>
+              )}
+
+              {profilePicture === "" && checkedProfilePicture === true ? (
+                <img
+                  src={defaultImage}
+                  alt="default-profile-pic"
+                  className="profile-image"
+                />
+              ) : (
+                <>
+                  <img
+                    src={profilePicture}
+                    alt="uploaded-profile-pic"
+                    className="uploaded-profile-image"
+                  />
+                </>
+              )}
             </div>
             <div className="view-upper-box-two">
               <div>
@@ -174,7 +197,8 @@ const TempView = () => {
           {userType === "tutor" && (
             <div className="lower-container-tempview">
               <div className="lower-container-tempview-one">
-                <b>{firstName} PDF documents:</b>
+                <b className="document-title">{firstName} PDF documents</b>
+                Download the following documents:
                 {pdfs.map((eachPdf, idx) => {
                   return (
                     <div key={idx}>
@@ -184,6 +208,11 @@ const TempView = () => {
                     </div>
                   );
                 })}
+                {pdfs.length === 0 && (
+                  <span className="pdf-placeholder-description">
+                    Currently no available documents to download
+                  </span>
+                )}
               </div>
               <div className="lower-container-tempview-two"></div>
             </div>

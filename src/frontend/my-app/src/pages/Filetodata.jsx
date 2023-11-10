@@ -4,11 +4,12 @@ const FileToData = (file) => {
     "image/png",
     "image/jpg",
     "application/pdf",
+    "image/PNG",
   ];
   const valid = validFileTypes.find((type) => type === file.type);
   // console.log(file.type);
   if (!valid) {
-    throw Error("provided file is not a png, jpg, jpeg, pdf file.");
+    throw Error("provided file is not a png, PNG, jpg, jpeg,  pdf file.");
   }
 
   const reader = new FileReader();

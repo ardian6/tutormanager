@@ -15,8 +15,12 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import { Context, useContext } from "../Context";
 import BasicModal from "../components/BasicModal";
+
 import BasicStack from "../components/BasicStack";
+
+import UploadProfileModal from "../components/UploadProfileModal";
 import AddCourseModal from "../components/AddCourseModal";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Profile = () => {
   const [email, setEmail] = React.useState("");
@@ -27,6 +31,10 @@ const Profile = () => {
   const [city, setCity] = React.useState("");
 
   const [hours, setHours] = React.useState("");
+
+  const [profilePicture, setProfilePicture] = React.useState("");
+  const [checkedProfilePicture, setCheckedProfilePicture] =
+    React.useState(false);
 
   const [pdf, setPdf] = React.useState("");
   const [listPdf, setListPdf] = React.useState([]);
@@ -59,7 +67,9 @@ const Profile = () => {
       setLastName(data.familyName);
       setCity(data.location);
       setListPdf(data.pdfStr);
-      // console.log(data.pdfStr);
+      setProfilePicture(data.profilePicture);
+      setCheckedProfilePicture(true);
+      console.log(data);
     }
 
     const classes = await fetch(
@@ -148,11 +158,31 @@ const Profile = () => {
           </div>
           <div className="profile-upper">
             <div className="upper-box-one">
-              <img
-                src={defaultImage}
-                alt="default-image"
-                className="profile-image"
-              />
+              <UploadProfileModal
+                token={token}
+                getUser={getUser}
+              ></UploadProfileModal>
+              {checkedProfilePicture === false && (
+                <div className="view-profile-loading">
+                  <CircularProgress />
+                </div>
+              )}
+
+              {profilePicture === "" && checkedProfilePicture === true ? (
+                <img
+                  src={defaultImage}
+                  alt="default-image"
+                  className="profile-image"
+                />
+              ) : (
+                <>
+                  <img
+                    src={profilePicture}
+                    alt="default-image"
+                    className="uploaded-profile-image"
+                  />
+                </>
+              )}
             </div>
             <div className="upper-box-two">
               <BasicModal
@@ -201,11 +231,12 @@ const Profile = () => {
               <div className="lower-container-profile">
                 <div className="lower-box-one">
                   <b>Upload Documents. One at a time.</b>
+                  Only PDF files accepted
                   <input
                     type="file"
                     id="pdf"
                     name="pdf"
-                    accept="application/pdf, image/png, image/jpeg, image/jpg"
+                    accept="application/pdf"
                     onChange={() => {
                       storePdf();
                     }}
