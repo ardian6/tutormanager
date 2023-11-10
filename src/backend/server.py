@@ -10,13 +10,14 @@ from flask_cors import CORS
 #from src.echo import echo
 
 from auth import login, register, logout
-from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword
+from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword, uploadDocumentation
 from profile import addNewCourse, adminAddCourse, adminDeleteCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
 from filterT import filterTutors, getUserGroups
 from messages import listMessages, sendMessage
 from ratings import makeRatings, tutorWrittenRatings, tutorAverageRatings
 from notification import checkMyNotifications, dismissNotif
+from hours import myTotalHours
 
 def quit_gracefully(*args):
     '''For coverage'''
@@ -188,6 +189,13 @@ def admin_change_password():
     data = request.get_json()
     return dumps(adminChangePassword(data['token'], data['targetProfile'], data['newPassword']))
 
+## User Profile Upload Documentation Implementation to Server ##
+
+@APP.route("/profile/upload-doc", methods = ['POST'])
+def user_upload_doc():
+    data = request.get_json()
+    return dumps(uploadDocumentation(data['token'], data['dataStr']))
+
 """
 ROUTES FOR Booking FUNCTIONS
 
@@ -313,6 +321,17 @@ def notification_view():
 def notification_dismiss():
     data = request.get_json()
     return dumps(dismissNotif(data['token'], data['notificationID']))
+
+"""
+ROUTES FOR HOURS FUNCTIONS
+
+"""
+## User Hours Check Total Hours Taught Implementation to Server ##
+
+@APP.route("/hours/total-hours", methods = ['POST'])
+def total_hours_view():
+    data = request.get_json()
+    return dumps(myTotalHours(data['token']))
 
 """
 END OF ROUTES

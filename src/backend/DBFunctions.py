@@ -263,6 +263,8 @@ def dbViewProfile(targetProfile: str):
     averageRatings = 0.0
     if allData[4] == 'tutor':
         averageRatings = dbAverageRatings(targetProfile)
+    
+    allDocumentation = dbRetrieveDoc(targetProfile)
     return { # Return it in a dictionary format with all information 
         'username': allData[0],
         'email': allData[1],
@@ -273,7 +275,8 @@ def dbViewProfile(targetProfile: str):
         'location': allData[6],
         'phone': allData[7],
         'timezone': allData[8],
-        'averageRating': averageRatings
+        'averageRating': averageRatings,
+        'pdfStr': allDocumentation
     }
 
 # This function goes into the database and removes all data related to the targeted user
@@ -631,6 +634,7 @@ def dbAllNotifications(token: str) -> list:
     db.commit()
     return listOfAllNotif
 
+# This function deletes the dismissed notification from database
 def dbDismissNotif(notificationID: str):
     db = connectDB()
     cur = db.cursor()
@@ -638,6 +642,38 @@ def dbDismissNotif(notificationID: str):
     cur.close()
     db.commit()
     return
+
+# This function stores a data string of a pdf into the database
+def dbUploadDoc(token: str, pdfDataStr: str):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
+    currUsername = None
+    for t in cur.fetchall():
+        currUsername = t[0]
+    
+    docID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+    cur.execute("""insert into documentation values ('%s', '%s', '%s')""", [docID, currUsername, pdfDataStr])
+    
+    cur.close()
+    db.commit()
+    return
+
+# This function retrieves a list of all the data string pdf of a specific user
+def dbRetrieveDoc(username:str) -> list:
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select d.docID, d.nameOfuser, d.documentData, from documentation d where d.nameOfUser = %s""", [username])
+    listOfAllData = []
+    for t in cur.fetchall():
+        singleStr = []
+        singleStr.append(t[0])
+        singleStr.append(t[1])
+        singleStr.append(t[2])
+        listOfAllData.append(singleStr)
+    cur.close()
+    db.commit()
+    return listOfAllData
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':

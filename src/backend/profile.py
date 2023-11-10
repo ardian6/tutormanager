@@ -2,6 +2,7 @@ from DBFunctions import checkTokenExists, checkDuplicateEmail, checkDuplicateUse
 from DBFunctions import dbChangeUsername, dbChangePassword, dbChangeEmail, dbChangeBio, dbAddCourse
 from DBFunctions import dbDeleteAccount, dbAdminDelete, dbDeleteCourse, dbViewProfile, dbCourseList, dbAddCourseToList, dbViewMyCourses, dbAllUsernames
 from helper import getHashOf
+from DBFunctions import dbUploadDoc
 
 def changeUsername(session_token: str, newUsername: str) -> dict:
   """Changes a given user's username.
@@ -314,8 +315,22 @@ def adminChangePassword(session_token: str, targetProfile: str, newPassword: str
     "token": session_token,
   }
 
-# def uploadDocumentation(session_token)
-#   return
+def uploadDocumentation(session_token: str, pdfDataStr: str):
+  """Stores the data for a PDF
+    Paramaters:
+      session_token: String
+      pdfDataStr: String
+    Returns:
+      { session_token: String }
+  """
+  if not checkTokenExists(session_token):
+    return {"error": "Token is invalid."}
+  
+  dbUploadDoc(session_token, pdfDataStr)
+
+  return {
+    "token": session_token,
+  }
 
 # Below is for myself (Mathew) to test out functions
 if __name__ == '__main__':

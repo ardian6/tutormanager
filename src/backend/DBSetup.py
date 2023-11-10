@@ -86,6 +86,14 @@ def setupTables():
 	primary key   (notifID)
   )""")
 
+  cur.execute("""create table documentation (
+  docID         varchar(30),
+  nameOfUser    varchar(30) references users(username),           
+  documentData  varchar(60000),
+	primary key   (docID)
+  )""")
+
+
   cur.close()
   db.commit()
   return
@@ -101,6 +109,7 @@ def deleteTables():
   cur.execute("""drop table messages""")
   cur.execute("""drop table ratings""")
   cur.execute("""drop table notifications""")
+  cur.execute("""drop table documentation""")
   cur.execute("""drop table Users""")
 
   cur.execute("""drop type uType""")
@@ -118,6 +127,7 @@ def clearData():
   cur.execute("""delete from messages""")
   cur.execute("""delete from ratings""")
   cur.execute("""delete from notifications""")
+  cur.execute("""delete from documentation""")
   cur.execute("""delete from Users""")
   cur.close()
   db.commit()
@@ -196,6 +206,7 @@ def inputData7():
   cur.execute("""insert into ratings values ('1', 'username2', 'username4', '2023-11-05 13:22:11', 'Good Tutor', 5)""")
   cur.execute("""insert into ratings values ('2', 'username3', 'username4', '2023-11-05 16:33:40', 'Bad Tutor', 1.5)""")
   cur.execute("""insert into ratings values ('3', 'username5', 'username4', '2023-11-05 18:09:20', 'Ok Tutor', 3.5)""")
+  cur.execute("""insert into ratings values ('4', 'username2', 'username6', '2023-11-05 18:09:20', 'Excellent Tutor', 5)""")
   cur.close()
   db.commit()
   return
@@ -284,7 +295,7 @@ if __name__ == '__main__':
         # inputData7()
         # inputData8()
         # test()
-        printData()
+        # printData()
 
     except psycopg2.Error as err:
         print("DB error: ", err)
