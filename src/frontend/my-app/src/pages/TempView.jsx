@@ -205,7 +205,7 @@ const TempView = () => {
             <div className="lower-container-tempview">
               <div className="lower-container-tempview-one">
                 <b className="document-title">{firstName} PDF documents</b>
-                Download the following documents:
+                View documents:
                 {pdfs.map((eachPdf, idx) => {
                   return (
                     <div key={idx}>

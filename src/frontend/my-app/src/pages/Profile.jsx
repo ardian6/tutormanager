@@ -292,7 +292,7 @@ const Profile = () => {
             <>
               <div className="lower-container-profile">
                 <div className="lower-box-one">
-                  <b>Upload Documents. One at a time.</b>
+                  <b>Upload Documents (One at a time)</b>
                   Only PDF files accepted
                   <input
                     type="file"
