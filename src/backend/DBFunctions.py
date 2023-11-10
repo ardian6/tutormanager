@@ -653,7 +653,7 @@ def dbUploadDoc(token: str, pdfDataStr: str):
         currUsername = t[0]
     
     docID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
-    cur.execute("""insert into documentation values ('%s', '%s', '%s')""", [docID, currUsername, pdfDataStr])
+    cur.execute("""insert into documentation values (%s, %s, %s)""", [docID, currUsername, pdfDataStr])
     
     cur.close()
     db.commit()
