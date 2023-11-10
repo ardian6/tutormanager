@@ -2,10 +2,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-capstone-project-3900f12apenguin created by GitHub Classroom
 The Tutor Connect Web Platform is a project aimed at creating a user-friendly online platform that connects students with tutors. This platform simplifies the process of finding and scheduling one-on-one tutoring appointments with private tutors. It provides students with a convenient way to browse and select tutors, view tutors' profiles and expertise, schedule tutorials, and communicate with tutors.
 
-Features
+**Features**
 1. User Registration and Authentication
 Users can create accounts and log in securely.
 User roles: Students and Tutors.
