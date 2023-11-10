@@ -381,7 +381,7 @@ def dbAllUsernames() -> list:
     cur = db.cursor()
     cur.execute("""select u.username from Users u""")
     for t in cur.fetchall():
-        listOfAllUsers.append(t[0].lower())
+        listOfAllUsers.append(t[0])
     cur.close()
     db.commit()
     return listOfAllUsers
