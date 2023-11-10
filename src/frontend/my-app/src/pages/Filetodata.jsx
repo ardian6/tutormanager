@@ -1,7 +1,12 @@
 const FileToData = (file) => {
-  const validFileTypes = ["file/jpeg", "file/png", "file/jpg", "file/pdf"];
+  const validFileTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/jpg",
+    "application/pdf",
+  ];
   const valid = validFileTypes.find((type) => type === file.type);
-
+  // console.log(file.type);
   if (!valid) {
     throw Error("provided file is not a png, jpg, jpeg, pdf file.");
   }
