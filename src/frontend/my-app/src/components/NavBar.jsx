@@ -17,6 +17,9 @@ function NavBar() {
                 <Button>Dashboard</Button>
               </Link>
             </div>
+            <Link to="/Recommendations">
+              <Button>Recommendations</Button>
+            </Link>
           </div>
         </div>
         <h4 className="tutormanager-title">Tutor Manager</h4>
