@@ -1,10 +1,25 @@
 from DBFunctions import checkTokenExists, dbViewUsernameCourses, dbViewProfile, dbAllUsernames, dbGroupUsers
 
-def filterTutors(session_token, course, location, timezone, rating):
-  if not checkTokenExists(session_token):
+def filterTutors(token: str, course: str, location: str, timezone: str, rating: str) -> dict:
+  """Filters tutors by given parameters.
+    Paramaters:
+      token: String,
+      course: String,
+      location: String,
+      timezone: String,
+      rating: String
+    Returns:
+      { 
+        token: String,
+        listofalldata: String[] 
+      }
+  """
+  if not checkTokenExists(token):
     return {"error": "Token is invalid."}
+  
   listOfAllUsers = dbAllUsernames()
   listofValidTutors = []
+
   for userN in listOfAllUsers:
     dictHolder = dbViewProfile(userN)
     if (dictHolder['userType'] == 'tutor'):
@@ -18,18 +33,29 @@ def filterTutors(session_token, course, location, timezone, rating):
               listofValidTutors.append(dictHolder)
 
   return {
-    "token": session_token,
+    "token": token,
     "listofalldata": listofValidTutors
   }
 
-def getUserGroups(session_token: str):
-  if not checkTokenExists(session_token):
+def getUserGroups(token: str) -> dict:
+  """Returns 3 lists for all users (Students, Tutors and Admins)
+    Paramaters:
+      token: String,
+    Returns:
+      { 
+        token: String,
+        studentList: String[],
+        tutorList: String[],
+        adminList: String[] 
+      }
+  """
+  if not checkTokenExists(token):
     return {"error": "Token is invalid."}
 
   students, tutors, admins = dbGroupUsers()
 
   return {
-    "token": session_token,
+    "token": token,
     "studentList": students,
     "tutorList": tutors,
     "adminList": admins
