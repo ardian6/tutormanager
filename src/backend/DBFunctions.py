@@ -663,7 +663,7 @@ def dbUploadDoc(token: str, pdfDataStr: str):
 def dbRetrieveDoc(username:str) -> list:
     db = connectDB()
     cur = db.cursor()
-    cur.execute("""select d.docID, d.nameOfuser, d.documentData from documentation d where d.nameOfUser = %s""", [username])
+    cur.execute("""select d.documentData from documentation d where d.nameOfUser = %s""", [username])
     listOfAllData = []
     for t in cur.fetchall():
         singleStr = []
