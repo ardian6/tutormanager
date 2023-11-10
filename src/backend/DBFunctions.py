@@ -666,9 +666,7 @@ def dbRetrieveDoc(username:str) -> list:
     cur.execute("""select d.documentData from documentation d where d.nameOfUser = %s""", [username])
     listOfAllData = []
     for t in cur.fetchall():
-        singleStr = []
-        singleStr.append(t[0])
-        listOfAllData.append(singleStr)
+        listOfAllData.append(t[0])
     cur.close()
     db.commit()
     return listOfAllData
