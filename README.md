@@ -49,7 +49,7 @@ Calendar integration (Outlook Calendar API).
    ```sh
    git clone git@github.com:unsw-cse-comp3900-9900-23T3/capstone-project-3900f12apenguin.git
    ```
-1. Install Python3 and Python3 modules.
+1. Install Python3.
    ```sh
    sudo apt update && upgrade
    ```
