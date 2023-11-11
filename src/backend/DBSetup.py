@@ -26,6 +26,8 @@ def setupTables():
   phone       varchar(30),
   timezone    varchar(15),
   approved    boolean,
+  profilePic  varchar(60000),
+  youtubeLink varchar(60000),
 	primary key (username)
   )""")
 
@@ -50,7 +52,7 @@ def setupTables():
   cur.execute("""create table bookings (
 	bookingID   varchar(30),
   stuUser     varchar(30) references users(username),
-  tutUser     varchar(30) references users(username),           
+  tutUser     varchar(30) references users(username),
   startTime   timestamp,
   endTime     timestamp,
   approved    boolean,
@@ -61,7 +63,7 @@ def setupTables():
   cur.execute("""create table messages (
 	msgID       varchar(30),
   stuUser     varchar(30) references users(username),
-  tutUser     varchar(30) references users(username),           
+  tutUser     varchar(30) references users(username),
   timeSent    timestamp,
   message     varchar(1000),
   sentBy      varchar(30) references users(username),
@@ -71,7 +73,7 @@ def setupTables():
   cur.execute("""create table ratings (
   ratingID      varchar(30),
   stuUser       varchar(30) references users(username),
-  tutUser       varchar(30) references users(username),           
+  tutUser       varchar(30) references users(username),
   timeSent      timestamp,
   ratingMessage varchar(1000),
   ratingNumber  numeric,
@@ -80,11 +82,19 @@ def setupTables():
 
   cur.execute("""create table notifications (
   notifID       varchar(30),
-  nameOfuser    varchar(30) references users(username),           
+  nameOfuser    varchar(30) references users(username),
   timeSent      timestamp,
   notifMessage  varchar(1000),
 	primary key   (notifID)
   )""")
+
+  cur.execute("""create table documentation (
+  docID         varchar(30),
+  nameOfUser    varchar(30) references users(username),
+  documentData  varchar(60000),
+	primary key   (docID)
+  )""")
+
 
   cur.close()
   db.commit()
@@ -101,6 +111,7 @@ def deleteTables():
   cur.execute("""drop table messages""")
   cur.execute("""drop table ratings""")
   cur.execute("""drop table notifications""")
+  cur.execute("""drop table documentation""")
   cur.execute("""drop table Users""")
 
   cur.execute("""drop type uType""")
@@ -118,6 +129,7 @@ def clearData():
   cur.execute("""delete from messages""")
   cur.execute("""delete from ratings""")
   cur.execute("""delete from notifications""")
+  cur.execute("""delete from documentation""")
   cur.execute("""delete from Users""")
   cur.close()
   db.commit()
@@ -126,14 +138,14 @@ def clearData():
 # Input dummy data for user table
 def inputData1():
   cur = db.cursor()
-  cur.execute(f"""insert into Users values ('username1', '{getHashOf('password1')}', 'email1@gmail.com', 'givenname1', 'famailyName1', 'admin', 'bio1', 'location1', 'phone1', 'timezone1', True)""")
-  cur.execute(f"""insert into Users values ('username2', '{getHashOf('password2')}', 'email2@gmail.com', 'givenname2', 'famailyName2', 'student', 'bio2', 'location2', 'phone2', 'timezone2', True)""")
-  cur.execute(f"""insert into Users values ('username3', '{getHashOf('password3')}', 'email3@gmail.com', 'givenname3', 'famailyName3', 'student', 'bio3', 'location3', 'phone3', 'timezone3', True)""")
-  cur.execute(f"""insert into Users values ('username4', '{getHashOf('password4')}', 'email4@gmail.com', 'givenname4', 'famailyName4', 'tutor', 'bio4', 'location4', 'phone4', 'timezone4', True)""")
-  cur.execute(f"""insert into Users values ('username5', '{getHashOf('password5')}', 'email5@gmail.com', 'givenname5', 'famailyName5', 'student', 'bio5', 'location5', 'phone5', 'timezone5', True)""")
-  cur.execute(f"""insert into Users values ('username6', '{getHashOf('password6')}', 'email6@gmail.com', 'givenname6', 'famailyName6', 'tutor', 'bio6', 'location6', 'phone6', 'timezone6', False)""")
-  cur.execute(f"""insert into Users values ('username7', '{getHashOf('password7')}', 'email7@gmail.com', 'givenname7', 'famailyName7', 'tutor', 'bio7', 'location7', 'phone7', 'timezone7', True)""")
-  cur.execute(f"""insert into Users values ('username8', '{getHashOf('password8')}', 'email8@gmail.com', 'givenname8', 'famailyName8', 'student', 'bio8', 'location8', 'phone8', 'timezone8', True)""")
+  cur.execute(f"""insert into Users values ('username1', '{getHashOf('password1')}', 'email1@gmail.com', 'givenname1', 'famailyName1', 'admin', 'bio1', 'location1', 'phone1', 'timezone1', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username2', '{getHashOf('password2')}', 'email2@gmail.com', 'givenname2', 'famailyName2', 'student', 'bio2', 'location2', 'phone2', 'timezone2', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username3', '{getHashOf('password3')}', 'email3@gmail.com', 'givenname3', 'famailyName3', 'student', 'bio3', 'location3', 'phone3', 'timezone3', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username4', '{getHashOf('password4')}', 'email4@gmail.com', 'givenname4', 'famailyName4', 'tutor', 'bio4', 'location4', 'phone4', 'timezone4', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username5', '{getHashOf('password5')}', 'email5@gmail.com', 'givenname5', 'famailyName5', 'student', 'bio5', 'location5', 'phone5', 'timezone5', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username6', '{getHashOf('password6')}', 'email6@gmail.com', 'givenname6', 'famailyName6', 'tutor', 'bio6', 'location6', 'phone6', 'timezone6', False, '', '')""")
+  cur.execute(f"""insert into Users values ('username7', '{getHashOf('password7')}', 'email7@gmail.com', 'givenname7', 'famailyName7', 'tutor', 'bio7', 'location7', 'phone7', 'timezone7', True, '', '')""")
+  cur.execute(f"""insert into Users values ('username8', '{getHashOf('password8')}', 'email8@gmail.com', 'givenname8', 'famailyName8', 'student', 'bio8', 'location8', 'phone8', 'timezone8', True, '', '')""")
   cur.close()
   db.commit()
   return
@@ -196,6 +208,7 @@ def inputData7():
   cur.execute("""insert into ratings values ('1', 'username2', 'username4', '2023-11-05 13:22:11', 'Good Tutor', 5)""")
   cur.execute("""insert into ratings values ('2', 'username3', 'username4', '2023-11-05 16:33:40', 'Bad Tutor', 1.5)""")
   cur.execute("""insert into ratings values ('3', 'username5', 'username4', '2023-11-05 18:09:20', 'Ok Tutor', 3.5)""")
+  cur.execute("""insert into ratings values ('4', 'username2', 'username6', '2023-11-05 18:09:20', 'Excellent Tutor', 5)""")
   cur.close()
   db.commit()
   return
@@ -204,7 +217,7 @@ def inputData7():
 def inputData8():
   cur = db.cursor()
   cur.execute("""insert into notifications values ('1', 'username2', '2023-05-28 13:00:00', 'Your booking with username4 has been accepted')""")
-  cur.execute("""insert into notifications values ('2', 'username4', '2023-05-25 13:00:00', 'You have recieved new messages from username2')""")
+  cur.execute("""insert into notifications values ('2', 'username4', '2023-05-25 13:00:00', 'You have received new messages from username2')""")
   cur.execute("""insert into notifications values ('3', 'username4', '2023-11-05 13:22:11', 'A new rating has been made on you by username2')""")
   cur.close()
   db.commit()
@@ -284,7 +297,7 @@ if __name__ == '__main__':
         # inputData7()
         # inputData8()
         # test()
-        printData()
+        # printData()
 
     except psycopg2.Error as err:
         print("DB error: ", err)

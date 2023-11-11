@@ -83,6 +83,7 @@
   position: relative;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .view-upper-box-two {
@@ -160,6 +161,82 @@
 .individual-profile-buttons {
   margin-top: 5px;
 }
+
 .individual-profile-button {
   font-size: 10px !important;
+}
+.message-user-button {
+  font-size: 10px !important;
+}
+
+.lower-container-tempview {
+  height: 260px;
+  width: 100%;
+  /* background-color: rgb(194, 218, 236); */
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 35px;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5px;
+  border-radius: 10px;
+}
+
+.lower-container-tempview > * {
+  /* margin-top: 40px; */
+  border-radius: 10px;
+  width: 250px;
+  height: 250px;
+  background-color: #ebf3ff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-size: 12px;
+}
+
+.lower-container-tempview-one {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.view-profile-loading {
+  position: absolute;
+}
+
+.document-title {
+  font-size: 12px;
+}
+
+.pdf-placeholder-description {
+  width: 90%;
+  text-align: center;
+  color: gray;
+}
+
+.lower-container-tempview-two {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.temp-youtube-embed-container {
+  width: 90%;
+  height: 90%;
+  background-color: rgb(215, 225, 235);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.temp-youtube-embed-placeholder {
+  text-align: center;
 }

@@ -1,4 +1,4 @@
- import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import React from "react";
 import "./TempView.css";
 
@@ -15,6 +15,8 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { Context, useContext } from "../Context";
 import BookModal from "../components/BookModal";
 import RatingModal from "../components/RatingModal";
+import CircularProgress from "@mui/material/CircularProgress";
+import VerifiedIcon from "@mui/icons-material/Verified";
 
 const TempView = () => {
   const param = useParams();
@@ -27,6 +29,12 @@ const TempView = () => {
   const [classes, setClasses] = React.useState([]);
   const [city, setCity] = React.useState("");
   const [userType, setUserType] = React.useState("");
+  const [pdfs, setPdfs] = React.useState("");
+  const [profilePicture, setProfilePicture] = React.useState("");
+  const [checkedProfilePicture, setCheckedProfilePicture] =
+    React.useState(false);
+  const [youtubeLink, setYoutubeLink] = React.useState("");
+  const [approval, setApproval] = React.useState("");
 
   const { getters } = useContext(Context);
   const loggedInUserName = getters.usernameGlobal;
@@ -57,6 +65,11 @@ const TempView = () => {
       setLastName(data.familyName);
       setCity(data.location);
       setUserType(data.userType);
+      setPdfs(data.pdfStr);
+      setProfilePicture(data.profilePicture);
+      setCheckedProfilePicture(true);
+      setYoutubeLink(data.youtubeLink);
+      setApproval(data.approval);
     }
 
     const classes = await fetch(
@@ -92,6 +105,9 @@ const TempView = () => {
         <div className="view-profile-card">
           <div className="view-profile-title-container">
             <AccountBoxIcon className="view-profile-title-icon" />
+            {approval === true && userType == "tutor" && (
+              <VerifiedIcon className="verified-icon" />
+            )}
             <div className="view-profile-title">
               {firstName + " " + lastName}
             </div>
@@ -101,16 +117,20 @@ const TempView = () => {
             <div className="view-profile-feature-buttons">
               <Stack spacing={2} direction="row">
                 <BookModal
-                    variant="contained"
-                    stuToken={token}
-                    tutUser={viewingUsername}
+                  variant="contained"
+                  stuToken={token}
+                  tutUser={viewingUsername}
                 ></BookModal>
-                <RatingModal token={token} tutorUser={viewingUsername}></RatingModal>
+                <RatingModal
+                  token={token}
+                  tutorUser={viewingUsername}
+                ></RatingModal>
                 <Button
                   variant="contained"
                   onClick={() => {
                     redirectStudentMessage(viewingUsername);
                   }}
+                  className="message-user-button"
                 >
                   Message {firstName}
                 </Button>
@@ -133,11 +153,27 @@ const TempView = () => {
           )}
           <div className="view-profile-upper">
             <div className="view-upper-box-one">
-              <img
-                src={defaultImage}
-                alt="default-image"
-                className="profile-image"
-              />
+              {checkedProfilePicture === false && (
+                <div className="view-profile-loading">
+                  <CircularProgress />
+                </div>
+              )}
+
+              {profilePicture === "" && checkedProfilePicture === true ? (
+                <img
+                  src={defaultImage}
+                  alt="default-profile-pic"
+                  className="profile-image"
+                />
+              ) : (
+                <>
+                  <img
+                    src={profilePicture}
+                    alt="uploaded-profile-pic"
+                    className="uploaded-profile-image"
+                  />
+                </>
+              )}
             </div>
             <div className="view-upper-box-two">
               <div>
@@ -165,7 +201,47 @@ const TempView = () => {
               </div>
             </div>
           </div>
+          {userType === "tutor" && (
+            <div className="lower-container-tempview">
+              <div className="lower-container-tempview-one">
+                <b className="document-title">{firstName} PDF documents</b>
+                View documents:
+                {pdfs.map((eachPdf, idx) => {
+                  return (
+                    <div key={idx}>
+                      <a download="PDF Title" href={eachPdf}>
+                        Download Pdf document {idx + 1}
+                      </a>
+                    </div>
+                  );
+                })}
+                {pdfs.length === 0 && (
+                  <span className="pdf-placeholder-description">
+                    Currently no available documents to download
+                  </span>
+                )}
+              </div>
+              <div className="lower-container-tempview-two">
+                <div className="temp-youtube-embed-container">
+                  {youtubeLink === "" ? (
+                    <div className="temp-youtube-embed-placeholder">
+                      {firstName} currently has no youtube video
+                    </div>
+                  ) : (
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={youtubeLink}
+                    ></iframe>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
+        {/* <div className="lower-container-profile">
+            <div className="lower-box-one"></div>
+          </div> */}
       </div>
     </>
   );

@@ -34,9 +34,20 @@ def dbregister(token: str, email: str, username: str, password: str, firstName: 
     db = connectDB()
     cur = db.cursor()
     if userType == 'tutor':
-        cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType, '', '', '', '', False])
+        cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType, '', '', '', '', False, '', '',])
+
+        #Creates a notification for all admins of a new tutor
+        cur.execute("""select u.username from users u where userType = %s""", ['admin'])
+        allAdmins = []
+        for t in cur.fetchall():
+            allAdmins.append(t[0])
+        for a in allAdmins:
+            notifID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+            notifstr = "A new tutor has been registered with name " + username
+            timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, a, timeNow, notifstr])
     else:
-        cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType, '', '', '', '', True])
+        cur.execute("""insert into Users values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", [username, password, email, firstName, lastName, userType, '', '', '', '', True, '', '',])
     cur.execute("""insert into Sessions values (%s, %s)""", [token, username])
     cur.close()
     db.commit()
@@ -183,7 +194,7 @@ def dbAddCourse(token: str, newCourse: str):
     for t in cur.fetchall():
         currUsername = t[0]
     addedCourse = True
-    cur.execute("""select c.course from userCourse c where c.username = %s and c.course = %s""", [currUsername, newCourse])   
+    cur.execute("""select c.course from userCourse c where c.username = %s and c.course = %s""", [currUsername, newCourse])
     for t in cur.fetchall():
         addedCourse = False
     if addedCourse == True:
@@ -201,7 +212,7 @@ def dbDeleteCourse(token: str, courseToBeDeleted: str):
     for t in cur.fetchall():
         currUsername = t[0]
     deletedCourse = False
-    cur.execute("""select c.course from userCourse c where c.username = %s and c.course = %s""", [currUsername, courseToBeDeleted])   
+    cur.execute("""select c.course from userCourse c where c.username = %s and c.course = %s""", [currUsername, courseToBeDeleted])
     for t in cur.fetchall():
         deletedCourse = True
     if deletedCourse == True:
@@ -222,7 +233,7 @@ def dbDeleteAccount(token: str, password: str):
     """
     db = connectDB()
     cur = db.cursor()
-    
+
     # Check if the user assoicated with the sess token and the password match to the ones in the database
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
     currUsername = None
@@ -244,6 +255,7 @@ def dbDeleteAccount(token: str, password: str):
         cur.execute("""delete from messages m where m.stuUser = %s or m.tutUser = %s""", [currUsername, currUsername])
         cur.execute("""delete from ratings r where r.stuUser = %s or r.tutUser = %s""", [currUsername, currUsername])
         cur.execute("""delete from notifications n where n.nameOfuser = %s""", [currUsername])
+        cur.execute("""delete from documentation d where d.nameOfuser = %s""", [currUsername])
         cur.execute("""delete from Users u where u.username = %s""", [currUsername])
 
     cur.close()
@@ -254,16 +266,18 @@ def dbDeleteAccount(token: str, password: str):
 def dbViewProfile(targetProfile: str):
     db = connectDB()
     cur = db.cursor()
-    cur.execute(""" select u.username, u.email, u.givenName, u.familyName, u.userType, u.bio, u.location, u.phone, u.timezone
-                    from users u 
-                    where u.username = %s""", [targetProfile])   
+    cur.execute(""" select u.username, u.email, u.givenName, u.familyName, u.userType, u.bio, u.location, u.phone, u.timezone, u.profilePic, u.youtubeLink, u.approved
+                    from users u
+                    where u.username = %s""", [targetProfile])
     allData = cur.fetchone()
     cur.close()
     db.commit()
     averageRatings = 0.0
     if allData[4] == 'tutor':
         averageRatings = dbAverageRatings(targetProfile)
-    return { # Return it in a dictionary format with all information 
+
+    allDocumentation = dbRetrieveDoc(targetProfile)
+    return { # Return it in a dictionary format with all information
         'username': allData[0],
         'email': allData[1],
         'givenName': allData[2],
@@ -273,7 +287,11 @@ def dbViewProfile(targetProfile: str):
         'location': allData[6],
         'phone': allData[7],
         'timezone': allData[8],
-        'averageRating': averageRatings
+        'profilePicture': allData[9],
+        'youtubeLink': allData[10],
+        'approval': allData[11],
+        'averageRating': averageRatings,
+        'pdfStr': allDocumentation
     }
 
 # This function goes into the database and removes all data related to the targeted user
@@ -288,6 +306,7 @@ def dbAdminDelete(targetProfile: str):
     cur.execute("""delete from messages m where m.stuUser = %s or m.tutUser = %s""", [targetProfile, targetProfile])
     cur.execute("""delete from ratings r where r.stuUser = %s or r.tutUser = %s""", [targetProfile, targetProfile])
     cur.execute("""delete from notifications n where n.nameOfuser = %s""", [targetProfile])
+    cur.execute("""delete from documentation d where d.nameOfuser = %s""", [targetProfile])
     cur.execute("""delete from Users u where u.username = %s""", [targetProfile])
     cur.close()
     db.commit()
@@ -312,7 +331,7 @@ def dbAddCourseToList(courseName: str):
     cur.execute("""insert into Courses values (%s)""", [courseName])
     cur.close()
     db.commit()
-    return 
+    return
 
 # This function removes a course from the list of all courses in the database
 def dbRemoveCourseFromList(courseName: str):
@@ -322,7 +341,7 @@ def dbRemoveCourseFromList(courseName: str):
     cur.execute("""delete from courses c where c.courseName = %s""", [courseName])
     cur.close()
     db.commit()
-    return 
+    return
 
 # This function retrieves the courses the user is doing
 def dbViewMyCourses(token: str) -> list:
@@ -362,7 +381,7 @@ def dbAllUsernames() -> list:
     cur = db.cursor()
     cur.execute("""select u.username from Users u""")
     for t in cur.fetchall():
-        listOfAllUsers.append(t[0].lower())
+        listOfAllUsers.append(t[0])
     cur.close()
     db.commit()
     return listOfAllUsers
@@ -376,8 +395,8 @@ def dbListAllBookings() -> list:
     for t in cur.fetchall():
         newStorage = []
         newStorage.append(t[0])
-        newStorage.append(t[1].lower())
-        newStorage.append(t[2].lower())
+        newStorage.append(t[1])
+        newStorage.append(t[2])
         newStorage.append(t[3].strftime("%Y/%m/%d %H:%M:%S"))
         newStorage.append(t[4].strftime("%Y/%m/%d %H:%M:%S"))
         newStorage.append(t[5])
@@ -402,8 +421,8 @@ def dbListMyBookings(token: str) -> list:
     for t in cur.fetchall():
         newStorage = []
         newStorage.append(t[0])
-        newStorage.append(t[1].lower())
-        newStorage.append(t[2].lower())
+        newStorage.append(t[1])
+        newStorage.append(t[2])
         newStorage.append(t[3].strftime("%Y-%m-%d %H:%M:%S"))
         newStorage.append(t[4].strftime("%Y-%m-%d %H:%M:%S"))
         newStorage.append(t[5])
@@ -422,7 +441,7 @@ def dbMakeBooking(studentUser: str, tutorUser: str, startTime: str, endTime: str
     sTime = datetime.datetime.strptime(startTime, '%Y-%m-%d %H:%M:%S')
     dTime = datetime.datetime.strptime(endTime, '%Y-%m-%d %H:%M:%S')
     cur.execute("""insert into bookings values (%s, %s, %s, %s, %s, %s, %s)""", [bookingId, studentUser, tutorUser, sTime, dTime, False, description])
-    
+
     notifID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
     notifstr = "A booking has been made by " + studentUser
     timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -498,12 +517,12 @@ def dbGroupUsers():
     allStudents = []
     for t in cur.fetchall():
         allStudents.append(t[0])
-    
+
     cur.execute("""select u.username from users u where userType = %s""", ['tutor'])
     allTutors = []
     for t in cur.fetchall():
         allTutors.append(t[0])
-    
+
     cur.execute("""select u.username from users u where userType = %s""", ['admin'])
     allAdmins = []
     for t in cur.fetchall():
@@ -545,10 +564,10 @@ def dbSendMessage(stuUser: str, tutUser: str, sentBy: str, timeSent: str, messag
     timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     notifstr = ""
     if stuUser == sentBy:
-        notifstr = "You have recieved a message from " + stuUser
+        notifstr = "You have received a message from " + stuUser
         cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, tutUser, timeNow, notifstr])
     else:
-        notifstr = "You have recieved a message from " + tutUser
+        notifstr = "You have received a message from " + tutUser
         cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, stuUser, timeNow, notifstr])
 
     cur.close()
@@ -631,10 +650,88 @@ def dbAllNotifications(token: str) -> list:
     db.commit()
     return listOfAllNotif
 
+# This function deletes the dismissed notification from database
 def dbDismissNotif(notificationID: str):
     db = connectDB()
     cur = db.cursor()
     cur.execute("""delete from notifications n where n.notifID = %s""", [notificationID])
+    cur.close()
+    db.commit()
+    return
+
+# This function stores a data string of a pdf into the database
+def dbUploadDoc(token: str, pdfDataStr: str):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
+    currUsername = None
+    for t in cur.fetchall():
+        currUsername = t[0]
+
+    docID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+    cur.execute("""insert into documentation values (%s, %s, %s)""", [docID, currUsername, pdfDataStr])
+
+    #Creates a notification for all admins of a tutor uploading documentation
+    cur.execute("""select u.username from users u where userType = %s""", ['admin'])
+    allAdmins = []
+    for t in cur.fetchall():
+        allAdmins.append(t[0])
+    for a in allAdmins:
+        notifID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+        notifstr = "A new file has been uploaded by tutor " + currUsername
+        timeNow = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        cur.execute("""insert into notifications values (%s, %s, %s, %s)""", [notifID, a, timeNow, notifstr])
+
+    cur.close()
+    db.commit()
+    return
+
+# This function retrieves a list of all the data string pdf of a specific user
+def dbRetrieveDoc(username:str) -> list:
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select d.documentData from documentation d where d.nameOfUser = %s""", [username])
+    listOfAllData = []
+    for t in cur.fetchall():
+        listOfAllData.append(t[0])
+    cur.close()
+    db.commit()
+    return listOfAllData
+
+# This function changes the user YouTube Link
+def dbChangeYTLink(token: str, newLink: str):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
+    currUsername = None
+    for t in cur.fetchall():
+        currUsername = t[0]
+    cur.execute("""update Users set youtubeLink = %s where username = %s""", [newLink, currUsername])
+    cur.close()
+    db.commit()
+    return
+
+
+# This function changes the user Profile Pic
+def dbChangeProfilePic(token: str, picStr: str):
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
+    currUsername = None
+    for t in cur.fetchall():
+        currUsername = t[0]
+    cur.execute("""update Users set profilePic = %s where username = %s""", [picStr, currUsername])
+    cur.close()
+    db.commit()
+    return
+
+# This function goes into the database and changes the tutor approval to true
+def dbAdminApprove(targetProfile: str):
+    # Same warning as the dbDeleteAccount function
+    # Delete the targeted profile
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""update Users set approved = %s where username = %s""", [True, targetProfile])
     cur.close()
     db.commit()
     return

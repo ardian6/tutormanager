@@ -1,44 +1,47 @@
 Ryan Gian Diary (z5360294)
-Week 1 
-Group formed with members Mathew, Hayka, Michael, Ardian, and I. Group named 3900F12APenguin. Selected Mathew as the Scrum Master. 
-Set up Jira and discussed with the group and tutor of how the proposal works. Selected project 16. 
+Week 1
+Group formed with members Mathew, Hayka, Michael, Ardian, and I. Group named 3900F12APenguin. Selected Mathew as the Scrum Master.
+Set up Jira and discussed with the group and tutor of how the proposal works. Selected project 16.
 Had a basic brainstorm of what programming languages/technologies to use and discussed each person’s tasks for the project proposal.
 
-Week 2 
-Each team member took on different parts of the proposal. I went through and wrote most of the user stories required for admin, student, and tutor users. 
-I discussed with Mathew some novel functionality that we can add to the project. I collaborated with Ardian and started the storyboard using balsamiq cloud. 
+Week 2
+Each team member took on different parts of the proposal. I went through and wrote most of the user stories required for admin, student, and tutor users.
+I discussed with Mathew some novel functionality that we can add to the project. I collaborated with Ardian and started the storyboard using balsamiq cloud.
 
 Week 3
-Each team member finished and finalised the proposal document to submit. Ardian and I went through all user stories to see if they were included in the storyboard. 
+Each team member finished and finalised the proposal document to submit. Ardian and I went through all user stories to see if they were included in the storyboard.
 Team went through one last time to check if everything is correct.  Group planned ahead and made dates for when we will start coding everything.
 
 Week 4
-This week, we had a meeting on the monday to come together and set everything up. This meant that the backend and frontend had to be set up. 
-Mathew was in charge with setting up the database and connecting it to the backend. Mathew wrote all the starter functions for the backend. 
-After he set up the backend and pushed it up, I took over to set up the frontend. I installed all relevant dependencies and created the react app. 
-I worked with Michael for a while to set up the routes for the react app to redirect to other pages. This was all the work we did on the Monday. 
-We set out to complete sprint 1 as early as possible so that we could connect the frontend to the backend. 
+This week, we had a meeting on the monday to come together and set everything up. This meant that the backend and frontend had to be set up.
+Mathew was in charge with setting up the database and connecting it to the backend. Mathew wrote all the starter functions for the backend.
+After he set up the backend and pushed it up, I took over to set up the frontend. I installed all relevant dependencies and created the react app.
+I worked with Michael for a while to set up the routes for the react app to redirect to other pages. This was all the work we did on the Monday.
+We set out to complete sprint 1 as early as possible so that we could connect the frontend to the backend.
 Mathew told us later in the week that he had moved the database to AWS so it makes connecting to the database easier.
-I discussed with all relevant frontend engineers who was doing what tasks. I set out to complete the Login, register and home page before the next week. 
+I discussed with all relevant frontend engineers who was doing what tasks. I set out to complete the Login, register and home page before the next week.
 
-Week 5 
-This week, I was set with the task of creating most of the UI and UX design of the website. I created all pages from scratch and made sure that they redirect to the corresponding pages properly. 
-I utilised materialUI as a framework to create most of the buttons. This saved me alot of time since I did not need to create it from scratch. 
+Week 5
+This week, I was set with the task of creating most of the UI and UX design of the website. I created all pages from scratch and made sure that they redirect to the corresponding pages properly.
+I utilised materialUI as a framework to create most of the buttons. This saved me alot of time since I did not need to create it from scratch.
 We had meetings throughout the week to connect the backend to the frontend. Michael completed most of the functionality aspects of the frontend. He made sure that the frontend properly connected to
-the backend without any errors. Our meetings throughout the week consisted of debugging alot of server function issues. We eventually got everything working and sprint 1 was done on time. 
+the backend without any errors. Our meetings throughout the week consisted of debugging alot of server function issues. We eventually got everything working and sprint 1 was done on time.
 
 Week 6
-We set up meetings during the week. At the start of the week, we set to clean up sprint 1 from any remaining issues. I started to create new pages for the dashboard, and profile view. 
+We set up meetings during the week. At the start of the week, we set to clean up sprint 1 from any remaining issues. I started to create new pages for the dashboard, and profile view.
 The dashboard would change depending on if the logged in user was an admin, student, or tutor. I had alot of discussions with Michael as to what we would both be doing so that we don't
 conflict in tasks. Overall, this week was also to discussing with others as to how to plan the weeks ahead of us.
 
 Week 7
 We had meetings throughout the week to complete the sprint 2 features. I went through the Jira board to see if we missed anything especially on the admin login pages. I did alot of bug fixes
-on the studentdashboard pages such as modal not showing correct username that was pressed on. I finished the UI for the student and tutor requests that show their requests. Alot of this week was 
-communicating with the backend engineers with how the backend worked before I was able to complete my features as I required dummy data. We made plans for the next week to complete and polish our sprint 2 
-before sprint 2 deadline. I worked with Michael to create most of the frontend features. Majority of the UI was created my me. Michael would go in after the UI was finished and implement most of the 
-functionality features. 
+on the studentdashboard pages such as modal not showing correct username that was pressed on. I finished the UI for the student and tutor requests that show their requests. Alot of this week was
+communicating with the backend engineers with how the backend worked before I was able to complete my features as I required dummy data. We made plans for the next week to complete and polish our sprint 2
+before sprint 2 deadline. I worked with Michael to create most of the frontend features. Majority of the UI was created my me. Michael would go in after the UI was finished and implement most of the
+functionality features.
 
 Week 8
-We went back and polished most of the program. I fixed the change password in the admin page that allows the admin to change the password of users and tutors. Started some media queries for some main pages. 
-I cleaned up most of the UI changes for sprint 2 ahead of the demo. Went through and found some bugs where the modal was not properly displaying the correct username that was being displayed. 
+We went back and polished most of the program. I fixed the change password in the admin page that allows the admin to change the password of users and tutors. Started some media queries for some main pages.
+I cleaned up most of the UI changes for sprint 2 ahead of the demo. Went through and found some bugs where the modal was not properly displaying the correct username that was being displayed.
+
+Week 9
+Went to the README.md file and fix some of the instructions. Fully implemented the user upload profile image function for both student and tutor users. Completed the user upload PDF file functionality for tutors. Finished tutor embedding youtube link. Had to go back to all dashboards and viewtemp pages (Only applied to tutors users) to implement the previous new stated features so that it properly shows them. Added user verfication tick visual UI to only appear on approved tutor users. Did meetings with group members throughout the week to make sure that we were on schedule with sprint 3. We planned everything we had to do for the following week. When and visually tested every page for bugs. Did alot of UI bug fixes and new implementation of previously stated features.

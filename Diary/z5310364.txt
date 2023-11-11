@@ -49,3 +49,17 @@ The reason for this is because we wanted to give ourselves a week to start worki
 This is because we do not think we have enough time to do all of that in sprint 3.
 At the end of the week we managed to get all of the user stories done with the exception of one or two because of bugs.
 My part in all of this was to ensure the backend was all done and working including the database.
+
+Week 8
+The primary thing accomplished this week was the Demo B. Before that everything that we set out to do for sprint 2 was completed.
+We managed to do really well for Demo B. After Demo B we also went to do the retrospective. 
+Furthermore, we talked about how to approach sprint 3.
+Additionally, I also recorded a video to thow the client.
+
+Week 9
+This week we completed most of the sprint 3 functionalities. Specifically the 3 main functionalities left in the requirements which
+were messaging, notifications and ratings. These were all done before the end of this week.
+Then we also worked on the novel functionalities and got most of them done before this week.
+Also asked a few questions in the tutorial to double check our understanding for the final demo is correct.
+
+Week 10

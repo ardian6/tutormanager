@@ -10,13 +10,14 @@ from flask_cors import CORS
 #from src.echo import echo
 
 from auth import login, register, logout
-from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword
+from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword, uploadDocumentation, changePicture, changeYTLink, adminApprove
 from profile import addNewCourse, adminAddCourse, adminDeleteCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
 from filterT import filterTutors, getUserGroups
 from messages import listMessages, sendMessage
 from ratings import makeRatings, tutorWrittenRatings, tutorAverageRatings
 from notification import checkMyNotifications, dismissNotif
+from hours import myTotalHours
 
 def quit_gracefully(*args):
     '''For coverage'''
@@ -188,6 +189,35 @@ def admin_change_password():
     data = request.get_json()
     return dumps(adminChangePassword(data['token'], data['targetProfile'], data['newPassword']))
 
+## User Profile Upload Documentation Implementation to Server ##
+
+@APP.route("/profile/upload-doc", methods = ['POST'])
+def user_upload_doc():
+    data = request.get_json()
+    return dumps(uploadDocumentation(data['token'], data['dataStr']))
+
+## User Profile Change Profile Picture Implementation to Server ##
+
+@APP.route("/profile/change-picture", methods = ['PUT'])
+def user_change_profile_picture():
+    data = request.get_json()
+    return dumps(changePicture(data['token'], data['pictureString']))
+
+## User Profile Change Youtube Video Implementation to Server ##
+
+@APP.route("/profile/change-youtube", methods = ['PUT'])
+def user_change_youtube():
+    data = request.get_json()
+    return dumps(changeYTLink(data['token'], data['link']))
+
+## User Profile Approve Tutor Implementation to Server ##
+
+@APP.route("/profile/admin-approve", methods = ['PUT'])
+def admin_approve():
+    data = request.get_json()
+    return dumps(adminApprove(data['token'], data['targetTutor']))
+
+
 """
 ROUTES FOR Booking FUNCTIONS
 
@@ -313,6 +343,17 @@ def notification_view():
 def notification_dismiss():
     data = request.get_json()
     return dumps(dismissNotif(data['token'], data['notificationID']))
+
+"""
+ROUTES FOR HOURS FUNCTIONS
+
+"""
+## User Hours Check Total Hours Taught Implementation to Server ##
+
+@APP.route("/hours/total-hours", methods = ['POST'])
+def total_hours_view():
+    data = request.get_json()
+    return dumps(myTotalHours(data['token']))
 
 """
 END OF ROUTES

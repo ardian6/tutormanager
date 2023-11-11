@@ -40,11 +40,13 @@ const StudentDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      const temp = data.listofalldata.sort((t1, t2) => t2.averageRating - t1.averageRating);
+      const temp = data.listofalldata.sort(
+        (t1, t2) => t2.averageRating - t1.averageRating
+      );
       setCheckedAsyncSearch(true);
       setStudents(temp);
     }
-  };  
+  };
 
   const navigate = useNavigate();
   const getBookings = async () => {
@@ -147,14 +149,10 @@ const StudentDashboard = () => {
                   <div className="subject-title">Description</div>
                   <div className="time-title">Time</div>
                   <div className="status-title">Status</div>
-                  <div className="change-title">Change</div>
                 </div>
                 {mybookings.map((booking, idx) => {
                   return (
-                    <div
-                      key={idx}
-                      className="student-individual-requests"
-                    >
+                    <div key={idx} className="student-individual-requests">
                       <div className="individual-tutor-title">
                         <Button
                           className="individual-profile-button"
@@ -177,14 +175,6 @@ const StudentDashboard = () => {
                         ) : (
                           <div className="pending-div">Pending</div>
                         )}
-                      </div>
-                      <div className="individual-change-title">
-                        <Stack spacing={1} direction="row" variant="text">
-                          <ChangeBookModal
-                            info={booking}
-                            token={token}
-                          ></ChangeBookModal>
-                        </Stack>
                       </div>
                     </div>
                   );
@@ -225,17 +215,28 @@ const StudentDashboard = () => {
                   </div>
                 )}
                 {students.map((student, idx) => {
+                  {
+                    console.log(student);
+                  }
                   return (
                     <div
                       key={idx}
                       className="tutor-search-individual-container"
                     >
                       <div className="individual-profile-image-container">
-                        <img
-                          src={defaultImage}
-                          alt="default-image"
-                          className="individual-profile-image"
-                        />
+                        {student["profilePicture"] === "" ? (
+                          <img
+                            src={defaultImage}
+                            alt="default-image"
+                            className="individual-profile-image"
+                          />
+                        ) : (
+                          <img
+                            src={student["profilePicture"]}
+                            alt="default-image"
+                            className="uploaded-profile-image"
+                          />
+                        )}
                       </div>
                       <div className="individual-profile-info">
                         {/* <div>{student["username"]}</div> */}
@@ -260,7 +261,15 @@ const StudentDashboard = () => {
                         </div>
 
                         <div>
-                          <b>Reviews:<Rating name="read-only" value={student["averageRating"]} size='small' readOnly /> </b>
+                          <b>
+                            Reviews:
+                            <Rating
+                              name="read-only"
+                              value={student["averageRating"]}
+                              size="small"
+                              readOnly
+                            />
+                          </b>
                         </div>
                         <div className="individual-profile-buttons">
                           <Stack spacing={1.5} direction="row" variant="text">
