@@ -23,25 +23,24 @@ Notifications for upcoming tutorial sessions and messages.
 
 ## Built With
 
-### Backend
-[![Python][Python3]][Python3-url] <br />
-[![Flask][Flask]][Flask-url] <br />
-[![AWS][AWS]][AWS-url] <br />
-
-### Frontend
-[![JS][JS]][JS-url] <br />
-[![CSS3][CSS3]][CSS3-url] <br />
-[![HTML5][HTML5]][HTML5-url] <br />
-[![NPM][NPM]][NPM-url] <br />
-[![Yarn][Yarn]][Yarn-url] <br />
-[![React][React.js]][React-url] <br />
+<div align="center">
+   
+| *Frontend* | *Backend* |
+|:----------:|:---------:|
+|[![JS][JS]][JS-url]|[![Python][Python3]][Python3-url]|
+|[![CSS3][CSS3]][CSS3-url]|[![Flask][Flask]][Flask-url]|
+|[![HTML5][HTML5]][HTML5-url]|[![AWS][AWS]][AWS-url]|
+|[![NPM][NPM]][NPM-url]|         |
+|[![Yarn][Yarn]][Yarn-url]|         |
+|[![React][React.js]][React-url]|         |
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This Project was created using WSL (Ubuntu 18.04) with Windows 10, hence the installation assumes the user uses those.
+This Project was intended to work with both Linux and Windows operating systems, as well as with the use of WSL (Ubuntu), hence the installation assumes the user uses one of those.
 
 ### Prerequisites
 This installation assumes the user has a GitHub account with a valid SSH key.
