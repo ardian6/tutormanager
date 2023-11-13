@@ -6,8 +6,10 @@ def checkMyNotifications(session_token: str) -> dict:
       session_token: String
 
     Returns:
-      { session_token: String,
-        notifList: list}
+      { 
+        session_token: String,
+        notifList: list
+      }
   """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
