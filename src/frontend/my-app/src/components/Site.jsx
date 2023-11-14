@@ -15,6 +15,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import TempView from "../pages/TempView";
 import Payment from "../pages/Payment";
 import Message from "../pages/Message";
+import Recommendations from "../pages/Recommendations";
 
 function Site(props) {
   const { getters } = React.useContext(Context);
@@ -53,6 +54,7 @@ function Site(props) {
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/home" element={<Home />} />
         <Route path="/Payment/:username" element={<Payment />} />
+        <Route path="/Recommendations" element={<Recommendations />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </div>
