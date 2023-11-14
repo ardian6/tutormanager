@@ -1,0 +1,23 @@
+.recommendation-container {
+  background-color: #4960a6;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recommendation-box {
+  margin-top: 60px;
+  height: 60vh;
+  width: 30vw;
+  background-color: #ebf3ff;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px;
+}
