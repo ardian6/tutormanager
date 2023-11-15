@@ -17,7 +17,7 @@ Calendar integration for easy scheduling.
 4. Communication
 Integrated messaging system to facilitate communication between students and tutors.
 Notifications for upcoming tutorial sessions and messages.
-5. Database (TALK ABOUT AWS)
+5. Database: We use the cloud-based AWS (Amazon Web Services) for storage.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -45,9 +45,9 @@ This Project was intended to work with both Linux and Windows operating systems,
 ### Prerequisites
 This installation assumes the user has a GitHub account with a valid SSH key.
 
-* Connect to WSL and open a terminal.
+* Open a terminal.
 
-* **Update any outdated packages or dependencies.**
+* **If using WSL or Linux, update any outdated packages or dependencies.**
    ```sh
    sudo apt update && upgrade
    ```
@@ -62,10 +62,15 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    cd capstone-project-3900f12apenguin
    ```
-1. Install Python3.
+1. Install Python3. <br />
+   _Linux:_ 
    ```sh
    sudo apt install python3 python3-pip
    ```
+   _Windows:_ <br />
+
+   Install Python manually: <a href="https://www.python.org/downloads/">Python</a>.
+   
 6. Install Flask and Flask_Cors.
    ```sh
    pip3 install flask
@@ -102,7 +107,7 @@ This installation assumes the user has a GitHub account with a valid SSH key.
 5. Install Dependencies for Yarn.
    **Go to correct directory for commands to work**
    ```sh
-   cd /capstone-project-3900f12apenguin/src/frontend/my-app
+   cd /src/frontend/my-app
    ```
    ```sh
    yarn install
@@ -112,15 +117,15 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```
 4. Create terminal 1 and run backend
    ```sh
-   cd /capstone-project-3900f12apenguin/src/backend
+   cd /src/backend
    ```
     Start the backend
    ```sh
-   python3 src/backend/server.py
+   python3 server.py
    ```
 5.  Create terminal 2 and run frontend
       ```sh
-      cd /capstone-project-3900f12apenguin/src/frontend/my-app
+      cd /src/frontend/my-app
       ```
        Start the frontend. It automatically opens a new tab in your default browser.
       ```sh
