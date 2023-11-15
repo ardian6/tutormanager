@@ -19,7 +19,6 @@ Integrated messaging system to facilitate communication between students and tut
 Notifications for upcoming tutorial sessions and messages.
 5. Database: We use the cloud-based AWS (Amazon Web Services) for storage.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Built With
 
@@ -35,14 +34,18 @@ Notifications for upcoming tutorial sessions and messages.
 |[![React][React.js]][React-url]|         |
 </div>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
 This Project was intended to work with both Linux and Windows operating systems, as well as with the use of WSL (Ubuntu), hence the installation assumes the user uses one of those.
 
 ### Prerequisites
+The following software needs to be installed on your machine for TutorManager to work properly:
+* <a href="https://nodejs.org/en/">Node.js v16+</a>
+* <a href="https://www.npmjs.com/">npm</a>
+* <a href="https://classic.yarnpkg.com/en/docs/install#windows-stable">Yarn</a>
+* <a href="https://react.dev/learn/installation">React</a>
+
 This installation assumes the user has a GitHub account with a valid SSH key.
 
 * Open a terminal.
@@ -62,6 +65,7 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    cd capstone-project-3900f12apenguin
    ```
+   <br />
 1. Install Python3. <br />
    _Linux:_ 
    ```sh
@@ -69,8 +73,8 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```
    _Windows:_ <br />
 
-   Install Python manually: <a href="https://www.python.org/downloads/">Python</a>.
-   
+   Install Python manually: <a href="https://www.python.org/downloads/">Python</a>
+   <br />
 6. Install Flask and Flask_Cors.
    ```sh
    pip3 install flask
@@ -78,6 +82,7 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    pip3 install flask_cors
    ```
+   <br />
 7. Install psycopg2.
    ```sh
    sudo apt-get install build-dep python-psycopg2
@@ -85,27 +90,32 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    pip3 install psycopg2-binary
    ```
+   <br />
 8. Install PyJWT.
    ```sh
    pip3 install PyJWT
    ```
-2. Install Node.
+   <br />
+2. Install Node (Skip if already installed as a prerequisite)
    ```sh
    npm install
    ```
    ```sh
    sudo apt-get install -y nodejs
    ```
-3. Install yarn.
+   <br />
+3. Install yarn (Skip if already installed as a prerequisite)
    ```sh
    npm install --global yarn
    ```
-4. Install React.
+   <br />
+4. Install React (Skip if already installed as a prerequisite)
    ```sh
    yarn add react-scripts
    ```
+   <br />
 5. Install Dependencies for Yarn.
-   **Go to correct directory for commands to work**
+   **You must be in the correct directory.**
    ```sh
    cd /src/frontend/my-app
    ```
@@ -115,7 +125,8 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    yarn
    ```
-4. Create terminal 1 and run backend
+   <br />
+4. Create a new terminal to run the backend
    ```sh
    cd /src/backend
    ```
@@ -123,7 +134,8 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    python3 server.py
    ```
-5.  Create terminal 2 and run frontend
+   <br />
+5.  Create another new terminal to run the frontend
       ```sh
       cd /src/frontend/my-app
       ```
@@ -131,16 +143,11 @@ This installation assumes the user has a GitHub account with a valid SSH key.
       ```sh
       yarn start
       ```
-    
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
