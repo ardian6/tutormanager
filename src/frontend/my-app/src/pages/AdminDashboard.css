@@ -60,3 +60,7 @@
     gap: 20px;
   }
 }
+
+.profile-view-span:hover {
+  cursor: pointer;
+}
