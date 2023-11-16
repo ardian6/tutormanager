@@ -325,6 +325,7 @@ const Profile = () => {
                     );
                   })}
                 </div>
+                <div className="lower-box-three"></div>
                 <div className="lower-box-two">
                   <div className="youtube-embed-container">
                     {youtubeLink === "" ? (
@@ -380,7 +381,6 @@ const Profile = () => {
                     )}
                   </div>
                 </div>
-                {/* <div className="lower-box-three"></div> */}
               </div>
             </>
           )}
