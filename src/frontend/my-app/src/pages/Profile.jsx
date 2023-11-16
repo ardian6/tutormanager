@@ -46,6 +46,8 @@ const Profile = () => {
 
   const [approval, setApproval] = React.useState("");
 
+  const [timetable, setTimetable] = React.useState([]);
+
   const { getters } = useContext(Context);
   const userName = getters.usernameGlobal;
   const userType = getters.userTypeGlobal;
@@ -125,6 +127,7 @@ const Profile = () => {
     if (userType === "tutor") {
       getHours();
     }
+    getTutorBookings();
   }, []);
 
   const uploadPdf = async () => {
@@ -205,6 +208,45 @@ const Profile = () => {
     console.log(inputYoutubeLink.slice(32));
     uploadUrl(path);
   };
+
+  const getTutorBookings = async () => {
+    const response = await fetch(
+      "http://localhost:5005/booking/view-target-booking",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token,
+          targetProfile: userName,
+        }),
+      }
+    );
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      console.log(data);
+      setTimetable(data.bookingsList);
+    }
+  };
+
+  function translateHourGivenTwoDates(date1, date2) {
+    var time24hour = date1.toString().slice(11, 19);
+    var time1 = new Date("1970-01-01T" + time24hour + "Z").toLocaleTimeString(
+      "en-US",
+      { timeZone: "UTC", hour12: true, hour: "numeric", minute: "numeric" }
+    );
+
+    var time24hour = date2.toString().slice(11, 19);
+    var time2 = new Date("1970-01-01T" + time24hour + "Z").toLocaleTimeString(
+      "en-US",
+      { timeZone: "UTC", hour12: true, hour: "numeric", minute: "numeric" }
+    );
+
+    return time1 + " - " + time2;
+  }
 
   return (
     <>
@@ -325,7 +367,18 @@ const Profile = () => {
                     );
                   })}
                 </div>
-                <div className="lower-box-three"></div>
+                <div className="lower-box-three">
+                  <b>Tutor Schedule:</b>
+                  {timetable.map((obj, idx) => {
+                    return (
+                      <div key={idx}>
+                        <u>Booking Id: {obj[0]}</u>
+                        {"  "}
+                        {translateHourGivenTwoDates(obj[3], obj[4])}
+                      </div>
+                    );
+                  })}
+                </div>
                 <div className="lower-box-two">
                   <div className="youtube-embed-container">
                     {youtubeLink === "" ? (
