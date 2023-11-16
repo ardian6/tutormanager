@@ -1,13 +1,7 @@
-import sys
 import signal
-import token
-import jwt
 from json import dumps
-from flask import Flask, request, redirect
-from flask import send_from_directory
-#from flask_mail import Mail, Message
+from flask import Flask, request
 from flask_cors import CORS
-#from src.echo import echo
 
 from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword, uploadDocumentation, changePicture, changeYTLink, adminApprove
