@@ -170,7 +170,7 @@ const BasicModal = ({emailState, bioState, cityState}) => {
     if (data.error) {
       alert(data.error);
     } else {
-      bioState(editCity);
+      cityState(editCity);
     }
   };
 
