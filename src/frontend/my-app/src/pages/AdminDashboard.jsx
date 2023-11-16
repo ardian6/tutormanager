@@ -102,6 +102,25 @@ const AdminDashboard = () => {
       }
   }
 
+  const approveTutor = async (subject) => {
+    const response = await fetch("http://localhost:5005/profile/admin-approve", {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token,
+          targetTutor: subject,
+        }),
+      });
+      const data = await response.json();
+      if (data.error) {
+        alert(data.error);
+      } else {
+        getUsers();
+      }
+  }
+
   React.useEffect(() => {
     getUsers();
     getCourses();
@@ -137,7 +156,6 @@ const AdminDashboard = () => {
                       <Button
                         className="removebtn"
                         variant="outlined"
-                        startIcon={<DeleteIcon />}
                         size="small"
                         onClick={() => {
                           handleOpen();
@@ -146,6 +164,31 @@ const AdminDashboard = () => {
                       >
                         Change Password
                       </Button>
+                      <AdminChangePasswordModal
+                        open={open}
+                        handleClose={handleClose}
+                        token={token}
+                        currentuser={curruser}
+                      ></AdminChangePasswordModal>
+                      {true ? 
+                      <Button
+                      className="removebtn"
+                      variant="outlined"
+                      size="small"
+                      onClick={() => {
+                        approveTutor(user);
+                      }}
+                    >
+                      Approve
+                    </Button>
+                    : <Button
+                    className="removebtn"
+                    variant="outlined"
+                    size="small"
+                    disabled
+                  >
+                    Approve
+                  </Button>}
                       <Button
                         className="removebtn"
                         variant="outlined"
@@ -157,13 +200,6 @@ const AdminDashboard = () => {
                       >
                         Delete
                       </Button>
-                      <AdminChangePasswordModal
-                        open={open}
-                        handleClose={handleClose}
-                        token={token}
-                        currentuser={curruser}
-                      ></AdminChangePasswordModal>
-                      {console.log(curruser)}
                     </div>
                   );
                 })}
@@ -180,7 +216,6 @@ const AdminDashboard = () => {
                       <Button
                         className="removebtn"
                         variant="outlined"
-                        startIcon={<DeleteIcon />}
                         size="small"
                         onClick={() => {
                           handleOpen();

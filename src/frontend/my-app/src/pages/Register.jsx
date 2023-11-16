@@ -16,6 +16,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormHelperText from "@mui/material/FormHelperText";
 import ErrorIcon from "@mui/icons-material/Error";
+import { TextField } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
@@ -228,6 +229,9 @@ const Register = () => {
                     </InputAdornment>
                   }
                 />
+                {!validEmail() ? <FormHelperText error id="component-error-text">
+                  Ensure valid email format.
+                </FormHelperText> : <></>}
               </ThemeProvider>
             </FormControl>
           </div>
@@ -269,6 +273,7 @@ const Register = () => {
                     setPwd(event.target.value);
                   }}
                   type={showPassword ? "text" : "password"}
+                  helperText={!validPwd() ? "Incorrect entry." : "Correct"}
                   endAdornment={
                     <>
                       <InputAdornment position="start">
@@ -288,6 +293,9 @@ const Register = () => {
                     </>
                   }
                 />
+                {!validPwd() ? <FormHelperText error id="component-error-text">
+                  Ensure minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special characte
+                </FormHelperText> : <></>}
               </FormControl>
             </ThemeProvider>
           </div>
@@ -330,9 +338,9 @@ const Register = () => {
                     </>
                   }
                 />
-                {/* <FormHelperText error id="component-error-text">
-                  Error
-                </FormHelperText> */}
+                {!validPwd() ? <FormHelperText error id="component-error-text">
+                  Ensure passwords match.
+                </FormHelperText> : <></>}
               </FormControl>
             </ThemeProvider>
           </div>

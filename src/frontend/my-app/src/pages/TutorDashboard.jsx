@@ -31,8 +31,6 @@ const TutorDashboard = () => {
     if (data.error) {
       alert(data.error);
     } else {
-      // console.log(data);
-      // console.log(data.bookingsList);
       setMybookings(data.bookingsList);
       setCheckedRequests(true);
     }

@@ -297,7 +297,7 @@ if __name__ == '__main__':
         # inputData7()
         # inputData8()
         # test()
-        # printData()
+        printData()
 
     except psycopg2.Error as err:
         print("DB error: ", err)
