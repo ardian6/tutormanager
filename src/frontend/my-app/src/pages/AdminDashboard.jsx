@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AdminChangePasswordModal from "../components/AdminChangePasswordModal";
 import Stack from "@mui/material/Stack";
 import AddCourse from "../components/AddCourse";
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [tutorUsers, setTutorUsers] = React.useState([]);
@@ -66,7 +67,9 @@ const AdminDashboard = () => {
     }
   };
   const getCourses = async () => {
-    const response = await fetch("http://localhost:5005/profile/view-all-courses", {
+    const response = await fetch(
+      "http://localhost:5005/profile/view-all-courses",
+      {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -74,16 +77,19 @@ const AdminDashboard = () => {
         body: JSON.stringify({
           token: token,
         }),
-      });
-      const data = await response.json();
-      if (data.error) {
-        alert(data.error);
-      } else {
-        setCourses(data.listcourses);
       }
-  }
+    );
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      setCourses(data.listcourses);
+    }
+  };
   const deleteCourses = async (subject) => {
-    const response = await fetch("http://localhost:5005/profile/admin-delete-course", {
+    const response = await fetch(
+      "http://localhost:5005/profile/admin-delete-course",
+      {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -92,20 +98,27 @@ const AdminDashboard = () => {
           token: token,
           courseName: subject,
         }),
-      });
-      const data = await response.json();
-      if (data.error) {
-        alert(data.error);
-      } else {
-        const temp = courses.filter((course) => course !== subject);
-        setCourses(temp);
       }
-  }
+    );
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      const temp = courses.filter((course) => course !== subject);
+      setCourses(temp);
+    }
+  };
 
   React.useEffect(() => {
     getUsers();
     getCourses();
   }, []);
+
+  const navigate = useNavigate();
+  const viewProfile = (id) => {
+    const path = "/Profile/" + id;
+    navigate(path);
+  };
 
   return (
     <>
@@ -118,11 +131,22 @@ const AdminDashboard = () => {
               <b>Add/Delete Courses</b>
               <div>
                 {courses?.map((course, idx) => {
-                  return (<div key={idx}>{course} <Button className="removebtn"
-                  variant="outlined"
-                  startIcon={<DeleteIcon />}
-                  size="small"
-                  onClick={() => {deleteCourses(course)}}>Delete</Button></div>)
+                  return (
+                    <div key={idx}>
+                      {course}
+                      <Button
+                        className="removebtn"
+                        variant="outlined"
+                        startIcon={<DeleteIcon />}
+                        size="small"
+                        onClick={() => {
+                          deleteCourses(course);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  );
                 })}
                 <AddCourse getCourses={getCourses}></AddCourse>
               </div>
@@ -133,7 +157,15 @@ const AdminDashboard = () => {
                 {tutorUsers.map((user, idx) => {
                   return (
                     <div key={idx}>
-                      {user}
+                      <span
+                        className="profile-view-span"
+                        onClick={() => {
+                          viewProfile(user);
+                        }}
+                      >
+                        {user}
+                      </span>
+
                       <Button
                         className="removebtn"
                         variant="outlined"
@@ -176,7 +208,14 @@ const AdminDashboard = () => {
                   // console.log(users);
                   return (
                     <div key={idx}>
-                      {user}
+                      <span
+                        className="profile-view-span"
+                        onClick={() => {
+                          viewProfile(user);
+                        }}
+                      >
+                        {user}
+                      </span>
                       <Button
                         className="removebtn"
                         variant="outlined"
