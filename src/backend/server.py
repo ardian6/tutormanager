@@ -214,7 +214,7 @@ def admin_approve():
 ## User Profile Change Location Implementation to Server ##
 
 @APP.route("/profile/change-location", methods = ['PUT'])
-def change_bio():
+def change_location():
     data = request.get_json()
     return dumps(changeEmail(data['token'], data['newCity']))
 
