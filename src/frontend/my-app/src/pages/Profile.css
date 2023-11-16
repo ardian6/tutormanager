@@ -257,3 +257,10 @@
   transform: scale(1.5);
   margin-left: 32px;
 }
+
+.lower-box-three {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
