@@ -163,7 +163,7 @@ const BasicModal = ({emailState, bioState, cityState}) => {
       },
       body: JSON.stringify({
         token: token,
-        newBio: editCity
+        newCity: editCity
       })
     });
     const data = await response.json();
