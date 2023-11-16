@@ -2,7 +2,7 @@ from DBFunctions import checkTokenExists, checkDuplicateEmail, checkDuplicateUse
 from DBFunctions import dbChangeUsername, dbChangePassword, dbChangeEmail, dbChangeBio, dbAddCourse
 from DBFunctions import dbDeleteAccount, dbAdminDelete, dbDeleteCourse, dbViewProfile, dbCourseList, dbAddCourseToList, dbViewMyCourses, dbAllUsernames
 from helper import getHashOf
-from DBFunctions import dbUploadDoc, dbChangeProfilePic, dbChangeYTLink, dbAdminApprove
+from DBFunctions import dbUploadDoc, dbChangeProfilePic, dbChangeYTLink, dbAdminApprove, dbChangeLoc
 
 def changeUsername(session_token: str, newUsername: str) -> dict:
   """Changes a given user's username.
@@ -389,6 +389,25 @@ def adminApprove(session_token: str, targetProfile: str) -> dict:
 
   # Approve the targeted user in the database
   dbAdminApprove(targetProfile)
+
+  return {
+    "token": session_token
+  }
+
+def changeEmail(session_token: str, newLoc: str) -> dict:
+  """Changes a given user's location.
+    Paramaters:
+      session_token: String
+      newLoc: String
+    Returns:
+      { session_token: String }
+  """
+  # Find user in database from token
+  if not checkTokenExists(session_token):
+    return {"error": "Token is invalid."}
+  
+  # This function actually goes into the database and changes the data stored
+  dbChangeLoc(session_token, newLoc) 
 
   return {
     "token": session_token

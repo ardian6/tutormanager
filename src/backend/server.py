@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword, uploadDocumentation, changePicture, changeYTLink, adminApprove
-from profile import addNewCourse, adminAddCourse, adminDeleteCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
+from profile import addNewCourse, adminAddCourse, adminDeleteCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData, changeEmail
 from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking, listTargetBooking
 from filterT import filterTutors, getUserGroups
 from messages import listMessages, sendMessage
@@ -210,6 +210,13 @@ def user_change_youtube():
 def admin_approve():
     data = request.get_json()
     return dumps(adminApprove(data['token'], data['targetTutor']))
+
+## User Profile Change Location Implementation to Server ##
+
+@APP.route("/profile/change-location", methods = ['PUT'])
+def change_bio():
+    data = request.get_json()
+    return dumps(changeEmail(data['token'], data['newCity']))
 
 
 """

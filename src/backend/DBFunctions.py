@@ -1039,11 +1039,31 @@ def dbAdminApprove(targetProfile: str):
     Returns:
       Nothing
     """
-    # Same warning as the dbDeleteAccount function
     # Delete the targeted profile
     db = connectDB()
     cur = db.cursor()
     cur.execute("""update Users set approved = %s where username = %s""", [True, targetProfile])
+    cur.close()
+    db.commit()
+    return
+
+
+def dbChangeLoc(token: str, newLoc: str):
+    """Changes the email of the given user.
+    
+    Parameters:
+        token: String,
+        newLoc: String
+    Returns:
+        Nothing
+    """
+    db = connectDB()
+    cur = db.cursor()
+    cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
+    currUsername = None
+    for t in cur.fetchall():
+        currUsername = t[0]
+    cur.execute("""update Users set location = %s where username = %s""", [newLoc, currUsername])
     cur.close()
     db.commit()
     return

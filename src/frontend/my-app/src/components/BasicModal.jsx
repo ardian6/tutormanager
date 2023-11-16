@@ -103,6 +103,11 @@ const BasicModal = ({emailState, bioState, cityState}) => {
     if (editBio !== bio) {
       changeBio();
     }
+
+    if (editCity !== city) {
+      changeCity();
+    }
+
     if (editEmail !== email && validEmail()) {
       changeEmail();
     }
@@ -147,6 +152,25 @@ const BasicModal = ({emailState, bioState, cityState}) => {
       alert(data.error);
     } else {
       bioState(editBio);
+    }
+  };
+
+  const changeCity = async () => {
+    const response = await fetch("http://localhost:5005/profile/change-location", {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+        newBio: editCity
+      })
+    });
+    const data = await response.json();
+    if (data.error) {
+      alert(data.error);
+    } else {
+      bioState(editCity);
     }
   };
 

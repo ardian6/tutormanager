@@ -138,14 +138,15 @@ def clearData():
 # Input dummy data for user table
 def inputData1():
   cur = db.cursor()
-  cur.execute(f"""insert into Users values ('username1', '{getHashOf('password1')}', 'email1@gmail.com', 'givenname1', 'famailyName1', 'admin', 'bio1', 'location1', 'phone1', 'timezone1', True, '', '')""")
-  cur.execute(f"""insert into Users values ('username2', '{getHashOf('password2')}', 'email2@gmail.com', 'givenname2', 'famailyName2', 'student', 'bio2', 'location2', 'phone2', 'timezone2', True, '', '')""")
-  cur.execute(f"""insert into Users values ('username3', '{getHashOf('password3')}', 'email3@gmail.com', 'givenname3', 'famailyName3', 'student', 'bio3', 'location3', 'phone3', 'timezone3', True, '', '')""")
-  cur.execute(f"""insert into Users values ('username4', '{getHashOf('password4')}', 'email4@gmail.com', 'givenname4', 'famailyName4', 'tutor', 'bio4', 'location4', 'phone4', 'timezone4', True, '', '')""")
-  cur.execute(f"""insert into Users values ('username5', '{getHashOf('password5')}', 'email5@gmail.com', 'givenname5', 'famailyName5', 'student', 'bio5', 'location5', 'phone5', 'timezone5', True, '', '')""")
-  cur.execute(f"""insert into Users values ('username6', '{getHashOf('password6')}', 'email6@gmail.com', 'givenname6', 'famailyName6', 'tutor', 'bio6', 'location6', 'phone6', 'timezone6', False, '', '')""")
-  cur.execute(f"""insert into Users values ('username7', '{getHashOf('password7')}', 'email7@gmail.com', 'givenname7', 'famailyName7', 'tutor', 'bio7', 'location7', 'phone7', 'timezone7', True, '', '')""")
-  cur.execute(f"""insert into Users values ('username8', '{getHashOf('password8')}', 'email8@gmail.com', 'givenname8', 'famailyName8', 'student', 'bio8', 'location8', 'phone8', 'timezone8', True, '', '')""")
+  cur.execute(f"""insert into Users values ('johnsmith', '{getHashOf('password1')}', 'johnsmith@gmail.com', 'John', 'Smith', 'admin', 'I am an admin on the site', 'sydney', '11111111', 'AEST', True, '', '')""")
+  cur.execute(f"""insert into Users values ('tomfarley', '{getHashOf('password2')}', 'tomfarley@gmail.com', 'Tom', 'Farley', 'student', 'Hello, I am a year 11 student in high school', 'sydney', '22222222', 'AEST', True, '', '')""")
+  cur.execute(f"""insert into Users values ('bobholt', '{getHashOf('password3')}', 'bobholt@gmail.com', 'Bob', 'Holt', 'student', '4th year commerce student at uni', 'sydney', '33333333', 'AEST', True, '', '')""")
+  cur.execute(f"""insert into Users values ('jesshuff', '{getHashOf('password4')}', 'jesshuff@gmail.com', 'Jess', 'Huffman', 'tutor', 'Tutor that can teach many topics', 'sydney', '44444444', 'AEST', True, '', '')""")
+  cur.execute(f"""insert into Users values ('nickbarr', '{getHashOf('password5')}', 'nickbarr@gmail.com', 'Nick', 'Barr', 'student', 'year 10', 'sydney', '55555555', 'AEST', True, '', '')""")
+  cur.execute(f"""insert into Users values ('gwenmelton', '{getHashOf('password6')}', 'gwenmelton@gmail.com', 'Gwen', 'Melton', 'tutor', 'Tutor with 10 years experience', 'perth', '66666666', 'AWST', False, '', '')""")
+  cur.execute(f"""insert into Users values ('stefanj', '{getHashOf('password7')}', 'stefanj@gmail.com', 'Stefan', 'Jones', 'tutor', 'Retired teacher', 'sydney', '77777777', 'AEST', True, '', '')""")
+  cur.execute(f"""insert into Users values ('adamowen', '{getHashOf('password8')}', 'adamowen@gmail.com', 'Adam', 'Owens', 'student', 'First year uni looking for help', 'sydney', '88888888', 'AEST', True, '', '')""")
+  cur.execute(f"""insert into Users values ('rolandb', '{getHashOf('password9')}', 'rolandb@gmail.com', 'Roland', 'Banks', 'admin', 'New Admin', 'sydney', '99999999', 'AEST', True, '', '')""")
   cur.close()
   db.commit()
   return
@@ -153,9 +154,9 @@ def inputData1():
 # Input dummy data for session table
 def inputData2():
   cur = db.cursor()
-  cur.execute("""insert into Sessions values ('1', 'username1')""")
-  cur.execute("""insert into Sessions values ('2', 'username3')""")
-  cur.execute("""insert into Sessions values ('3', 'username4')""")
+  cur.execute("""insert into Sessions values ('1', 'johnsmith')""")
+  cur.execute("""insert into Sessions values ('2', 'bobholt')""")
+  cur.execute("""insert into Sessions values ('3', 'jesshuff')""")
   cur.close()
   db.commit()
   return
@@ -172,10 +173,10 @@ def inputData3():
 # Input dummy data for userCourse table
 def inputData4():
   cur = db.cursor()
-  cur.execute("""insert into userCourse values ('maths', 'username3')""")
-  cur.execute("""insert into userCourse values ('english', 'username5')""")
-  cur.execute("""insert into userCourse values ('maths', 'username2')""")
-  cur.execute("""insert into userCourse values ('maths', 'username4')""")
+  cur.execute("""insert into userCourse values ('maths', 'bobholt')""")
+  cur.execute("""insert into userCourse values ('english', 'nickbarr')""")
+  cur.execute("""insert into userCourse values ('maths', 'tomfarley')""")
+  cur.execute("""insert into userCourse values ('maths', 'jesshuff')""")
   cur.close()
   db.commit()
   return
@@ -183,10 +184,10 @@ def inputData4():
 # Input dummy data for bookings table
 def inputData5():
   cur = db.cursor()
-  cur.execute("""insert into bookings values ('1', 'username2', 'username4', '2023-05-25 13:00:00', '2023-05-25 14:00:00', 'False', 'Maths')""")
-  cur.execute("""insert into bookings values ('2', 'username3', 'username4', '2023-06-15 15:00:00', '2023-06-15 17:00:00', 'True', 'Need help in algebra')""")
-  cur.execute("""insert into bookings values ('3', 'username5', 'username4', '2023-08-08 20:00:00', '2023-08-08 22:00:00', 'False', 'Grammar')""")
-  cur.execute("""insert into bookings values ('4', 'username8', 'username4', '2023-12-01 05:00:00', '2023-12-01 08:00:00', 'False', 'Future meeting')""")
+  cur.execute("""insert into bookings values ('1', 'tomfarley', 'jesshuff', '2023-11-25 13:00:00', '2023-11-25 14:00:00', 'False', 'Maths')""")
+  cur.execute("""insert into bookings values ('2', 'bobholt', 'jesshuff', '2023-12-15 15:00:00', '2023-12-15 17:00:00', 'True', 'Need help in algebra')""")
+  cur.execute("""insert into bookings values ('3', 'nickbarr', 'jesshuff', '2023-11-20 20:00:00', '2023-11-20 22:00:00', 'False', 'Grammar')""")
+  cur.execute("""insert into bookings values ('4', 'adamowen', 'jesshuff', '2023-12-01 05:00:00', '2023-12-01 08:00:00', 'False', 'Meeting')""")
   cur.close()
   db.commit()
   return
@@ -194,10 +195,10 @@ def inputData5():
 # Input dummy data for messages table
 def inputData6():
   cur = db.cursor()
-  cur.execute("""insert into messages values ('3', 'username2', 'username4', '2023-05-25 13:02:10', 'Do you offer algebra specific tutoring', 'username2')""")
-  cur.execute("""insert into messages values ('1', 'username2', 'username4', '2023-05-25 13:00:00', 'Hello, are you avaliable', 'username2')""")
-  cur.execute("""insert into messages values ('2', 'username2', 'username4', '2023-05-25 13:00:30', 'yes I am', 'username4')""")
-  cur.execute("""insert into messages values ('4', 'username3', 'username6', '2023-05-25 13:02:10', 'Delete Test', 'username3')""")
+  cur.execute("""insert into messages values ('3', 'tomfarley', 'jesshuff', '2023-05-25 13:02:10', 'Do you offer algebra specific tutoring', 'tomfarley')""")
+  cur.execute("""insert into messages values ('1', 'tomfarley', 'jesshuff', '2023-05-25 13:00:00', 'Hello, are you avaliable', 'tomfarley')""")
+  cur.execute("""insert into messages values ('2', 'tomfarley', 'jesshuff', '2023-05-25 13:00:30', 'yes I am', 'jesshuff')""")
+  cur.execute("""insert into messages values ('4', 'bobholt', 'jesshuff', '2023-05-25 13:02:10', 'Delete Test', 'bobholt')""")
   cur.close()
   db.commit()
   return
@@ -205,10 +206,10 @@ def inputData6():
 # Input dummy data for ratings table
 def inputData7():
   cur = db.cursor()
-  cur.execute("""insert into ratings values ('1', 'username2', 'username4', '2023-11-05 13:22:11', 'Good Tutor', 5)""")
-  cur.execute("""insert into ratings values ('2', 'username3', 'username4', '2023-11-05 16:33:40', 'Bad Tutor', 1.5)""")
-  cur.execute("""insert into ratings values ('3', 'username5', 'username4', '2023-11-05 18:09:20', 'Ok Tutor', 3.5)""")
-  cur.execute("""insert into ratings values ('4', 'username2', 'username6', '2023-11-05 18:09:20', 'Excellent Tutor', 5)""")
+  cur.execute("""insert into ratings values ('1', 'tomfarley', 'jesshuff', '2023-11-05 13:22:11', 'Good Tutor', 5)""")
+  cur.execute("""insert into ratings values ('2', 'bobholt', 'jesshuff', '2023-11-05 16:33:40', 'Bad Tutor', 1.5)""")
+  cur.execute("""insert into ratings values ('3', 'nickbarr', 'jesshuff', '2023-11-05 18:09:20', 'Ok Tutor', 3.5)""")
+  cur.execute("""insert into ratings values ('4', 'tomfarley', 'gwenmelton', '2023-11-05 18:09:20', 'Excellent Tutor', 5)""")
   cur.close()
   db.commit()
   return
@@ -216,9 +217,9 @@ def inputData7():
 # Input dummy data for notifications table
 def inputData8():
   cur = db.cursor()
-  cur.execute("""insert into notifications values ('1', 'username2', '2023-05-28 13:00:00', 'Your booking with username4 has been accepted')""")
-  cur.execute("""insert into notifications values ('2', 'username4', '2023-05-25 13:00:00', 'You have received new messages from username2')""")
-  cur.execute("""insert into notifications values ('3', 'username4', '2023-11-05 13:22:11', 'A new rating has been made on you by username2')""")
+  cur.execute("""insert into notifications values ('1', 'tomfarley', '2023-05-28 13:00:00', 'Your booking with username4 has been accepted')""")
+  cur.execute("""insert into notifications values ('2', 'jesshuff', '2023-05-25 13:00:00', 'You have received new messages from username2')""")
+  cur.execute("""insert into notifications values ('3', 'jesshuff', '2023-11-05 13:22:11', 'A new rating has been made on you by username2')""")
   cur.close()
   db.commit()
   return
