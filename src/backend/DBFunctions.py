@@ -594,6 +594,33 @@ def dbListMyBookings(token: str) -> list:
     db.commit()
     return listOfAllBookings
 
+def dbListTargetBooking(targetprofile) -> list:
+    """Returns the given user's bookings from the database.
+    
+    Paramaters:
+        targetprofile: String,
+    Returns:
+        listOfAllBookings: List
+    """
+    listOfAllBookings = []
+    db = connectDB()
+    cur = db.cursor()
+    # Find bookings
+    cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime, b.approved, b.description from bookings b where b.stuUser = %s or b.tutUser = %s""", [targetprofile, targetprofile])
+    for t in cur.fetchall():
+        newStorage = []
+        newStorage.append(t[0])
+        newStorage.append(t[1])
+        newStorage.append(t[2])
+        newStorage.append(t[3].strftime("%Y-%m-%d %H:%M:%S"))
+        newStorage.append(t[4].strftime("%Y-%m-%d %H:%M:%S"))
+        newStorage.append(t[5])
+        newStorage.append(t[6])
+        listOfAllBookings.append(newStorage)
+    cur.close()
+    db.commit()
+    return listOfAllBookings
+
 def dbMakeBooking(studentUser: str, tutorUser: str, startTime: str, endTime: str, description: str):
     """Makes a booking and stores it into the database.
     

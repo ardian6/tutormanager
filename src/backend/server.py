@@ -6,7 +6,7 @@ from flask_cors import CORS
 from auth import login, register, logout
 from profile import changeUsername, changeEmail, changePassword, viewProfile, changeBio, adminChangePassword, uploadDocumentation, changePicture, changeYTLink, adminApprove
 from profile import addNewCourse, adminAddCourse, adminDeleteCourse, deleteCourse, deleteAccount, adminDelete, viewAllCourses, viewUserCourses, allUsers, allUsersData
-from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking
+from bookings import listAllBookings, listMyBookings, makeBooking, deleteBooking, acceptBooking, changeBooking, listTargetBooking
 from filterT import filterTutors, getUserGroups
 from messages import listMessages, sendMessage
 from ratings import makeRatings, tutorWrittenRatings, tutorAverageRatings
@@ -258,6 +258,13 @@ def accept_bookings():
 def change_bookings():
     data = request.get_json()
     return dumps(changeBooking(data['token'], data['studentUser'], data['tutorUser'], data['startTime'], data['endTime'], data['description']))
+
+## User booking view targetted profile booking Implementation to Server ##
+
+@APP.route("/booking/view-target-booking", methods = ['POST'])
+def view_target_bookings():
+    data = request.get_json()
+    return dumps(listTargetBooking(data['token'], data['targetProfile']))
 
 """
 ROUTES FOR Filters FUNCTIONS
