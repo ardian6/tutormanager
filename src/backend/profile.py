@@ -237,7 +237,7 @@ def viewProfile(targetProfile: str) -> dict:
         'location': allData[6],
         'phone': allData[7],
         'timezone': allData[8],
-    }
+      }
   """
   return dbViewProfile(targetProfile)
 
@@ -265,7 +265,10 @@ def allUsers(session_token: str) -> dict:
     Paramaters:
       session_token: String
     Returns:
-      { token: String, usersList: String[] }
+      { 
+        token: String
+        usersList: String[] 
+      }
   """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}

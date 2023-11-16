@@ -17,38 +17,40 @@ Calendar integration for easy scheduling.
 4. Communication
 Integrated messaging system to facilitate communication between students and tutors.
 Notifications for upcoming tutorial sessions and messages.
-5. Database (TALK ABOUT AWS)
+5. Database: We use the cloud-based AWS (Amazon Web Services) for storage.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Built With
 
-### Backend
-[![Python][Python3]][Python3-url] <br />
-[![Flask][Flask]][Flask-url] <br />
-[![AWS][AWS]][AWS-url] <br />
-
-### Frontend
-[![JS][JS]][JS-url] <br />
-[![CSS3][CSS3]][CSS3-url] <br />
-[![HTML5][HTML5]][HTML5-url] <br />
-[![NPM][NPM]][NPM-url] <br />
-[![Yarn][Yarn]][Yarn-url] <br />
-[![React][React.js]][React-url] <br />
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<div align="center">
+   
+| *Frontend* | *Backend* |
+|:----------:|:---------:|
+|[![JS][JS]][JS-url]|[![Python][Python3]][Python3-url]|
+|[![CSS3][CSS3]][CSS3-url]|[![Flask][Flask]][Flask-url]|
+|[![HTML5][HTML5]][HTML5-url]|[![AWS][AWS]][AWS-url]|
+|[![NPM][NPM]][NPM-url]|         |
+|[![Yarn][Yarn]][Yarn-url]|         |
+|[![React][React.js]][React-url]|         |
+</div>
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This Project was created using WSL (Ubuntu 18.04) with Windows 10, hence the installation assumes the user uses those.
+This Project was intended to work with both Linux and Windows operating systems, as well as with the use of WSL (Ubuntu), hence the installation assumes the user uses one of those.
 
 ### Prerequisites
+The following software needs to be installed on your machine for TutorManager to work properly:
+* <a href="https://nodejs.org/en/">Node.js v16+</a>
+* <a href="https://www.npmjs.com/">npm</a>
+* <a href="https://classic.yarnpkg.com/en/docs/install#windows-stable">Yarn</a>
+* <a href="https://react.dev/learn/installation">React</a>
+
 This installation assumes the user has a GitHub account with a valid SSH key.
 
-* Connect to WSL and open a terminal.
+* Open a terminal.
 
-* **Update any outdated packages or dependencies.**
+* **If using WSL or Linux, update any outdated packages or dependencies.**
    ```sh
    sudo apt update && upgrade
    ```
@@ -63,10 +65,16 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    cd capstone-project-3900f12apenguin
    ```
-1. Install Python3.
+   <br />
+1. Install Python3. <br />
+   _Linux:_ 
    ```sh
    sudo apt install python3 python3-pip
    ```
+   _Windows:_ <br />
+
+   Install Python manually: <a href="https://www.python.org/downloads/">Python</a>
+   <br />
 6. Install Flask and Flask_Cors.
    ```sh
    pip3 install flask
@@ -74,6 +82,7 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    pip3 install flask_cors
    ```
+   <br />
 7. Install psycopg2.
    ```sh
    sudo apt-get install build-dep python-psycopg2
@@ -81,29 +90,34 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    pip3 install psycopg2-binary
    ```
+   <br />
 8. Install PyJWT.
    ```sh
    pip3 install PyJWT
    ```
-2. Install Node.
+   <br />
+2. Install Node (Skip if already installed as a prerequisite)
    ```sh
    npm install
    ```
    ```sh
    sudo apt-get install -y nodejs
    ```
-3. Install yarn.
+   <br />
+3. Install yarn (Skip if already installed as a prerequisite)
    ```sh
    npm install --global yarn
    ```
-4. Install React.
+   <br />
+4. Install React (Skip if already installed as a prerequisite)
    ```sh
    yarn add react-scripts
    ```
+   <br />
 5. Install Dependencies for Yarn.
-   **Go to correct directory for commands to work**
+   **You must be in the correct directory.**
    ```sh
-   cd /capstone-project-3900f12apenguin/src/frontend/my-app
+   cd /src/frontend/my-app
    ```
    ```sh
    yarn install
@@ -111,32 +125,29 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    yarn
    ```
-4. Create terminal 1 and run backend
+   <br />
+4. Create a new terminal to run the backend
    ```sh
-   cd /capstone-project-3900f12apenguin/src/backend
+   cd /src/backend
    ```
     Start the backend
    ```sh
-   python3 src/backend/server.py
+   python3 server.py
    ```
-5.  Create terminal 2 and run frontend
+   <br />
+5.  Create another new terminal to run the frontend
       ```sh
-      cd /capstone-project-3900f12apenguin/src/frontend/my-app
+      cd /src/frontend/my-app
       ```
        Start the frontend. It automatically opens a new tab in your default browser.
       ```sh
       yarn start
       ```
-    
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->

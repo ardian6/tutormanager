@@ -215,9 +215,6 @@ const StudentDashboard = () => {
                   </div>
                 )}
                 {students.map((student, idx) => {
-                  {
-                    console.log(student);
-                  }
                   return (
                     <div
                       key={idx}

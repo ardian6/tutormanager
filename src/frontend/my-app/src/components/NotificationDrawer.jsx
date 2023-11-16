@@ -114,7 +114,6 @@ export default function TemporaryDrawer() {
       <Badge badgeContent={notifications.length} color="error">
         {["Notifications"].map((anchor) => (
           <React.Fragment key={anchor}>
-            {console.log(anchor)}
             <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
             <Drawer
               anchor={anchor}

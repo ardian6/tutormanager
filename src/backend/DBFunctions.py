@@ -10,8 +10,17 @@ def connectDB():
         password="3900PenguinDBtest",
         port='5432')
 
-# Check if the login information is correct by retrieving information from the database
 def dblogin(token: str, username: str, password: str) -> str:
+    """Checks if the login information is correct by retrieving information from the database.
+    Returns the type of user (Tutor, Student, Admin) on valid login or an empty string otherwise.
+
+    Parameters:
+        token: String,
+        username: String,
+        password: String,
+    Returns:
+        typeOfUser: String
+    """
     typeOfUser = ""
     db = connectDB()
     cur = db.cursor()
@@ -27,10 +36,22 @@ def dblogin(token: str, username: str, password: str) -> str:
     cur.close()
     db.commit()
     db.close()
-    return typeOfUser # Returns the usertype in string format or empty string if invalid login
+    return typeOfUser
 
-# Stores a new user into the database
 def dbregister(token: str, email: str, username: str, password: str, firstName: str, lastName: str, userType: str):
+    """Stores a new user into the database.
+
+    Parameters:
+        token: String,
+        email: String,
+        username: String,
+        password: String,
+        firstName: String,
+        lastName: String,
+        userType: String
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     if userType == 'tutor':
@@ -54,8 +75,15 @@ def dbregister(token: str, email: str, username: str, password: str, firstName: 
     db.close()
     return
 
-# Checks if there is already another user in the database with the same username
-def checkDuplicateUsername(username: str):
+def checkDuplicateUsername(username: str) -> bool:
+    """Checks if another user in the database has the same username as the given one.
+    Returns True if the username is already in use and False otherwise.
+
+    Parameters:
+        username: String,
+    Returns:
+        alreadyExist: Boolean
+    """
     alreadyExist = False
     db = connectDB()
     cur = db.cursor()
@@ -66,10 +94,17 @@ def checkDuplicateUsername(username: str):
     cur.close()
     db.commit()
     db.close()
-    return alreadyExist #Returns true if there username is already in use and false otherwise
+    return alreadyExist
 
-# Checks if there is already another user in the database with the same email
-def checkDuplicateEmail(email: str):
+def checkDuplicateEmail(email: str) -> bool:
+    """Checks if another user in the database has the same email as the given one.
+    Returns True if the email is already in use and False otherwise.
+
+    Parameters:
+        email: String,
+    Returns:
+        alreadyExist: Boolean
+    """
     alreadyExist = False
     db = connectDB()
     cur = db.cursor()
@@ -80,10 +115,16 @@ def checkDuplicateEmail(email: str):
     cur.close()
     db.commit()
     db.close()
-    return alreadyExist #Returns true if there email is already in use and false otherwise
+    return alreadyExist 
 
-# Remove session token from the database
 def dblogout(token: str):
+    """Removes session token from the database.
+    
+    Parameters:
+        token: String,
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""delete from Sessions s where s.sessID = %s""", [token])
@@ -92,8 +133,14 @@ def dblogout(token: str):
     db.close()
     return
 
- # Check if the token exists
-def checkTokenExists(token: str):
+def checkTokenExists(token: str) -> bool:
+    """Checks if the given token belongs to an existing user.
+    
+    Parameters:
+        token: String,
+    Returns:
+        tokenExist: Boolean
+    """
     tokenExist = False
     db = connectDB()
     cur = db.cursor()
@@ -104,10 +151,16 @@ def checkTokenExists(token: str):
     cur.close()
     db.commit()
     db.close()
-    return tokenExist # -> Returns true if token exists otherwise false.
+    return tokenExist
 
-# Returns username of a session id
 def getUsername(token: str):
+    """Given a session ID (token), returns the username of the user associated with that token.
+    
+    Parameters:
+        token: String,
+    Returns:
+        uName: String
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from sessions s where s.sessID = %s""", [token])
@@ -118,8 +171,14 @@ def getUsername(token: str):
     db.close()
     return uName
 
-# Check if token exists and is an admin
-def checkTokenAdmin(token: str):
+def checkTokenAdmin(token: str) -> bool:
+    """Checks the given token and returns True if it belongs to an Admin user, and False otherwise.
+    
+    Parameters:
+        token: String,
+    Returns:
+        tokenAdmin: Boolean
+    """
     tokenAdmin = False
     db = connectDB()
     cur = db.cursor()
@@ -129,10 +188,17 @@ def checkTokenAdmin(token: str):
         tokenAdmin = True
     cur.close()
     db.commit()
-    return tokenAdmin # -> Returns true if token exists and it belongs to an admin otherwise false.
+    return tokenAdmin
 
-# This function goes into the database and changes the username stored into the new desired username
 def dbChangeUsername(token: str, newUsername: str):
+    """Changes the username of the given user.
+    
+    Parameters:
+        token: String,
+        newUsername: String
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -146,8 +212,15 @@ def dbChangeUsername(token: str, newUsername: str):
     db.commit()
     return
 
-# This function goes into the database and changes the email stored
 def dbChangeEmail(token: str, newEmail: str):
+    """Changes the email of the given user.
+    
+    Parameters:
+        token: String,
+        newEmail: String
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -159,8 +232,15 @@ def dbChangeEmail(token: str, newEmail: str):
     db.commit()
     return
 
-# This function goes into the database and changes the password stored
 def dbChangePassword(token: str, newPass: str):
+    """Changes the password of the given user.
+    
+    Parameters:
+        token: String,
+        newPass: String
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -172,8 +252,15 @@ def dbChangePassword(token: str, newPass: str):
     db.commit()
     return
 
-# This function goes into the database and changes the bio stored
 def dbChangeBio(token: str, newBio: str):
+    """Changes the bio of the given user.
+    
+    Parameters:
+        token: String,
+        newBio: String
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -185,8 +272,15 @@ def dbChangeBio(token: str, newBio: str):
     db.commit()
     return
 
-# This function goes into the database and stores a user with a course
 def dbAddCourse(token: str, newCourse: str):
+    """Goes into the database and adds the given course to the given user.
+    
+    Parameters:
+        token: String,
+        newCourse: String
+    Returns:
+        addedCourse: Boolean
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -201,10 +295,19 @@ def dbAddCourse(token: str, newCourse: str):
         cur.execute("""insert into userCourse values (%s, %s)""", [newCourse, currUsername])
     cur.close()
     db.commit()
-    return addedCourse  # Returns True if successful or false if failed (Failed if course has already added)
 
-# This function goes into the database and removes a user with a course
-def dbDeleteCourse(token: str, courseToBeDeleted: str):
+    # Returns True if successful or false if failed (Failed if course has already been added)
+    return addedCourse
+
+def dbDeleteCourse(token: str, courseToBeDeleted: str) -> bool:
+    """Goes into the database and removes the given course from the given user.
+    
+    Parameters:
+        token: String,
+        courseToBeDeleted: String
+    Returns:
+        deletedCourse: Boolean
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -219,7 +322,9 @@ def dbDeleteCourse(token: str, courseToBeDeleted: str):
         cur.execute("""delete from userCourse c where c.username = %s and c.course = %s""", [currUsername, courseToBeDeleted])
     cur.close()
     db.commit()
-    return deletedCourse # Returns True if successful or false if failed (Failed if course cannot be deleted because they didnt have it in the first place)
+
+    # Returns True if successful or false if failed (Failed if course cannot be deleted because they didn't have it in the first place)
+    return deletedCourse
 
 def dbDeleteAccount(token: str, password: str):
     """Removes all data related to the given user information.
@@ -262,8 +367,14 @@ def dbDeleteAccount(token: str, password: str):
     db.commit()
     return correctInfo
 
-# This function goes into the database and retrieves the information for the profile of a specific user
-def dbViewProfile(targetProfile: str):
+def dbViewProfile(targetProfile: str) -> dict:
+    """Goes into the database and retrieves the information for the profile of a specific user.
+    
+    Parameters:
+        targetProfile: String
+    Returns:
+        dict representing all information of the given user.
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute(""" select u.username, u.email, u.givenName, u.familyName, u.userType, u.bio, u.location, u.phone, u.timezone, u.profilePic, u.youtubeLink, u.approved
@@ -277,7 +388,9 @@ def dbViewProfile(targetProfile: str):
         averageRatings = dbAverageRatings(targetProfile)
 
     allDocumentation = dbRetrieveDoc(targetProfile)
-    return { # Return it in a dictionary format with all information
+
+    # Return it in a dictionary format with all information
+    return { 
         'username': allData[0],
         'email': allData[1],
         'givenName': allData[2],
@@ -294,8 +407,14 @@ def dbViewProfile(targetProfile: str):
         'pdfStr': allDocumentation
     }
 
-# This function goes into the database and removes all data related to the targeted user
 def dbAdminDelete(targetProfile: str):
+    """Removes all data related to the targeted user from the database.
+    
+    Parameters:
+        targetProfile: String
+    Returns:
+        Nothing
+    """
     # Same warning as the dbDeleteAccount function
     # Delete the targeted profile
     db = connectDB()
@@ -312,8 +431,12 @@ def dbAdminDelete(targetProfile: str):
     db.commit()
     return
 
-# This function retrieves all the courses stored in the database
 def dbCourseList() -> list:
+    """Retrieves all the courses stored in the database.
+    
+    Returns:
+        allCourseList: list[str]
+    """
     allCourseList = []
     db = connectDB()
     cur = db.cursor()
@@ -324,8 +447,14 @@ def dbCourseList() -> list:
     db.commit()
     return allCourseList
 
-# This function adds a new course to the list of all courses in the database
 def dbAddCourseToList(courseName: str):
+    """Adds a new course to the list of all courses in the database.
+    
+    Paramaters:
+        courseName: String,
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""insert into Courses values (%s)""", [courseName])
@@ -333,8 +462,15 @@ def dbAddCourseToList(courseName: str):
     db.commit()
     return
 
-# This function removes a course from the list of all courses in the database
+# This function 
 def dbRemoveCourseFromList(courseName: str):
+    """Removes a course from the list of all courses in the database.
+    
+    Paramaters:
+        courseName: String,
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""delete from userCourse uc where uc.course = %s""", [courseName])
@@ -343,8 +479,14 @@ def dbRemoveCourseFromList(courseName: str):
     db.commit()
     return
 
-# This function retrieves the courses the user is doing
 def dbViewMyCourses(token: str) -> list:
+    """Retrieves the courses the given user is doing.
+    
+    Paramaters:
+        token: String,
+    Returns:
+        myCourseList: list[str]
+    """
     myCourseList = []
     db = connectDB()
     cur = db.cursor()
@@ -361,8 +503,14 @@ def dbViewMyCourses(token: str) -> list:
     db.commit()
     return myCourseList
 
-# This function retrieves the courses the user is doing through username
 def dbViewUsernameCourses(username: str) -> list:
+    """Retrieves the courses assigned to the user with the given username.
+    
+    Paramaters:
+        username: String,
+    Returns:
+        myCourseList: list[str]
+    """
     myCourseList = []
     db = connectDB()
     cur = db.cursor()
@@ -374,8 +522,12 @@ def dbViewUsernameCourses(username: str) -> list:
     db.commit()
     return myCourseList
 
-# This function returns all usernames
 def dbAllUsernames() -> list:
+    """Returns the usernames of all users in the database.
+    
+    Returns:
+        listOfAllUsers: List
+    """
     listOfAllUsers = []
     db = connectDB()
     cur = db.cursor()
@@ -386,8 +538,12 @@ def dbAllUsernames() -> list:
     db.commit()
     return listOfAllUsers
 
-# This function returns all bookings from database
 def dbListAllBookings() -> list:
+    """Returns all bookings from the database.
+    
+    Returns:
+        listOfAllBookings: List
+    """
     listOfAllBookings = []
     db = connectDB()
     cur = db.cursor()
@@ -406,8 +562,14 @@ def dbListAllBookings() -> list:
     db.commit()
     return listOfAllBookings
 
-# This function returns all my bookings from database
 def dbListMyBookings(token: str) -> list:
+    """Returns the given user's bookings from the database.
+    
+    Paramaters:
+        token: String,
+    Returns:
+        listOfAllBookings: List
+    """
     listOfAllBookings = []
     db = connectDB()
     cur = db.cursor()
@@ -432,8 +594,45 @@ def dbListMyBookings(token: str) -> list:
     db.commit()
     return listOfAllBookings
 
-# This function makes a booking and stores into database
+def dbListTargetBooking(targetprofile) -> list:
+    """Returns the given user's bookings from the database.
+    
+    Paramaters:
+        targetprofile: String,
+    Returns:
+        listOfAllBookings: List
+    """
+    listOfAllBookings = []
+    db = connectDB()
+    cur = db.cursor()
+    # Find bookings
+    cur.execute("""select b.bookingID, b.stuUser, b.tutUser, b.startTime, b.endTime, b.approved, b.description from bookings b where b.stuUser = %s or b.tutUser = %s""", [targetprofile, targetprofile])
+    for t in cur.fetchall():
+        newStorage = []
+        newStorage.append(t[0])
+        newStorage.append(t[1])
+        newStorage.append(t[2])
+        newStorage.append(t[3].strftime("%Y-%m-%d %H:%M:%S"))
+        newStorage.append(t[4].strftime("%Y-%m-%d %H:%M:%S"))
+        newStorage.append(t[5])
+        newStorage.append(t[6])
+        listOfAllBookings.append(newStorage)
+    cur.close()
+    db.commit()
+    return listOfAllBookings
+
 def dbMakeBooking(studentUser: str, tutorUser: str, startTime: str, endTime: str, description: str):
+    """Makes a booking and stores it into the database.
+    
+    Paramaters:
+        studentUser: String,
+        tutorUser: String,
+        startTime: String,
+        endTime: String,
+        description: String
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     # Insert into database
@@ -451,8 +650,15 @@ def dbMakeBooking(studentUser: str, tutorUser: str, startTime: str, endTime: str
     db.commit()
     return
 
-# This function deletes a booking and removes it from database
 def dbDeleteBooking(studentUser: str, tutorUser: str):
+    """Deletes a booking and removes it from database.
+    
+    Paramaters:
+        studentUser: String,
+        tutorUser: String
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     # Delete from database
@@ -467,8 +673,16 @@ def dbDeleteBooking(studentUser: str, tutorUser: str):
     db.commit()
     return
 
-# This function checks if the booking exists.
 def dbCheckDuplicateBooking(studentUser: str, tutorUser: str) -> bool:
+    """Check if a booking already exists between the given student and tutor.
+    Returns True if a booking exists and False otherwise.
+    
+    Paramaters:
+        studentUser: String,
+        tutorUser: String
+    Returns:
+        existingBooking: Boolean
+    """
     existingBooking = False
     db = connectDB()
     cur = db.cursor()
@@ -479,8 +693,14 @@ def dbCheckDuplicateBooking(studentUser: str, tutorUser: str) -> bool:
     db.commit()
     return existingBooking
 
-# This functions goes into a database and changes a booking accepted value to true
 def dbAcceptBooking(bID: str):
+    """Changes a booking accepted value to true
+    
+    Paramaters:
+        bID: String,
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""update Bookings set approved = %s where bookingID = %s""", [True, bID])
@@ -500,8 +720,15 @@ def dbAcceptBooking(bID: str):
     db.commit()
     return
 
-# This functions allow for the admin to change password
 def dbAdminChangePassword(profile: str, newPass: str):
+    """Allows for the admin to change a user's password.
+    
+    Paramaters:
+        profile: String,
+        newPass: String
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""update users set password = %s where username = %s""", [newPass, profile])
@@ -509,8 +736,14 @@ def dbAdminChangePassword(profile: str, newPass: str):
     db.commit()
     return
 
-# This functions returns all users
-def dbGroupUsers():
+def dbGroupUsers() -> (list, list, list):
+    """Returns all users.
+    
+    Returns:
+        allStudents: list[str],
+        allTutors: list[str],
+        allAdmins: list[str]
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select u.username from users u where userType = %s""", ['student'])
@@ -532,8 +765,15 @@ def dbGroupUsers():
     db.commit()
     return allStudents, allTutors, allAdmins
 
-# This function gives all messages between two users
 def dbListMessages(stuUser: str, tutUser: str) -> list:
+    """Retreives all messages between two users
+    
+    Paramaters:
+        stuUser: String,
+        tutUser: String
+    Returns:
+        messageList: list[str]
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select m.msgID, m.stuUser, m.tutUser, m.timeSent, m.message, m.sentBy from messages m where m.stuUser = %s and m.tutUser = %s order by m.timeSent""", [stuUser, tutUser])
@@ -551,10 +791,21 @@ def dbListMessages(stuUser: str, tutUser: str) -> list:
     db.commit()
     return messageList
 
-# This function stores a new message that was sent into the database
 def dbSendMessage(stuUser: str, tutUser: str, sentBy: str, timeSent: str, message: str):
+    """Stores a new message that was sent into the database
+    
+    Paramaters:
+        stuUser: String,
+        tutUser: String,
+        sentBy: Float,
+        timeSent: String,
+        message: String
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
+
     # Insert into database
     messageID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
     timeFormat = datetime.datetime.strptime(timeSent, '%Y-%m-%d %H:%M:%S')
@@ -574,16 +825,27 @@ def dbSendMessage(stuUser: str, tutUser: str, sentBy: str, timeSent: str, messag
     db.commit()
     return
 
-# This function creates a new rating and stores it into the database
 def dbMakeRating(stuUser: str, tutUser: str, numberRate: float, reviewRate: str) -> bool:
+    """Creates a new rating and stores it into the database
+    
+    Paramaters:
+        stuUser: String,
+        tutUser: String,
+        numberRate: Float,
+        reviewRate: String
+    Returns:
+        valid: Boolean
+    """
     db = connectDB()
     cur = db.cursor()
+
     # Check if the student has had a session with the tutor
     valid = False
     cur.execute("""select b.endTime from bookings b where b.stuUser = %s and b.tutUser = %s""", [stuUser, tutUser])
     for t in cur.fetchall():
         if t[0] < datetime.datetime.now():
             valid = True
+
     # Insert into database
     if valid == True:
         ratingID = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
@@ -598,8 +860,14 @@ def dbMakeRating(stuUser: str, tutUser: str, numberRate: float, reviewRate: str)
     db.commit()
     return valid
 
-# This function returns all the ratings assoicated with a specific tutor
 def dbTutorRatings(tutUser: str) -> list:
+    """Returns all the ratings assoicated with a specific tutor.
+    
+    Paramaters:
+        tutUser: String,
+    Returns:
+        listOfAllReviews: list[str]
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select r.ratingID, r.stuUser, r.tutUser, r.timesent, r.ratingMessage, r.ratingNumber from ratings r where r.tutUser = %s""", [tutUser])
@@ -617,8 +885,14 @@ def dbTutorRatings(tutUser: str) -> list:
     db.commit()
     return listOfAllReviews
 
-# This functions returns the average rating of a specific tutor
-def dbAverageRatings (tutUser: str) -> float:
+def dbAverageRatings(tutUser: str) -> float:
+    """Calculates the average user rating of the given tutor user.
+
+    Paramaters:
+        tutUser: String,
+    Returns:
+        float representing the average rating of the given tutor.
+    """
     listOfRatings = dbTutorRatings(tutUser)
     total = 0.0
     amount = 0.0
@@ -629,8 +903,14 @@ def dbAverageRatings (tutUser: str) -> float:
         return 0.0
     return total/amount
 
-# This functions retrieves all the notifications associated with this specific user from the database
 def dbAllNotifications(token: str) -> list:
+    """Retrieves all the notifications associated with this specific user from the database
+
+    Paramaters:
+        token: String,
+    Returns:
+        listOfAllNotif: list[str]
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -650,8 +930,13 @@ def dbAllNotifications(token: str) -> list:
     db.commit()
     return listOfAllNotif
 
-# This function deletes the dismissed notification from database
 def dbDismissNotif(notificationID: str):
+    """Deletes the dismissed notification from database
+    Paramaters:
+        notificationID: String,
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""delete from notifications n where n.notifID = %s""", [notificationID])
@@ -659,8 +944,14 @@ def dbDismissNotif(notificationID: str):
     db.commit()
     return
 
-# This function stores a data string of a pdf into the database
 def dbUploadDoc(token: str, pdfDataStr: str):
+    """Stores a data string of a pdf into the database
+    Paramaters:
+        token: String,
+        pdfDataStr: String
+    Returns:
+        Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -686,8 +977,13 @@ def dbUploadDoc(token: str, pdfDataStr: str):
     db.commit()
     return
 
-# This function retrieves a list of all the data string pdf of a specific user
-def dbRetrieveDoc(username:str) -> list:
+def dbRetrieveDoc(username: str) -> list:
+    """Retrieves a list of all the data string pdf of a specific user
+    Paramaters:
+        username: String,
+    Returns:
+        listOfAllData: list[str]
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select d.documentData from documentation d where d.nameOfUser = %s""", [username])
@@ -698,8 +994,14 @@ def dbRetrieveDoc(username:str) -> list:
     db.commit()
     return listOfAllData
 
-# This function changes the user YouTube Link
 def dbChangeYTLink(token: str, newLink: str):
+    """Changes the user's YouTube Link
+    Paramaters:
+        token: String,
+        newLink: String
+    Returns:
+      Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -711,9 +1013,14 @@ def dbChangeYTLink(token: str, newLink: str):
     db.commit()
     return
 
-
-# This function changes the user Profile Pic
 def dbChangeProfilePic(token: str, picStr: str):
+    """Changes the user's profile picture
+    Paramaters:
+        token: String,
+        picStr: String
+    Returns:
+      Nothing
+    """
     db = connectDB()
     cur = db.cursor()
     cur.execute("""select s.username from Sessions s where s.sessID = %s""", [token])
@@ -725,8 +1032,13 @@ def dbChangeProfilePic(token: str, picStr: str):
     db.commit()
     return
 
-# This function goes into the database and changes the tutor approval to true
 def dbAdminApprove(targetProfile: str):
+    """Admin approves a tutor given the tutor's profile.
+    Paramaters:
+        targetProfile: String
+    Returns:
+      Nothing
+    """
     # Same warning as the dbDeleteAccount function
     # Delete the targeted profile
     db = connectDB()

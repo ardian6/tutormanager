@@ -6,8 +6,10 @@ def listMessages(session_token: str, stuUser: str, tutUser: str) -> dict:
       session_token: String
 
     Returns:
-      { session_token: String,
-        messageList: list }
+      { 
+        session_token: String,
+        messageList: list 
+      }
   """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}
@@ -25,7 +27,7 @@ def sendMessage(session_token: str, stuUser: str, tutUser: str, sentBy: str, tim
       session_token: String
 
     Returns:
-      { session_token: String}
+      { session_token: String }
   """
   if not checkTokenExists(session_token):
     return {"error": "Token is invalid."}

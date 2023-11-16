@@ -26,7 +26,7 @@ def setupTables():
   phone       varchar(30),
   timezone    varchar(15),
   approved    boolean,
-  profilePic  varchar(60000),
+  profilePic  varchar(1000000),
   youtubeLink varchar(60000),
 	primary key (username)
   )""")

@@ -58,7 +58,7 @@ def logout(token: str) -> dict:
     Paramaters:
       token: String
     Returns:
-      {session_token: String}
+      { session_token: String }
   """
   dblogout(token)
   return {

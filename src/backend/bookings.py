@@ -1,4 +1,4 @@
-from DBFunctions import checkTokenExists, dbListAllBookings, dbListMyBookings, dbMakeBooking, dbDeleteBooking, dbCheckDuplicateBooking, dbAcceptBooking
+from DBFunctions import checkTokenExists, dbListAllBookings, dbListMyBookings, dbMakeBooking, dbDeleteBooking, dbCheckDuplicateBooking, dbAcceptBooking, dbListTargetBooking
 
 def listAllBookings(session_token: str) -> dict:
   """Grabs all bookings in a list
@@ -112,6 +112,26 @@ def changeBooking(session_token: str, studentUser: str, tutorUser: str,
   makeBooking(session_token, studentUser, tutorUser, startTime, endTime, description)
   return {
     "token": session_token
+  }
+
+def listTargetBooking(session_token: str, targetProfile: str) -> dict:
+  """Grabs all bookings related to the user
+    Paramaters:
+      session_token: String
+      targetProfile: String
+
+    Returns:
+      { session_token: String,
+        bookingsList: list }
+  """
+  if not checkTokenExists(session_token):
+    return {"error": "Token is invalid."}
+  
+  listOfAllBookings = dbListTargetBooking(targetProfile)
+
+  return {
+    "token": session_token,
+    "bookingsList": listOfAllBookings
   }
 
 # Below is for myself (Mathew) to test out functions

@@ -149,7 +149,7 @@ const TutorDashboard = () => {
                   </div>
                 )}
                 <div className="tutor-request-info-bar">
-                  <div className="student-title">Tutor</div>
+                  <div className="student-title">Student</div>
                   <div className="tutor-subject-title">Description</div>
                   <div className="tutor-time-title">Time</div>
                   <div className="tutor-accept-title">Accept</div>
