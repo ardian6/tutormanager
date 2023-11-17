@@ -42,9 +42,10 @@ This Project was intended to work with both Linux and Windows operating systems,
 ### Prerequisites
 The following software needs to be installed on your machine for TutorManager to work properly:
 * <a href="https://nodejs.org/en/">Node.js v16+</a>
-* <a href="https://www.npmjs.com/">npm</a>
-* <a href="https://classic.yarnpkg.com/en/docs/install#windows-stable">Yarn</a>
-* <a href="https://react.dev/learn/installation">React</a>
+* <a href="https://www.npmjs.com/">npm v8+</a>
+* <a href="https://classic.yarnpkg.com/en/docs/install#windows-stable">Yarn 1.22.19</a>
+* <a href="https://react.dev/learn/installation">React 18.2.0</a>
+* <a href="https://www.python.org/downloads/release/python-369/">Python 3.6.9</a>
 
 This installation assumes the user has a GitHub account with a valid SSH key.
 
