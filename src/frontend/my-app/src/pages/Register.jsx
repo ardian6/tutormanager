@@ -46,11 +46,11 @@ const Register = () => {
   const navigate = useNavigate();
   const registerBtn = async () => {
     if (!validEmail()) {
-      alert("Correct email");
+      alert("Invalid email");
       return
     }
     if (!validPwd()) {
-      alert("Correct password");
+      alert("Invalid password");
       return
     }
     const response = await fetch("http://localhost:5005/auth/register/", {
