@@ -27,3 +27,6 @@ I attended our scheduled meeting where it was decided that I would have a major 
 
 Week 9:
 I continued to work on the final report in preparation for the due date. I finished off the installation section and aim to begin the 'Overview' section by the end of this week. I also added comments and refactored some of the backend code to make it more readable.
+
+Week 10
+I did the majority of the report with Mathew and Ryan, and attended our final meeting on Thursday Week 10 to prepare for the demo on Friday. I attended and participated in the demo and finalised the report before the due date.
