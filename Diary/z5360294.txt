@@ -54,4 +54,4 @@ Did alot of UI bug fixes and new implementation of previously stated features.
 Week 10
 For the final week, we had to polish as much as possible before the demo and report. Did alot of bug fixes. Went with the group and practiced the final demo.
 Went through and fixed the dummy data with Matthew. Did the project report with Ardian. Added all the packages and libraries used in our project in the report. 
-Added all challenges faced in the report. Added alot of features and explained them in the report. 
+Added all challenges faced in the report. Added alot of features and explained them in the report. Tried to clean as much as possible before final submission.
