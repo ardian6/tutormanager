@@ -40,3 +40,7 @@ an item and will be completed by the end of this week.
 Week 9
 Implemented rating and notifications for the frontend. Moving on, there should be only a few addition functionality to implement
 before the project is completed.
+
+Week 10
+Implemented a default rating and also a reccomendations page to reccomend resources outside of the current website. Finalising the report, 
+and rehearsing for the demo should be the last things on the agenda.
