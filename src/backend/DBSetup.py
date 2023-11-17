@@ -262,6 +262,18 @@ def printData():
   cur.close()
   return
 
+# Input admin data for user table
+def inputAdmins():
+  cur = db.cursor()
+  cur.execute(f"""insert into Users values ('admin1', '{getHashOf('password1')}', 'admin1@gmail.com', 'FirstHolder1', 'LastHolder1', 'admin', 'BioHolder1', 'sydney', '11111111', 'AEST', True, '', '')""")
+  cur.execute(f"""insert into Users values ('admin2', '{getHashOf('password2')}', 'admin2@gmail.com', 'FirstHolder2', 'LastHolder2', 'admin', 'BioHolder2', 'sydney', '22222222', 'AEST', True, '', '')""")
+  cur.execute(f"""insert into Users values ('admin3', '{getHashOf('password3')}', 'admin3@gmail.com', 'FirstHolder3', 'LastHolder3', 'admin', 'BioHolder3', 'sydney', '33333333', 'AEST', True, '', '')""")
+  cur.execute(f"""insert into Users values ('admin4', '{getHashOf('password4')}', 'admin4@gmail.com', 'FirstHolder4', 'LastHolder4', 'admin', 'BioHolder4', 'sydney', '44444444', 'AEST', True, '', '')""")
+  cur.execute(f"""insert into Users values ('admin5', '{getHashOf('password5')}', 'admin5@gmail.com', 'FirstHolder5', 'LastHolder5', 'admin', 'BioHolder5', 'sydney', '55555555', 'AEST', True, '', '')""")
+  cur.close()
+  db.commit()
+  return
+
 # Testing function for myself (Mathew)
 def test():
   cur = db.cursor()
@@ -286,8 +298,8 @@ if __name__ == '__main__':
         password="3900PenguinDBtest",
         port='5432')
 
-        # deleteTables()
-        # setupTables()
+        deleteTables()
+        setupTables()
         # clearData()
         # inputData1()
         # inputData2()
@@ -297,8 +309,9 @@ if __name__ == '__main__':
         # inputData6()
         # inputData7()
         # inputData8()
+        inputAdmins()
         # test()
-        printData()
+        # printData()
 
     except psycopg2.Error as err:
         print("DB error: ", err)
