@@ -51,12 +51,12 @@ This installation assumes the user has a GitHub account with a valid SSH key.
 
 * Open a terminal.
 
-* **If using WSL or Linux, update any outdated packages or dependencies.**
+* **For WSL or Linux users, perform this step prior to installation.**
    ```sh
    sudo apt update && upgrade
    ```
 
-### Installation
+### Main Installation
 **Do in order:**
 > use 'pip3 freeze' to see if you've installed python modules correctly.
 1. Clone the repo with SSH.
@@ -66,55 +66,23 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    cd capstone-project-3900f12apenguin
    ```
-   <br />
-1. Install Python3. <br />
-   _Linux:_ 
-   ```sh
-   sudo apt install python3 python3-pip
-   ```
-   _Windows:_ <br />
-
-   Install Python manually: <a href="https://www.python.org/downloads/">Python</a>
-   <br />
-6. Install Flask and Flask_Cors.
+1. Install Python modules.
    ```sh
    pip3 install flask
    ```
    ```sh
    pip3 install flask_cors
    ```
-   <br />
-7. Install psycopg2.
-   ```sh
-   sudo apt-get install build-dep python-psycopg2
-   ```
    ```sh
    pip3 install psycopg2-binary
    ```
-   <br />
-8. Install PyJWT.
    ```sh
    pip3 install PyJWT
    ```
-   <br />
-2. Install Node (Skip if already installed as a prerequisite)
-   ```sh
-   npm install
-   ```
-   ```sh
-   sudo apt-get install -y nodejs
-   ```
-   <br />
-3. Install yarn (Skip if already installed as a prerequisite)
-   ```sh
-   npm install --global yarn
-   ```
-   <br />
-4. Install React (Skip if already installed as a prerequisite)
+2. Install React-scripts
    ```sh
    yarn add react-scripts
    ```
-   <br />
 5. Install Dependencies for Yarn.
    **You must be in the correct directory.**
    ```sh
@@ -126,17 +94,19 @@ This installation assumes the user has a GitHub account with a valid SSH key.
    ```sh
    yarn
    ```
-   <br />
-4. Create a new terminal to run the backend
+4. Create a new terminal in the main project directory to run the backend
+   > Note: Additional Admin accounts can be added by manually adding new Admin users within DBSetup.py. 
+
+   > WARNING: Re-running ‘DBSetup.py’ without modification to the file will reset the database. However, the file can be modified to manually edit the database (Note: This is unnecessary for the application to function 
+ correctly) 
    ```sh
-   cd /src/backend
+   python3 src/backend/DBSetup.py
    ```
-    Start the backend
+   Start the backend
    ```sh
-   python3 server.py
+   python3 src/backend/server.py
    ```
-   <br />
-5.  Create another new terminal to run the frontend
+6.  Open a second new terminal in the project main directory to run the frontend 
       ```sh
       cd /src/frontend/my-app
       ```
