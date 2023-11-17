@@ -63,3 +63,6 @@ Then we also worked on the novel functionalities and got most of them done befor
 Also asked a few questions in the tutorial to double check our understanding for the final demo is correct.
 
 Week 10
+This was our final week. As a group we just touched up on all our functionalities to make sure everything worked. 
+Furthermore, on friday we made sure the report and the code base was all completed and ready for submission.
+Also earlier in the week we had rehersals on who demonstrates what functionality in the demo. 
