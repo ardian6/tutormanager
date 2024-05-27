@@ -1,4 +1,4 @@
-# capstone-project-3900f12apenguin
+# TutorManager
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
